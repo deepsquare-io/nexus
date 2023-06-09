@@ -1,0 +1,12 @@
+{
+  "agreement-contract": "Anlaşma sözleşmesi",
+  "incomplete-alert": "Profil bilgileriniz eksik.",
+  "information": "Profil bilgisi",
+  "mfa-alert": "Hesabınız iki faktörlü kimlik doğrulama ile korunmuyor.<1>2FA'yı şimdi kurun</1>",
+  "private-sale-conditions": "Özel satış koşulları",
+  "security": "Güvenlik",
+  "title": "Hesap doğrulama",
+  "total-invested": "Toplam yatırım: ",
+  "total-invested-tooltip": "maks. yatırım değeri, mevcut MT doğrulama kademesine bağlıdır.",
+  "user-information": "Kullanıcı bilgisi"
+}

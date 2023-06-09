@@ -1,0 +1,21 @@
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     viewBox="0 0 25 25" style="enable-background:new 0 0 25 25;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:none;}
+	.st2{fill:#393939;}
+</style>
+  <g id="Layer_1" transform="translate(-17.368)">
+	<g id="_1421394342400" transform="translate(17.368)">
+		<g id="Groupe_28">
+			<path id="Tracé_14" class="st0" d="M12.5,17.3l7.7-4.5L12.5,0"/>
+      <path id="Tracé_15" class="st0" d="M12.5,25l7.7-10.8l-7.7,4.5"/>
+      <path id="Tracé_16" class="st0" d="M12.5,18.7l-7.7-4.5L12.5,25"/>
+      <line id="Ligne_7" class="st1" x1="12.5" y1="17.3" x2="20.2" y2="12.7"/>
+      <path id="Tracé_17" class="st0" d="M12.5,0L4.8,12.7l7.7,4.5"/>
+      <path id="Tracé_18" class="st0" d="M12.5,17.3"/>
+      <path id="Tracé_19" class="st2" d="M4.8,12.7"/>
+		</g>
+	</g>
+</g>
+</svg>

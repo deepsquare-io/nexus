@@ -1,0 +1,259 @@
+{
+  "actions": {
+    "accept": "Accepter",
+    "accept-bonus-DPS": "Oui, je veux des DPS supplémentaires!",
+    "apply": "Appliquer",
+    "back": "Retour",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "confirm": "Confirmer",
+    "connect-to-metamask": "Se connecter à MetaMask",
+    "connected-to-metamask": "Connecté à MetaMask",
+    "copied": "Copié",
+    "copy": "Copier",
+    "disable-2fa": "Désactiver le 2FA",
+    "download-agreement-contract": "Télécharger mon accord contractuel",
+    "edit": "Éditer",
+    "enable-2fa": "Activer 2FA",
+    "get-verified": "Vérifier votre identité",
+    "max": "Max",
+    "min": "Min",
+    "next": "Suivant",
+    "processing": "En cours de traitement",
+    "purchase": "Acheter",
+    "regenerate": "Re-générer",
+    "restart": "Recommencer",
+    "retry": "Réessayer",
+    "send-invitations": "Envoyer des invitations",
+    "show-recovery-codes": "Afficher les codes de récupération",
+    "sign-agreement-contract": "Signer mon accord contractuel",
+    "sign-out": "Se déconnecter",
+    "skip": "Passer pour le moment",
+    "submit": "Envoyer",
+    "tier-required": "Niveau {{tier}} requis",
+    "verified": "Vérifié",
+    "wallet-mismatch": "Wallet non correspondant"
+  },
+  "alert": {
+    "avalanche-migration": "Vos tokens DPS sont déjà sur Avalanche! Cliquez <2>ici</2>",
+    "avalanche-migration-add-token": "pour ajouter vos tokens sur Metamask.",
+    "avalanche-migration-connect": "pour vous connecter à Metamask. Si MetaMask ne s'ouvre pas, lisez notre <2>FAQ</2>.",
+    "bonus-dps": "<0>Gagnez des DPS supplémentaires en aidant DeepSquare</0>Pour vous remercier d'avoir accepté les nouvelles conditions, nous aimerions vous donner l'opportunité de gagner des DPS supplémentaires! Cliquez<3> ici</3> pour en savoir plus.",
+    "low-avax": "Le wallet responsable de la KYC dispose de peu d'AVAX (actuellement {{ amount }}). Rechargez le, ou le processus de KYC pourrait être bloqué.",
+    "mobile": "Il semblerait que vous utilisiez un téléphone mobile. Utilisez l'<2>application MetaMask</2> pour connecter votre wallet.",
+    "new-terms": "<0>Acceptation des nouvelles conditions</0>Aidez le projet DeepSquare en acceptant les nouvelles conditions d'acquisition de jetons. Cliquez <2>ici</2> pour en savoir plus.",
+    "wallet-mismatch": "<0>Wallet non correspondant</0>Vous êtes connecté à un wallet qui n'est pas enregistré dans notre base de données.<2></2>Utilisez le wallet avec lequel vous avez créé votre compte pour continuer. ({{ address }})"
+  },
+  "already-have-an-account-q": "Vous avez déjà un compte ?",
+  "bonus-dps-dialog": {
+    "content": "<0>Pour vous remercier d'avoir accepté les nouveaux termes d'acquisition de jetons, nous aimerions vous donner l'opportunité d'obtenir des DPS supplémentaires ! C'est une nouvelle façon d'aider à mettre le projet dans une position encore plus robuste alors que nous approchons de la sortie du token sur les plateformes d'échange..</0><1></1><2>Les détails sont disponibles <2>ici</2> mais pour résumer, vous pouvez prêter 25% de vos DPS à DeepSquare, qui vous seront rendu pendant la période d'acquisition de jetons (21 mois pour la vente privée 1 et 18 mois pour la vente privée 2) ET vous recevrez en bonus un montant équivalent à la valeur de la somme prêtée au taux de la vente privée 3.</2>",
+    "title": "Gagnez des DPS supplémentaires en aidant DeepSquare"
+  },
+  "buy-dps": "Acheter des DPS",
+  "errors": {
+    "unexpected": "Une erreur inattendue s'est produite."
+  },
+  "forms": {
+    "account-type": {
+      "label": "Type de compte",
+      "values": {
+        "company": "Au nom d'une entreprise",
+        "private": "Compte privé"
+      }
+    },
+    "address": {
+      "label": "Adresse"
+    },
+    "address-complement": {
+      "label": "Adresse (complément)"
+    },
+    "agreement": {
+      "label": "Accord"
+    },
+    "balance": {
+      "label": "Balance"
+    },
+    "birthdate": {
+      "error": {
+        "adulthood": "Vous devez avoir au minimum 18 ans pour créer un compte"
+      },
+      "label": "Date de naissance"
+    },
+    "city": {
+      "label": "Ville"
+    },
+    "confirm-new-password": {
+      "label": "Confirmer le nouveau mot de passe"
+    },
+    "confirm-password": {
+      "label": "Confirmer le mot de passe"
+    },
+    "country": {
+      "cannot-update-country": "Le pays ne peut pas être modifié",
+      "error": {
+        "invalid": "Pays invalide."
+      },
+      "label": "Pays"
+    },
+    "created-at": {
+      "label": "Date de création du compte"
+    },
+    "email": {
+      "error": {
+        "invalid": "Vous devez entrer une adresse mail valide pour continuer."
+      }
+    },
+    "email-address": {
+      "label": "Adresse mail"
+    },
+    "full-name": {
+      "label": "Nom complet"
+    },
+    "funds": {
+      "label": "Source d'investissement",
+      "values": {
+        "business": "Dividende ou bénéfice issus de sociétés",
+        "inheritance": "Héritage",
+        "other": "Autre",
+        "salary": "Salaire"
+      }
+    },
+    "invite-email-addresses": {
+      "helper-text": "Une adresse email par ligne",
+      "label": "Adresses email"
+    },
+    "kyc-tier": {
+      "label": "Niveau de KYC"
+    },
+    "last-transaction": {
+      "label": "Dernière transaction"
+    },
+    "mfa-code": {
+      "placeholder": "6 chiffres ou code de récupération"
+    },
+    "new-password": {
+      "label": "Nouveau mot de passe"
+    },
+    "password": {
+      "error": {
+        "mismatch": "Les mots de passes doivent correspondre"
+      },
+      "label": "Mot de passe"
+    },
+    "referral-code": {
+      "label": "Code de parrainage"
+    },
+    "username": {
+      "label": "Nom d'utilisateur",
+      "tooltip": "Ce nom d'utilisateur sera votre identifiant au sein de la communauté DeepSquare"
+    },
+    "wallet": {
+      "label": "Adresse du wallet"
+    },
+    "zip-code": {
+      "label": "Code postal"
+    }
+  },
+  "getting-started": "Pour commencer",
+  "infos": {
+    "updated-successfully": "Informations mises à jour avec succès",
+    "updating": "Mise à jour de vos informations"
+  },
+  "kyc": {
+    "identity": {
+      "card": {
+        "loading": "La vérification peut prendre jusqu'à 5 minutes.",
+        "name": "Vérification de l'identité"
+      }
+    },
+    "investment-up-to": "Investissement jusqu'à",
+    "meeting": {
+      "card": {
+        "name": "Rencontrer un membre du conseil d'administration"
+      },
+      "dialog": {
+        "title": "Demander un rendez-vous avec DeepSquare"
+      }
+    },
+    "steps": {
+      "0": {
+        "label": "0: pas de KYC vérifiée"
+      },
+      "1": {
+        "label": "1: identité vérifiée"
+      },
+      "2": {
+        "label": "2: identité et adresse postale vérifiées"
+      },
+      "3": {
+        "label": "3: bureau rencontré"
+      }
+    }
+  },
+  "loading-your-profile": "Chargement de votre profil",
+  "maintenance-title": "Maintenance en cours",
+  "mfa": {
+    "activation-success": "La double authentification a été activée",
+    "deactivation-success": "La double authentification a été désactivée",
+    "disabled": "La double authentification n'est pas activée.",
+    "how-to-enable": "<0>activez la double authentification sur votre compte :</0><1><0>Scannez ce QR code votre application d'authentification, comme Authy ou Google Authenticator.</0><1>Confirmez l'inscription en utilisant le code à 6 chiffres généré par votre application.</1></1>",
+    "recovery-code-details": "Ces codes de récupérations vous permettront d'ignorer la double authentification si vous n'avez pas accès à votre application d'authentification. Conservez les en lieu sûr (comme dans un gestionnaire de mots de passe) et <2>traitez les comme des mots de passe</2>.",
+    "recovery-code-only-once": "Vous ne pouvez utilisez chacun d'entre-eux qu'une seule fois.",
+    "recovery-code-title": "Codes de récupérations pour la double authentification"
+  },
+  "nav": {
+    "admin": "Admin",
+    "admin-disabled": "Vous devez connecter votre wallet MetaMask pour accès à l'interface administrateur.",
+    "faq": "FAQ",
+    "launchpad": "Investir",
+    "profile": "Profil",
+    "referral": "Parrainage",
+    "vote": "Voter"
+  },
+  "network-banner": "<0>DeepSquare est maintenant sur le réseau Avalanche!</0><1>Changez vers le <2>réseau Avalanche</2>.</1>",
+  "new-terms-dialog": {
+    "content": "<0>Cher investisseur et membre estimé de la communauté,</0><1></1><2>Nous sommes fiers de vous annoncer qu'ensemble nous avons levé $3.2M ! Notre objectif est de lever $2.8M supplémentaires auprès d'investisseurs institutionnels dans le cadre de la vente privée 3, avec une valorisation de 42 millions de dollars ($0.6/DPS).</2><3></3><4> Afin d'attirer des investisseurs supplémentaires et d'assurer le succès à long terme du projet, nous vous demandons d'accepter les changements proposés pour le planning d'acquisition de jetons (vesting) - <2>voir ici pour plus de détails</2> (veuillez noter que nous avons besoin de votre consentement pour modifier vos conditions d'acquisition de jetons).</4><5></5>En résumé, nous vous demandons d'accepter les changements proposés pour les périodes d'acquisition de jetons. Au lieu de 25% à l'inscription et 75% après 12 mois : <7><0>Pour la vente privée 1 : commence 9 mois après le listing puis les jetons sont acquis chaque mois à raison d'un douzième de la valeur totale sur 12 mois.</0><1>Pour la vente privée 2 : commence 6 mois après le listing puis les jetons sont acquis chaque mois à raison d'un douzième de la valeur totale sur 12 mois.</1></7>Ces changements contribueront à attirer de nouveaux fonds institutionnels et, en définitive, à faciliter l'entrée sur le marché.<9></9><10></10><11><0></0>Je comprends que je recevrai le nouveau contrat numérique par e-mail après avoir accepté les nouvelles conditions et que je devrai les signer numériquement afin de finaliser le processus.</11>",
+    "title": "Aidez le projet DeepSquare!"
+  },
+  "powered-by": "Soutenu par",
+  "privacy-policy": "Confidentialité",
+  "referees": "Filleuls",
+  "referral": {
+    "invite": {
+      "title": "Inviter des amis",
+      "toast-success_one": "{{count}} invitation envoyée",
+      "toast-success_many": "{{ count }} invitations envoyées",
+      "toast-success_other": "{{count}} invitations envoyées"
+    }
+  },
+  "terms": {
+    "accepted": "Conditions acceptées avec succès!",
+    "i-accept-the-terms": "J'accepte les <2>Termes et Conditions de la Vente Privée de DeepSquare</2>",
+    "you-must-accept": "Vous devez accepter les conditions pour continuer."
+  },
+  "validation": {
+    "max": "Le montant maximum est {{ amount }}",
+    "min": "Le montant minimum est {{ amount }}"
+  },
+  "web3": {
+    "alert": {
+      "connect-metamask": "Se connecter à MetaMask.",
+      "connect-your-metamask-wallet": "Connectez vous à votre wallet MetaMask pour voir votre solde.",
+      "please-install-metamask": "<2>Installez MetaMask.</2> Vous devrez rafraichir la page après avoir terminé l'installation."
+    },
+    "authorized-stc": "Vous avez autorisé {{ amount }} {{ symbol }}",
+    "dps-remaining-at": "jetons DPS restants à",
+    "investment-confirmed": "Investissement confirmé!",
+    "transactions": "Transactions",
+    "tx-rejected": "Transaction refusée",
+    "waiting-authorization-confirmation": "En attente de la confirmation de l'autorisation",
+    "waiting-investment-confirmation": "En attente de la confirmation de la transaction",
+    "watch-asset": "Ajouter à MetaMask"
+  },
+  "website-under-maintenance": "Le site est actuellement en maintenance",
+  "welcome": {
+    "terms": {
+      "title": "Termes et conditions"
+    }
+  }
+}

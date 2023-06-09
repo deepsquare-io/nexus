@@ -1,0 +1,14 @@
+{
+  "version": "0.1.0",
+  "name": "DeepSquare",
+  "description": "Full-stack application of the DeepSquare Investment project base on Next.js.",
+  "icons": {
+    "60": "/favicons/firefox_app_60x60.png",
+    "128": "/favicons/firefox_app_128x128.png",
+    "512": "/favicons/firefox_app_512x512.png"
+  },
+  "developer": {
+    "name": "DeepSquare Association",
+    "url": "https://deepsquare.io"
+  }
+}

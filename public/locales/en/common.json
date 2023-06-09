@@ -1,0 +1,258 @@
+{
+  "actions": {
+    "accept": "Accept",
+    "accept-bonus-DPS": "Yes, I want Bonus DPS!",
+    "apply": "Apply",
+    "back": "Back",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "connect-to-metamask": "Connect to MetaMask",
+    "connected-to-metamask": "Connected to MetaMask",
+    "copied": "Copied",
+    "copy": "Copy",
+    "disable-2fa": "Disable 2FA",
+    "download-agreement-contract": "Download my agreement contract",
+    "edit": "Edit",
+    "enable-2fa": "Enable 2FA",
+    "get-verified": "Get verified",
+    "max": "Max",
+    "min": "Min",
+    "next": "Next",
+    "processing": "Processing",
+    "purchase": "Purchase",
+    "regenerate": "Regenerate",
+    "restart": "Restart",
+    "retry": "Retry",
+    "send-invitations": "Send invitations",
+    "show-recovery-codes": "Show recovery codes",
+    "sign-agreement-contract": "Sign my agreement contract",
+    "sign-out": "Sign out",
+    "skip": "Skip for now",
+    "submit": "Submit",
+    "tier-required": "Tier {{tier}} required",
+    "verified": "Verified",
+    "wallet-mismatch": "Wallet mismatch"
+  },
+  "alert": {
+    "avalanche-migration": "Your DPS tokens have already been transferred on Avalanche! Click <2>here</2> ",
+    "avalanche-migration-add-token": "to add the token to MetaMask.",
+    "avalanche-migration-connect": "to connect to MetaMask. If MetaMask does not show up, please read our <2>FAQ</2>.",
+    "bonus-dps": "<0>Earn bonus DPS by helping DeepSquare</0>As a thank you for accepting the new vesting terms, we would like to give you the opportunity of earning bonus DPS! <3>Click here</3> to read more about the bonus.",
+    "low-avax": "The wallet handling KYC verification is getting low in AVAX (currently {{amount}}). Please refill it, or the KYC process could be blocked.",
+    "mobile": "It seems that you are using a mobile device. Please use the <2>MetaMask application</2> to connect your wallet.",
+    "new-terms": "<0>Acceptance of new terms</0>Help the DeepSquare project by accepting the new vesting terms. Click <2>here</2> to read more about the new terms.",
+    "wallet-mismatch": "<0>Wallet mismatch</0>You are connected to a wallet address that is not registered in our database.<2></2>Please connect to the wallet address you registered with to continue. ({{address}})"
+  },
+  "already-have-an-account-q": "Already have an account? <1>Sign in</1>",
+  "bonus-dps-dialog": {
+    "content": "<0>As a thank you for accepting the new vesting terms, we would like to give you the opportunity of earning bonus DPS! This is an additional way you can help put the project in an even stronger position as we approach listing.</0><1></1><2>The full details are available <2>here</2> but in an attempt to summarise, you can lend DeepSquare 25% of your tokens, which will be returned to you over the course of your new vesting period (21 months for PS1 and 18 months for PS2) AND you receive bonus DPS from PS3 to the value your loan of 25% represents.</2>",
+    "title": "Earn bonus DPS by helping DeepSquare"
+  },
+  "buy-dps": "Buy DPS",
+  "errors": {
+    "unexpected": "An unexpected error occurred."
+  },
+  "forms": {
+    "account-type": {
+      "label": "Account type",
+      "values": {
+        "company": "On behalf of a company",
+        "private": "Private account"
+      }
+    },
+    "address": {
+      "label": "Address"
+    },
+    "address-complement": {
+      "label": "Address (complement)"
+    },
+    "agreement": {
+      "label": "Agreement"
+    },
+    "balance": {
+      "label": "Balance"
+    },
+    "birthdate": {
+      "error": {
+        "adulthood": "You must be at least 18 years old to register"
+      },
+      "label": "Birthdate"
+    },
+    "city": {
+      "label": "City"
+    },
+    "confirm-new-password": {
+      "label": "Confirm new password"
+    },
+    "confirm-password": {
+      "label": "Confirm password"
+    },
+    "country": {
+      "cannot-update-country": "Country cannot be updated",
+      "error": {
+        "invalid": "Invalid country"
+      },
+      "label": "Country"
+    },
+    "created-at": {
+      "label": "Registration date"
+    },
+    "email": {
+      "error": {
+        "invalid": "You must enter a valid email address to continue."
+      }
+    },
+    "email-address": {
+      "label": "Email address"
+    },
+    "full-name": {
+      "label": "Full name"
+    },
+    "funds": {
+      "label": "Source of funds",
+      "values": {
+        "business": "Business",
+        "inheritance": "Inheritance",
+        "other": "Other",
+        "salary": "Salary"
+      }
+    },
+    "invite-email-addresses": {
+      "helper-text": "One email address per line",
+      "label": "Email addresses"
+    },
+    "kyc-tier": {
+      "label": "KYC tier"
+    },
+    "last-transaction": {
+      "label": "Last transaction"
+    },
+    "mfa-code": {
+      "placeholder": "6-digits or recovery code"
+    },
+    "new-password": {
+      "label": "New password"
+    },
+    "password": {
+      "error": {
+        "mismatch": "Passwords must match"
+      },
+      "label": "Password"
+    },
+    "referral-code": {
+      "label": "Referral code"
+    },
+    "username": {
+      "label": "Username",
+      "tooltip": "This username is how you’ll be known by the community"
+    },
+    "wallet": {
+      "label": "Wallet address"
+    },
+    "zip-code": {
+      "label": "ZIP code"
+    }
+  },
+  "getting-started": "Getting started",
+  "infos": {
+    "updated-successfully": "Information updated successfully",
+    "updating": "Updating your information"
+  },
+  "kyc": {
+    "identity": {
+      "card": {
+        "loading": "The verification can take up to 5 minutes.",
+        "name": "Identity verification"
+      }
+    },
+    "investment-up-to": "Investment up to",
+    "meeting": {
+      "card": {
+        "name": "Board meeting"
+      },
+      "dialog": {
+        "title": "Request a meeting with DeepSquare"
+      }
+    },
+    "steps": {
+      "0": {
+        "label": "0: no KYC passed"
+      },
+      "1": {
+        "label": "1: identity verified"
+      },
+      "2": {
+        "label": "2: identity and postal address verified"
+      },
+      "3": {
+        "label": "3: board met"
+      }
+    }
+  },
+  "loading-your-profile": "Loading your profile",
+  "maintenance-title": "Under maintenance",
+  "mfa": {
+    "activation-success": "Two-factor authentication was enabled",
+    "deactivation-success": "Two-factor authentication was disabled",
+    "disabled": "Two-factor authentication is not enabled.",
+    "how-to-enable": "<0>Enable the two-factor authentication with your account:</0><1><0>Scan this QR code with your authenticator app, such as Authy or Google Authenticator.</0><1>Confirm the enrollment using the 6-digits secret that is generated by your app.</1></1>",
+    "recovery-code-details": "These recovery codes allow you to bypass the two-authentication process in case of you do not have access to your OTP app. You should keep those codes in a safe place (like your password manager) and <2>treat them as passwords</2>.",
+    "recovery-code-only-once": "You can use each only once.",
+    "recovery-code-title": "Multi-factor authentication recovery codes"
+  },
+  "nav": {
+    "admin": "Admin",
+    "admin-disabled": "You need to connect your MetaMask wallet in order to access the admin panel.",
+    "faq": "FAQ",
+    "launchpad": "Launchpad",
+    "profile": "Profile",
+    "referral": "Referral",
+    "vote": "Vote"
+  },
+  "network-banner": "<0>DeepSquare now runs on Avalanche Network!</0><1>Please switch to the <2>Avalanche Network</2>.</1>",
+  "new-terms-dialog": {
+    "content": "<0>Dear Investor and valued Community Member,</0><1></1><2>We are proud to share that together we have raised ~$3.2M so far! We aim to raise another ~$2.8M from institutional investors in Private Sale 3 at a valuation of $42M ($0.6/DPS).</2><3></3><4>To help attract additional investors and to give the project long-term success, we kindly request that you agree to the proposed changes in the vesting schedule - <2>see here for details</2> (please note that we need your consent to change your vesting terms).</4><5></5>In summary, we request that you agree to accept the new vesting terms. Instead of 25% on listing and 75% after 12 months :<7><0>For Private Sale 1: 9 months after listing, tokens vest at a rate of 1/12th over 12 months</0><1>For Private Sale 2: 6 months after listing, tokens vest at a rate of 1/12th over 12 months</1></7>These changes will help to attract new institutional money and will ultimately support a smoother entry into the market.<9></9><10></10><11><0></0>I understand I will receive the new digital contract by email after having accepted the new terms and that I will need to digitally sign them in order to finalise the process.</11>",
+    "title": "Help the DeepSquare Project"
+  },
+  "powered-by": "Powered by",
+  "privacy-policy": "Privacy Policy",
+  "referees": "Referees",
+  "referral": {
+    "invite": {
+      "title": "Invite referees",
+      "toast-success_one": "Sent {{ count }} invitation",
+      "toast-success_other": "Sent {{ count }} invitations"
+    }
+  },
+  "terms": {
+    "accepted": "Terms accepted successfully!",
+    "i-accept-the-terms": "I accept the <2>DeepSquare Private Sale Terms and Conditions</2>",
+    "you-must-accept": "You must accept the conditions to continue."
+  },
+  "validation": {
+    "max": "Maximum amount is {{amount}}",
+    "min": "Minimum amount is {{amount}}"
+  },
+  "web3": {
+    "alert": {
+      "connect-metamask": "Connect to MetaMask.",
+      "connect-your-metamask-wallet": "Connect your MetaMask wallet to see your current balance.",
+      "please-install-metamask": "Please <2>install MetaMask.</2> You will need to refresh this page after the installation."
+    },
+    "authorized-stc": "You have authorized {{ amount }} {{ symbol }}",
+    "dps-remaining-at": "DPS tokens remaining at",
+    "investment-confirmed": "Investment confirmed!",
+    "transactions": "Transactions",
+    "tx-rejected": "Transaction rejected",
+    "waiting-authorization-confirmation": "Waiting for authorization confirmation",
+    "waiting-investment-confirmation": "Waiting for investment confirmation",
+    "watch-asset": "Add to MetaMask"
+  },
+  "website-under-maintenance": "The website is currently under maintenance.",
+  "welcome": {
+    "terms": {
+      "title": "Terms and conditions"
+    }
+  }
+}

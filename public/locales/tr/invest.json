@@ -1,0 +1,46 @@
+{
+  "amount": "Yatirim tutari",
+  "awaiting-deposits": "FIAT mevduat bekleniyor",
+  "bank": {
+    "account-data": "Hesap verisi",
+    "receiver": "Alıcı",
+    "reference": "Referans:",
+    "reference-warning": "Transferinizi tanımlayabilmemiz için lütfen referans numarasını kullanın",
+    "swift": "Aracı SWIFT/BIC:"
+  },
+  "choose-currency": "Para Birimini Seç",
+  "choose-investment-amount": "Yatırım tutarını seçin",
+  "click-here-to-learn-secure-wallet": "Kripto cüzdanınızın güvenliğini nasıl sağlayacağınızı öğrenmek için <0>buraya tıklayın</0>.",
+  "closed-for-maintenance": "Bakım nedeniyle kapalı",
+  "credit-card-cvc": "CVC Kodu",
+  "credit-card-expiration": "Kartın Son Kullanma Tarihi",
+  "credit-card-fees": "Kredi kartı ücretleri ({{rate}}%): {{fees}}<4></4>Su kadar DPS Alacaksınız: {{amount}} DPS",
+  "credit-card-number": "Kart numarası",
+  "crypto": {
+    "digital-wallet-required": "Dijital para birimlerini tutmak için dijital bir cüzdana ihtiyacınız var.",
+    "intro": "DPS jetonlarını satın almak için, Avalanche native jetonu olan AVAX'a veya Avalanche ağında çalışan bir stabilcoin olan {{symbol}}'a ihtiyacınız vardır. SSS bölümümüzde <5>kripto ile DPS'yi nasıl satın alacağınızı</5> öğrenin."
+  },
+  "deposit-item": "{{date}} tarihinde {{amount}}",
+  "i-confirm-that-i-have-sent": "{{amount}} gönderdiğimi onaylıyorum",
+  "i-confirm-that-the-address-is-mine": "<1></1> adresinin bana ait olduğunu onaylıyorum.<3></3>Bu adrese DPS jetonları alacağımın farkındayım ve bu adres üzerinde tam kontrole sahibim.",
+  "in-order-to-invest-with-credit-card": "Kredi kartı ile yatırım yapmak için lütfen",
+  "insufficient-avax-balance": "Yetersiz {{symbol}} bakiyesi (min: {{amount}})",
+  "insufficient-stc-balance": "Yetersiz {{symbol}} bakiyesi",
+  "invest-in-deepsquare": "DeepSquare'e yatırım yapın",
+  "investment-confirmed": "Yatırımınız onaylandı!",
+  "investment-confirmed-label": "Tesekkurler!",
+  "limit-reach-thanks": "Yatırım limiti erişimi - DeepSquare'e gösterdiğiniz ilgi için çok teşekkür ederiz!",
+  "maintenance-description": "Ekibimiz DeepSquare'deki deneyiminizi geliştirmek için çok çalışıyor. Bunu yapmak için, ödemenin geçici olarak devre dışı bırakılması gerekiyordu. <1></1>Lütfen daha sonra tekrar deneyin.",
+  "payment-succeeded": "Ödeme başarılı",
+  "please-fill-the-amount-form": "Lütfen miktar formunu doldurun",
+  "provide-credit-card-details": "Fatura ayrıntılarını sağlayın",
+  "raise-your-limit": "Mevcut MT doğrulama durumunuzla mümkün olan maksimum yatırıma ulaştınız. <2>yatırım limitinizi artırmak</2> için lütfen MT doğrulama işlemini tamamlayın..",
+  "under-maintenance": "bakımda",
+  "using-credit-card": "Kredi/banka kartı <0>kullan</0>",
+  "using-crypto": "Kripto <0>kullan</0>",
+  "using-wire": "Banka transferi <0>kullan</0>",
+  "wire": {
+    "digital-wallet-required": "Banka havalesi kullanarak yatırım yapmak için lütfen"
+  },
+  "wire-thanks": "DeepSquare'e olan güveniniz ve yatırımınız için teşekkür ederiz. DPS jetonlarınızı önümüzdeki birkaç gün içinde alacaksınız!"
+}

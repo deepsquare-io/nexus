@@ -1,0 +1,25 @@
+{
+  "actions": {
+    "download-agreement": "Download corresponding agreement contract",
+    "got-to-profile": "Go to profile",
+    "see-on-snowtrace": "See on SnowTrace",
+    "send-agreement": "Send agreement contract",
+    "send-reminder": "Send an email reminder"
+  },
+  "entering-administration": "Entering administration",
+  "users": {
+    "go-to-stripe": "Go to Stripe profile",
+    "kyc-confirmation": "By clicking on confirm, you acknowledge that <2>{{username}} ({{email}})</2>will have his/her KYC tier set to {{tier}}, which imply a blockchain transaction.",
+    "no-referee": "This user does not have any referee.",
+    "no-transaction": "This user does not have any transaction.",
+    "no-user-selected": "No user selected.",
+    "set-kyc": "Set user KYC",
+    "tabs": {
+      "kyc": "KYC",
+      "personal-information": "Personal information",
+      "referral": "Referral",
+      "transactions": "transactions",
+      "wallet": "Wallet"
+    }
+  }
+}

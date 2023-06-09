@@ -1,0 +1,16 @@
+{
+  "infos": {
+    "title": "Complete your personal information"
+  },
+  "kyc": {
+    "title": "KYC verification"
+  },
+  "wallet": {
+    "continue-with-this-wallet": "Continue with this wallet",
+    "please-connect-wallet": "Please connect a web3 wallet. We recommend using MetaMask.<1></1>If you don't know how to install MetaMask, please <4>read our guide</4>.<6></6>Clicking on \"Connect\" is not working ? <9>Click here</9>.",
+    "title": "Connect a wallet"
+  },
+  "wallet-connected": "Wallet <1>{{account}}</1> is connected.",
+  "we-need-to-know-more-about-you": "In order to invest in DeepSquare during the private sale, we need to know more about you.",
+  "welcome-to-deepsquare": "Welcome to DeepSquare"
+}

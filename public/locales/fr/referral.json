@@ -1,0 +1,19 @@
+{
+  "alert": {
+    "additional": " Investissez {{additional}} jetons DPS additionnels pour bénéficier du programme de parrainage.",
+    "invite": "<0><0></0> <2>Invitez votre réseau</2></0> et recevez {{percentage}}% en DPS token.",
+    "restriction": "Ne partagez votre code de parrainage qu'avec des personnes que vous connaissez. Durant la vente privée, le partage en public est interdit pour des raisons légales."
+  },
+  "code": "Code de parrainage :",
+  "gains": "Gains de parrainage",
+  "link": "Lien de parrainage :",
+  "receive-referral-bonus": "Recevez {{percentage}}% des tokens DPS achetés en utilisant votre code de parrainage!",
+  "referral-gains": "Voici le détail de vos gains par parrainage.",
+  "referrals": {
+    "email": "Email",
+    "gains": "Gains par parrainage (jetons DPS)",
+    "registration-date": "Date de création du compte",
+    "title": "Parrainages"
+  },
+  "title": "Programme de parrainage"
+}

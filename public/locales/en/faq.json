@@ -1,0 +1,68 @@
+{
+  "avalanche-mobile": {
+    "avalanche-manual-on-mobile": "On mobile we need to add the Avalanche network manually. Log in to your MetaMask wallet and go to <2>Settings / Networks / Add Network</2>. Then, fill in the following info:",
+    "how-to-manually-add-avalanche-network-on-mobile": "How to manually add the Avalanche network on mobile?",
+    "save": "After you've clicked on \"Save\", the Avalanche Mainnet network will be added to your MetaMask wallet. You can now connect your crypto wallet on the app."
+  },
+  "connect-nothing-happens": {
+    "metamask-not-auto-open": "If after clicking on the \"Connect\" button nothing changes, it might be because MetaMask does not automatically open. <1>Refresh the page</1> and manually click on MetaMask.",
+    "when-click-nothing-happens": "When I click on \"Connect\" nothing happens. Why?"
+  },
+  "dps-on-ethereum": {
+    "dps-ethereum-remains": "The DPS tokens on Ethereum are an indelible mark of your participation in the early stage of the project. The project has migrated to Avalanche and the DPS tokens on that blockchain are now the official ones.",
+    "what-will-happen-to-dps-on-ethereum-q": "What will happen to my DPS tokens on Ethereum network?"
+  },
+  "faq": "FAQ",
+  "frequently-asked-questions": "FAQ",
+  "how-to-add-dps-to-metamask": "How to add DPS token to MetaMask?",
+  "how-to-buy-dps-with-crypto": {
+    "add-avalanche-network-to-metamask": "Add Avalanche network to MetaMask",
+    "add-avalanche-to-metamask": "Add Avalanche to MetaMask",
+    "at-this-point-avax-or-stc": "At this point one should have AVAX and/or {{symbol}} on MetaMask on the Avalanche network.",
+    "avalanche-already-set-up": "Avalanche is already set up",
+    "buy-avax-from-exchange": "The other way, more common, would be to send AVAX to your MetaMask from a crypto exchange (e.g. Kraken, Binance, Coinbase, etc.).",
+    "buy-avax-from-metamask": "One way would be to buy AVAX directly from MetaMask. The main drawbacks of this approach are the expensive fees and the maximum amount one can invest ($1500).",
+    "buy-dps-avax-or-stc": "Buy DPS with AVAX or {{symbol}}",
+    "cannot-see-avax-on-metamask": "If you cannot see your AVAX on MetaMask, you might have used the wrong MetaMask address or the wrong network.",
+    "connect-login-to-metamask": "Press the \"Connect\" button and log in to MetaMask. If nothing happens, it might be because MetaMask does not automatically pop up. Refresh the page and manually click on the extension.",
+    "connect-metamask-to-the-app": "Connect MetaMask to the App",
+    "dps-now-in-header": "The updated DPS balance is now displayed on the page header.",
+    "eg-on-binance": "E.g. on Binance",
+    "ensure-metamask-installed": "Ensure that MetaMask is installed",
+    "final-step-launchpad-and-invest": "The final step is to go on the <1>portal Launchpad</1> and invest using crypto. Setting the amount of AVAX or {{symbol}} one is willing to invest and clicking on the \"Purchase\" button. If one is investing with {{symbol}}, MetaMask will come up twice:",
+    "get-avax-metamask": "Get AVAX on MetaMask",
+    "how-to-buy-dps-with-crypto": "How to buy DPS with crypto?",
+    "investor-need-avax": "In order to buy DPS tokens with crypto, the investors need to have either AVAX or {{symbol}} on their crypto wallet. AVAX is Avalanche's native token while {{symbol}} is a stablecoin, a coin you can always redeem for US$1.00.",
+    "next-step-buy-dps-with-avax": "The next step will be to <1>buy</1> DPS with AVAX.",
+    "see-the-guide": "See the guide",
+    "send-avax-to-wallet": "Go to your exchange and send AVAX to your MetaMask address using the <1>AVAX C-Chain network</1>. One should first send a small amount of AVAX to test the transfer. Wait a few seconds and you should see the AVAX on your MetaMask.",
+    "stc-allowance-tx": "a first time to allow DeepSquare to debit {{symbol}} from your wallet.",
+    "stc-swap-tx": "a second time to swap {{symbol}} for DPS tokens.",
+    "this-guide-will-help-you": "This guide will help you go through all the required steps in order to invest with DeepSquare.",
+    "tx-succeed-send-rest-avax": "When the transaction has succeeded, one can send the rest of the AVAX corresponding to one&lsquo;s investment budget."
+  },
+  "how-to-install-metamask": {
+    "click-here-to-install-metamask": "Click <1>here</1> to install MetaMask.",
+    "how-to-install-metamask": "How to install MetaMask?",
+    "metamask-holds-the-keys": "MetaMask will hold the key to your DPS tokens. Please make sure to store your secret recovery phrase. The Secret Recovery Phrase is a unique 12-word phrase generated when you first set up MetaMask. If you ever lose your password, your Secret Recovery Phrase allows you to recover your wallet and your funds. Not even the team at MetaMask can help you recover your account or wallet if you lose your Secret Recovery Phrase.",
+    "metamask-is-a-crypto-wallet": "MetaMask is a crypto wallet and a gateway to blockchain apps like <2>app.deepsquare.io</2>. It allows users to access their Avalanche wallet through a browser extension or a mobile app.",
+    "refresh-after-install": "Once installed, it is recommended to <1>refresh</1> the application page.",
+    "this-video-metamask-tutorial": "The video below will provide a <1>tutorial</1> on how to perform this installation. You can also <4>read this guide</4> for more details.",
+    "tip-pin-metamask": "<0>Tip:</0> Pin MetaMask to your browser for an easier access."
+  },
+  "other-tokens-metamask": {
+    "check-network": "Make sure you are on the right network in MetaMask. If your tokens are on the Ethereum network, you will not see them in the Avalanche network and vice versa.",
+    "where-other-tokens-metamask-q": "Why can't I see my other tokens in my MetaMask account?"
+  },
+  "smart-contracts": {
+    "where-are-the-smart-contracts-q": "Where can I find the smart contracts?"
+  },
+  "transfer-dps-from-ethereum": {
+    "how-to-transfer-dps-from-ethereum": "How do I transfer my DPS tokens from the Ethereum network to the Avalanche network?",
+    "no-need-to-transfer": "There is no need to transfer the DPS tokens from the Ethereum network to the Avalanche network as DeepSquare has already sent them to your Avalanche C-Chain address. <1></1>You should see your DPS tokens in the application header like in the following example:"
+  },
+  "wallet-mismatch": {
+    "mismatch-explanation": "The wallet mismatch appears when the wallet you are currently using on MetaMask differs from the one you registered with during the process of creating your account. In the following example, the wallet address \"0x71f2...a829\" was used during the registration.",
+    "why-wallet-mismatch-q": "Why do I have a wallet mismatch?"
+  }
+}

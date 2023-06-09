@@ -1,0 +1,69 @@
+@import 'react-toastify/dist/ReactToastify.css';
+
+/** handle the notification color and the text color based on the theme **/
+.Toastify__toast-theme--dark {
+  font-family: Roboto, serif;
+  @apply bg-background text-white;
+}
+
+.Toastify__toast-theme--light {
+  font-family: Roboto, serif;
+  @apply bg-neutral text-white;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+  font-family: Roboto, serif;
+  @apply bg-info;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  font-family: Roboto, serif;
+  @apply bg-success;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--warning {
+  font-family: Roboto, serif;
+  @apply bg-warning;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+  font-family: Roboto, serif;
+  @apply bg-error;
+}
+
+.Toastify__progress-bar {
+  @apply bg-primary;
+}
+
+.Toastify__progress-bar--rtl {
+  @apply bg-primary;
+}
+
+.Toastify__progress-bar-theme--light {
+  @apply bg-background;
+}
+
+.Toastify__progress-bar-theme--dark {
+  @apply bg-white;
+}
+
+.Toastify__progress-bar--info {
+  @apply bg-info;
+}
+
+.Toastify__progress-bar--success {
+  @apply bg-success;
+}
+
+.Toastify__progress-bar--warning {
+  @apply bg-warning;
+}
+
+.Toastify__progress-bar--error {
+  @apply bg-error;
+}
+
+/** Classes for the close button. Better use your own closeButton **/
+.Toastify__close-button {
+  @apply text-white;
+}

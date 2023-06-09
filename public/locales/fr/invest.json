@@ -1,0 +1,46 @@
+{
+  "amount": "Montant",
+  "awaiting-deposits": "Virements en attente",
+  "bank": {
+    "account-data": "Informations du compte",
+    "receiver": "Bénéficiaire",
+    "reference": "Référence :",
+    "reference-warning": "Utilisez votre code de référence pour que nous puissions identifier la transaction.",
+    "swift": "Intermédiaire SWIFT/BIC:"
+  },
+  "choose-currency": "Choisissez une devise",
+  "choose-investment-amount": "Choisissez le montant",
+  "click-here-to-learn-secure-wallet": "<0>Cliquez ici</0>pour apprendre comment sécuriser votre wallet.",
+  "closed-for-maintenance": "En cours de maintenance",
+  "credit-card-cvc": "Cryptogramme visuel",
+  "credit-card-expiration": "Date d'expiration",
+  "credit-card-fees": "Taxes de transaction par carte bancaire ({{ rate }}%): {{ fees }}<1></1>Vous recevrez : {{ amount }} DPS",
+  "credit-card-number": "Numéro de la carte",
+  "crypto": {
+    "digital-wallet-required": "Pour détenir des actifs numériques, vous aurez besoin d'un wallet numérique.",
+    "intro": "Afin d'acheter des DPS, vous aurez besoin d'AVAX (token natif d'Avalanche) ou d'{{ symbol }}, une cryptomonnaie stable disponible sur Avalanche. Découvrez comment <2>acheter des DPS avec des cryptomonnaies</2> dans notre FAQ."
+  },
+  "deposit-item": "{{ amount }} le {{ date }}",
+  "i-confirm-that-i-have-sent": "Je confirme avoir envoyé {{ amount }}",
+  "i-confirm-that-the-address-is-mine": "Je confirme que l'adresse <1></1> est la mienne.<3></3>Je suis conscient que je recevrais les DPS sur cette adresse et j'en ai le contrôle.",
+  "in-order-to-invest-with-credit-card": "Pour investir avec une carte de crédit",
+  "insufficient-avax-balance": "Solde en {{symbol}} insuffisant (min : {{amount}})",
+  "insufficient-stc-balance": "Solde en {{ symbol }} insuffisant",
+  "invest-in-deepsquare": "Investir dans DeepSquare",
+  "investment-confirmed": "Votre investissement a été confirmé!",
+  "investment-confirmed-label": "Merci !",
+  "limit-reach-thanks": "Limit d'investissement atteinte - Merci pour votre intérêt en DeepSquare!",
+  "maintenance-description": "Notre équipe travaille sans relâche pour améliorer votre expérience sur DeepSquare. Pour cela, le paiment a été momentanément désactivé <1></1>Réessayez plus tard.",
+  "payment-succeeded": "Paiement confirmé",
+  "please-fill-the-amount-form": "Remplissez le champ de montant",
+  "provide-credit-card-details": "Fournissez les détails de facturation",
+  "raise-your-limit": "Vous avez atteint le plafond d'investissement avec votre niveau de KYC. Complétez le procédure de KYC pour <2>augmenter votre plafond d'investissement</2>.",
+  "under-maintenance": "en maintenance",
+  "using-credit-card": "<0>Par</0> carte<0> de débit/crédit</0>",
+  "using-crypto": "<0>Avec des </0>crypto",
+  "using-wire": "<0>Par</0> virement",
+  "wire": {
+    "digital-wallet-required": "Pour investir par virement"
+  },
+  "wire-thanks": "Merci pour votre confiance et votre investissement en DeepSquare. Vous recevrez vos DPS dans quelques jours!"
+}

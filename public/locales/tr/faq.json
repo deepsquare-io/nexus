@@ -1,0 +1,68 @@
+{
+  "avalanche-mobile": {
+    "avalanche-manual-on-mobile": "Cep telefonunda Avalanche ağını manuel olarak eklememiz gerekiyor. MetaMask cüzdanınızda oturum açın ve : <2>Ayarlar / Aglar / Ag Ekle</2>'ye gidin. Ardından, aşağıdaki bilgileri doldurun:",
+    "how-to-manually-add-avalanche-network-on-mobile": "Avalanche ağını mobil cihaza manuel olarak nasıl ekleyebilirim?",
+    "save": "\"Kaydet\"'e tikladiktan sonra, Avalanche Mainnet ağı MetaMask cüzdanınıza eklenecek. Artık kripto cüzdanınızı uygulamaya bağlayabilirsiniz."
+  },
+  "connect-nothing-happens": {
+    "metamask-not-auto-open": "\"Baglan\"'s bastiktan sonra herhangi bir degisiklik olmazsa, MetaMask otomatik olarak açılmadığından olabilir. <1>Sayfayi yenileyin</1> ve manuel olarak MetaMask'a tiklayin",
+    "when-click-nothing-happens": "\"Baglan\"'a tikladiktan sonra hicbir sey olmadi. Neden?"
+  },
+  "dps-on-ethereum": {
+    "dps-ethereum-remains": "Ethereum üzerindeki DPS jetonları, projenin erken aşamasına katılımınızın silinmez bir işareti olarak kalacaktir. Proje Avalanche blockchain'ine taşındı ve artik bu blok zincirindeki DPS jetonları resmi olanlardir.",
+    "what-will-happen-to-dps-on-ethereum-q": "Ethereum'daki DPS'ime ne olacak?"
+  },
+  "faq": "SSS",
+  "frequently-asked-questions": "SSS",
+  "how-to-add-dps-to-metamask": "MetaMask'a DPS nasıl eklenir?",
+  "how-to-buy-dps-with-crypto": {
+    "add-avalanche-network-to-metamask": "MetaMask'a Avalanche ağıni ekleyin",
+    "add-avalanche-to-metamask": "MetaMask'e Avalanche Ekle",
+    "at-this-point-avax-or-stc": "MetaMask'inizda Avalanche aginizda bu noktada AVAX ve/veya {STC.symbol} olmalidir.",
+    "avalanche-already-set-up": "Avalanche zaten kurulmuş",
+    "buy-avax-from-exchange": "Daha yaygın olan diğer yol, bir kripto borsasından MetaMask'inize AVAX göndermek olacaktır. (mesela. Kraken, Binance, Coinbase, vs.).",
+    "buy-avax-from-metamask": "Bunun bir yolu, AVAX'ı doğrudan MetaMask'tan satın almak olacaktır. Bu yaklaşımın ana dezavantajları, pahalı ücretler ve yatırım yapılabilecek maksimum tutardır. ($1500).",
+    "buy-dps-avax-or-stc": "AVAX veya {STC.symbol} ile DPS satın alın.",
+    "cannot-see-avax-on-metamask": "AVAX'ınızı MetaMask üzerinde göremiyorsanız, yanlış MetaMask adresini veya yanlış ağı kullanmış olabilirsiniz.",
+    "connect-login-to-metamask": "\"Baglan\" tusuna basin ve MetaMask'a baglanin. Hiçbir şey olmazsa, bunun nedeni MetaMask'in otomatik olarak açılmaması olabilir. Sayfayı yenileyin ve uzantıya manuel olarak tıklayın.",
+    "connect-metamask-to-the-app": "MetaMask'i Uygulamaya Bağlayın",
+    "dps-now-in-header": "Güncellenen DPS bakiyesi artık sayfa başlığında görüntüleniyor.",
+    "eg-on-binance": "Mesela Binance'ta",
+    "ensure-metamask-installed": "MetaMask'in kurulu olduğundan emin olun",
+    "final-step-launchpad-and-invest": "En son adim olarak <1>Baslatma paneline</1> gidin ve kripto kullanarak yatirim yapin. Yatirim yapmak istediginiz AVAX veya {STC.symbol} miktarini belirleyin ve \"Satin Al\" tusuna basin. {STC.symbol} ile yatırım yapılırsa MetaMask iki kez çıkar:",
+    "get-avax-metamask": "AVAX'ı MetaMask'te edinin",
+    "how-to-buy-dps-with-crypto": "Kripto ile DPS nasıl satın alınır?",
+    "investor-need-avax": "DPS jetonlarını kripto ile satın almak için yatırımcıların kripto cüzdanlarında AVAX veya {STC.symbol} olması gerekir. AVAX, Avalanche'ın native jetonudur, {STC.symbol} ise bir sabit kriptodur, her zaman 1,00 ABD Doları karşılığında kullanabileceğiniz bir kripto paradır.",
+    "next-step-buy-dps-with-avax": "Sonraki adım, AVAX ile DPS <1>satın almak</1> olacaktır.",
+    "see-the-guide": "Kılavuza bakın",
+    "send-avax-to-wallet": "Kullandiginiz borsanıza gidin ve <1>AVAX C-Chain ağını</1> kullanarak MetaMask adresinize AVAX gönderin. Transferi test etmek için önce az miktarda AVAX gönderilmelidir. Bir sure bekleyin ve MetaMask'inizde AVAX'ı görmelisiniz.",
+    "stc-allowance-tx": "Ilk olarak DeepSquare'in cüzdanınızdan {STC.symbol} para çekmesine veriyorsunuz.",
+    "stc-swap-tx": "ikinci olarak {STC.symbol} ile DPS jetonlarini takas ediyorsunuz.",
+    "this-guide-will-help-you": "Bu kılavuz, DeepSquare ile yatırım yapmak için gerekli tüm adımlardan geçmenize yardımcı olacaktır..",
+    "tx-succeed-send-rest-avax": "İşlem başarılı olduğunda, yatırım bütçesine karşılık gelen AVAX'ın geri kalanı gönderilebilir."
+  },
+  "how-to-install-metamask": {
+    "click-here-to-install-metamask": "Click <1>Buraya</1> tiklayarak MetaMask kurun.",
+    "how-to-install-metamask": "MetaMask nasıl kurulur?",
+    "metamask-holds-the-keys": "MetaMask, DPS jetonlarinizin anahtarını tutacaktır. Lütfen gizli kurtarma ifadenizi sakladığınızdan emin olun. Gizli Kurtarma İfadesi, MetaMask'i ilk kurduğunuzda oluşturulan 12 kelimelik benzersiz bir ifadedir. Parolanızı kaybederseniz, Gizli Kurtarma ifadeniz cüzdanınızı ve paranızı kurtarmanıza olanak tanır. Gizli Kurtarma ifadenizi kaybederseniz MetaMask ekibi bile hesabınızı veya cüzdanınızı kurtarmanıza yardımcı olamaz..",
+    "metamask-is-a-crypto-wallet": "Metamask bir kripto cuzdanidir ve blockchain projelerine acilan bir kapidir, tipki <2>app.deepsquare.io<2> gibi. Metamask kullanicilarinin Avalanche cuzdanlarina erismesini saglar, kullanicilar bunu web tarayicilarindan ya da cep telefonlarindan gerceklestirebilir",
+    "refresh-after-install": "Yüklendikten sonra, uygulama sayfasını <1>yenilemeniz</1> önerilir.",
+    "this-video-metamask-tutorial": "Aşağıdaki video, bu kurulumun nasıl gerçekleştirileceği konusunda bir <1>eğitici</1> sağlayacaktır. Daha fazla ayrıntı için <4>bu kılavuzu da okuyabilirsiniz</4>.",
+    "tip-pin-metamask": "<0>Ipucu:</0> Daha kolay erişim için MetaMask'i tarayıcınıza sabitleyin."
+  },
+  "other-tokens-metamask": {
+    "check-network": "MetaMask'te doğru ağda olduğunuzdan emin olun. Jetonlarınız Ethereum üzerindeyse, onları Avalanche ağında göremezsiniz.",
+    "where-other-tokens-metamask-q": "Neden diğer jetonlarımı MetaMask'ta göremiyorum?"
+  },
+  "smart-contracts": {
+    "where-are-the-smart-contracts-q": "Akıllı sözleşmeleri nerede bulabilirim?"
+  },
+  "transfer-dps-from-ethereum": {
+    "how-to-transfer-dps-from-ethereum": "DPS jetonlarımı Ethereum'dan Avalanche'a nasıl aktarırım?",
+    "no-need-to-transfer": "DeepSquare jetonlari Avalanche C-Chain adresinize zaten gönderdiğinden, DPS jetonlarini Ethereum'dan Avalanche'a aktarmanıza gerek yoktur. <1></1>Aşağıdaki örnekte olduğu gibi uygulama başlığında DPS jetonlarinizi görmelisiniz:"
+  },
+  "wallet-mismatch": {
+    "mismatch-explanation": "Cüzdan uyuşmazlığı, şu anda MetaMask'ta kullandığınız cüzdan ile hesabınızı oluşturma işlemi sırasında kaydolduğunuz cüzdandan farklı olduğunda ortaya çıkar. Aşağıdaki örnekte, kayıt sırasında \"0x71f2...a829\" cüzdan adresi kullanılmıştır..",
+    "why-wallet-mismatch-q": "Neden cüzdan uyumsuzluğum var?"
+  }
+}

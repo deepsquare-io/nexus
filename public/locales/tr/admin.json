@@ -1,0 +1,25 @@
+{
+  "actions": {
+    "download-agreement": "İlgili sözleşme metnini indirin",
+    "got-to-profile": "Profile git",
+    "see-on-snowtrace": "SnowTrace'de gor",
+    "send-agreement": "Sozlesme metnini yolla",
+    "send-reminder": "Hatirlatma email'i yolla"
+  },
+  "entering-administration": "Admin paneline git",
+  "users": {
+    "go-to-stripe": "Stripe profiline git",
+    "kyc-confirmation": "Buraya tiklayarak <1>%username% (%email%)</1> ait Musterini Tani (MT) uygulamasinin hangi kademesi oldugu bilgisinin bir blockchain bilgisi olarak yazilmasini kabul ediyorum.",
+    "no-referee": "Bu kullanıcının herhangi bir referansi yok.",
+    "no-transaction": "Bu kullanıcının herhangi bir islemi yok.",
+    "no-user-selected": "Herhangi bir kullanici secilmedi.",
+    "set-kyc": "MT kademesini sec",
+    "tabs": {
+      "kyc": "MT",
+      "personal-information": "Kisisel bilgiler",
+      "referral": "Referans",
+      "transactions": "Islemler",
+      "wallet": "Cuzdan"
+    }
+  }
+}

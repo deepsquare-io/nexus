@@ -1,0 +1,46 @@
+{
+  "amount": "Investment amount",
+  "awaiting-deposits": "Awaiting FIAT deposits",
+  "bank": {
+    "account-data": "Account data",
+    "receiver": "Receiver (beneficiary)",
+    "reference": "Reference:",
+    "reference-warning": "Please use the reference number so we can identify your transfer.",
+    "swift": "Intermediary SWIFT/BIC:"
+  },
+  "choose-currency": "Choose currency",
+  "choose-investment-amount": "Choose investment amount",
+  "click-here-to-learn-secure-wallet": "<0>Click here</0>to learn how to secure your crypto wallet.",
+  "closed-for-maintenance": "Closed for maintenance",
+  "credit-card-cvc": "CVC Code",
+  "credit-card-expiration": "Card Expiration",
+  "credit-card-fees": "Credit card fees ({{rate}}%): {{fees}}<4></4>You will receive: {{amount}} DPS",
+  "credit-card-number": "Card Number",
+  "crypto": {
+    "digital-wallet-required": "To hold digital currencies, you need a digital wallet.",
+    "intro": "In order to purchase DPS tokens, you either need AVAX, the Avalanche native token or {{symbol}}, a stablecoin running on the Avalanche network. Learn <5>how to purchase DPS with crypto</5> in our FAQ."
+  },
+  "deposit-item": "{{amount}} on {{date}}",
+  "i-confirm-that-i-have-sent": "I confirm that I have sent {{amount}}",
+  "i-confirm-that-the-address-is-mine": "I confirm that the <1></1> address is mine.<3></3>I am aware I will receive DPS tokens to this address and I have full control of it.",
+  "in-order-to-invest-with-credit-card": "In order to invest using credit card please",
+  "insufficient-avax-balance": "Insufficient {{symbol}} balance (min: {{amount}})",
+  "insufficient-stc-balance": "Insufficient {{symbol}} balance",
+  "invest-in-deepsquare": "Invest in DeepSquare",
+  "investment-confirmed": "Your investment was confirmed!",
+  "investment-confirmed-label": "Thank you!",
+  "limit-reach-thanks": "Investment limit reach - Thank you so much for your interest in DeepSquare!",
+  "maintenance-description": "Our team is working hard to improve your experience on DeepSquare. To do so, payment had to be momentarily disabled. <1></1>Please try again later.",
+  "payment-succeeded": "Payment succeeded",
+  "please-fill-the-amount-form": "Please fill the amount form",
+  "provide-credit-card-details": "Provide billing details",
+  "raise-your-limit": "You have reached the maximum investment possible with your current KYC verification state. Please complete the KYC verification process to <2>increase your investment limit</2>.",
+  "under-maintenance": "under maintenance",
+  "using-credit-card": "<0>Using credit/debit</0> card",
+  "using-crypto": "<0>Using</0> crypto<0></0>",
+  "using-wire": "<0>Using</0> wire <0>transfer</0>",
+  "wire": {
+    "digital-wallet-required": "In order to invest using wire transfer please"
+  },
+  "wire-thanks": "Thank you for your trust and investment in DeepSquare. You will receive your DPS tokens in the next few days!"
+}

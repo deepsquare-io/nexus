@@ -1,0 +1,19 @@
+{
+  "alert": {
+    "additional": "Referans programından yararlanmak için ek {{ek}} DPS yatırımı yapın.",
+    "invite": "<0><0></0> <2>Arkadaslarinizi davet edin</2></0>ve DPS jetonunda %{{percentage}} kazanın.",
+    "restriction": "Lütfen referans kodunuzu yalnızca tanıdığınız kişilerle doğrudan paylaşın. Bu bir Özel Satış olduğundan, herkese açık olarak paylaşımı engelleyen kısıtlamalar bulunmaktadir."
+  },
+  "code": "Referans kodu:",
+  "gains": "Referans kazanimlari",
+  "link": "Referans linki:",
+  "receive-referral-bonus": "Referans kodunuz kullanildiginda arkadasinizin yaptigi yatirimin {{percentage}}%'si DPS jetonu hesabiniza yollanir!",
+  "referral-gains": "Referans kazançlarınızın tüm ayrıntılarını kontrol edin.",
+  "referrals": {
+    "email": "E-posta",
+    "gains": "Referans kazanclari (DPS)",
+    "registration-date": "Kayit tarihi",
+    "title": "Referanslar"
+  },
+  "title": "Referans programi"
+}

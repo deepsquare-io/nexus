@@ -1,0 +1,19 @@
+{
+  "alert": {
+    "additional": "Invest an additional {{additional}} DPS tokens to benefit from the referral program.",
+    "invite": "<0><0></0> <2>Invite your network</2></0> and get {{percentage}}% in DPS token.",
+    "restriction": "Please only share your referral code directly with persons known to you. Since this is a Private Sale, restrictions apply preventing sharing publicly."
+  },
+  "code": "Referral code:",
+  "gains": "Referral gains",
+  "link": "Referral link:",
+  "receive-referral-bonus": "Receive {{percentage}}% worth of DPS tokens purchased using your referral code!",
+  "referral-gains": "Check the complete details of your referral gains.",
+  "referrals": {
+    "email": "Email",
+    "gains": "Referral gains (DPS tokens)",
+    "registration-date": "Registration date",
+    "title": "Referrals"
+  },
+  "title": "Referral program"
+}

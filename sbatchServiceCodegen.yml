@@ -1,0 +1,38 @@
+overwrite: true
+schema: [ '../schemas/sbatchapi/schema.graphqls' ]
+documents: [ 'src/graphql/sbatchServiceClient/**/*.graphql' ]
+config:
+  strictScalars: true
+  declarationKind: type
+  scalars:
+    BigNumber: string
+    DateTime: string
+    BigInt: string
+    Time: string
+  skipTypename: true
+  namingConvention:
+    enumValues: upper-case#upperCase
+  useTypeImports: true
+  # Apollo
+  withRefetchFn: true
+  pureMagicComment: true
+generates:
+  src/graphql/sbatchServiceClient/generated/Types.ts:
+    plugins:
+      - typescript
+  src/graphql/sbatchServiceClient:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: generated/Types.ts
+      folder: ../generated
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+  src/graphql/sbatchServiceClient/generated/introspection.json:
+    plugins:
+      - introspection
+    config: { minify: true }
+hooks:
+  afterAllFileWrite:
+    - prettier --write

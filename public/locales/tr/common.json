@@ -1,0 +1,258 @@
+{
+  "actions": {
+    "accept": "Kabul et",
+    "accept-bonus-DPS": "Yes, I want Bonus DPS!",
+    "apply": "Basvur",
+    "back": "Geri",
+    "cancel": "Iptal",
+    "close": "Kapat",
+    "confirm": "Onayla",
+    "connect-to-metamask": "MetaMask'a baglan",
+    "connected-to-metamask": "MetaMask'a baglandi",
+    "copied": "Kopyalandi",
+    "copy": "Kopyala",
+    "disable-2fa": "2FA'i devre disi birak",
+    "download-agreement-contract": "Sözleşme metnimi indir",
+    "edit": "Duzenle",
+    "enable-2fa": "2FA'i active et",
+    "get-verified": "Get verified",
+    "max": "Max",
+    "min": "Min",
+    "next": "Sonraki",
+    "processing": "Isleniyor",
+    "purchase": "Satin al",
+    "regenerate": "Yeniden olustur",
+    "restart": "Yeniden basla",
+    "retry": "Yeniden dene",
+    "send-invitations": "Davet yolla",
+    "show-recovery-codes": "Kurtarma kodlarını göster",
+    "sign-agreement-contract": "sözleşme metnimi imzala",
+    "sign-out": "Cikis",
+    "skip": "Skip for now",
+    "submit": "Gonder",
+    "tier-required": "Kademe {{tier}} gerekli",
+    "verified": "Dogrulandi",
+    "wallet-mismatch": "Yanlis cuzdan"
+  },
+  "alert": {
+    "avalanche-migration": "DPS jetonlarınız Avalanche'a zaten transfer edildi!  <2>Buraya tikla</2> ",
+    "avalanche-migration-add-token": "jetonlarinizi MetaMask'a eklemek için.",
+    "avalanche-migration-connect": "MetaMask'a bağlanmak için. MetaMask görünmüyorsa, lütfen okuyunuz. <2>SSS</2>.",
+    "bonus-dps": "<0>Earn bonus DPS by helping DeepSquare</0>As a thank you for accepting the new vesting terms, we would like to give you the opportunity of earning bonus DPS! <3>Click here</3> to read more about the bonus.",
+    "low-avax": "MT doğrulamasını işleyen cüzdan'da AVAX miktari azalıyor (su anda {{amount}}). Lütfen yeniden ekleme yapin, aksi takdirde MT işlemi bloke olabilir.",
+    "mobile": "Görünüşe göre bir mobil cihaz kullanıyorsunuz. Cuzdaninizi baglamak icin Lutfen <2>MetaMask Uygulamasini</2> kullanin.",
+    "new-terms": "<0>Acceptance of new terms</0>Help the DeepSquare project by accepting the new vesting terms.<2>Click here</2> to read more about the new terms.",
+    "wallet-mismatch": "<0>Yanlis cuzdan</0>Veritabanımızda kayıtlı olmayan bir cüzdanla baglanmaya calisiyorsunuz.<2></2>Devam etmek için lütfen kaydolduğunuz cüzdan adresine bağlanın. ({{address}})"
+  },
+  "already-have-an-account-q": "Zaten hesabınız var mı? <1>Giris</1>",
+  "bonus-dps-dialog": {
+    "content": "<0>As a thank you for accepting the new vesting terms, we would like to give you the opportunity of earning bonus DPS! This is an additional way you can help put the project in an even stronger position as we approach listing.</0><1></1><2>The full details are available <2>here</2> but in an attempt to summarise, you can lend DeepSquare 25% of your tokens, which will be returned to you over the course of your new vesting period (21 months for PS1 and 18 months for PS2) AND you receive bonus DPS from PS3 to the value your loan of 25% represents.</2>",
+    "title": "Earn bonus DPS by helping DeepSquare"
+  },
+  "buy-dps": "DPS satin al",
+  "errors": {
+    "unexpected": "Beklenmedik bir hata gerceklesti"
+  },
+  "forms": {
+    "account-type": {
+      "label": "Hesap tipi",
+      "values": {
+        "company": "Bir şirket adına",
+        "private": "Özel hesap"
+      }
+    },
+    "address": {
+      "label": "Adres"
+    },
+    "address-complement": {
+      "label": "Adres (tamamlayici alan)"
+    },
+    "agreement": {
+      "label": "Sozlesme"
+    },
+    "balance": {
+      "label": "Bakiye"
+    },
+    "birthdate": {
+      "error": {
+        "adulthood": "Kayıt olmak için en az 18 yaşında olmalısınız"
+      },
+      "label": "Dogum tarihi"
+    },
+    "city": {
+      "label": "Sehir"
+    },
+    "confirm-new-password": {
+      "label": "Yeni sifrenizi onaylayin"
+    },
+    "confirm-password": {
+      "label": "Sifrenizi onaylayin"
+    },
+    "country": {
+      "cannot-update-country": "Ulke degistirilemez",
+      "error": {
+        "invalid": "Gecersiz ulke"
+      },
+      "label": "Ulke"
+    },
+    "created-at": {
+      "label": "Kayit tarihi"
+    },
+    "email": {
+      "error": {
+        "invalid": "Devam etmek için geçerli bir e-posta adresi girmelisiniz."
+      }
+    },
+    "email-address": {
+      "label": "E-posta adresi"
+    },
+    "full-name": {
+      "label": "Adiniz Soyadiniz"
+    },
+    "funds": {
+      "label": "Yatirim kaynagi",
+      "values": {
+        "business": "iş",
+        "inheritance": "Miras",
+        "other": "Baska",
+        "salary": "Maas"
+      }
+    },
+    "invite-email-addresses": {
+      "helper-text": "Her satıra bir e-posta adresi",
+      "label": "E-posta adresleri"
+    },
+    "kyc-tier": {
+      "label": "MT kademesi"
+    },
+    "last-transaction": {
+      "label": "Son işlem"
+    },
+    "mfa-code": {
+      "placeholder": "6 basamaklı kodunuz veya kurtarma kodunuz"
+    },
+    "new-password": {
+      "label": "Yeni sifre"
+    },
+    "password": {
+      "error": {
+        "mismatch": "Sifreler mutlaka eşleşmeli"
+      },
+      "label": "Sifre"
+    },
+    "referral-code": {
+      "label": "Referans kodu"
+    },
+    "username": {
+      "label": "E-posta adresi",
+      "tooltip": "Bu kullanıcı adı, topluluk tarafından gorulecek isminizdir."
+    },
+    "wallet": {
+      "label": "Cuzdan adresi"
+    },
+    "zip-code": {
+      "label": "Posta kodu"
+    }
+  },
+  "getting-started": "Başlayin",
+  "infos": {
+    "updated-successfully": "Bilgi başarıyla güncellendi",
+    "updating": "Bilgileriniz güncelleniyor"
+  },
+  "kyc": {
+    "identity": {
+      "card": {
+        "loading": "Doğrulama 5 dakika kadar sürebilir.",
+        "name": "Kimlik doğrulama"
+      }
+    },
+    "investment-up-to": "Belirli degere kadar yatirim",
+    "meeting": {
+      "card": {
+        "name": "Yönetim Kurulu Toplantısı"
+      },
+      "dialog": {
+        "title": "DeepSquare ile bir toplantı talep edin"
+      }
+    },
+    "steps": {
+      "0": {
+        "label": "0: herhangi bir MT yok"
+      },
+      "1": {
+        "label": "1: kimlik dogrulandi"
+      },
+      "2": {
+        "label": "2: kimlik ve posta adresi doğrulandı"
+      },
+      "3": {
+        "label": "3: yönetim kurulu bir araya geldi"
+      }
+    }
+  },
+  "loading-your-profile": "profiliniz yükleniyor",
+  "maintenance-title": "",
+  "mfa": {
+    "activation-success": "İki faktörlü kimlik doğrulama etkinleştirildi",
+    "deactivation-success": "İki faktörlü kimlik doğrulama devre dışı bırakıldı",
+    "disabled": "İki faktörlü kimlik doğrulama etkin değil.",
+    "how-to-enable": "<0>Hesabınızla iki faktörlü kimlik doğrulamayı etkinleştirin:</0><1><0>Bu QR kodunu Authy veya Google Authenticator gibi kimlik doğrulama uygulamanızla tarayın.</0><1>Uygulamanız tarafından oluşturulan 6 basamaklı kodunuzu kullanarak kaydı onaylayın.</1></1>",
+    "recovery-code-details": "Bu kurtarma kodları, OTP uygulamanıza erişiminiz olmaması durumunda iki kimlik doğrulama sürecini atlamanıza olanak tanır. Bu kodları güvenli bir yerde (şifre yöneticiniz gibi) saklamalı ve <2>sifreniz gibi saklayiniz</2>.",
+    "recovery-code-only-once": "Her birini yalnızca bir kez kullanabilirsiniz.",
+    "recovery-code-title": "Çok faktörlü kimlik doğrulama kurtarma kodları"
+  },
+  "nav": {
+    "admin": "yönetici",
+    "admin-disabled": "Yönetici paneline erişmek için MetaMask cüzdanınızı bağlamanız gerekir.",
+    "faq": "SSS",
+    "launchpad": "Başlatma paneli",
+    "profile": "Profil",
+    "referral": "Referans",
+    "vote": "Oylama"
+  },
+  "network-banner": "<0>DeepSquare artık Avalanche'ta çalışıyor!</0><1>Lutfen <2>Avalanche Network</2>'une gecin.</1>",
+  "new-terms-dialog": {
+    "content": "<0>Dear Investor and valued Community Member,</0><1></1><2>We are proud to share that together we have raised ~$3.2M so far! We aim to raise another ~$2.8M from institutional investors in Private Sale 3 at a valuation of $42M ($0.6/DPS).</2><3></3><4>To help attract additional investors and to give the project long-term success, we kindly request that you agree to the proposed changes in the vesting schedule - <2>see here for details</2> (please note that we need your consent to change your vesting terms).</4><5></5>In summary, we request that you agree to accept the new vesting terms. Instead of 25% on listing and 75% after 12 months :<7><0>For Private Sale 1: 9 months after listing, tokens vest at a rate of 1/12th over 12 months</0><1>For Private Sale 2: 6 months after listing, tokens vest at a rate of 1/12th over 12 months</1></7>These changes will help to attract new institutional money and will ultimately support a smoother entry into the market.<9></9><10></10><11><0></0>I understand I will receive the new digital contract by email after having accepted the new terms and that I will need to digitally sign them in order to finalise the process.</11>",
+    "title": "Help the DeepSquare Project"
+  },
+  "powered-by": "Tarafından desteklenmektedir",
+  "privacy-policy": "Gizlilik Politikası",
+  "referees": "Referanslar",
+  "referral": {
+    "invite": {
+      "title": "Referans davet edin",
+      "toast-success_one": "Davet {{count}} yollayin",
+      "toast-success_other": "Davet {{count}} yolladin"
+    }
+  },
+  "terms": {
+    "accepted": "Şartlar başarıyla kabul edildi!",
+    "i-accept-the-terms": "<2>Ozel satis ve sartlarini</2> kabul ettim",
+    "you-must-accept": "Devam etmek için koşulları kabul etmelisiniz."
+  },
+  "validation": {
+    "max": "Maksimum miktar {{amount}}",
+    "min": "Minimum miktar {{amount}}"
+  },
+  "web3": {
+    "alert": {
+      "connect-metamask": "MetaMask'a bağlanın.",
+      "connect-your-metamask-wallet": "Mevcut bakiyenizi görmek için MetaMask cüzdanınızı bağlayın.",
+      "please-install-metamask": "<2>Lutfen MetaMask.</2> kurun. Kurulumdan sonra bu sayfayı yenilemeniz gerekecek."
+    },
+    "authorized-stc": "{{amount}} {{symbol}} otorize ettiniz",
+    "dps-remaining-at": "DPS'de kalan",
+    "investment-confirmed": "Investment confirmed!",
+    "transactions": "Islemler",
+    "tx-rejected": "Islem reddedildi",
+    "waiting-authorization-confirmation": "Yetkilendirme onayı bekleniyor",
+    "waiting-investment-confirmation": "Yatırım onayı bekleniyor",
+    "watch-asset": "MetaMask'e Ekle"
+  },
+  "website-under-maintenance": "Web sitesi şu anda bakımdadır.",
+  "welcome": {
+    "terms": {
+      "title": "Şartlar ve koşullar"
+    }
+  }
+}

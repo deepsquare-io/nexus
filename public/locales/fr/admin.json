@@ -1,0 +1,25 @@
+{
+  "actions": {
+    "download-agreement": "Télécharger l'accord contractuel correspondant",
+    "got-to-profile": "Voir le profil",
+    "see-on-snowtrace": "Voir sur SnowTrace",
+    "send-agreement": "Envoyer l'accord contractuel",
+    "send-reminder": "Envoyer un rappel par email"
+  },
+  "entering-administration": "Accès à l'administration",
+  "users": {
+    "go-to-stripe": "Voir le profil Stripe",
+    "kyc-confirmation": "En cliquant sur confirmer, vous reconnaissez que <1>{{ username }} ({{ email }})</1>verra son niveau de KYC modifié à {{ tier }}, ce qui implique une transaction dans la blockchain.",
+    "no-referee": "Cet utilisateur n'a aucun parrainage.",
+    "no-transaction": "Cet utilisateur n'a aucune transaction.",
+    "no-user-selected": "Pas d'utilisateur sélecté.",
+    "set-kyc": "Modifier la KYC de l'utilisateur ",
+    "tabs": {
+      "kyc": "KYC",
+      "personal-information": "Informations personnelles",
+      "referral": "Parrain",
+      "transactions": "transactions",
+      "wallet": "Wallet"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "infos": {
+    "title": "Kişisel bilgilerinizi tamamlayın"
+  },
+  "kyc": {
+    "title": "Musterini tani (MT) doğrulaması"
+  },
+  "wallet": {
+    "continue-with-this-wallet": "Bu cüzdanla devam et",
+    "please-connect-wallet": "Lütfen bir web3 cüzdanı bağlayın. MetaMask kullanmanızı öneririz.<1></1>MetaMask'i nasıl kuracağınızı bilmiyorsanız, lütfen <4>kılavuzumuzu okuyun</4>.<6></6>\"Bağlan\" üzerine tikladiginizda çalışmıyor ise <9>Buraya tıklayın</9>.",
+    "title": "Bir cüzdan bağlayın"
+  },
+  "wallet-connected": "Cuzdan <1>{{account}}</1> baglandi.",
+  "we-need-to-know-more-about-you": "Özel satış sırasında DeepSquare'e yatırım yapabilmek için hakkınızda daha çok şey bilmemiz gerekiyor.",
+  "welcome-to-deepsquare": "DeepSquare'e hoş geldiniz!"
+}

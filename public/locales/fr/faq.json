@@ -1,0 +1,68 @@
+{
+  "avalanche-mobile": {
+    "avalanche-manual-on-mobile": "Il faut ajouter le réseau Avalanche manuellement sur mobile. Connectez-vous sur votre portefeuille MetaMask et allez sur <2>Settings / Networks / Add Network</2>. Ensuite, entrez les informations suivantes :",
+    "how-to-manually-add-avalanche-network-on-mobile": "Comment ajouter le réseau Avalanche manuellement sur mobile ?",
+    "save": "Après avoir cliqué sur \"Save\", le réseau Avalanche Mainnet sera ajouté à votre portefeuille MetaMask. Vous pouvez maintenant connecter votre portefeuille sur l'application."
+  },
+  "connect-nothing-happens": {
+    "metamask-not-auto-open": "Si rien ne se passe après avoir cliqué sur le bouton \"Se connecter à MetaMask\", il est possible que MetaMask ne se soit pas ouvert automatiquement. <1>Rafraichissez la page</1> et cliquez manuellement sur MetaMask.",
+    "when-click-nothing-happens": "Rien ne se passe quand je clique sur \"Se connecter à MetaMask\". Pourquoi ?"
+  },
+  "dps-on-ethereum": {
+    "dps-ethereum-remains": "La possession de jeton DPS sur Ethereum est une marque indélébile de votre participation au stade initial du projet. Ce dernier a depuis migré sur le réseau Avalanche et le jeton DPS sur cette blockchain est dorénavant le jeton officiel.",
+    "what-will-happen-to-dps-on-ethereum-q": "Que va t'il advenir de mes jetons DPS sur le réseau Ethereum ?"
+  },
+  "faq": "FAQ",
+  "frequently-asked-questions": "FAQ",
+  "how-to-add-dps-to-metamask": "Comment voir mes jetons DPS dans MetaMask?",
+  "how-to-buy-dps-with-crypto": {
+    "add-avalanche-network-to-metamask": "Ajouter le réseau Avalanche à MetaMask",
+    "add-avalanche-to-metamask": "Ajouter Avalanche à MetaMask",
+    "at-this-point-avax-or-stc": "A ce stade vous devriez avoir de l'AVAX et/ou de l'{{ symbol }} sur MetaMask (réseau Avalanche).",
+    "avalanche-already-set-up": "Le réseau Avalanche est déjà selectionné",
+    "buy-avax-from-exchange": "Un autre moyen plus courant est d'envoyer des AVAX sur votre MetaMask depuis une plateforme d'échange (ex. Kraken, Binance, Coinbase, etc.).",
+    "buy-avax-from-metamask": "Il est possible d'acheter de l'AVAX directement depuis MetaMask. Les principaux défauts de cette méthode sont les frais élevés et le montant maximum que l'on peut investir ($1500).",
+    "buy-dps-avax-or-stc": "Acheter des DPS avec de l'AVAX ou de l'{{ symbol }}",
+    "cannot-see-avax-on-metamask": "Si vous ne parvenez pas à voir vos AVAX sur MetaMask, vous n'avez peut-être pas sélectionné le réseau Avalanche sur Metamask ou vous avez peut-être utilisé une mauvaise adresse.",
+    "connect-login-to-metamask": "Appuyez sur le bouton \"Se connecter à MetaMask\" et identifiez vous sur MetaMask. Si rien ne se passe, c'est peut-être parce que MetaMask ne s'est pas ouvert automatiquement. Rafraichissez la page et cliquez manuellement sur l'extension MetaMask.",
+    "connect-metamask-to-the-app": "Connectez MetaMask à l'application",
+    "dps-now-in-header": "Le solde de vos jetons DPS est maintenant actualisé et affiché dans l'en-tête de la page.",
+    "eg-on-binance": "ex. sur Binance",
+    "ensure-metamask-installed": "Assurez-vous que MetaMask est bien installé",
+    "final-step-launchpad-and-invest": "La dernière étape est de vous rendre sur la page <1>Investir</1> et d'investir en utilisant de la crypto. Entrez le montant en AVAX ou en {{ symbol }} que vous souhaitez investir et cliquez ensuite sur le bouton \"Acheter\". Notez que si vous avec choisi d'investir avec de l'{{ symbol }}, MetaMask va apparaître deux fois :",
+    "get-avax-metamask": "Ajoutez des AVAX sur votre MetaMask",
+    "how-to-buy-dps-with-crypto": "Comment acheter des DPS avec de la crypto ?",
+    "investor-need-avax": "Afin d'acheter des jetons DPS avec des crypto-monnaies, les investisseurs doivent avoir soit des AVAX soit des {{ symbol }} sur leur portefeuille. AVAX est le jeton natif de la blockchain Avalanche alors que {{ symbol }} est une monnaie stable indexé sur le dollar américain, c'est à dire un jeton que vous pouvez toujours échanger pour US$1.00.",
+    "next-step-buy-dps-with-avax": "La prochaine étape sera d'<1>acheter</1> des DPS avec de l'AVAX.",
+    "see-the-guide": "Voir le guide",
+    "send-avax-to-wallet": "Rendez-vous sur votre plateforme d'échange et envoyez des AVAX sur votre adresse MetaMask en utilisant bien le <1>réseau AVAX C-Chain</1>. Il est recommandé d'envoyer une petite quantité d'AVAX pour tester le transfert. Attendez quelques secondes et vous devriez voir vos AVAX sur MetaMask.",
+    "stc-allowance-tx": "une première fois pour autoriser DeepSquare à débiter des {{ symbol }} sur votre portefeuille;",
+    "stc-swap-tx": "une seconde fois pour échanger vos {{ symbol }} contre des jetons DPS.",
+    "this-guide-will-help-you": "Ce guide vous aidera à franchir toutes les étapes nécessaires pour investir dans DeepSquare.",
+    "tx-succeed-send-rest-avax": "Lorsque la transaction a réussi, vous pouvez envoyer le reste de vos AVAX."
+  },
+  "how-to-install-metamask": {
+    "click-here-to-install-metamask": "Cliquez <1>ici</1> pour installer MetaMask.",
+    "how-to-install-metamask": "Comment installer MetaMask?",
+    "metamask-holds-the-keys": "MetaMask sera le coffre-fort pour vos jetons DPS. Veillez à conserver votre phrase de récupération secrète à tout prix. La phrase de récupération secrète est une phrase unique de 12 mots générée lors de la première configuration de MetaMask. Si jamais vous perdez votre mot de passe, votre phrase de récupération secrète vous permet de récupérer votre portefeuille et vos fonds. Si vous perdez votre phrase de récupération secrète, même l'équipe de MetaMask ne peut pas vous aider à récupérer votre compte ou votre portefeuille.",
+    "metamask-is-a-crypto-wallet": "MetaMask est un portefeuille de crypto-monnaie et une passerelle vers des applications blockchain comme <2>app.deepsquare.io</2>. Il permet aux utilisateurs d'accéder à leur portefeuille Avalanche via une extension de navigateur ou une application mobile.",
+    "refresh-after-install": "Une fois installé, il est recommandé de <1>rafraichir</1> la page de d'application.",
+    "this-video-metamask-tutorial": "La vidéo ci-dessous présente un <1>tutoriel</1> qui explique le processus d'installation. Vous pouvez également <4>lire ce guide</4> pour plus de détails.",
+    "tip-pin-metamask": "<0>Astuce :</0> Épinglez MetaMask à votre navigateur pour un accès facilité."
+  },
+  "other-tokens-metamask": {
+    "check-network": "Assurez-vous d'être sur le bon réseau dans MetaMask. Si vos jetons sont sur le réseau Ethereum, vous ne les verrez pas sur le réseau Avalanche et vice versa.",
+    "where-other-tokens-metamask-q": "Pourquoi ne vois-je pas mes autres jetons sur mon compte MetaMask?"
+  },
+  "smart-contracts": {
+    "where-are-the-smart-contracts-q": "Où puis-je trouver les smart contracts ?"
+  },
+  "transfer-dps-from-ethereum": {
+    "how-to-transfer-dps-from-ethereum": "Comment transférer mes jetons DPS du réseau Ethereum au réseau Avalanche ?",
+    "no-need-to-transfer": "Il n'est pas nécessaire de transférer les jetons DPS du réseau Ethereum au réseau Avalanche car DeepSquare les a déjà envoyés à votre adresse C-Chain d'Avalanche. <1></1>Vous devriez voir vos jetons DPS dans l'en-tête de l'application comme dans l'exemple suivant :"
+  },
+  "wallet-mismatch": {
+    "mismatch-explanation": "La non-concordance de portefeuille apparaît lorsque le porte-monnaie que vous utilisez actuellement sur MetaMask diffère de celui avec lequel vous vous êtes inscrit lors du processus de création de votre compte. Dans l'exemple suivant, l'adresse du porte-monnaie \"0x71f2...a829\" a été utilisée lors de l'enregistrement.",
+    "why-wallet-mismatch-q": "Pourquoi ai-je une erreur de non-concordance de portefeuille ?"
+  }
+}

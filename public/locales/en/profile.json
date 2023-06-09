@@ -1,0 +1,12 @@
+{
+  "agreement-contract": "Agreement Contract",
+  "incomplete-alert": "Your profile information is incomplete.",
+  "information": "Profile information",
+  "mfa-alert": "Your account is not protected with a two-factor authentication.<1>Setup 2FA now</1>",
+  "private-sale-conditions": "Private sale conditions",
+  "security": "Security",
+  "title": "Account verification",
+  "total-invested": "Total invested: ",
+  "total-invested-tooltip": "The max. investment value depends on your current KYC verification tier.",
+  "user-information": "User information"
+}

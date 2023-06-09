@@ -1,0 +1,12 @@
+{
+  "agreement-contract": "Accord contractuel",
+  "incomplete-alert": "Vos informations personnelles sont incomplètes.",
+  "information": "Informations personnelles",
+  "mfa-alert": "Votre compte n'est pas protégé avec la double authentification.<1>Activer la double authentification</1>",
+  "private-sale-conditions": "Termes et Conditions de la Vente Privée",
+  "security": "Sécurité",
+  "title": "Vérification du compte",
+  "total-invested": "Investissement total : ",
+  "total-invested-tooltip": "L'investissement maximum dépend de votre niveau actuel de KYC.",
+  "user-information": "Information utilisateur"
+}
