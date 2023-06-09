@@ -1,1 +1,0 @@
-{"version":3,"file":"handleDom.d.ts","sourceRoot":"","sources":["../../../../src/coreHandlers/handleDom.ts"],"names":[],"mappings":"AAKA,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,UAAU,CAAC;AAKhD,UAAU,cAAc;IACtB,IAAI,EAAE,MAAM,CAAC;IACb,KAAK,EAAE,IAAI,GAAG;QAAE,MAAM,EAAE,IAAI,CAAA;KAAE,CAAC;CAChC;AAED,eAAO,MAAM,iBAAiB,EAAE,CAAC,MAAM,EAAE,eAAe,KAAK,CAAC,WAAW,EAAE,cAAc,KAAK,IAc3F,CAAC"}

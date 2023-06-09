@@ -1,0 +1,38 @@
+{
+  "entry": [
+    "./src/app/**/*.{ts,tsx}",
+    "./cli/index.ts",
+    "./cypress/integration/**/*.spec.ts",
+    "./cypress/plugins/index.ts",
+    "./cypress/support/e2e.ts",
+    "./migrations/*.ts"
+  ],
+  "extensions": [".ts", ".tsx"],
+  "ignorePatterns": ["**/node_modules/**", "**/*.generated.*"],
+  "ignoreUnresolved": [
+    "@cypress/code-coverage/task",
+    "@cypress/code-coverage/support",
+    "@cypress/code-coverage/middleware/nextjs",
+    "chalk",
+    "tailwindcss/resolveConfig",
+    "tailwindcss/tailwind-config",
+    "tailwindcss/colors",
+    "yargs/helpers",
+    "../../tailwind.config",
+    "hardhat/config"
+  ],
+  "ignoreUnused": ["next", "react", "react-dom", "@babel/preset-env", "@swc/core", "react-is"],
+  "ignoreUnimported": ["**/*.spec.*", "./abi/*", "src/components/forms/workloads/ContainerWorkloadSubform.tsx"],
+  "aliases": {
+    "@components/*": ["./src/components/*"],
+    "@graphql/*": ["./src/graphql/*"],
+    "@grpc/*": ["./src/grpc/*"],
+    "@hooks/*": ["./src/hooks/*"],
+    "@lib/*": ["./src/lib/*"],
+    "@public/*": ["./public/*"],
+    "@state/*": ["./src/state/*"],
+    "@styles/*": ["./src/styles/*"],
+    "@utils/*": ["./src/utils/*"],
+    "@data/*": ["./src/data/*"]
+  }
+}

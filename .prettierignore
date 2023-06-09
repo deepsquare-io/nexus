@@ -1,0 +1,7 @@
+/.next
+/coverage
+/node_modules
+/pnpm-lock.yaml
+/src/lib/web3/contracts/*
+/src/grpc/generated
+/abi
