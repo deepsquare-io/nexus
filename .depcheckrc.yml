@@ -28,6 +28,7 @@ ignores:
   - autoprefixer
   - depcheck
   - esbuild
+  - encoding
   - '@ethersproject/bytes'
   - react-is
   - '@trivago/prettier-plugin-sort-imports'
