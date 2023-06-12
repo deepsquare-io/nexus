@@ -1,0 +1,35 @@
+name: Update latest file
+description: Update latest file for version tracking
+inputs:
+  name:
+    description: 'Which app'
+    required: true
+  version:
+    description: 'The new version to write'
+    required: true
+  token:
+    description: 'Github access token'
+    required: true
+  base:
+    description: 'Branch to merge'
+    default: main
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Update latest
+      shell: sh
+      run: sed -Ei 's/${{ inputs.name }}=(.*)/${{ inputs.name }}=${{ inputs.version }}/g' ./latest
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        add-paths: |
+          ./latest
+        token: ${{ inputs.token }}
+        commit-message: 'chore(version): updated ${{ inputs.name }} to ${{ inputs.version }}'
+        delete-branch: true
+        base: ${{ inputs.base }}
+        title: 'chore(version): updated ${{ inputs.name }} to ${{ inputs.version }}'
+        branch: chore/update-version-${{ inputs.name }}
+        signoff: true

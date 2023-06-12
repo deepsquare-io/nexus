@@ -1,0 +1,33 @@
+name: Setup environment
+description: Setup Node and install dependencies
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+
+    - name: Get the latest pnpm version
+      id: pnpm
+      run: echo "latest-version=$(npm show pnpm version)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: ${{ steps.pnpm.outputs.latest-version }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+        cache: pnpm
+        cache-dependency-path: './customer-portal/pnpm-lock.yaml'
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile # equivalent to npm ci
+      shell: bash
+      working-directory: ./customer-portal
+      env:
+        SENTRYCLI_SKIP_DOWNLOAD: '1'

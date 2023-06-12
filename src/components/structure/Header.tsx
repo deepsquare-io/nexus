@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useAuth } from 'reactfire';
 import { useDisconnect } from 'wagmi';
 import { useContext } from 'react';
 import ConnectButton from '@components/buttons/ConnectButton';
@@ -8,7 +9,7 @@ import CustomLink from '@components/routing/Link';
 import WalletBalances from '@components/web3/WalletBalances';
 import useDialog from '@hooks/useDialog';
 import { authContext } from '@lib/contexts/AuthContext';
-import { isDisconnected, isWeb3 } from '@lib/types/AuthMethod';
+import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import MuiAppBar from '@mui/material/AppBar';
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar/AppBar';
 import Button from '@mui/material/Button';
@@ -47,6 +48,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
   const { authMethod, setAuthMethod } = useContext(authContext);
   const { isOpen: isDrawerOpen, toggle: toggleDrawer } = useDialog('drawer');
   const { disconnectAsync } = useDisconnect();
+  const auth = useAuth();
 
   return (
     <AppBar position="fixed" open={isDrawerOpen} elevation={0} {...props}>
@@ -70,12 +72,14 @@ const Header = ({ className, ...props }: HeaderProps) => {
                 if (isWeb3(authMethod)) {
                   localStorage.setItem('reconnectWallet', 'false');
                   await disconnectAsync();
+                } else if (isWeb2(authMethod)) {
+                  await auth.signOut();
                 }
                 setUser(null);
                 setAuthMethod(undefined);
               }}
             >
-              Disconnect
+              Log out
             </Button>
           )}
           <CustomLink
