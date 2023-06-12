@@ -49,16 +49,16 @@ dependencies:
     version: 2.8.2
   '@sentry/nextjs':
     specifier: ^7.45.0
-    version: 7.45.0(next@13.4.3)(react@18.2.0)(webpack@5.75.0)
+    version: 7.45.0(encoding@0.1.13)(next@13.4.3)(react@18.2.0)(webpack@5.75.0)
   '@swc/core':
     specifier: ^1.3.36
     version: 1.3.36
   '@wagmi/connectors':
     specifier: ^2.0.0
-    version: 2.0.0(@wagmi/chains@0.3.1)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
+    version: 2.0.0(@wagmi/chains@0.3.1)(encoding@0.1.13)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
   '@wagmi/core':
     specifier: ^1.0.8
-    version: 1.0.8(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
+    version: 1.0.8(encoding@0.1.13)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
   ajv:
     specifier: ^8.12.0
     version: 8.12.0
@@ -80,9 +80,12 @@ dependencies:
   dedent:
     specifier: ^0.7.0
     version: 0.7.0
+  encoding:
+    specifier: ^0.1.13
+    version: 0.1.13
   firebase:
     specifier: ^9.22.2
-    version: 9.22.2
+    version: 9.22.2(encoding@0.1.13)
   graphql:
     specifier: ^16.6.0
     version: 16.6.0
@@ -136,7 +139,7 @@ dependencies:
     version: 0.17.0
   wagmi:
     specifier: ^1.0.9
-    version: 1.0.9(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
+    version: 1.0.9(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
   xterm:
     specifier: 5.1.0
     version: 5.1.0
@@ -171,22 +174,22 @@ devDependencies:
     version: 7.20.2(@babel/core@7.21.0)
   '@graphql-codegen/cli':
     specifier: ^3.0.0
-    version: 3.0.0(@babel/core@7.21.0)(@swc/core@1.3.36)(@types/node@18.14.0)(graphql@16.6.0)(typescript@5.0.4)
+    version: 3.0.0(@babel/core@7.21.0)(@swc/core@1.3.36)(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)(typescript@5.0.4)
   '@graphql-codegen/introspection':
     specifier: ^3.0.1
-    version: 3.0.1(graphql@16.6.0)
+    version: 3.0.1(encoding@0.1.13)(graphql@16.6.0)
   '@graphql-codegen/near-operation-file-preset':
     specifier: ^2.5.0
-    version: 2.5.0(graphql@16.6.0)
+    version: 2.5.0(encoding@0.1.13)(graphql@16.6.0)
   '@graphql-codegen/typescript':
     specifier: ^3.0.0
-    version: 3.0.0(graphql@16.6.0)
+    version: 3.0.0(encoding@0.1.13)(graphql@16.6.0)
   '@graphql-codegen/typescript-operations':
     specifier: ^3.0.0
-    version: 3.0.0(graphql@16.6.0)
+    version: 3.0.0(encoding@0.1.13)(graphql@16.6.0)
   '@graphql-codegen/typescript-react-apollo':
     specifier: ^3.3.7
-    version: 3.3.7(graphql-tag@2.12.6)(graphql@16.6.0)
+    version: 3.3.7(encoding@0.1.13)(graphql-tag@2.12.6)(graphql@16.6.0)
   '@jest/globals':
     specifier: ^29.4.3
     version: 29.4.3
@@ -342,7 +345,7 @@ packages:
       zen-observable-ts: 1.2.5
     dev: false
 
-  /@ardatan/relay-compiler@12.0.0(graphql@16.6.0):
+  /@ardatan/relay-compiler@12.0.0(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-9anThAaj1dQr6IGmzBMcfzOQKTa5artjuPmw8NYK/fiGEMjADbSguBY2FMDykt+QhilR3wc9VA/3yVju7JHg7Q==}
     hasBin: true
     peerDependencies:
@@ -357,13 +360,13 @@ packages:
       babel-preset-fbjs: 3.4.0(@babel/core@7.21.0)
       chalk: 4.1.2
       fb-watchman: 2.0.2
-      fbjs: 3.0.4
+      fbjs: 3.0.4(encoding@0.1.13)
       glob: 7.2.3
       graphql: 16.6.0
       immutable: 3.7.6
       invariant: 2.2.4
       nullthrows: 1.1.1
-      relay-runtime: 12.0.0
+      relay-runtime: 12.0.0(encoding@0.1.13)
       signedsource: 1.0.0
       yargs: 15.4.1
     transitivePeerDependencies:
@@ -371,11 +374,11 @@ packages:
       - supports-color
     dev: true
 
-  /@ardatan/sync-fetch@0.0.1:
+  /@ardatan/sync-fetch@0.0.1(encoding@0.1.13):
     resolution: {integrity: sha512-xhlTqH0m31mnsG0tIP4ETgfSB6gXDaYYsUWTrlUV93fFQPI9dd8hE0Ot6MHLCtqgB32hwJAC3YZMWlXZw7AleA==}
     engines: {node: '>=14'}
     dependencies:
-      node-fetch: 2.6.11
+      node-fetch: 2.6.11(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: true
@@ -1706,12 +1709,12 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@coinbase/wallet-sdk@3.6.6:
+  /@coinbase/wallet-sdk@3.6.6(encoding@0.1.13):
     resolution: {integrity: sha512-vX+epj/Ttjo7XRwlr3TFUUfW5GTRMvORpERPwiu7z2jl3DSVL4rXLmHt5y6LDPlUVreas2gumdcFbu0fLRG9Jg==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       '@metamask/safe-event-emitter': 2.0.0
-      '@solana/web3.js': 1.77.2
+      '@solana/web3.js': 1.77.2(encoding@0.1.13)
       bind-decorator: 1.0.11
       bn.js: 5.2.1
       buffer: 6.0.3
@@ -2628,17 +2631,17 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /@firebase/auth-compat@0.4.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
+  /@firebase/auth-compat@0.4.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-Q30e77DWXFmXEt5dg5JbqEDpjw9y3/PcP9LslDPR7fARmAOTIY9MM6HXzm9KC+dlrKH/+p6l8g9ifJiam9mc4A==}
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
       '@firebase/app-compat': 0.2.12
-      '@firebase/auth': 0.23.2(@firebase/app@0.9.12)
+      '@firebase/auth': 0.23.2(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/auth-types': 0.12.0(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
-      node-fetch: 2.6.7
+      node-fetch: 2.6.7(encoding@0.1.13)
       tslib: 2.5.2
     transitivePeerDependencies:
       - '@firebase/app'
@@ -2660,7 +2663,7 @@ packages:
       '@firebase/util': 1.9.3
     dev: false
 
-  /@firebase/auth@0.23.2(@firebase/app@0.9.12):
+  /@firebase/auth@0.23.2(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-dM9iJ0R6tI1JczuGSxXmQbXAgtYie0K4WvKcuyuSTCu9V8eEDiz4tfa1sO3txsfvwg7nOY3AjoCyMYEdqZ8hdg==}
     peerDependencies:
       '@firebase/app': 0.x
@@ -2669,7 +2672,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/logger': 0.4.0
       '@firebase/util': 1.9.3
-      node-fetch: 2.6.7
+      node-fetch: 2.6.7(encoding@0.1.13)
       tslib: 2.5.2
     transitivePeerDependencies:
       - encoding
@@ -2711,14 +2714,14 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /@firebase/firestore-compat@0.3.11(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
+  /@firebase/firestore-compat@0.3.11(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-jPhySBBp6+Vt750WmeCK4it/NV9YHQEX+jJ7Va8wHOhVejy0zUhL5TsLF6Bz3hCjb4Dxn6XVgvuSqiuqY16yWw==}
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
       '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/firestore': 3.12.2(@firebase/app@0.9.12)
+      '@firebase/firestore': 3.12.2(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/firestore-types': 2.5.1(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/util': 1.9.3
       tslib: 2.5.2
@@ -2738,7 +2741,7 @@ packages:
       '@firebase/util': 1.9.3
     dev: false
 
-  /@firebase/firestore@3.12.2(@firebase/app@0.9.12):
+  /@firebase/firestore@3.12.2(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-6EDIJ2V4hlUkPvAb1uH5DAz65ZvhStIM1oYGSUx6mt2UdEDu/0CAVS7xYBY6niTyM/+2r6XBW3hYG/1x1V27vg==}
     engines: {node: '>=10.10.0'}
     peerDependencies:
@@ -2751,20 +2754,20 @@ packages:
       '@firebase/webchannel-wrapper': 0.10.1
       '@grpc/grpc-js': 1.7.3
       '@grpc/proto-loader': 0.6.13
-      node-fetch: 2.6.7
+      node-fetch: 2.6.7(encoding@0.1.13)
       tslib: 2.5.2
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@firebase/functions-compat@0.3.5(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12):
+  /@firebase/functions-compat@0.3.5(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-uD4jwgwVqdWf6uc3NRKF8cSZ0JwGqSlyhPgackyUPe+GAtnERpS4+Vr66g0b3Gge0ezG4iyHo/EXW/Hjx7QhHw==}
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
       '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/functions': 0.10.0(@firebase/app@0.9.12)
+      '@firebase/functions': 0.10.0(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/functions-types': 0.6.0
       '@firebase/util': 1.9.3
       tslib: 2.5.2
@@ -2777,7 +2780,7 @@ packages:
     resolution: {integrity: sha512-hfEw5VJtgWXIRf92ImLkgENqpL6IWpYaXVYiRkFY1jJ9+6tIhWM7IzzwbevwIIud/jaxKVdRzD7QBWfPmkwCYw==}
     dev: false
 
-  /@firebase/functions@0.10.0(@firebase/app@0.9.12):
+  /@firebase/functions@0.10.0(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-2U+fMNxTYhtwSpkkR6WbBcuNMOVaI7MaH3cZ6UAeNfj7AgEwHwMIFLPpC13YNZhno219F0lfxzTAA0N62ndWzA==}
     peerDependencies:
       '@firebase/app': 0.x
@@ -2788,7 +2791,7 @@ packages:
       '@firebase/component': 0.6.4
       '@firebase/messaging-interop-types': 0.2.0
       '@firebase/util': 1.9.3
-      node-fetch: 2.6.7
+      node-fetch: 2.6.7(encoding@0.1.13)
       tslib: 2.5.2
     transitivePeerDependencies:
       - encoding
@@ -2934,14 +2937,14 @@ packages:
       tslib: 2.5.2
     dev: false
 
-  /@firebase/storage-compat@0.3.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12):
+  /@firebase/storage-compat@0.3.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-wvsXlLa9DVOMQJckbDNhXKKxRNNewyUhhbXev3t8kSgoCotd1v3MmqhKKz93ePhDnhHnDs7bYHy+Qa8dRY6BXw==}
     peerDependencies:
       '@firebase/app-compat': 0.x
     dependencies:
       '@firebase/app-compat': 0.2.12
       '@firebase/component': 0.6.4
-      '@firebase/storage': 0.11.2(@firebase/app@0.9.12)
+      '@firebase/storage': 0.11.2(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/storage-types': 0.8.0(@firebase/app-types@0.9.0)(@firebase/util@1.9.3)
       '@firebase/util': 1.9.3
       tslib: 2.5.2
@@ -2961,7 +2964,7 @@ packages:
       '@firebase/util': 1.9.3
     dev: false
 
-  /@firebase/storage@0.11.2(@firebase/app@0.9.12):
+  /@firebase/storage@0.11.2(@firebase/app@0.9.12)(encoding@0.1.13):
     resolution: {integrity: sha512-CtvoFaBI4hGXlXbaCHf8humajkbXhs39Nbh6MbNxtwJiCqxPy9iH3D3CCfXAvP0QvAAwmJUTK3+z9a++Kc4nkA==}
     peerDependencies:
       '@firebase/app': 0.x
@@ -2969,7 +2972,7 @@ packages:
       '@firebase/app': 0.9.12
       '@firebase/component': 0.6.4
       '@firebase/util': 1.9.3
-      node-fetch: 2.6.7
+      node-fetch: 2.6.7(encoding@0.1.13)
       tslib: 2.5.2
     transitivePeerDependencies:
       - encoding
@@ -2995,7 +2998,7 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /@graphql-codegen/cli@3.0.0(@babel/core@7.21.0)(@swc/core@1.3.36)(@types/node@18.14.0)(graphql@16.6.0)(typescript@5.0.4):
+  /@graphql-codegen/cli@3.0.0(@babel/core@7.21.0)(@swc/core@1.3.36)(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)(typescript@5.0.4):
     resolution: {integrity: sha512-16nuFabHCfPQ/d+v52OvR1ueL8eiJvS/nRuvuEV8d9T1fkborHKRw4lhyKVebu9izFBs6G0CvVCLhgVzQwHSLw==}
     hasBin: true
     peerDependencies:
@@ -3006,15 +3009,15 @@ packages:
       '@babel/types': 7.22.4
       '@graphql-codegen/core': 3.1.0(graphql@16.6.0)
       '@graphql-codegen/plugin-helpers': 4.2.0(graphql@16.6.0)
-      '@graphql-tools/apollo-engine-loader': 7.3.26(graphql@16.6.0)
+      '@graphql-tools/apollo-engine-loader': 7.3.26(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/code-file-loader': 7.3.23(@babel/core@7.21.0)(graphql@16.6.0)
       '@graphql-tools/git-loader': 7.3.0(@babel/core@7.21.0)(graphql@16.6.0)
-      '@graphql-tools/github-loader': 7.3.28(@babel/core@7.21.0)(@types/node@18.14.0)(graphql@16.6.0)
+      '@graphql-tools/github-loader': 7.3.28(@babel/core@7.21.0)(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/graphql-file-loader': 7.5.17(graphql@16.6.0)
       '@graphql-tools/json-file-loader': 7.4.18(graphql@16.6.0)
       '@graphql-tools/load': 7.8.14(graphql@16.6.0)
-      '@graphql-tools/prisma-loader': 7.2.72(@types/node@18.14.0)(graphql@16.6.0)
-      '@graphql-tools/url-loader': 7.17.18(@types/node@18.14.0)(graphql@16.6.0)
+      '@graphql-tools/prisma-loader': 7.2.72(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)
+      '@graphql-tools/url-loader': 7.17.18(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       '@whatwg-node/fetch': 0.6.9(@types/node@18.14.0)
       chalk: 4.1.2
@@ -3024,7 +3027,7 @@ packages:
       debounce: 1.2.1
       detect-indent: 6.1.0
       graphql: 16.6.0
-      graphql-config: 4.5.0(@types/node@18.14.0)(graphql@16.6.0)
+      graphql-config: 4.5.0(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)
       inquirer: 8.2.5
       is-glob: 4.0.3
       json-to-pretty-yaml: 1.2.2
@@ -3063,13 +3066,13 @@ packages:
       tslib: 2.5.2
     dev: true
 
-  /@graphql-codegen/introspection@3.0.1(graphql@16.6.0):
+  /@graphql-codegen/introspection@3.0.1(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-D6vJQTEL/np4EmeUHm5spLK59cr+AMXEoLRoTI+dagFzlHYDTfXZH6F7uhKaakxcj0SAQhIWKvGMggotUdEtyg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 4.2.0(graphql@16.6.0)
-      '@graphql-codegen/visitor-plugin-common': 3.1.1(graphql@16.6.0)
+      '@graphql-codegen/visitor-plugin-common': 3.1.1(encoding@0.1.13)(graphql@16.6.0)
       graphql: 16.6.0
       tslib: 2.5.2
     transitivePeerDependencies:
@@ -3077,14 +3080,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/near-operation-file-preset@2.5.0(graphql@16.6.0):
+  /@graphql-codegen/near-operation-file-preset@2.5.0(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-S9PNJP5tTkUWBQ6inbviOsTREzsMxYVqJGrtPcIdMWkKLZAAItAfAb60klB1T64vt6Oru+nUf8IYUNrchJ8MYg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/add': 3.2.3(graphql@16.6.0)
       '@graphql-codegen/plugin-helpers': 2.7.2(graphql@16.6.0)
-      '@graphql-codegen/visitor-plugin-common': 2.13.1(graphql@16.6.0)
+      '@graphql-codegen/visitor-plugin-common': 2.13.1(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 8.13.1(graphql@16.6.0)
       graphql: 16.6.0
       parse-filepath: 1.0.2
@@ -3147,14 +3150,14 @@ packages:
       tslib: 2.5.2
     dev: true
 
-  /@graphql-codegen/typescript-operations@3.0.0(graphql@16.6.0):
+  /@graphql-codegen/typescript-operations@3.0.0(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-t+Lk+lxkUFDh6F0t8CErowOccP3bZwxhl66qmEeBcOrC7jQrSCnRZoFvOXhFKFBJe/y4DIJiizgSr34AqjiJIQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 4.2.0(graphql@16.6.0)
-      '@graphql-codegen/typescript': 3.0.0(graphql@16.6.0)
-      '@graphql-codegen/visitor-plugin-common': 3.0.0(graphql@16.6.0)
+      '@graphql-codegen/typescript': 3.0.0(encoding@0.1.13)(graphql@16.6.0)
+      '@graphql-codegen/visitor-plugin-common': 3.0.0(encoding@0.1.13)(graphql@16.6.0)
       auto-bind: 4.0.0
       graphql: 16.6.0
       tslib: 2.4.1
@@ -3163,14 +3166,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript-react-apollo@3.3.7(graphql-tag@2.12.6)(graphql@16.6.0):
+  /@graphql-codegen/typescript-react-apollo@3.3.7(encoding@0.1.13)(graphql-tag@2.12.6)(graphql@16.6.0):
     resolution: {integrity: sha512-9DUiGE8rcwwEkf/S1kpBT/Py/UUs9Qak14bOnTT1JHWs1MWhiDA7vml+A8opU7YFI1EVbSSaE5jjRv11WHoikQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
       graphql-tag: ^2.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 2.7.2(graphql@16.6.0)
-      '@graphql-codegen/visitor-plugin-common': 2.13.1(graphql@16.6.0)
+      '@graphql-codegen/visitor-plugin-common': 2.13.1(encoding@0.1.13)(graphql@16.6.0)
       auto-bind: 4.0.0
       change-case-all: 1.0.14
       graphql: 16.6.0
@@ -3181,14 +3184,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/typescript@3.0.0(graphql@16.6.0):
+  /@graphql-codegen/typescript@3.0.0(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-FQWyuIUy1y+fxb9+EZfvdBHBQpYExlIBHV5sg2WGNCsyVyCqBTl0mO8icyOtsQPVg6YFMFe8JJO69vQbwHma5w==}
     peerDependencies:
       graphql: ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 4.2.0(graphql@16.6.0)
       '@graphql-codegen/schema-ast': 3.0.1(graphql@16.6.0)
-      '@graphql-codegen/visitor-plugin-common': 3.0.0(graphql@16.6.0)
+      '@graphql-codegen/visitor-plugin-common': 3.0.0(encoding@0.1.13)(graphql@16.6.0)
       auto-bind: 4.0.0
       graphql: 16.6.0
       tslib: 2.4.1
@@ -3197,14 +3200,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/visitor-plugin-common@2.13.1(graphql@16.6.0):
+  /@graphql-codegen/visitor-plugin-common@2.13.1(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-mD9ufZhDGhyrSaWQGrU1Q1c5f01TeWtSWy/cDwXYjJcHIj1Y/DG2x0tOflEfCvh5WcnmHNIw4lzDsg1W7iFJEg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 2.7.2(graphql@16.6.0)
       '@graphql-tools/optimize': 1.4.0(graphql@16.6.0)
-      '@graphql-tools/relay-operation-optimizer': 6.5.18(graphql@16.6.0)
+      '@graphql-tools/relay-operation-optimizer': 6.5.18(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 8.13.1(graphql@16.6.0)
       auto-bind: 4.0.0
       change-case-all: 1.0.14
@@ -3218,14 +3221,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/visitor-plugin-common@3.0.0(graphql@16.6.0):
+  /@graphql-codegen/visitor-plugin-common@3.0.0(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-ZoNlCmmkGClB137SpJT9og/nkihLN7Z4Ynl9Ir3OlbDuI20dbpyXsclpr9QGLcxEcfQeVfhGw9CooW7wZJJ8LA==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 4.2.0(graphql@16.6.0)
       '@graphql-tools/optimize': 1.4.0(graphql@16.6.0)
-      '@graphql-tools/relay-operation-optimizer': 6.5.18(graphql@16.6.0)
+      '@graphql-tools/relay-operation-optimizer': 6.5.18(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       auto-bind: 4.0.0
       change-case-all: 1.0.15
@@ -3239,14 +3242,14 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-codegen/visitor-plugin-common@3.1.1(graphql@16.6.0):
+  /@graphql-codegen/visitor-plugin-common@3.1.1(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-uAfp+zu/009R3HUAuTK2AamR1bxIltM6rrYYI6EXSmkM3rFtFsLTuJhjUDj98HcUCszJZrADppz8KKLGRUVlNg==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
       '@graphql-codegen/plugin-helpers': 4.2.0(graphql@16.6.0)
       '@graphql-tools/optimize': 1.4.0(graphql@16.6.0)
-      '@graphql-tools/relay-operation-optimizer': 6.5.18(graphql@16.6.0)
+      '@graphql-tools/relay-operation-optimizer': 6.5.18(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       auto-bind: 4.0.0
       change-case-all: 1.0.15
@@ -3260,12 +3263,12 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-tools/apollo-engine-loader@7.3.26(graphql@16.6.0):
+  /@graphql-tools/apollo-engine-loader@7.3.26(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-h1vfhdJFjnCYn9b5EY1Z91JTF0KB3hHVJNQIsiUV2mpQXZdeOXQoaWeYEKaiI5R6kwBw5PP9B0fv3jfUIG8LyQ==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/sync-fetch': 0.0.1
+      '@ardatan/sync-fetch': 0.0.1(encoding@0.1.13)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       '@whatwg-node/fetch': 0.8.8
       graphql: 16.6.0
@@ -3399,12 +3402,12 @@ packages:
       - supports-color
     dev: true
 
-  /@graphql-tools/github-loader@7.3.28(@babel/core@7.21.0)(@types/node@18.14.0)(graphql@16.6.0):
+  /@graphql-tools/github-loader@7.3.28(@babel/core@7.21.0)(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-OK92Lf9pmxPQvjUNv05b3tnVhw0JRfPqOf15jZjyQ8BfdEUrJoP32b4dRQQem/wyRL24KY4wOfArJNqzpsbwCA==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/sync-fetch': 0.0.1
+      '@ardatan/sync-fetch': 0.0.1(encoding@0.1.13)
       '@graphql-tools/executor-http': 0.1.10(@types/node@18.14.0)(graphql@16.6.0)
       '@graphql-tools/graphql-tag-pluck': 7.5.2(@babel/core@7.21.0)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
@@ -3503,12 +3506,12 @@ packages:
       tslib: 2.5.2
     dev: true
 
-  /@graphql-tools/prisma-loader@7.2.72(@types/node@18.14.0)(graphql@16.6.0):
+  /@graphql-tools/prisma-loader@7.2.72(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-0a7uV7Fky6yDqd0tI9+XMuvgIo6GAqiVzzzFV4OSLry4AwiQlI3igYseBV7ZVOGhedOTqj/URxjpiv07hRcwag==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@graphql-tools/url-loader': 7.17.18(@types/node@18.14.0)(graphql@16.6.0)
+      '@graphql-tools/url-loader': 7.17.18(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       '@types/js-yaml': 4.0.5
       '@types/json-stable-stringify': 1.0.34
@@ -3517,7 +3520,7 @@ packages:
       debug: 4.3.4(supports-color@5.5.0)
       dotenv: 16.0.3
       graphql: 16.6.0
-      graphql-request: 6.1.0(graphql@16.6.0)
+      graphql-request: 6.1.0(encoding@0.1.13)(graphql@16.6.0)
       http-proxy-agent: 6.1.1
       https-proxy-agent: 6.2.1
       jose: 4.14.4
@@ -3535,12 +3538,12 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@graphql-tools/relay-operation-optimizer@6.5.18(graphql@16.6.0):
+  /@graphql-tools/relay-operation-optimizer@6.5.18(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-mc5VPyTeV+LwiM+DNvoDQfPqwQYhPV/cl5jOBjTgSniyaq8/86aODfMkrE2OduhQ5E00hqrkuL2Fdrgk0w1QJg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/relay-compiler': 12.0.0(graphql@16.6.0)
+      '@ardatan/relay-compiler': 12.0.0(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       graphql: 16.6.0
       tslib: 2.5.2
@@ -3561,12 +3564,12 @@ packages:
       value-or-promise: 1.0.12
     dev: true
 
-  /@graphql-tools/url-loader@7.17.18(@types/node@18.14.0)(graphql@16.6.0):
+  /@graphql-tools/url-loader@7.17.18(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-ear0CiyTj04jCVAxi7TvgbnGDIN2HgqzXzwsfcqiVg9cvjT40NcMlZ2P1lZDgqMkZ9oyLTV8Bw6j+SyG6A+xPw==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
-      '@ardatan/sync-fetch': 0.0.1
+      '@ardatan/sync-fetch': 0.0.1(encoding@0.1.13)
       '@graphql-tools/delegate': 9.0.35(graphql@16.6.0)
       '@graphql-tools/executor-graphql-ws': 0.0.14(graphql@16.6.0)
       '@graphql-tools/executor-http': 0.1.10(@types/node@18.14.0)(graphql@16.6.0)
@@ -4849,10 +4852,10 @@ packages:
     resolution: {integrity: sha512-IthPJsJR85GhOkp3Hvp8zFOPK5ynKn6STyHa/WZpioK7E1aYDiBzpqQPrngc14DszIUkIrdd3k9Iu0XSzlP/1w==}
     dev: true
 
-  /@safe-global/safe-apps-provider@0.15.2:
+  /@safe-global/safe-apps-provider@0.15.2(encoding@0.1.13):
     resolution: {integrity: sha512-BaoGAuY7h6jLBL7P+M6b7hd+1QfTv8uMyNF3udhiNUwA0XwfzH2ePQB13IEV3Mn7wdcIMEEUDS5kHbtAsj60qQ==}
     dependencies:
-      '@safe-global/safe-apps-sdk': 7.9.0
+      '@safe-global/safe-apps-sdk': 7.9.0(encoding@0.1.13)
       events: 3.3.0
     transitivePeerDependencies:
       - bufferutil
@@ -4860,10 +4863,10 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@safe-global/safe-apps-sdk@7.11.0:
+  /@safe-global/safe-apps-sdk@7.11.0(encoding@0.1.13):
     resolution: {integrity: sha512-RDamzPM1Lhhiiz0O+Dn6FkFqIh47jmZX+HCV/BBnBBOSKfBJE//IGD3+02zMgojXHTikQAburdPes9qmH1SA1A==}
     dependencies:
-      '@safe-global/safe-gateway-typescript-sdk': 3.7.3
+      '@safe-global/safe-gateway-typescript-sdk': 3.7.3(encoding@0.1.13)
       ethers: 5.7.2
     transitivePeerDependencies:
       - bufferutil
@@ -4871,10 +4874,10 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@safe-global/safe-apps-sdk@7.9.0:
+  /@safe-global/safe-apps-sdk@7.9.0(encoding@0.1.13):
     resolution: {integrity: sha512-S2EI+JL8ocSgE3uGNaDZCzKmwfhtxXZFDUP76vN0FeaY35itFMyi8F0Vhxu0XnZm3yLzJE3tp5px6GhuQFLU6w==}
     dependencies:
-      '@safe-global/safe-gateway-typescript-sdk': 3.7.3
+      '@safe-global/safe-gateway-typescript-sdk': 3.7.3(encoding@0.1.13)
       ethers: 5.7.2
     transitivePeerDependencies:
       - bufferutil
@@ -4882,10 +4885,10 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@safe-global/safe-gateway-typescript-sdk@3.7.3:
+  /@safe-global/safe-gateway-typescript-sdk@3.7.3(encoding@0.1.13):
     resolution: {integrity: sha512-O6JCgXNZWG0Vv8FnOEjKfcbsP0WxGvoPJk5ufqUrsyBlHup16It6oaLnn+25nXFLBZOHI1bz8429JlqAc2t2hg==}
     dependencies:
-      cross-fetch: 3.1.6
+      cross-fetch: 3.1.6(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -4945,7 +4948,7 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@sentry/cli@1.75.2:
+  /@sentry/cli@1.75.2(encoding@0.1.13):
     resolution: {integrity: sha512-CG0CKH4VCKWzEaegouWfCLQt9SFN+AieFESCatJ7zSuJmzF05ywpMusjxqRul6lMwfUhRKjGKOzcRJ1jLsfTBw==}
     engines: {node: '>= 8'}
     hasBin: true
@@ -4953,7 +4956,7 @@ packages:
     dependencies:
       https-proxy-agent: 5.0.1
       mkdirp: 0.5.6
-      node-fetch: 2.6.11
+      node-fetch: 2.6.11(encoding@0.1.13)
       progress: 2.0.3
       proxy-from-env: 1.1.0
       which: 2.0.2
@@ -5010,7 +5013,7 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /@sentry/nextjs@7.45.0(next@13.4.3)(react@18.2.0)(webpack@5.75.0):
+  /@sentry/nextjs@7.45.0(encoding@0.1.13)(next@13.4.3)(react@18.2.0)(webpack@5.75.0):
     resolution: {integrity: sha512-JEWM3g0X1a57qY6PpCFUYr/Zigyl/AlmVwl8RbAS9J4LF5M6wD9CXSFIGOtS+Pt3KoxJCgiUsRJg+KCsszIcCg==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -5028,7 +5031,7 @@ packages:
       '@sentry/react': 7.45.0(react@18.2.0)
       '@sentry/types': 7.45.0
       '@sentry/utils': 7.45.0
-      '@sentry/webpack-plugin': 1.20.0
+      '@sentry/webpack-plugin': 1.20.0(encoding@0.1.13)
       chalk: 3.0.0
       next: 13.4.3(@babel/core@7.21.0)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -5134,11 +5137,11 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@sentry/webpack-plugin@1.20.0:
+  /@sentry/webpack-plugin@1.20.0(encoding@0.1.13):
     resolution: {integrity: sha512-Ssj1mJVFsfU6vMCOM2d+h+KQR7QHSfeIP16t4l20Uq/neqWXZUQ2yvQfe4S3BjdbJXz/X4Rw8Hfy1Sd0ocunYw==}
     engines: {node: '>= 8'}
     dependencies:
-      '@sentry/cli': 1.75.2
+      '@sentry/cli': 1.75.2(encoding@0.1.13)
       webpack-sources: 3.2.3
     transitivePeerDependencies:
       - encoding
@@ -5182,7 +5185,7 @@ packages:
       buffer: 6.0.3
     dev: false
 
-  /@solana/web3.js@1.77.2:
+  /@solana/web3.js@1.77.2(encoding@0.1.13):
     resolution: {integrity: sha512-pKu9S21NGAi6Nsayz2KEdhqOlPUJIr3L911bgQvPg2Dbk/U4gJsk41XGdxyfsfnwKPEI/KbitcByterst4VQ3g==}
     dependencies:
       '@babel/runtime': 7.22.3
@@ -5197,7 +5200,7 @@ packages:
       buffer: 6.0.3
       fast-stable-stringify: 1.0.0
       jayson: 3.7.0
-      node-fetch: 2.6.11
+      node-fetch: 2.6.11(encoding@0.1.13)
       rpc-websockets: 7.5.1
       superstruct: 0.14.2
     transitivePeerDependencies:
@@ -6023,7 +6026,7 @@ packages:
       typescript: 5.0.4
     dev: false
 
-  /@wagmi/connectors@2.0.0(@wagmi/chains@0.3.1)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6):
+  /@wagmi/connectors@2.0.0(@wagmi/chains@0.3.1)(encoding@0.1.13)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6):
     resolution: {integrity: sha512-W7GFLdLaJiqISm65pwoe0DePLjL3klyugCwQwlunFXHNHvYSsoWkzDjb1H5XJwx9g+dTVNwJVg8TE7WfaUdilg==}
     peerDependencies:
       '@wagmi/chains': '>=0.3.0'
@@ -6035,13 +6038,13 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@coinbase/wallet-sdk': 3.6.6
+      '@coinbase/wallet-sdk': 3.6.6(encoding@0.1.13)
       '@ledgerhq/connect-kit-loader': 1.0.2
-      '@safe-global/safe-apps-provider': 0.15.2
-      '@safe-global/safe-apps-sdk': 7.11.0
+      '@safe-global/safe-apps-provider': 0.15.2(encoding@0.1.13)
+      '@safe-global/safe-apps-sdk': 7.11.0(encoding@0.1.13)
       '@wagmi/chains': 0.3.1(typescript@5.0.4)
-      '@walletconnect/ethereum-provider': 2.7.4(@web3modal/standalone@2.4.1)
-      '@walletconnect/legacy-provider': 2.0.0
+      '@walletconnect/ethereum-provider': 2.7.4(@web3modal/standalone@2.4.1)(encoding@0.1.13)
+      '@walletconnect/legacy-provider': 2.0.0(encoding@0.1.13)
       '@web3modal/standalone': 2.4.1(react@18.2.0)
       abitype: 0.8.1(typescript@5.0.4)(zod@3.20.6)
       eventemitter3: 4.0.7
@@ -6059,7 +6062,7 @@ packages:
       - zod
     dev: false
 
-  /@wagmi/core@1.0.8(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6):
+  /@wagmi/core@1.0.8(encoding@0.1.13)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6):
     resolution: {integrity: sha512-0NknHYf7KivPK9PXzfWP2zxNeHG9kDZEW3NXRQ7Wyd4l6LiX3pBMtHnb1grlqhzrirApqOwhzViyRaznl3IwCg==}
     peerDependencies:
       typescript: ^5.0.4
@@ -6069,7 +6072,7 @@ packages:
         optional: true
     dependencies:
       '@wagmi/chains': 0.3.1(typescript@5.0.4)
-      '@wagmi/connectors': 2.0.0(@wagmi/chains@0.3.1)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
+      '@wagmi/connectors': 2.0.0(@wagmi/chains@0.3.1)(encoding@0.1.13)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
       abitype: 0.8.2(typescript@5.0.4)(zod@3.20.6)
       eventemitter3: 4.0.7
       typescript: 5.0.4
@@ -6138,7 +6141,7 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@walletconnect/ethereum-provider@2.7.4(@web3modal/standalone@2.4.1):
+  /@walletconnect/ethereum-provider@2.7.4(@web3modal/standalone@2.4.1)(encoding@0.1.13):
     resolution: {integrity: sha512-R5hcByY9zIsvyTHFUS+3xqtzs2REezED4tZFyXk0snJjWlnlL2EdeHaCjr5n+SIZDin4CMj1EAFC0ZrM4KoA4Q==}
     peerDependencies:
       '@web3modal/standalone': '>=2'
@@ -6146,13 +6149,13 @@ packages:
       '@web3modal/standalone':
         optional: true
     dependencies:
-      '@walletconnect/jsonrpc-http-connection': 1.0.7
+      '@walletconnect/jsonrpc-http-connection': 1.0.7(encoding@0.1.13)
       '@walletconnect/jsonrpc-provider': 1.0.13
       '@walletconnect/jsonrpc-types': 1.0.3
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/sign-client': 2.7.4
       '@walletconnect/types': 2.7.4
-      '@walletconnect/universal-provider': 2.7.4
+      '@walletconnect/universal-provider': 2.7.4(encoding@0.1.13)
       '@walletconnect/utils': 2.7.4
       '@web3modal/standalone': 2.4.1(react@18.2.0)
       events: 3.3.0
@@ -6180,12 +6183,12 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@walletconnect/jsonrpc-http-connection@1.0.7:
+  /@walletconnect/jsonrpc-http-connection@1.0.7(encoding@0.1.13):
     resolution: {integrity: sha512-qlfh8fCfu8LOM9JRR9KE0s0wxP6ZG9/Jom8M0qsoIQeKF3Ni0FyV4V1qy/cc7nfI46SLQLSl4tgWSfLiE1swyQ==}
     dependencies:
       '@walletconnect/jsonrpc-utils': 1.0.8
       '@walletconnect/safe-json': 1.0.2
-      cross-fetch: 3.1.6
+      cross-fetch: 3.1.6(encoding@0.1.13)
       tslib: 1.14.1
     transitivePeerDependencies:
       - encoding
@@ -6267,10 +6270,10 @@ packages:
       qrcode: 1.5.3
     dev: false
 
-  /@walletconnect/legacy-provider@2.0.0:
+  /@walletconnect/legacy-provider@2.0.0(encoding@0.1.13):
     resolution: {integrity: sha512-A8xPebMI1A+50HbWwTpFCbwP7G+1NGKdTKyg8BUUg3h3Y9JucpC1W6w/x0v1Xw7qFEqQnz74LoIN/A3ytH9xrQ==}
     dependencies:
-      '@walletconnect/jsonrpc-http-connection': 1.0.7
+      '@walletconnect/jsonrpc-http-connection': 1.0.7(encoding@0.1.13)
       '@walletconnect/jsonrpc-provider': 1.0.13
       '@walletconnect/legacy-client': 2.0.0
       '@walletconnect/legacy-modal': 2.0.0
@@ -6378,10 +6381,10 @@ packages:
       - lokijs
     dev: false
 
-  /@walletconnect/universal-provider@2.7.4:
+  /@walletconnect/universal-provider@2.7.4(encoding@0.1.13):
     resolution: {integrity: sha512-suH3o5LpTX7hlx5lU98oLdEM0Ws5ZysjQ4Zr6EWIK1DVT8EDdWbw49ggJSW9IYRLQ2xG22jDvmTIdFAexYOgng==}
     dependencies:
-      '@walletconnect/jsonrpc-http-connection': 1.0.7
+      '@walletconnect/jsonrpc-http-connection': 1.0.7(encoding@0.1.13)
       '@walletconnect/jsonrpc-provider': 1.0.13
       '@walletconnect/jsonrpc-types': 1.0.3
       '@walletconnect/jsonrpc-utils': 1.0.8
@@ -7882,10 +7885,10 @@ packages:
   /create-require@1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
 
-  /cross-fetch@3.1.6:
+  /cross-fetch@3.1.6(encoding@0.1.13):
     resolution: {integrity: sha512-riRvo06crlE8HiqOwIpQhxwdOk4fOeR7FVM/wXoxchFEqMNUjvbs3bfo4OTgMEMHzppd4DxFBDbyySj8Cv781g==}
     dependencies:
-      node-fetch: 2.6.11
+      node-fetch: 2.6.11(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
@@ -8264,6 +8267,11 @@ packages:
   /encode-utf8@1.0.3:
     resolution: {integrity: sha512-ucAnuBEhUK4boH2HjVYG5Q2mQyPorvv0u/ocS+zhdw0S8AlHYY+GOFhP1Gio5z4icpP2ivFSvhtFjQi8+T9ppw==}
     dev: false
+
+  /encoding@0.1.13:
+    resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    dependencies:
+      iconv-lite: 0.6.3
 
   /end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -9053,10 +9061,10 @@ packages:
     resolution: {integrity: sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ==}
     dev: true
 
-  /fbjs@3.0.4:
+  /fbjs@3.0.4(encoding@0.1.13):
     resolution: {integrity: sha512-ucV0tDODnGV3JCnnkmoszb5lf4bNpzjv80K41wd4k798Etq+UYD0y0TIfalLjZoKgjive6/adkRnszwapiDgBQ==}
     dependencies:
-      cross-fetch: 3.1.6
+      cross-fetch: 3.1.6(encoding@0.1.13)
       fbjs-css-vars: 1.0.2
       loose-envify: 1.4.0
       object-assign: 4.1.1
@@ -9131,7 +9139,7 @@ packages:
       path-exists: 4.0.0
     dev: true
 
-  /firebase@9.22.2:
+  /firebase@9.22.2(encoding@0.1.13):
     resolution: {integrity: sha512-eBXsaTzXPx3Y0QhuuluG/qR58tlOx2X/W0GKNoF004FcG9L2gHuvGu5/bIczvrPyfNOCqDF+I5I/kOQi8l9m0A==}
     dependencies:
       '@firebase/analytics': 0.10.0(@firebase/app@0.9.12)
@@ -9141,14 +9149,14 @@ packages:
       '@firebase/app-check-compat': 0.3.7(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
       '@firebase/app-compat': 0.2.12
       '@firebase/app-types': 0.9.0
-      '@firebase/auth': 0.23.2(@firebase/app@0.9.12)
-      '@firebase/auth-compat': 0.4.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
+      '@firebase/auth': 0.23.2(@firebase/app@0.9.12)(encoding@0.1.13)
+      '@firebase/auth-compat': 0.4.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/database': 0.14.4
       '@firebase/database-compat': 0.3.4
-      '@firebase/firestore': 3.12.2(@firebase/app@0.9.12)
-      '@firebase/firestore-compat': 0.3.11(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
-      '@firebase/functions': 0.10.0(@firebase/app@0.9.12)
-      '@firebase/functions-compat': 0.3.5(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
+      '@firebase/firestore': 3.12.2(@firebase/app@0.9.12)(encoding@0.1.13)
+      '@firebase/firestore-compat': 0.3.11(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)(encoding@0.1.13)
+      '@firebase/functions': 0.10.0(@firebase/app@0.9.12)(encoding@0.1.13)
+      '@firebase/functions-compat': 0.3.5(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/installations': 0.6.4(@firebase/app@0.9.12)
       '@firebase/installations-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
       '@firebase/messaging': 0.12.4(@firebase/app@0.9.12)
@@ -9157,8 +9165,8 @@ packages:
       '@firebase/performance-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
       '@firebase/remote-config': 0.4.4(@firebase/app@0.9.12)
       '@firebase/remote-config-compat': 0.2.4(@firebase/app-compat@0.2.12)(@firebase/app@0.9.12)
-      '@firebase/storage': 0.11.2(@firebase/app@0.9.12)
-      '@firebase/storage-compat': 0.3.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)
+      '@firebase/storage': 0.11.2(@firebase/app@0.9.12)(encoding@0.1.13)
+      '@firebase/storage-compat': 0.3.2(@firebase/app-compat@0.2.12)(@firebase/app-types@0.9.0)(@firebase/app@0.9.12)(encoding@0.1.13)
       '@firebase/util': 1.9.3
     transitivePeerDependencies:
       - encoding
@@ -9451,7 +9459,7 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /graphql-config@4.5.0(@types/node@18.14.0)(graphql@16.6.0):
+  /graphql-config@4.5.0(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-x6D0/cftpLUJ0Ch1e5sj1TZn6Wcxx4oMfmhaG9shM0DKajA9iR+j1z86GSTQ19fShbGvrSSvbIQsHku6aQ6BBw==}
     engines: {node: '>= 10.0.0'}
     peerDependencies:
@@ -9465,7 +9473,7 @@ packages:
       '@graphql-tools/json-file-loader': 7.4.18(graphql@16.6.0)
       '@graphql-tools/load': 7.8.14(graphql@16.6.0)
       '@graphql-tools/merge': 8.4.2(graphql@16.6.0)
-      '@graphql-tools/url-loader': 7.17.18(@types/node@18.14.0)(graphql@16.6.0)
+      '@graphql-tools/url-loader': 7.17.18(@types/node@18.14.0)(encoding@0.1.13)(graphql@16.6.0)
       '@graphql-tools/utils': 9.2.1(graphql@16.6.0)
       cosmiconfig: 8.0.0
       graphql: 16.6.0
@@ -9480,13 +9488,13 @@ packages:
       - utf-8-validate
     dev: true
 
-  /graphql-request@6.1.0(graphql@16.6.0):
+  /graphql-request@6.1.0(encoding@0.1.13)(graphql@16.6.0):
     resolution: {integrity: sha512-p+XPfS4q7aIpKVcgmnZKhMNqhltk20hfXtkaIkTfjjmiKMJ5xrt5c743cL03y/K7y1rg3WrIC49xGiEQ4mxdNw==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.6.0)
-      cross-fetch: 3.1.6
+      cross-fetch: 3.1.6(encoding@0.1.13)
       graphql: 16.6.0
     transitivePeerDependencies:
       - encoding
@@ -9751,6 +9759,12 @@ packages:
     dependencies:
       safer-buffer: 2.1.2
     dev: true
+
+  /iconv-lite@0.6.3:
+    resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      safer-buffer: 2.1.2
 
   /idb@7.0.1:
     resolution: {integrity: sha512-UUxlE7vGWK5RfB/fDwEGgRf84DY/ieqNha6msMV99UsEMQhJ1RwbCd8AYBj3QMgnE3VZnfQvm4oKVCJTYlqIgg==}
@@ -11089,7 +11103,7 @@ packages:
   /node-addon-api@2.0.2:
     resolution: {integrity: sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==}
 
-  /node-fetch@2.6.11:
+  /node-fetch@2.6.11(encoding@0.1.13):
     resolution: {integrity: sha512-4I6pdBY1EthSqDmJkiNk3JIT8cswwR9nfeW/cPdUagJYEQG7R95WRH74wpz7ma8Gh/9dI9FP+OU+0E4FvtA55w==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
@@ -11098,9 +11112,10 @@ packages:
       encoding:
         optional: true
     dependencies:
+      encoding: 0.1.13
       whatwg-url: 5.0.0
 
-  /node-fetch@2.6.7:
+  /node-fetch@2.6.7(encoding@0.1.13):
     resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
@@ -11109,6 +11124,7 @@ packages:
       encoding:
         optional: true
     dependencies:
+      encoding: 0.1.13
       whatwg-url: 5.0.0
     dev: false
 
@@ -11926,7 +11942,7 @@ packages:
       firebase: ^9.0.0
       react: '>=16 || experimental'
     dependencies:
-      firebase: 9.22.2
+      firebase: 9.22.2(encoding@0.1.13)
       react: 18.2.0
       rxfire: 6.0.3(firebase@9.22.2)(rxjs@7.8.1)
       rxjs: 7.8.1
@@ -12037,11 +12053,11 @@ packages:
       jsesc: 0.5.0
     dev: true
 
-  /relay-runtime@12.0.0:
+  /relay-runtime@12.0.0(encoding@0.1.13):
     resolution: {integrity: sha512-QU6JKr1tMsry22DXNy9Whsq5rmvwr3LSZiiWV/9+DFpuTWvp+WFhobWMc8TC4OjKFfNhEZy7mOiqUAn5atQtug==}
     dependencies:
       '@babel/runtime': 7.22.3
-      fbjs: 3.0.4
+      fbjs: 3.0.4(encoding@0.1.13)
       invariant: 2.2.4
     transitivePeerDependencies:
       - encoding
@@ -12234,7 +12250,7 @@ packages:
       firebase: ^9.0.0
       rxjs: ^6.0.0 || ^7.0.0
     dependencies:
-      firebase: 9.22.2
+      firebase: 9.22.2(encoding@0.1.13)
       rxjs: 7.8.1
       tslib: 1.14.1
     dev: false
@@ -12273,7 +12289,6 @@ packages:
 
   /safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-    dev: true
 
   /sass@1.62.1:
     resolution: {integrity: sha512-NHpxIzN29MXvWiuswfc1W3I0N8SXBd8UR26WntmDlRYf0bSADnwnOjsyMZ3lMezSlArD33Vs3YFhp7dWvL770A==}
@@ -13412,7 +13427,7 @@ packages:
     resolution: {integrity: sha512-DRibZL6DsNhIgYQ+wNdWDL2SL3bKPlVrRiBqV5yuMm++op8W4kGFtaQfCs4KEJn0wBZcHVHJ3eoywX8983k1ow==}
     dev: true
 
-  /wagmi@1.0.9(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6):
+  /wagmi@1.0.9(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6):
     resolution: {integrity: sha512-LIExrD43Kyy8YIG02AQ4+heQc324h4lgTsQcpIDkLcOnwCV24uNSe/Ib1/F2k0N51uUsFoBdB5hjAaT6Ww7AtQ==}
     peerDependencies:
       react: '>=17.0.0'
@@ -13425,7 +13440,7 @@ packages:
       '@tanstack/query-sync-storage-persister': 4.29.11
       '@tanstack/react-query': 4.29.12(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query-persist-client': 4.29.12(@tanstack/react-query@4.29.12)
-      '@wagmi/core': 1.0.8(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
+      '@wagmi/core': 1.0.8(encoding@0.1.13)(react@18.2.0)(typescript@5.0.4)(viem@0.3.39)(zod@3.20.6)
       abitype: 0.8.2(typescript@5.0.4)(zod@3.20.6)
       react: 18.2.0
       typescript: 5.0.4

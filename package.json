@@ -64,6 +64,7 @@
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
     "dedent": "^0.7.0",
+    "encoding": "^0.1.13",
     "firebase": "^9.22.2",
     "graphql": "^16.6.0",
     "graphql-2-json-schema": "^0.10.0",
