@@ -1,4 +1,4 @@
-name: Customer Portal CI
+name: Nexus CI
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -29,7 +29,7 @@ jobs:
   test-build:
     name: Test build
     runs-on: self-hosted
-    if: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/prod' }}
+    if: ${{ github.ref != 'refs/heads/main' }}
     needs: [scripts]
     timeout-minutes: 60
     steps:

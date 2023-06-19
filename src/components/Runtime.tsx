@@ -9,6 +9,7 @@ import type { FC, ReactNode } from 'react';
 import { useMemo } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import DialogProvider from '@components/providers/DialogProvider';
+import FirebaseProvider from '@components/providers/FirebaseProvider';
 import LockProvider from '@components/providers/LockProvider';
 import client from '@graphql/client';
 import { deepsquareChain } from '@lib/web3/constants/chains';
@@ -45,19 +46,21 @@ const Runtime: FC<RuntimeProps> = ({ children }) => {
       <ThemeProvider theme={initialTheme}>
         <StyledEngineProvider injectFirst>
           <WagmiConfig config={wagmiConfig}>
-            <AuthProvider>
-              <ApolloProvider client={client}>
-                <LockProvider>
-                  <DialogProvider>
-                    <IconContext.Provider value={{ style: { display: 'inline', verticalAlign: 'middle' } }}>
-                      <ToastContainer position="top-left" pauseOnFocusLoss={false} />
-                      <CssBaseline />
-                      {children}
-                    </IconContext.Provider>
-                  </DialogProvider>
-                </LockProvider>
-              </ApolloProvider>
-            </AuthProvider>
+            <FirebaseProvider>
+              <AuthProvider>
+                <ApolloProvider client={client}>
+                  <LockProvider>
+                    <DialogProvider>
+                      <IconContext.Provider value={{ style: { display: 'inline', verticalAlign: 'middle' } }}>
+                        <ToastContainer position="top-left" pauseOnFocusLoss={false} />
+                        <CssBaseline />
+                        {children}
+                      </IconContext.Provider>
+                    </DialogProvider>
+                  </LockProvider>
+                </ApolloProvider>
+              </AuthProvider>
+            </FirebaseProvider>
           </WagmiConfig>
         </StyledEngineProvider>
       </ThemeProvider>

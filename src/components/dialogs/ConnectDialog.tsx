@@ -1,5 +1,7 @@
 'use client';
 
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { useAuth } from 'reactfire';
 import { useAccount, useConnect } from 'wagmi';
 import useDialog from '@hooks/useDialog';
 import { deepsquareChain } from '@lib/web3/constants/chains';
@@ -9,6 +11,7 @@ import Dialog from '@mui/material/Dialog';
 const ConnectDialog = () => {
   const { isOpen, close } = useDialog('connect');
   const { isConnected } = useAccount();
+  const auth = useAuth();
   const { connectAsync, isLoading, connectors } = useConnect();
 
   return (
@@ -24,7 +27,19 @@ const ConnectDialog = () => {
         className="px-8 py-4 rounded-lg"
         loading={isLoading}
       >
-        Connect to Metamask
+        Connect with Metamask
+      </LoadingButton>
+      <LoadingButton
+        variant="contained"
+        onClick={async () => {
+          await signInWithPopup(auth, new GoogleAuthProvider());
+          close();
+        }}
+        color="primary"
+        className="px-8 py-4 rounded-lg"
+        loading={isLoading}
+      >
+        Connect with Google
       </LoadingButton>
     </Dialog>
   );
