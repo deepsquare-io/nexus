@@ -38,6 +38,7 @@ const Runtime: FC<RuntimeProps> = ({ children }) => {
       publicClient,
       webSocketPublicClient,
       connectors: [new InjectedConnector({ chains }), new MetaMaskConnector({ chains })],
+      autoConnect: true,
     });
   }, []);
 

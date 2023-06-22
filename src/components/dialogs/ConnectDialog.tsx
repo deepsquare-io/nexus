@@ -20,7 +20,6 @@ const ConnectDialog = () => {
         variant="contained"
         onClick={async () => {
           if (!isConnected) await connectAsync({ connector: connectors[0], chainId: deepsquareChain.id });
-          localStorage.setItem('reconnectWallet', 'true');
           close();
         }}
         color="primary"
