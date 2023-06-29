@@ -1,5 +1,3 @@
-'use client';
-
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 import Runtime from '@components/Runtime';
