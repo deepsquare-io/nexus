@@ -1,15 +1,6 @@
 import type { Address } from 'wagmi';
-
-export enum JobStatus {
-  PENDING,
-  META_SCHEDULED,
-  SCHEDULED,
-  RUNNING,
-  CANCELLED,
-  FINISHED,
-  FAILED,
-  OUT_OF_CREDITS,
-}
+import type { Job } from '@deepsquare/deepsquare-client';
+import type { JobStatus } from '@lib/types/enums/JobStatus';
 
 export type JobCostStruct = {
   maxCost: bigint;
@@ -35,7 +26,7 @@ export type JobDefinitionStruct = {
 
 export type JobStruct = {
   jobId: string;
-  status: number;
+  status: JobStatus;
   customerAddr: Address;
   providerAddr: Address;
   definition: JobDefinitionStruct;
@@ -45,14 +36,6 @@ export type JobStruct = {
   jobName: string;
   hasCancelRequest: boolean;
 };
-
-export enum ProviderStatus {
-  UNKNOWN,
-  WAITING_APPROVAL,
-  JOINED,
-  KICKED,
-  BANNED,
-}
 
 export type ProviderHardware = {
   nodes: bigint;

@@ -5,12 +5,12 @@ import { MetaSchedulerAbi } from '@abi/MetaScheduler';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isDisconnected, isWeb3 } from '@lib/types/AuthMethod';
+import type { JobStatus } from '@lib/types/enums/JobStatus';
 import { ZERO_ADDRESS } from '@lib/web3/constants/address';
 import { addressMetaScheduler, addressProviderManager } from '@lib/web3/constants/contracts';
 import type {
   JobCostStruct,
   JobDefinitionStruct,
-  JobStatus,
   JobStruct,
   JobTimeStruct,
   ProviderHardware,

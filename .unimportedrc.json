@@ -7,14 +7,8 @@
     "./cypress/support/e2e.ts",
     "./migrations/*.ts"
   ],
-  "extensions": [
-    ".ts",
-    ".tsx"
-  ],
-  "ignorePatterns": [
-    "**/node_modules/**",
-    "**/*.generated.*"
-  ],
+  "extensions": [".ts", ".tsx"],
+  "ignorePatterns": ["**/node_modules/**", "**/*.generated.*"],
   "ignoreUnresolved": [
     "@cypress/code-coverage/task",
     "@cypress/code-coverage/support",
@@ -27,50 +21,18 @@
     "../../tailwind.config",
     "hardhat/config"
   ],
-  "ignoreUnused": [
-    "next",
-    "react",
-    "react-dom",
-    "@babel/preset-env",
-    "@swc/core",
-    "react-is",
-    "encoding"
-  ],
-  "ignoreUnimported": [
-    "**/*.spec.*",
-    "./abi/*",
-    "src/components/forms/workloads/ContainerWorkloadSubform.tsx"
-  ],
+  "ignoreUnused": ["next", "react", "react-dom", "@babel/preset-env", "@swc/core", "react-is", "encoding"],
+  "ignoreUnimported": ["**/*.spec.*", "./abi/*", "src/components/forms/workloads/ContainerWorkloadSubform.tsx"],
   "aliases": {
-    "@components/*": [
-      "./src/components/*"
-    ],
-    "@graphql/*": [
-      "./src/graphql/*"
-    ],
-    "@grpc/*": [
-      "./src/grpc/*"
-    ],
-    "@hooks/*": [
-      "./src/hooks/*"
-    ],
-    "@lib/*": [
-      "./src/lib/*"
-    ],
-    "@public/*": [
-      "./public/*"
-    ],
-    "@state/*": [
-      "./src/state/*"
-    ],
-    "@styles/*": [
-      "./src/styles/*"
-    ],
-    "@utils/*": [
-      "./src/utils/*"
-    ],
-    "@data/*": [
-      "./src/data/*"
-    ]
+    "@components/*": ["./src/components/*"],
+    "@graphql/*": ["./src/graphql/*"],
+    "@grpc/*": ["./src/grpc/*"],
+    "@hooks/*": ["./src/hooks/*"],
+    "@lib/*": ["./src/lib/*"],
+    "@public/*": ["./public/*"],
+    "@state/*": ["./src/state/*"],
+    "@styles/*": ["./src/styles/*"],
+    "@utils/*": ["./src/utils/*"],
+    "@data/*": ["./src/data/*"]
   }
 }

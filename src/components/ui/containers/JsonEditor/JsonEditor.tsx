@@ -3,7 +3,7 @@ import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import type { IntrospectionQuery } from 'graphql/index';
 import type { JSONEditor, JSONSchema, JSONSchemaDefinitions } from 'vanilla-jsoneditor';
 import { useCallback, useEffect, useRef } from 'react';
-import introspection from '@graphql/sbatchServiceClient/generated/introspection.json';
+import introspection from '@graphql/external/sbatchServiceClient/generated/introspection.json';
 
 function JsonEditor(props: Record<string, any>) {
   const containerRef = useRef<HTMLDivElement>(null);

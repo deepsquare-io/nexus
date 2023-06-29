@@ -1,4 +1,4 @@
-import { JobStatus } from '@lib/web3/types/DataStructs';
+import { JobStatus } from '@lib/types/enums/JobStatus';
 import { isJobTerminated } from '@utils/isJobTerminated';
 
 export function hasJobRun(status: number): boolean {

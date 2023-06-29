@@ -1,13 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es2018",
-      "esnext.asynciterable"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "es2018", "esnext.asynciterable"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -23,42 +17,18 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@abi/*": [
-        "./abi/*"
-      ],
-      "@data/*": [
-        "./src/data/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@graphql/*": [
-        "./src/graphql/*"
-      ],
-      "@grpc/*": [
-        "./src/grpc/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ],
-      "@public/*": [
-        "./public/*"
-      ],
-      "@state/*": [
-        "./src/state/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@app/types/*": [
-        "./src/types/*"
-      ]
+      "@abi/*": ["./abi/*"],
+      "@data/*": ["./src/data/*"],
+      "@components/*": ["./src/components/*"],
+      "@graphql/*": ["./src/graphql/*"],
+      "@grpc/*": ["./src/grpc/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@public/*": ["./public/*"],
+      "@state/*": ["./src/state/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@app/types/*": ["./src/types/*"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -69,26 +39,14 @@
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "cli",
-    "cypress",
-    "migrations"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "cli", "cypress", "migrations"],
   "ts-node": {
     "compilerOptions": {
       "target": "es2020",
       "module": "CommonJS"
     },
-    "require": [
-      "tsconfig-paths/register"
-    ],
+    "require": ["tsconfig-paths/register"],
     "transpileOnly": true
   }
 }

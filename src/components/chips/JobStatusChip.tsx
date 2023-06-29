@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import useWindowSize from '@hooks/useWindowSize';
-import { JobStatus } from '@lib/web3/types/DataStructs';
+import { JobStatus } from '@lib/types/enums/JobStatus';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';

@@ -1,0 +1,10 @@
+export enum JobStatus {
+  PENDING,
+  META_SCHEDULED,
+  SCHEDULED,
+  RUNNING,
+  CANCELLED,
+  FINISHED,
+  FAILED,
+  OUT_OF_CREDITS,
+}

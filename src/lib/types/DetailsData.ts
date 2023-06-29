@@ -1,4 +1,4 @@
-import type { EnvVar } from '@graphql/sbatchServiceClient/generated/Types';
+import type { EnvVar } from '@graphql/external/sbatchServiceClient/generated/Types';
 import type StorageData from '@lib/types/StorageData';
 import type BlenderOutputFormat from '@lib/types/enums/BlenderOutputFormat';
 import type BlenderRenderEngine from '@lib/types/enums/BlenderRenderEngine';
