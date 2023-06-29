@@ -70,7 +70,6 @@ const Header = ({ className, ...props }: HeaderProps) => {
             <Button
               onClick={async () => {
                 if (isWeb3(authMethod)) {
-                  localStorage.setItem('reconnectWallet', 'false');
                   await disconnectAsync();
                 } else if (isWeb2(authMethod)) {
                   await auth.signOut();

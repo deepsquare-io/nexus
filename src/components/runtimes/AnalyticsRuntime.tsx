@@ -1,3 +1,5 @@
+'use client';
+
 import Script from 'next/script';
 import type { FC } from 'react';
 import useGTM from '@hooks/useGTM';

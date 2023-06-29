@@ -4,8 +4,9 @@ set -ex
 
 SCRIPTPATH=$(dirname "$(realpath "$0")")
 PROJECTPATH="${SCRIPTPATH}/.."
-ABIPATH="${PROJECTPATH}/abi"
 
-find "${ABIPATH}" -name '*.abi' -exec sh -c 'contract=$(basename "$1"); echo "export const ${contract%.abi}Abi = " | cat - "$1" > "${1%.abi}.ts"; echo " as const;" >> ${1%.abi}.ts; rm "$1";' _ {} \;
+rm -f "${PROJECTPATH}/abi/*.ts"
 
-prettier --write "${ABIPATH}/*.ts"
+find "${PROJECTPATH}/abi" -name '*.abi' -exec sh -c 'contract=$(basename "$1"); echo "export const ${contract%.abi}Abi = " | cat - "$1" > "${1%.abi}.ts"; echo " as const;" >> ${1%.abi}.ts; rm "$1";' _ {} \;
+
+prettier --write "${PROJECTPATH}/abi/*.ts"
