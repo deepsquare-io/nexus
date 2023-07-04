@@ -1235,7 +1235,7 @@
           },
           {
             "name": "source",
-            "description": "Source of the group of steps.\n\nSyntax: <url>@<tag/hash>\n\nExample: github.com/example/my-module@v1\n\nGo name: \"Source\".",
+            "description": "Source of the group of steps.\n\nSyntax: <url>@<tag/hash>\n\nExample: github.com/example/my-module@v1\nExample: github.com/example/module-monorepo/my-module@v1\n\nThe host must be a git repository accessible via HTTPS.\nThe path must indicates a directory. For example, `/my-module` indicates the root directory of the repository `my-module`.\n`module-monorepo/my-module` indicates the subdirectory `my-module` of the repository `module-monorepo`.\n\nGo name: \"Source\".",
             "type": {
               "kind": "NON_NULL",
               "name": null,

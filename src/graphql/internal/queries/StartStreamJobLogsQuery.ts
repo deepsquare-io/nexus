@@ -1,19 +1,23 @@
 import { Rest } from 'ably/promises';
+import { injectable } from 'tsyringe';
 import { Args, ArgsType, Field, Query, Resolver } from 'type-graphql';
+import { type Hex } from 'viem';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
+import { HexScalar } from '@graphql/internal/scalars/HexScalar';
 
 @ArgsType()
 class StreamJobLogsArgs {
-  @Field(() => String)
-  jobId!: string;
+  @Field(() => HexScalar)
+  jobId!: Hex;
 }
 
+@injectable()
 @Resolver()
 export default class StartStreamJobLogsQuery {
   constructor(private readonly deepSquare: DeepSquareClient, private readonly ably: Rest) {}
 
-  @Query(() => Boolean)
-  startStreamJobLogs(@Args() { jobId }: StreamJobLogsArgs): boolean {
+  @Query(() => String)
+  startStreamJobLogs(@Args() { jobId }: StreamJobLogsArgs) {
     const { fetchLogs } = this.deepSquare.getLogsMethods(jobId);
     const publishLogs = async () => {
       const [stream, stopFetch] = await fetchLogs();
@@ -30,6 +34,6 @@ export default class StartStreamJobLogsQuery {
 
     void publishLogs();
 
-    return true;
+    return 'test';
   }
 }

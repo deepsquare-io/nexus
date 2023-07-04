@@ -2,16 +2,18 @@ overwrite: true
 schema: [ 'http://localhost:3000/graphql' ]
 documents: [ 'src/graphql/internal/client/**/*.graphql' ]
 config:
-  strictScalars: true
+  strictScalars: false
   declarationKind: type
   scalars:
     BigNumber: string
     DateTime: string
-    BigInt: string
+    bigint: bigint
     Time: string
   skipTypename: true
-  namingConvention:
-    enumValues: upper-case#upperCase
+  enumValues: {
+    JobStatus: '@deepsquare/deepsquare-client#JobStatus',
+    ProviderStatus: '@deepsquare/deepsquare-client#ProviderStatus'
+  }
   useTypeImports: true
   # Apollo
   withRefetchFn: true

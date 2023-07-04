@@ -1,37 +1,39 @@
 import { Field, ObjectType } from 'type-graphql';
 import { type Hex } from 'viem';
+import BigIntScalar from '@graphql/internal/scalars/BigIntScalar';
+import { HexScalar } from '@graphql/internal/scalars/HexScalar';
 import { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 
 @ObjectType()
 export class ProviderHardware {
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   nodes!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   gpus!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   cpus!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   mem!: bigint;
 }
 
 @ObjectType()
 export class ProviderPrices {
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   gpuPricePerMin!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   cpuPricePerMin!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   memPricePerMin!: bigint;
 }
 
 @ObjectType()
-export default class Provider {
-  @Field(() => String)
+export class Provider {
+  @Field(() => HexScalar)
   addr!: Hex;
 
   @Field(() => ProviderHardware)
@@ -43,7 +45,7 @@ export default class Provider {
   @Field(() => ProviderStatus)
   status!: ProviderStatus;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   jobCount!: bigint;
 
   @Field(() => Boolean)

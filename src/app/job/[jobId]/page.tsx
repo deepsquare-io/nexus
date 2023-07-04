@@ -54,10 +54,10 @@ const JobConsolePage = ({ params }: { params: { jobId: string } }) => {
   const handleDownload = (url: string) => {
     // window.location.href = url.replace(/(.*)transfer.deepsquare.run(.*)/, '$1transfer.deepsquare.run/get/$2');
   };
-  
-  const dlLink = 'tet'
 
-  // const dlLink = useStreamLogs(terminal, params.jobId, showTimestamp, !!download, handleDownload);
+  // const dlLink = 'tet'
+
+  const dlLink = useStreamLogs(terminal, params.jobId, showTimestamp, !!download, handleDownload);
 
   const onTerminal = useCallback(
     (terminal: Terminal) => {

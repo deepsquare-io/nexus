@@ -1,0 +1,5 @@
+query ListJob {
+    listJobs {
+        ...FullJobSummaryFragment
+    }
+}

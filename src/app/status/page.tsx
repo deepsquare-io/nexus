@@ -12,11 +12,11 @@ import React, { useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
 import { JobStatus } from '@lib/types/enums/JobStatus';
-import type { JobStruct, ProviderStruct } from '@lib/web3/types/DataStructs';
 import { CancelSharp, DownloadSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -32,7 +32,8 @@ import formatCredit from '@utils/format/formatCredit';
 import { formatEther } from '@utils/format/formatEther';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
-import { isJobTerminated } from '@utils/isJobTerminated';
+import { computeCost } from '@utils/job/computeCost';
+import { isJobTerminated } from '@utils/job/isJobTerminated';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 dayjs.extend(duration);
@@ -53,21 +54,22 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const [value, setValue] = useState<(JobStruct & { provider: ProviderStruct | undefined }) | undefined>(undefined);
+  const [value, setValue] = useState<FullJobSummary | undefined>(undefined);
 
   const jobs = useListJobs();
 
   if (jobs.length === 0) return null;
 
-  const computeCost = (job: JobStruct & { provider: ProviderStruct | undefined }): bigint => {
-    if (!job.provider) return 0n;
-
-    const tasks = job.definition.ntasks;
-    const gpuCost = job.definition.gpuPerTask * job.provider.providerPrices.gpuPricePerMin;
-    const cpuCost = job.definition.cpuPerTask * job.provider.providerPrices.cpuPricePerMin;
-    const memCost = job.definition.memPerCpu * job.definition.cpuPerTask * job.provider.providerPrices.memPricePerMin;
-    return formatEther(tasks * (gpuCost + cpuCost + memCost));
-  };
+  // const computeCost = (summary: FullJobSummary): bigint => {
+  //   if (!summary.provider) return 0n;
+  //
+  //   const tasks = summary.definition.ntasks;
+  //   const gpuCost = summary.definition.gpuPerTask * summary.provider.providerPrices.gpuPricePerMin;
+  //   const cpuCost = summary.definition.cpuPerTask * summary.provider.providerPrices.cpuPricePerMin;
+  //   const memCost =
+  //     summary.definition.memPerCpu * summary.definition.cpuPerTask * summary.provider.providerPrices.memPricePerMin;
+  //   return formatEther(tasks * (gpuCost + cpuCost + memCost));
+  // };
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
     const field = event.currentTarget.dataset.field!;
@@ -146,7 +148,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   size="small"
                   onClick={async () => {
                     if (isJobTerminated(params.row.status) || !cancel) return;
-                    const cancelTransaction = await toast.promise(cancel(params.row.jobId as Address), {
+                    const cancelTransaction = await toast.promise(cancel(params.row.jobId), {
                       error: 'Transaction rejected',
                     });
 
@@ -160,7 +162,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<JobStruct & { provider: ProviderStruct | undefined }>)
+        ] as GridColumns<FullJobSummary>)
       : ([
           {
             field: 'jobId',
@@ -210,7 +212,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               )
                 return '-';
               const maxDuration = dayjs.duration(
-                Number((formatEther(params.row.cost.maxCost) * 60n * 1000n) / computeCost(params.row)),
+                Number((formatEther(params.row.cost.maxCost) * 60n * 1000n) / formatEther(computeCost(params.row))),
               );
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
@@ -326,7 +328,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                       aria-label="cancel"
                       onClick={async () => {
                         if (isJobTerminated(params.row.status) || !cancel) return;
-                        const cancelTransaction = await toast.promise(cancel(params.row.jobId as Address), {
+                        const cancelTransaction = await toast.promise(cancel(params.row.jobId), {
                           error: 'Transaction rejected',
                         });
 
@@ -342,7 +344,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<JobStruct & { provider: ProviderStruct | undefined }>);
+        ] as GridColumns<FullJobSummary>);
 
   const columnBuffer = columns.map((col) => ({
     ...col,

@@ -24,6 +24,7 @@ import { isWeb2 } from '@lib/types/AuthMethod';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import formatCredit from '@utils/format/formatCredit';
+import { formatWei } from '@utils/format/formatWei';
 
 const JsonEditor = dynamic(() => import('@components/ui/containers/JsonEditor/JsonEditor'), { ssr: false });
 
@@ -100,7 +101,7 @@ const SandboxPage: NextPage = () => {
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
       type: WorkloadType.SANDBOX,
-      credit: '1000',
+      credit: formatWei(5000n).toString(),
       jobName: `${WorkloadType.SANDBOX} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
     resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n, isWeb2(authMethod))),

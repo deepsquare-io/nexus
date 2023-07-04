@@ -23,6 +23,7 @@ import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import Grid from '@mui/material/Grid';
 import formatCredit from '@utils/format/formatCredit';
+import { formatWei } from '@utils/format/formatWei';
 import { resolveJobForm } from '@utils/resolveJobForm';
 
 const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) => {
@@ -65,7 +66,7 @@ const UnityPage: NextPage = () => {
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
       type: WorkloadType.URS,
-      credit: '1000',
+      credit: formatWei(275n).toString(),
       jobName: `${WorkloadType.URS} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 1,

@@ -3,36 +3,27 @@ import { useContractRead, useContractReads } from 'wagmi';
 import { useContext } from 'react';
 import { MetaSchedulerAbi } from '@abi/MetaScheduler';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
+import { useListJobQuery } from '@graphql/internal/client/generated/listJobs.generated';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
+import type { JobCost, JobDefinition, JobSummary, JobTime } from '@graphql/internal/types/JobSummary';
+import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/Provider';
 import { authContext } from '@lib/contexts/AuthContext';
-import { isDisconnected, isWeb3 } from '@lib/types/AuthMethod';
+import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import type { JobStatus } from '@lib/types/enums/JobStatus';
+import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 import { ZERO_ADDRESS } from '@lib/web3/constants/address';
 import { addressMetaScheduler, addressProviderManager } from '@lib/web3/constants/contracts';
-import type {
-  JobCostStruct,
-  JobDefinitionStruct,
-  JobStruct,
-  JobTimeStruct,
-  ProviderHardware,
-  ProviderPrices,
-  ProviderStatus,
-  ProviderStruct,
-} from '@lib/web3/types/DataStructs';
 
-export default function useListJobs(
-  start?: number,
-  stop?: number,
-): (JobStruct & { provider: ProviderStruct | undefined })[] {
+export default function useListJobs(start?: number, stop?: number): FullJobSummary[] {
   const { authMethod } = useContext(authContext);
 
-  //TODO: Replace '0x0' with public address of portal provider
   const { data: idList } = useContractRead({
     address: addressMetaScheduler,
     abi: MetaSchedulerAbi,
     functionName: 'getJobs',
     args: [isWeb3(authMethod) ? authMethod.address : '0x0'],
-    watch: !isDisconnected(authMethod),
-    enabled: !isDisconnected(authMethod),
+    watch: isWeb3(authMethod),
+    enabled: isWeb3(authMethod),
   });
 
   const jobListConfig = { address: addressMetaScheduler, abi: MetaSchedulerAbi, functionName: 'jobs' };
@@ -41,22 +32,12 @@ export default function useListJobs(
       return { ...jobListConfig, args: [id] };
     }),
     allowFailure: false,
-    watch: !isDisconnected(authMethod),
-    select: (data): JobStruct[] => {
+    enabled: isWeb3(authMethod),
+    watch: isWeb3(authMethod),
+    select: (data): JobSummary[] => {
       return (
-        data as [
-          string,
-          JobStatus,
-          Address,
-          Address,
-          JobDefinitionStruct,
-          boolean,
-          JobCostStruct,
-          JobTimeStruct,
-          string,
-          boolean,
-        ][]
-      ).map((job): JobStruct => {
+        data as [Address, JobStatus, Address, Address, JobDefinition, boolean, JobCost, JobTime, Address, boolean][]
+      ).map((job): JobSummary => {
         return {
           jobId: job[0],
           status: job[1],
@@ -74,7 +55,7 @@ export default function useListJobs(
   });
 
   const providerIds = new Set(
-    (jobList as JobStruct[])?.filter((job) => job.providerAddr).map((job) => job.providerAddr),
+    (jobList as JobSummary[])?.filter((job) => job.providerAddr).map((job) => job.providerAddr),
   );
 
   providerIds.delete(ZERO_ADDRESS);
@@ -87,8 +68,9 @@ export default function useListJobs(
       };
     }),
     allowFailure: false,
-    watch: !isDisconnected(authMethod),
-    select: (data): ProviderStruct[] => {
+    enabled: isWeb3(authMethod),
+    watch: isWeb3(authMethod),
+    select: (data): Provider[] => {
       return (data as [Address, ProviderHardware, ProviderPrices, ProviderStatus, bigint, boolean, boolean][]).map(
         (provider) => {
           return {
@@ -105,7 +87,11 @@ export default function useListJobs(
     },
   });
 
+  const { data } = useListJobQuery();
+
   if (isDisconnected(authMethod)) return [];
+
+  if (isWeb2(authMethod) && data) return data.listJobs;
 
   return jobList
     ? jobList

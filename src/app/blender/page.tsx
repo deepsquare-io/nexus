@@ -26,6 +26,7 @@ import BlenderVersion from '@lib/types/enums/BlenderVersion';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import Grid from '@mui/material/Grid';
 import formatCredit from '@utils/format/formatCredit';
+import { formatWei } from '@utils/format/formatWei';
 import { resolveJobForm } from '@utils/resolveJobForm';
 
 const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) => {
@@ -65,7 +66,7 @@ export default function BlenderPage() {
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
       type: WorkloadType.BLENDER,
-      credit: '1000',
+      credit: formatWei(1200n).toString(),
       details: {
         version: BlenderVersion.v341,
         outputFormat: BlenderOutputFormat.PNG,

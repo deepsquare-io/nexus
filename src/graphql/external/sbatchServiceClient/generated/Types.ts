@@ -839,6 +839,11 @@ export type StepUse = {
    * Syntax: <url>@<tag/hash>
    *
    * Example: github.com/example/my-module@v1
+   * Example: github.com/example/module-monorepo/my-module@v1
+   *
+   * The host must be a git repository accessible via HTTPS.
+   * The path must indicates a directory. For example, `/my-module` indicates the root directory of the repository `my-module`.
+   * `module-monorepo/my-module` indicates the subdirectory `my-module` of the repository `module-monorepo`.
    *
    * Go name: "Source".
    */

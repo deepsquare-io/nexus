@@ -22,6 +22,7 @@ import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import TextToImageModel from '@lib/types/enums/TextToImageModel';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import formatCredit from '@utils/format/formatCredit';
+import { formatWei } from '@utils/format/formatWei';
 import { resolveJobForm } from '@utils/resolveJobForm';
 
 const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) => {
@@ -55,7 +56,7 @@ const TextToImagePage: NextPage = () => {
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
       type: WorkloadType.TEXTTOIMAGE,
-      credit: '1000',
+      credit: formatWei(1000n).toString(),
       jobName: `${WorkloadType.TEXTTOIMAGE} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 4,

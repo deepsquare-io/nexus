@@ -4,13 +4,13 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type StartStreamJobLogsQueryVariables = Types.Exact<{
-  jobId: Types.Scalars['String'];
+  jobId: Types.Scalars['Hex'];
 }>;
 
-export type StartStreamJobLogsQuery = { startStreamJobLogs: boolean };
+export type StartStreamJobLogsQuery = { startStreamJobLogs: string };
 
 export const StartStreamJobLogsDocument = /*#__PURE__*/ gql`
-  query StartStreamJobLogs($jobId: String!) {
+  query StartStreamJobLogs($jobId: Hex!) {
     startStreamJobLogs(jobId: $jobId)
   }
 `;

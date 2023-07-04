@@ -1,6 +1,6 @@
 import type { Address } from 'wagmi';
-import type { Job } from '@deepsquare/deepsquare-client';
-import type { JobStatus } from '@lib/types/enums/JobStatus';
+import type { JobStatus } from '@deepsquare/deepsquare-client';
+import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 
 export type JobCostStruct = {
   maxCost: bigint;

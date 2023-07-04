@@ -60,7 +60,7 @@ const NewPage: NextPage = () => {
     defaultValues: {
       type: WorkloadType.UPSCALING,
       jobName: `${WorkloadType.UPSCALING} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
-      credit: formatWei(1000n).toString(),
+      credit: formatWei(4000n).toString(),
       details: {
         nTasks: 1,
         gpuPerTask: 1,

@@ -1,3 +1,6 @@
+import type { JobStatus } from '@deepsquare/deepsquare-client';
+import type { ProviderStatus } from '@deepsquare/deepsquare-client';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -10,6 +13,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  Hex: any;
+  bigint: bigint;
 };
 
 export type BoreInput = {
@@ -40,8 +45,39 @@ export type ForRangeInput = {
   increment?: InputMaybe<Scalars['Int']>;
 };
 
+export type FullJobSummary = {
+  cost: JobCost;
+  customerAddr: Scalars['Hex'];
+  definition: JobDefinition;
+  hasCancelRequest: Scalars['Boolean'];
+  jobId: Scalars['Hex'];
+  jobName: Scalars['Hex'];
+  provider: Provider;
+  providerAddr: Scalars['Hex'];
+  status: JobStatus;
+  time: JobTime;
+  valid: Scalars['Boolean'];
+};
+
 export type HttpDataInput = {
   url: Scalars['String'];
+};
+
+export type JobCost = {
+  delegateSpendingAuthority: Scalars['Boolean'];
+  finalCost: Scalars['bigint'];
+  maxCost: Scalars['bigint'];
+  pendingTopUp: Scalars['bigint'];
+};
+
+export type JobDefinition = {
+  batchLocationHash: Scalars['String'];
+  cpuPerTask: Scalars['bigint'];
+  gpuPerTask: Scalars['bigint'];
+  memPerCpu: Scalars['bigint'];
+  ntasks: Scalars['bigint'];
+  storageType: Scalars['Int'];
+  uses: Array<Label>;
 };
 
 export type JobInput = {
@@ -60,6 +96,20 @@ export type JobResourcesInput = {
   gpusPerTask: Scalars['Int'];
   memPerCpu: Scalars['Int'];
   tasks: Scalars['Int'];
+};
+
+export { JobStatus };
+
+export type JobTime = {
+  blockNumberStateChange: Scalars['bigint'];
+  cancelRequestTimestamp: Scalars['bigint'];
+  end: Scalars['bigint'];
+  start: Scalars['bigint'];
+};
+
+export type Label = {
+  key: Scalars['String'];
+  value: Scalars['String'];
 };
 
 export type MountInput = {
@@ -83,12 +133,43 @@ export type NetworkInterfaceInput = {
   wireguard?: InputMaybe<WireguardInput>;
 };
 
+export type Provider = {
+  addr: Scalars['Hex'];
+  jobCount: Scalars['bigint'];
+  linkListed: Scalars['Boolean'];
+  providerHardware: ProviderHardware;
+  providerPrices: ProviderPrices;
+  status: ProviderStatus;
+  valid: Scalars['Boolean'];
+};
+
+export type ProviderHardware = {
+  cpus: Scalars['bigint'];
+  gpus: Scalars['bigint'];
+  mem: Scalars['bigint'];
+  nodes: Scalars['bigint'];
+};
+
+export type ProviderPrices = {
+  cpuPricePerMin: Scalars['bigint'];
+  gpuPricePerMin: Scalars['bigint'];
+  memPricePerMin: Scalars['bigint'];
+};
+
+export { ProviderStatus };
+
 export type Query = {
-  startStreamJobLogs: Scalars['Boolean'];
+  listJobs: Array<FullJobSummary>;
+  ping: Scalars['String'];
+  startStreamJobLogs: Scalars['String'];
+};
+
+export type QueryPingArgs = {
+  pong?: InputMaybe<Scalars['String']>;
 };
 
 export type QueryStartStreamJobLogsArgs = {
-  jobId: Scalars['String'];
+  jobId: Scalars['Hex'];
 };
 
 export type S3DataInput = {

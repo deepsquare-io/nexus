@@ -2,7 +2,9 @@ import { Field, Int, ObjectType } from 'type-graphql';
 import type { ReadContractReturnType } from 'viem';
 import { type Hex } from 'viem';
 import type { MetaSchedulerAbi } from '@abi/MetaScheduler';
-import { JobStatus } from '@lib/types/enums/JobStatus';
+import { JobStatus } from '@deepsquare/deepsquare-client';
+import BigIntScalar from '@graphql/internal/scalars/BigIntScalar';
+import { HexScalar } from '@graphql/internal/scalars/HexScalar';
 
 @ObjectType()
 export class Label {
@@ -15,16 +17,16 @@ export class Label {
 
 @ObjectType()
 export class JobDefinition {
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   gpuPerTask!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   memPerCpu!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   cpuPerTask!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   ntasks!: bigint;
 
   @Field()
@@ -39,28 +41,28 @@ export class JobDefinition {
 
 @ObjectType()
 export class JobTime {
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   start!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   end!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   cancelRequestTimestamp!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   blockNumberStateChange!: bigint;
 }
 
 @ObjectType()
 export class JobCost {
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   maxCost!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   finalCost!: bigint;
 
-  @Field(() => String)
+  @Field(() => BigIntScalar)
   pendingTopUp!: bigint;
 
   @Field(() => Boolean)
@@ -68,17 +70,17 @@ export class JobCost {
 }
 
 @ObjectType()
-export default class JobSummary implements ReadContractReturnType<typeof MetaSchedulerAbi, 'getJob'> {
-  @Field(() => String)
+export class JobSummary implements ReadContractReturnType<typeof MetaSchedulerAbi, 'getJob'> {
+  @Field(() => HexScalar)
   jobId!: Hex;
 
   @Field(() => JobStatus)
   status!: JobStatus;
 
-  @Field(() => String)
+  @Field(() => HexScalar)
   customerAddr!: Hex;
 
-  @Field(() => String)
+  @Field(() => HexScalar)
   providerAddr!: Hex;
 
   @Field()
@@ -93,7 +95,7 @@ export default class JobSummary implements ReadContractReturnType<typeof MetaSch
   @Field()
   time!: JobTime;
 
-  @Field(() => String)
+  @Field(() => HexScalar)
   jobName!: Hex;
 
   @Field(() => Boolean)
