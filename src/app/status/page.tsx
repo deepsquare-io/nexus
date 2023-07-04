@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import type { Address } from 'wagmi';
 import { usePublicClient } from 'wagmi';
 import type { MouseEvent } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
@@ -29,7 +29,7 @@ import type { GridColumns } from '@mui/x-data-grid';
 import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
-import { formatEther } from '@utils/format/formatEther';
+import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
 import { isJobTerminated } from '@utils/isJobTerminated';
@@ -59,6 +59,9 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   if (jobs.length === 0) return null;
 
+  /**
+   * Returns the cost factor based on the allocation. The unit is wei per minute.
+   */
   const computeCost = (job: JobStruct & { provider: ProviderStruct | undefined }): bigint => {
     if (!job.provider) return 0n;
 
@@ -66,7 +69,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
     const gpuCost = job.definition.gpuPerTask * job.provider.providerPrices.gpuPricePerMin;
     const cpuCost = job.definition.cpuPerTask * job.provider.providerPrices.cpuPricePerMin;
     const memCost = job.definition.memPerCpu * job.definition.cpuPerTask * job.provider.providerPrices.memPricePerMin;
-    return formatEther(tasks * (gpuCost + cpuCost + memCost));
+    return tasks * (gpuCost + cpuCost + memCost);
   };
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
@@ -210,7 +213,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               )
                 return '-';
               const maxDuration = dayjs.duration(
-                Number((formatEther(params.row.cost.maxCost) * 60n * 1000n) / computeCost(params.row)),
+                formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
               );
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
@@ -246,7 +249,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) => (params.row.provider ? `${computeCost(params.row)} creds/min` : '-'),
+            valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
           },
           {
             field: 'cost',
@@ -260,10 +263,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               hasJobRun(params.row.status)
                 ? isJobTerminated(params.row.status)
                   ? formatEther(params.row.cost.finalCost)
-                  : `~${
+                  : `~${formatEther(
                       BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
-                      computeCost(params.row)
-                    }`
+                        computeCost(params.row),
+                    )}`
                 : '-',
           },
           {
