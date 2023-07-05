@@ -176,6 +176,16 @@
         "possibleTypes": null
       },
       {
+        "kind": "SCALAR",
+        "name": "Float",
+        "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "INPUT_OBJECT",
         "name": "ForRange",
         "description": "ForRange describes the parameter for a range loop.",
@@ -229,6 +239,16 @@
             "deprecationReason": null
           }
         ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "ID",
+        "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
+        "fields": null,
+        "inputFields": null,
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
@@ -855,6 +875,14 @@
             "deprecationReason": null
           },
           {
+            "name": "if",
+            "description": "\"If\" is a boolean test that skips the step if the test is false.\n\nThe test format is bash and variables such as $PATH or $(pwd) can be expanded.\n\nNote that \"If\" will be run after the \"DependsOn\".\n\nExample: '3 -eq 3 && \"${TEST}\" = \"test\"'.\n\nGo name: \"If\".",
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "launch",
             "description": "Launch a background process to run a group of commands if not null.\n\nIs exclusive with \"run\", \"for\", \"use\".\n\nGo name: \"Launch\".",
             "type": { "kind": "INPUT_OBJECT", "name": "StepAsyncLaunch", "ofType": null },
@@ -1215,7 +1243,7 @@
           },
           {
             "name": "source",
-            "description": "Source of the group of steps.\n\nSyntax: <url>@<tag/hash>\n\nExample: github.com/example/my-module@v1\n\nGo name: \"Source\".",
+            "description": "Source of the group of steps.\n\nSyntax: <url>@<tag/hash>\n\nExample: github.com/example/my-module@v1\nExample: github.com/example/module-monorepo/my-module@v1\n\nThe host must be a git repository accessible via HTTPS.\nThe path must indicates a directory. For example, `/my-module` indicates the root directory of the repository `my-module`.\n`module-monorepo/my-module` indicates the subdirectory `my-module` of the repository `module-monorepo`.\n\nGo name: \"Source\".",
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2143,14 +2171,38 @@
         ]
       },
       {
+        "name": "defer",
+        "description": "The @defer directive may be specified on a fragment spread to imply de-prioritization, that causes the fragment to be omitted in the initial response, and delivered as a subsequent response afterward. A query with @defer directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred delivered in a subsequent response. @include and @skip take precedence over @defer.",
+        "isRepeatable": false,
+        "locations": ["FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
+        "args": [
+          {
+            "name": "if",
+            "description": null,
+            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
+            "defaultValue": "true",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "label",
+            "description": null,
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
+      {
         "name": "deprecated",
-        "description": "Marks an element of a GraphQL schema as no longer supported.",
+        "description": "The @deprecated built-in directive is used within the type system definition language to indicate deprecated portions of a GraphQL service's schema, such as deprecated fields on a type, arguments on a field, input fields on an input type, or values of an enum type.",
         "isRepeatable": false,
         "locations": ["ARGUMENT_DEFINITION", "ENUM_VALUE", "FIELD_DEFINITION", "INPUT_FIELD_DEFINITION"],
         "args": [
           {
             "name": "reason",
-            "description": "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).",
+            "description": null,
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "defaultValue": "\"No longer supported\"",
             "isDeprecated": false,
@@ -2244,13 +2296,13 @@
       },
       {
         "name": "include",
-        "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
+        "description": "The @include directive may be provided for fields, fragment spreads, and inline fragments, and allows for conditional inclusion during execution as described by the if argument.",
         "isRepeatable": false,
         "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
-            "description": "Included when true.",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2264,13 +2316,13 @@
       },
       {
         "name": "skip",
-        "description": "Directs the executor to skip this field or fragment when the `if` argument is true.",
+        "description": "The @skip directive may be provided for fields, fragment spreads, and inline fragments, and allows for conditional exclusion during execution as described by the if argument.",
         "isRepeatable": false,
         "locations": ["FIELD", "FRAGMENT_SPREAD", "INLINE_FRAGMENT"],
         "args": [
           {
             "name": "if",
-            "description": "Skipped when true.",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2284,13 +2336,13 @@
       },
       {
         "name": "specifiedBy",
-        "description": "Exposes a URL that specifies the behavior of this scalar.",
+        "description": "The @specifiedBy built-in directive is used within the type system definition language to provide a scalar specification URL for specifying the behavior of custom scalar types.",
         "isRepeatable": false,
         "locations": ["SCALAR"],
         "args": [
           {
             "name": "url",
-            "description": "The URL that specifies the behavior of this scalar.",
+            "description": null,
             "type": {
               "kind": "NON_NULL",
               "name": null,

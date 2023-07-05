@@ -1,6 +1,6 @@
 overwrite: true
-schema: [ '../schemas/sbatchapi/schema.graphqls' ]
-documents: [ 'src/graphql/sbatchServiceClient/**/*.graphql' ]
+schema: ['https://sbatch.dev.deepsquare.run/graphql']
+documents: ['src/graphql/sbatchServiceClient/**/*.graphql']
 config:
   strictScalars: true
   declarationKind: type
