@@ -71,9 +71,6 @@ dependencies:
   '@wagmi/core':
     specifier: ^1.0.8
     version: 1.0.8(encoding@0.1.13)(react@18.2.0)(typescript@5.1.3)(viem@0.3.35)(zod@3.20.6)
-  ably:
-    specifier: ^1.2.40
-    version: 1.2.40
   ajv:
     specifier: ^8.12.0
     version: 8.12.0
@@ -89,9 +86,6 @@ dependencies:
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
-  cors:
-    specifier: ^2.8.5
-    version: 2.8.5
   date-fns:
     specifier: ^2.29.3
     version: 2.29.3
@@ -104,9 +98,6 @@ dependencies:
   encoding:
     specifier: ^0.1.13
     version: 0.1.13
-  express:
-    specifier: ^4.18.2
-    version: 4.18.2
   firebase:
     specifier: ^9.22.2
     version: 9.22.2(encoding@0.1.13)
@@ -116,9 +107,6 @@ dependencies:
   graphql-2-json-schema:
     specifier: ^0.10.0
     version: 0.10.0
-  graphql-scalars:
-    specifier: ^1.22.2
-    version: 1.22.2(graphql@16.6.0)
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -10247,16 +10235,6 @@ packages:
     transitivePeerDependencies:
       - encoding
     dev: true
-
-  /graphql-scalars@1.22.2(graphql@16.6.0):
-    resolution: {integrity: sha512-my9FB4GtghqXqi/lWSVAOPiTzTnnEzdOXCsAC2bb5V7EFNQjVjwy3cSSbUvgYOtDuDibd+ZsCDhz+4eykYOlhQ==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
-    dependencies:
-      graphql: 16.6.0
-      tslib: 2.6.0
-    dev: false
 
   /graphql-subscriptions@2.0.0(graphql@16.6.0):
     resolution: {integrity: sha512-s6k2b8mmt9gF9pEfkxsaO1lTxaySfKoEJzEfmwguBbQ//Oq23hIXCfR1hm4kdh5hnR20RdwB+s3BCb+0duHSZA==}

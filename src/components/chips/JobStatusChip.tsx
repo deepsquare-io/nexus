@@ -96,14 +96,6 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
             sx={{ color: '#AA5B00', backgroundColor: '#FCF2E6' }}
           />
         );
-      default:
-        return (
-          <Chip
-            className="font-bold"
-            label={`\u2022 ${status}`}
-            sx={{ color: '#FF3838', backgroundColor: '#FFDEDE' }}
-          />
-        );
     }
   }
 };
