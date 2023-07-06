@@ -11,7 +11,6 @@ import { ApolloProvider } from '@apollo/client';
 import DialogProvider from '@components/providers/DialogProvider';
 import FirebaseProvider from '@components/providers/FirebaseProvider';
 import LockProvider from '@components/providers/LockProvider';
-import PubSubProvider from '@components/providers/PubSubProvider';
 import client from '@graphql/client';
 import { deepsquareChain } from '@lib/web3/constants/chains';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -49,21 +48,19 @@ const Runtime: FC<RuntimeProps> = ({ children }) => {
         <StyledEngineProvider injectFirst>
           <WagmiConfig config={wagmiConfig}>
             <FirebaseProvider>
-              <PubSubProvider>
-                <AuthProvider>
-                  <ApolloProvider client={client}>
-                    <LockProvider>
-                      <DialogProvider>
-                        <IconContext.Provider value={{ style: { display: 'inline', verticalAlign: 'middle' } }}>
-                          <ToastContainer position="top-left" pauseOnFocusLoss={false} />
-                          <CssBaseline />
-                          {children}
-                        </IconContext.Provider>
-                      </DialogProvider>
-                    </LockProvider>
-                  </ApolloProvider>
-                </AuthProvider>
-              </PubSubProvider>
+              <AuthProvider>
+                <ApolloProvider client={client}>
+                  <LockProvider>
+                    <DialogProvider>
+                      <IconContext.Provider value={{ style: { display: 'inline', verticalAlign: 'middle' } }}>
+                        <ToastContainer position="top-left" pauseOnFocusLoss={false} />
+                        <CssBaseline />
+                        {children}
+                      </IconContext.Provider>
+                    </DialogProvider>
+                  </LockProvider>
+                </ApolloProvider>
+              </AuthProvider>
             </FirebaseProvider>
           </WagmiConfig>
         </StyledEngineProvider>
