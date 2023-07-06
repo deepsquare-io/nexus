@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import type { Address } from 'wagmi';
 import { usePublicClient } from 'wagmi';
 import type { MouseEvent } from 'react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
@@ -29,7 +29,7 @@ import type { GridColumns } from '@mui/x-data-grid';
 import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
-import { formatEther } from '@utils/format/formatEther';
+import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
 import { computeCost } from '@utils/job/computeCost';
@@ -59,17 +59,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
   const jobs = useListJobs();
 
   if (jobs.length === 0) return null;
-
-  // const computeCost = (summary: FullJobSummary): bigint => {
-  //   if (!summary.provider) return 0n;
-  //
-  //   const tasks = summary.definition.ntasks;
-  //   const gpuCost = summary.definition.gpuPerTask * summary.provider.providerPrices.gpuPricePerMin;
-  //   const cpuCost = summary.definition.cpuPerTask * summary.provider.providerPrices.cpuPricePerMin;
-  //   const memCost =
-  //     summary.definition.memPerCpu * summary.definition.cpuPerTask * summary.provider.providerPrices.memPricePerMin;
-  //   return formatEther(tasks * (gpuCost + cpuCost + memCost));
-  // };
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
     const field = event.currentTarget.dataset.field!;
@@ -248,7 +237,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) => (params.row.provider ? `${computeCost(params.row)} creds/min` : '-'),
+            valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
           },
           {
             field: 'cost',
@@ -262,10 +251,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               hasJobRun(params.row.status)
                 ? isJobTerminated(params.row.status)
                   ? formatEther(params.row.cost.finalCost)
-                  : `~${
+                  : `~${formatEther(
                       BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
-                      computeCost(params.row)
-                    }`
+                        computeCost(params.row),
+                    )}`
                 : '-',
           },
           {
