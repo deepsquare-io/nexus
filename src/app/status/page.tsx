@@ -201,7 +201,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               )
                 return '-';
               const maxDuration = dayjs.duration(
-                Number((formatEther(params.row.cost.maxCost) * 60n * 1000n) / formatEther(computeCost(params.row))),
+                formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
               );
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
