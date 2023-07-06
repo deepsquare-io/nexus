@@ -520,6 +520,18 @@ export type Step = {
    */
   for?: InputMaybe<StepFor>;
   /**
+   * "If" is a boolean test that skips the step if the test is false.
+   *
+   * The test format is bash and variables such as $PATH or $(pwd) can be expanded.
+   *
+   * Note that "If" will be run after the "DependsOn".
+   *
+   * Example: '3 -eq 3 && "${TEST}" = "test"'.
+   *
+   * Go name: "If".
+   */
+  if?: InputMaybe<Scalars['String']>;
+  /**
    * Launch a background process to run a group of commands if not null.
    *
    * Is exclusive with "run", "for", "use".

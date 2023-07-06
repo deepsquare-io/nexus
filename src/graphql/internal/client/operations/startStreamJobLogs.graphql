@@ -1,3 +1,0 @@
-query StartStreamJobLogs ($jobId: Hex!) {
-    startStreamJobLogs(jobId: $jobId)
-}

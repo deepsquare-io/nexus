@@ -51,11 +51,9 @@ const JobConsolePage = ({ params }: { params: { jobId: string } }) => {
   const searchParams = useSearchParams();
   const download = searchParams.get('download');
 
-  const handleDownload = (url: string) => {
-    // window.location.href = url.replace(/(.*)transfer.deepsquare.run(.*)/, '$1transfer.deepsquare.run/get/$2');
-  };
-
-  // const dlLink = 'tet'
+  const handleDownload = useCallback((url: string) => {
+    window.location.href = url.replace(/(.*)transfer.deepsquare.run(.*)/, '$1transfer.deepsquare.run/get/$2');
+  }, []);
 
   const dlLink = useStreamLogs(terminal, params.jobId, showTimestamp, !!download, handleDownload);
 

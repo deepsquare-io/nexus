@@ -875,6 +875,14 @@
             "deprecationReason": null
           },
           {
+            "name": "if",
+            "description": "\"If\" is a boolean test that skips the step if the test is false.\n\nThe test format is bash and variables such as $PATH or $(pwd) can be expanded.\n\nNote that \"If\" will be run after the \"DependsOn\".\n\nExample: '3 -eq 3 && \"${TEST}\" = \"test\"'.\n\nGo name: \"If\".",
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "launch",
             "description": "Launch a background process to run a group of commands if not null.\n\nIs exclusive with \"run\", \"for\", \"use\".\n\nGo name: \"Launch\".",
             "type": { "kind": "INPUT_OBJECT", "name": "StepAsyncLaunch", "ofType": null },

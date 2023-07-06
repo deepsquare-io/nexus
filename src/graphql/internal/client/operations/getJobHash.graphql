@@ -1,0 +1,7 @@
+query GetJobHash($jobId: Hex!) {
+    getJobHash(jobId: $jobId) {
+        hash
+        address
+        timestamp
+    }
+}

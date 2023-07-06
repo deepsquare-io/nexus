@@ -18,8 +18,8 @@ dependencies:
     specifier: ^2.0.0
     version: 2.0.0(@apollo/server@4.7.4)(next@13.4.3)
   '@deepsquare/deepsquare-client':
-    specifier: ^0.9.5
-    version: 0.9.5(encoding@0.1.13)(typescript@5.1.3)(zod@3.20.6)
+    specifier: ^0.10.0
+    version: 0.10.0(encoding@0.1.13)(typescript@5.1.3)(zod@3.20.6)
   '@emotion/react':
     specifier: ^11.10.6
     version: 11.10.6(@types/react@18.2.13)(react@18.2.0)
@@ -2168,8 +2168,8 @@ packages:
       '@date-io/core': 2.16.0
     dev: false
 
-  /@deepsquare/deepsquare-client@0.9.5(encoding@0.1.13)(typescript@5.1.3)(zod@3.20.6):
-    resolution: {integrity: sha512-+CvT8aApcFcUZiuyNByVouEspvQL4UWjymXc+iHdzaXvtD/4EZJkBI4Zono6ZAS50PT50XxvuEc0a4F18mQkJw==}
+  /@deepsquare/deepsquare-client@0.10.0(encoding@0.1.13)(typescript@5.1.3)(zod@3.20.6):
+    resolution: {integrity: sha512-z9baxZfglSi8+4JItu/USkWuhRlwcPkEsm9N1Jz27EpkUgVBly46DwqDOjF9GSUQ+vxhB49vPCOtcQ8q6nqzGw==}
     dependencies:
       '@grpc/grpc-js': 1.8.17
       '@protobuf-ts/grpc-transport': 2.9.0(@grpc/grpc-js@1.8.17)
@@ -5230,7 +5230,7 @@ packages:
     resolution: {integrity: sha512-bcKpo1oj54hGholplGLpqPHRbIsnbixFtc06nwuNM5/dwSXOq/AAYoIBRsBmnZJSdfeNW5rnff7NTAz3ZCqR9Q==}
     dependencies:
       '@noble/curves': 1.0.0
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.1
       '@scure/base': 1.1.1
     dev: false
 
@@ -5244,7 +5244,7 @@ packages:
   /@scure/bip39@1.2.0:
     resolution: {integrity: sha512-SX/uKq52cuxm4YFXWFaVByaSHJh2w3BnokVSeUJVCv6K7WulT9u2BuNRBhuFl8vAuYnzx9bEu9WgpcNYTrYieg==}
     dependencies:
-      '@noble/hashes': 1.3.0
+      '@noble/hashes': 1.3.1
       '@scure/base': 1.1.1
     dev: false
 

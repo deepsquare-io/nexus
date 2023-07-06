@@ -53,8 +53,6 @@ const privateSchema = z.intersection(
     WEB3_PRIVATE_KEY: z.custom<Address>((val) => {
       return /^0x+[0-9a-fA-f]{64}$/.test(val as string);
     }),
-    ABLY_SUBSCRIBE_KEY: z.string().min(1),
-    ABLY_PUBLISH_KEY: z.string().min(1),
   }),
 );
 

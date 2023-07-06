@@ -59,6 +59,12 @@ export type FullJobSummary = {
   valid: Scalars['Boolean'];
 };
 
+export type GetJobHashOutput = {
+  address: Scalars['Hex'];
+  hash: Scalars['Hex'];
+  timestamp: Scalars['String'];
+};
+
 export type HttpDataInput = {
   url: Scalars['String'];
 };
@@ -159,17 +165,17 @@ export type ProviderPrices = {
 export { ProviderStatus };
 
 export type Query = {
+  getJobHash: GetJobHashOutput;
   listJobs: Array<FullJobSummary>;
   ping: Scalars['String'];
-  startStreamJobLogs: Scalars['String'];
+};
+
+export type QueryGetJobHashArgs = {
+  jobId: Scalars['Hex'];
 };
 
 export type QueryPingArgs = {
   pong?: InputMaybe<Scalars['String']>;
-};
-
-export type QueryStartStreamJobLogsArgs = {
-  jobId: Scalars['Hex'];
 };
 
 export type S3DataInput = {
