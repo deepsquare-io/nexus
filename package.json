@@ -39,7 +39,6 @@
     "gen:grpc": "cd ../protos/loggerapis && buf generate"
   },
   "dependencies": {
-    "@ably-labs/react-hooks": "^2.1.1",
     "@apollo/client": "^3.7.9",
     "@apollo/server": "^4.7.4",
     "@as-integrations/next": "^2.0.0",
