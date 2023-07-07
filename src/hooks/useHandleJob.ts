@@ -89,7 +89,6 @@ export default function useHandleJob(
             }
           }
         } else if (isWeb2(authMethod)) {
-          console.log(debouncedAmount.toString());
           await toast.promise(
             requestJob({
               variables: {
