@@ -1036,7 +1036,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "StepRun",
-        "description": "StepRun is one script executed with the shell.\n\nA temporary shared storage is accessible through the $STORAGE_PATH environment variable.\n\nA shared cache per site is accessible via the $DEEPSQUARE_TMP environment variable. The $DEEPSQUARE_TMP directory is cleared periodically.\n\necho \"KEY=value\" >> \"$DEEPSQUARE_ENV\" can be used to share environment variables between steps.\n\n$DEEPSQUARE_INPUT is the path that contains imported files.\n\n$DEEPSQUARE_OUTPUT is the staging directory for uploading files.",
+        "description": "StepRun is one script executed with the shell.\n\nA temporary shared storage is accessible through the $STORAGE_PATH environment variable.\n\nAvailables caches can be used by invoking one of the following environment variable:\n\n| Environment variables                   | Lifecycle                        |\n| --------------------------------------- | -------------------------------- |\n| STORAGE_PATH                            | job duration                     |\n| DEEPSQUARE_TMP or DEEPSQUARE_SHARED_TMP | provider's policy                |\n| DEEPSQUARE_SHARED_WORLD_TMP             | provider's policy                |\n| DEEPSQUARE_DISK_TMP                     | node reboot or provider's policy |\n| DEEPSQUARE_DISK_WORLD_TMP               | node reboot or provider's policy |\n\necho \"KEY=value\" >> \"$DEEPSQUARE_ENV\" can be used to share environment variables between steps.\n\n$DEEPSQUARE_INPUT is the path that contains imported files.\n\n$DEEPSQUARE_OUTPUT is the staging directory for uploading files.",
         "fields": null,
         "inputFields": [
           {

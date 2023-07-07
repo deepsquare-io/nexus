@@ -5,7 +5,12 @@ import { addressMetaScheduler } from '@lib/web3/constants/contracts';
 
 container.register(DeepSquareClient, {
   useFactory: instanceCachingFactory(() => {
-    return new DeepSquareClient(env.WEB3_PRIVATE_KEY, undefined, addressMetaScheduler, env.NEXT_PUBLIC_API_URL);
+    return new DeepSquareClient(
+      env.WEB3_PRIVATE_KEY,
+      undefined,
+      addressMetaScheduler,
+      `${env.NEXT_PUBLIC_API_URL}/graphql`,
+    );
   }),
 });
 export default container;

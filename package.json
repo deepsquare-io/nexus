@@ -42,7 +42,7 @@
     "@apollo/client": "^3.7.9",
     "@apollo/server": "^4.7.4",
     "@as-integrations/next": "^2.0.0",
-    "@deepsquare/deepsquare-client": "^0.10.0",
+    "@deepsquare/deepsquare-client": "^0.10.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@ethersproject/bytes": "5.7.0",
