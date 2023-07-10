@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import type { Address } from 'wagmi';
 import { usePublicClient } from 'wagmi';
 import type { MouseEvent } from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
@@ -16,6 +16,8 @@ import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb3 } from '@lib/types/AuthMethod';
 import { JobStatus } from '@lib/types/enums/JobStatus';
 import { CancelSharp, DownloadSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -42,6 +44,8 @@ const StatusPage: NextPage = withConnectionRequired(() => {
   const router = useRouter();
 
   const { width } = useWindowSize();
+
+  const { authMethod } = useContext(authContext);
 
   const [openTopUpDialog, setOpenTopUpDialog] = useState<boolean>(false);
   const [topUpJobId, setTopUpJobId] = useState<string | undefined>(undefined);
@@ -294,20 +298,22 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                     <DescriptionOutlinedIcon />
                   </Button>
                 </Tooltip>
-                <Tooltip title="Top up">
-                  <Button
-                    className="rounded h-11"
-                    color="primary"
-                    disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
-                    aria-label="top up"
-                    onClick={() => {
-                      if (isJobTerminated(params.row.status) || !cancel) return;
-                      setOpenTopUpDialog(true);
-                    }}
-                  >
-                    <MoreTime />
-                  </Button>
-                </Tooltip>
+                {isWeb3(authMethod) && (
+                  <Tooltip title="Top up">
+                    <Button
+                      className="rounded h-11"
+                      color="primary"
+                      disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
+                      aria-label="top up"
+                      onClick={() => {
+                        if (isJobTerminated(params.row.status) || !cancel) return;
+                        setOpenTopUpDialog(true);
+                      }}
+                    >
+                      <MoreTime />
+                    </Button>
+                  </Tooltip>
+                )}
                 <Tooltip title="Cancel job">
                   <span>
                     <Button
