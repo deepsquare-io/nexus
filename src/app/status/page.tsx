@@ -4,19 +4,19 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import type { Address } from 'wagmi';
-import { usePublicClient } from 'wagmi';
 import type { MouseEvent } from 'react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
-import type { JobStruct, ProviderStruct } from '@lib/web3/types/DataStructs';
-import { JobStatus } from '@lib/web3/types/DataStructs';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb3 } from '@lib/types/AuthMethod';
+import { JobStatus } from '@lib/types/enums/JobStatus';
 import { CancelSharp, DownloadSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -32,7 +32,8 @@ import formatCredit from '@utils/format/formatCredit';
 import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
-import { isJobTerminated } from '@utils/isJobTerminated';
+import { computeCost } from '@utils/job/computeCost';
+import { isJobTerminated } from '@utils/job/isJobTerminated';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 dayjs.extend(duration);
@@ -42,35 +43,22 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   const { width } = useWindowSize();
 
+  const { authMethod } = useContext(authContext);
+
   const [openTopUpDialog, setOpenTopUpDialog] = useState<boolean>(false);
   const [topUpJobId, setTopUpJobId] = useState<string | undefined>(undefined);
 
   const { cancel } = useCancelJob();
 
-  const publicClient = usePublicClient();
-
   const [loading] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const [value, setValue] = useState<(JobStruct & { provider: ProviderStruct | undefined }) | undefined>(undefined);
+  const [value, setValue] = useState<FullJobSummary | undefined>(undefined);
 
   const jobs = useListJobs();
 
   if (jobs.length === 0) return null;
-
-  /**
-   * Returns the cost factor based on the allocation. The unit is wei per minute.
-   */
-  const computeCost = (job: JobStruct & { provider: ProviderStruct | undefined }): bigint => {
-    if (!job.provider) return 0n;
-
-    const tasks = job.definition.ntasks;
-    const gpuCost = job.definition.gpuPerTask * job.provider.providerPrices.gpuPricePerMin;
-    const cpuCost = job.definition.cpuPerTask * job.provider.providerPrices.cpuPricePerMin;
-    const memCost = job.definition.memPerCpu * job.definition.cpuPerTask * job.provider.providerPrices.memPricePerMin;
-    return tasks * (gpuCost + cpuCost + memCost);
-  };
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
     const field = event.currentTarget.dataset.field!;
@@ -149,13 +137,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   size="small"
                   onClick={async () => {
                     if (isJobTerminated(params.row.status) || !cancel) return;
-                    const cancelTransaction = await toast.promise(cancel(params.row.jobId as Address), {
-                      error: 'Transaction rejected',
-                    });
-
-                    await toast.promise(publicClient.waitForTransactionReceipt({ hash: cancelTransaction.hash }), {
-                      success: 'Job successfully cancelled',
-                    });
+                    await cancel(params.row.jobId);
                   }}
                 >
                   <CancelSharp />
@@ -163,7 +145,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<JobStruct & { provider: ProviderStruct | undefined }>)
+        ] as GridColumns<FullJobSummary>)
       : ([
           {
             field: 'jobId',
@@ -306,20 +288,22 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                     <DescriptionOutlinedIcon />
                   </Button>
                 </Tooltip>
-                <Tooltip title="Top up">
-                  <Button
-                    className="rounded h-11"
-                    color="primary"
-                    disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
-                    aria-label="top up"
-                    onClick={() => {
-                      if (isJobTerminated(params.row.status) || !cancel) return;
-                      setOpenTopUpDialog(true);
-                    }}
-                  >
-                    <MoreTime />
-                  </Button>
-                </Tooltip>
+                {isWeb3(authMethod) && (
+                  <Tooltip title="Top up">
+                    <Button
+                      className="rounded h-11"
+                      color="primary"
+                      disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
+                      aria-label="top up"
+                      onClick={() => {
+                        if (isJobTerminated(params.row.status) || !cancel) return;
+                        setOpenTopUpDialog(true);
+                      }}
+                    >
+                      <MoreTime />
+                    </Button>
+                  </Tooltip>
+                )}
                 <Tooltip title="Cancel job">
                   <span>
                     <Button
@@ -329,13 +313,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                       aria-label="cancel"
                       onClick={async () => {
                         if (isJobTerminated(params.row.status) || !cancel) return;
-                        const cancelTransaction = await toast.promise(cancel(params.row.jobId as Address), {
-                          error: 'Transaction rejected',
-                        });
-
-                        await toast.promise(publicClient.waitForTransactionReceipt({ hash: cancelTransaction.hash }), {
-                          success: 'Job successfully cancelled',
-                        });
+                        await cancel(params.row.jobId);
                       }}
                     >
                       <CancelOutlinedIcon />
@@ -345,7 +323,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<JobStruct & { provider: ProviderStruct | undefined }>);
+        ] as GridColumns<FullJobSummary>);
 
   const columnBuffer = columns.map((col) => ({
     ...col,

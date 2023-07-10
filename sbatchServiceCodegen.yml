@@ -1,6 +1,6 @@
 overwrite: true
-schema: ['https://sbatch.dev.deepsquare.run/graphql']
-documents: ['src/graphql/sbatchServiceClient/**/*.graphql']
+schema: [ 'https://sbatch.dev.deepsquare.run/graphql' ]
+documents: [ 'src/graphql/external/sbatchServiceClient/**/*.graphql' ]
 config:
   strictScalars: true
   declarationKind: type
@@ -17,10 +17,10 @@ config:
   withRefetchFn: true
   pureMagicComment: true
 generates:
-  src/graphql/sbatchServiceClient/generated/Types.ts:
+  src/graphql/external/sbatchServiceClient/generated/Types.ts:
     plugins:
       - typescript
-  src/graphql/sbatchServiceClient:
+  src/graphql/external/sbatchServiceClient:
     preset: near-operation-file
     presetConfig:
       extension: .generated.ts
@@ -29,7 +29,7 @@ generates:
     plugins:
       - typescript-operations
       - typescript-react-apollo
-  src/graphql/sbatchServiceClient/generated/introspection.json:
+  src/graphql/external/sbatchServiceClient/generated/introspection.json:
     plugins:
       - introspection
     config: { minify: true }

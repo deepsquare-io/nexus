@@ -1,0 +1,3 @@
+mutation CancelJob($jobId: Hex!) {
+    cancelJob(jobId: $jobId)
+}

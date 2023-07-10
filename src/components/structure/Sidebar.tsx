@@ -3,7 +3,7 @@
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
-import type { FC, ReactNode } from 'react';
+import type { FC, JSX, ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import CustomLink from '@components/routing/Link';
 import useDialog from '@hooks/useDialog';

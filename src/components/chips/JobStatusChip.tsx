@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import useWindowSize from '@hooks/useWindowSize';
-import { JobStatus } from '@lib/web3/types/DataStructs';
+import { JobStatus } from '@lib/types/enums/JobStatus';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
@@ -12,7 +12,7 @@ import Chip from '@mui/material/Chip';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export interface JobStatusChipProps {
-  status: number;
+  status: JobStatus;
 }
 
 interface Props {
@@ -94,14 +94,6 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
             className="font-bold"
             label={`\u2022 ${JobStatus[status]}`}
             sx={{ color: '#AA5B00', backgroundColor: '#FCF2E6' }}
-          />
-        );
-      default:
-        return (
-          <Chip
-            className="font-bold"
-            label={`\u2022 ${JobStatus[status]}`}
-            sx={{ color: '#FF3838', backgroundColor: '#FFDEDE' }}
           />
         );
     }

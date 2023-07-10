@@ -8,33 +8,39 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import type { ContentErrors } from 'vanilla-jsoneditor';
 import * as y from 'yup';
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
 import type { CreditSubformData } from '@components/forms/CreditSubform';
 import CreditSubform from '@components/forms/CreditSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
-import type { Job } from '@graphql/sbatchServiceClient/generated/Types';
-import { useSubmitMutation } from '@graphql/sbatchServiceClient/generated/createJob.generated';
+import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
 import useHandleJob from '@hooks/useHandleJob';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb2 } from '@lib/types/AuthMethod';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import formatCredit from '@utils/format/formatCredit';
+import { formatWei } from '@utils/format/formatWei';
 
 const JsonEditor = dynamic(() => import('@components/ui/containers/JsonEditor/JsonEditor'), { ssr: false });
 
 const MemoJsonEditor = memo(JsonEditor, (prev, next) => JSON.stringify(prev) == JSON.stringify(next));
 
-const schema = (maxAmount: bigint, minAmount: bigint) => {
+const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) => {
   return y.object().shape({
     jobName: y.string().required().max(32),
     credit: y
       .string()
       .required()
-      .test('exceed-balance', 'Credit allocation exceeds your balance', (value) => BigInt(value) < maxAmount)
+      .test(
+        'exceed-balance',
+        'Credit allocation exceeds your balance',
+        (value) => BigInt(value) < maxAmount || ignoreBalance,
+      )
       .test(
         'subceed-min-amount',
         `Credit allocation is lower than ${formatCredit(minAmount)} credits`,
@@ -71,6 +77,7 @@ const SandboxPage: NextPage = () => {
 
   const { balance_wCredit } = useBalances();
   const { data: minAmount } = useGetMinimumAmount();
+  const { authMethod } = useContext(authContext);
 
   const [content, setContent] = useState<Content>(() => {
     if (typeof window === 'undefined') return { text: JSON.stringify(defaultJob) };
@@ -86,7 +93,6 @@ const SandboxPage: NextPage = () => {
   }
 
   const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
-  const [submit] = useSubmitMutation();
 
   useEffect(() => {
     localStorage.setItem('userContent', JSON.stringify(content));
@@ -95,31 +101,15 @@ const SandboxPage: NextPage = () => {
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
       type: WorkloadType.SANDBOX,
-      credit: '1000',
+      credit: formatWei(5000n).toString(),
       jobName: `${WorkloadType.SANDBOX} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
-    resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n)),
+    resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n, isWeb2(authMethod))),
   });
 
   const { handleSubmit, watch } = methods;
 
-  const { handleJob } = useHandleJob(
-    watch('credit').toString(),
-    watch('jobName'),
-    json.output
-      ? json.output.s3
-        ? 2
-        : json.output.http
-        ? json.output.http.url === 'https://transfer.deepsquare.run/'
-          ? 0
-          : 1
-        : 4
-      : 4,
-    json?.resources?.cpusPerTask,
-    json?.resources?.tasks,
-    json?.resources?.gpusPerTask,
-    json?.resources?.memPerCpu,
-  );
+  const { handleJob } = useHandleJob(watch('credit').toString(), watch('jobName'));
 
   const onSubmit: SubmitHandler<CreditSubformData & WorkloadFormData> = async () => {
     if (jsonErrors && 'validationErrors' in jsonErrors && jsonErrors.validationErrors.length > 0) {
@@ -127,11 +117,7 @@ const SandboxPage: NextPage = () => {
       return;
     }
 
-    await submit({ variables: { job: json } }).then(async (jobDefinition) => {
-      if (jobDefinition.data?.submit) {
-        await handleJob(jobDefinition.data.submit);
-      }
-    });
+    await handleJob(json);
   };
 
   return (

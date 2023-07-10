@@ -18,8 +18,8 @@ import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import initialTheme from '@styles/theme';
+import { InjectedConnector } from '@wagmi/connectors/injected';
 import { MetaMaskConnector } from '@wagmi/connectors/metaMask';
-import { InjectedConnector } from '@wagmi/core';
 import AuthProvider from './providers/AuthProvider';
 
 type RuntimeProps = {

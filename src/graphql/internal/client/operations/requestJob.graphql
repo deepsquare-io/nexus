@@ -1,0 +1,3 @@
+mutation RequestJob($job: JobInput!, $jobName: String!, $maxAmount: String!) {
+    requestJob(job: $job, jobName: $jobName, maxAmount: $maxAmount)
+}

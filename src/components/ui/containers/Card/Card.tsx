@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import type { ComponentProps, FC, PropsWithChildren } from 'react';
+import type { ComponentProps, FC, JSX, PropsWithChildren } from 'react';
 
 export interface CardProps extends ComponentProps<'div'> {
   block?: boolean;

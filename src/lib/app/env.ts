@@ -1,4 +1,5 @@
 import merge from 'lodash/merge';
+import type { Address } from 'wagmi';
 import type { ZodString } from 'zod';
 import { z } from 'zod';
 import ChainId from '@lib/web3/lib/ChainId';
@@ -45,6 +46,16 @@ const publicSchema = z.lazy(() => {
   );
 });
 
-const env = publicSchema.parse(raw);
+const privateSchema = z.intersection(
+  publicSchema,
+  z.object({
+    // ECDSA keypair for user authentication
+    WEB3_PRIVATE_KEY: z.custom<Address>((val) => {
+      return /^0x+[0-9a-fA-f]{64}$/.test(val as string);
+    }),
+  }),
+);
 
+const schema = isPlatformBrowser() ? publicSchema : privateSchema;
+const env = schema.parse(raw) as z.infer<typeof privateSchema>;
 export default env;

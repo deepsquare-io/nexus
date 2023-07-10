@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import type { ComponentType, FC } from 'react';
+import type { ComponentType, FC, JSX } from 'react';
 import { useContext } from 'react';
 import ConnectButton from '@components/buttons/ConnectButton';
 import { authContext } from '@lib/contexts/AuthContext';

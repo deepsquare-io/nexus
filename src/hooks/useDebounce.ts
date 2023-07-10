@@ -1,5 +1,5 @@
+import { deepEqual } from 'wagmi';
 import { useEffect, useState } from 'react';
-import { deepEqual } from '@wagmi/core';
 
 function useDebounce<T>(value: T, delay?: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);

@@ -1,6 +1,6 @@
 overwrite: true
 schema: [ 'https://metrics.beta.deepsquare.run/graphql' ]
-documents: [ 'src/graphql/statsClient/**/*.graphql' ]
+documents: [ 'src/graphql/external/statsClient/**/*.graphql' ]
 config:
   strictScalars: true
   declarationKind: type
@@ -17,10 +17,10 @@ config:
   withRefetchFn: true
   pureMagicComment: true
 generates:
-  src/graphql/statsClient/generated/Types.ts:
+  src/graphql/external/statsClient/generated/Types.ts:
     plugins:
       - typescript
-  src/graphql/statsClient:
+  src/graphql/external/statsClient:
     preset: near-operation-file
     presetConfig:
       extension: .generated.ts
@@ -29,7 +29,7 @@ generates:
     plugins:
       - typescript-operations
       - typescript-react-apollo
-  src/graphql/statsClient/generated/introspection.json:
+  src/graphql/external/statsClient/generated/introspection.json:
     plugins:
       - introspection
     config: { minify: true }

@@ -1,0 +1,51 @@
+fragment FullJobSummaryFragment on FullJobSummary {
+    cost {
+        delegateSpendingAuthority
+        finalCost
+        maxCost
+        pendingTopUp
+    }
+    customerAddr
+    definition {
+        batchLocationHash
+        cpuPerTask
+        gpuPerTask
+        memPerCpu
+        ntasks
+        storageType
+        uses {
+            key
+            value
+        }
+    }
+    hasCancelRequest
+    jobId
+    jobName
+    provider {
+        addr
+        jobCount
+        linkListed
+        providerHardware {
+            cpus
+            gpus
+            mem
+            nodes
+        }
+        providerPrices {
+            cpuPricePerMin
+            gpuPricePerMin
+            memPricePerMin
+        }
+        status
+        valid
+    }
+    providerAddr
+    status
+    time {
+        blockNumberStateChange
+        cancelRequestTimestamp
+        end
+        start
+    }
+    valid
+}
