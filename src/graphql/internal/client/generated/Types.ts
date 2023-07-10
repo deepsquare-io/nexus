@@ -1,6 +1,3 @@
-import type { JobStatus } from '@deepsquare/deepsquare-client';
-import type { ProviderStatus } from '@deepsquare/deepsquare-client';
-
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -14,7 +11,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Hex: any;
-  bigint: bigint;
+  bigint: string;
 };
 
 export type BoreInput = {
@@ -104,7 +101,16 @@ export type JobResourcesInput = {
   tasks: Scalars['Int'];
 };
 
-export { JobStatus };
+export enum JobStatus {
+  CANCELLED = 0,
+  FAILED = 1,
+  FINISHED = 2,
+  META_SCHEDULED = 3,
+  OUT_OF_CREDITS = 4,
+  PENDING = 5,
+  RUNNING = 6,
+  SCHEDULED = 7,
+}
 
 export type JobTime = {
   blockNumberStateChange: Scalars['bigint'];
@@ -162,7 +168,13 @@ export type ProviderPrices = {
   memPricePerMin: Scalars['bigint'];
 };
 
-export { ProviderStatus };
+export enum ProviderStatus {
+  BANNED = 0,
+  JOINED = 1,
+  KICKED = 2,
+  UNKNOWN = 3,
+  WAITING_APPROVAL = 4,
+}
 
 export type Query = {
   getJobHash: GetJobHashOutput;

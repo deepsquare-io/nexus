@@ -3,9 +3,7 @@ import { GraphQLScalarType } from 'graphql/type';
 import type { Hex } from 'viem';
 import { isHex } from 'viem';
 
-export class HexClass {}
-
-export const HexScalar = new GraphQLScalarType({
+const HexScalar = new GraphQLScalarType({
   name: 'Hex',
   description: 'Hexadecimal string scalar type',
   serialize(value: unknown): string {
@@ -32,3 +30,5 @@ export const HexScalar = new GraphQLScalarType({
     return ast.value; // value from the client query
   },
 });
+
+export default HexScalar;

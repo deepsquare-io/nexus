@@ -1,15 +1,8 @@
 import { GraphQLScalarType, Kind } from 'graphql';
 
-const BigIntScalar = new GraphQLScalarType({
+export const BigIntScalar = new GraphQLScalarType({
   name: 'bigint',
   description: 'Representation of a native JS bigint.',
-  serialize: (value: unknown) => {
-    if (typeof value !== 'bigint') {
-      throw new Error('bigint can only represent bigint instances');
-    }
-
-    return value.toString();
-  },
   parseValue: (value: unknown) => {
     if (
       typeof value !== 'bigint' &&
@@ -17,9 +10,16 @@ const BigIntScalar = new GraphQLScalarType({
       typeof value !== 'number' &&
       typeof value !== 'string'
     ) {
-      throw new Error('BigNumber can only be parsed from string');
+      throw new Error('BigNumber can only be parsed from string or number');
     }
     return BigInt(value);
+  },
+  serialize: (value: unknown) => {
+    if (typeof value !== 'bigint') {
+      throw new Error('bigint can only represent bigint instances');
+    }
+
+    return value.toString();
   },
   parseLiteral: (ast) => {
     if (ast.kind !== Kind.STRING && ast.kind !== Kind.BOOLEAN && ast.kind !== Kind.INT) {
@@ -28,6 +28,11 @@ const BigIntScalar = new GraphQLScalarType({
 
     return BigInt(ast.value);
   },
+  extensions: {
+    codegenScalarType: 'bigint',
+    jsonSchema: {
+      type: 'integer',
+      format: 'int64',
+    },
+  },
 });
-
-export default BigIntScalar;

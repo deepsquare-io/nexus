@@ -3,8 +3,8 @@ import type { ReadContractReturnType } from 'viem';
 import { type Hex } from 'viem';
 import type { MetaSchedulerAbi } from '@abi/MetaScheduler';
 import { JobStatus } from '@deepsquare/deepsquare-client';
-import BigIntScalar from '@graphql/internal/scalars/BigIntScalar';
-import { HexScalar } from '@graphql/internal/scalars/HexScalar';
+import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
+import HexScalar from '@graphql/internal/scalars/HexScalar';
 
 @ObjectType()
 export class Label {
@@ -74,7 +74,7 @@ export class JobSummary implements ReadContractReturnType<typeof MetaSchedulerAb
   @Field(() => HexScalar)
   jobId!: Hex;
 
-  @Field(() => JobStatus)
+  @Field(() => Int)
   status!: JobStatus;
 
   @Field(() => HexScalar)

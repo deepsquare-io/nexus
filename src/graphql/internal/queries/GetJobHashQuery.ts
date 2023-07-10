@@ -3,7 +3,7 @@ import { Args, ArgsType, Field, ObjectType, Query, Resolver } from 'type-graphql
 import { type Hex } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
-import { HexScalar } from '@graphql/internal/scalars/HexScalar';
+import HexScalar from '@graphql/internal/scalars/HexScalar';
 import env from '@lib/app/env';
 
 @ArgsType()

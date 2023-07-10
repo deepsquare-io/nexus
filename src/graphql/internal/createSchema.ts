@@ -4,8 +4,8 @@ import RequestJobMutation from '@graphql/internal/mutations/RequestJobMutation';
 import GetJobHashQuery from '@graphql/internal/queries/GetJobHashQuery';
 import ListJobsQuery from '@graphql/internal/queries/ListJobsQuery';
 import PingQuery from '@graphql/internal/queries/PingQuery';
-import BigIntScalar from '@graphql/internal/scalars/BigIntScalar';
-import { HexScalar } from '@graphql/internal/scalars/HexScalar';
+import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
+import HexScalar from '@graphql/internal/scalars/HexScalar';
 import container from '@lib/app/container';
 import { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 

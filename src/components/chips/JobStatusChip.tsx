@@ -48,7 +48,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
   if (!!width && width < 768) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
-        <Icon status={status.toString()} />
+        <Icon status={JobStatus[status]} />
       </div>
     );
   } else {
@@ -57,7 +57,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
         return (
           <Chip
             className="font-bold"
-            label={`\u2022 ${status}`}
+            label={`\u2022 ${JobStatus[status]}`}
             sx={{ color: '#14804A', backgroundColor: '#E1FCEF' }}
           />
         );
@@ -67,7 +67,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
         return (
           <Chip
             className="font-bold"
-            label={`\u2022 ${status}`}
+            label={`\u2022 ${JobStatus[status]}`}
             sx={{ color: '#FF3838', backgroundColor: '#FFDEDE' }}
           />
         );
@@ -76,7 +76,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
         return (
           <Chip
             className="font-bold"
-            label={`\u2022 ${status}`}
+            label={`\u2022 ${JobStatus[status]}`}
             sx={{ color: '#663B8A', backgroundColor: '#FFEAFD' }}
           />
         );
@@ -84,7 +84,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
         return (
           <Chip
             className="font-bold"
-            label={`\u2022 ${status}`}
+            label={`\u2022 ${JobStatus[status]}`}
             sx={{ color: '#5A6376', backgroundColor: '#E9EDF5' }}
           />
         );
@@ -92,7 +92,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
         return (
           <Chip
             className="font-bold"
-            label={`\u2022 ${status}`}
+            label={`\u2022 ${JobStatus[status]}`}
             sx={{ color: '#AA5B00', backgroundColor: '#FCF2E6' }}
           />
         );

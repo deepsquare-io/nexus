@@ -15,26 +15,26 @@ export type ListJobQuery = {
     providerAddr: any;
     status: Types.JobStatus;
     valid: boolean;
-    cost: { delegateSpendingAuthority: boolean; finalCost: bigint; maxCost: bigint; pendingTopUp: bigint };
+    cost: { delegateSpendingAuthority: boolean; finalCost: string; maxCost: string; pendingTopUp: string };
     definition: {
       batchLocationHash: string;
-      cpuPerTask: bigint;
-      gpuPerTask: bigint;
-      memPerCpu: bigint;
-      ntasks: bigint;
+      cpuPerTask: string;
+      gpuPerTask: string;
+      memPerCpu: string;
+      ntasks: string;
       storageType: number;
       uses: Array<{ key: string; value: string }>;
     };
     provider: {
       addr: any;
-      jobCount: bigint;
+      jobCount: string;
       linkListed: boolean;
       status: Types.ProviderStatus;
       valid: boolean;
-      providerHardware: { cpus: bigint; gpus: bigint; mem: bigint; nodes: bigint };
-      providerPrices: { cpuPricePerMin: bigint; gpuPricePerMin: bigint; memPricePerMin: bigint };
+      providerHardware: { cpus: string; gpus: string; mem: string; nodes: string };
+      providerPrices: { cpuPricePerMin: string; gpuPricePerMin: string; memPricePerMin: string };
     };
-    time: { blockNumberStateChange: bigint; cancelRequestTimestamp: bigint; end: bigint; start: bigint };
+    time: { blockNumberStateChange: string; cancelRequestTimestamp: string; end: string; start: string };
   }>;
 };
 

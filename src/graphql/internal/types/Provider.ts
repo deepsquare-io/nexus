@@ -1,7 +1,7 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from 'type-graphql';
 import { type Hex } from 'viem';
-import BigIntScalar from '@graphql/internal/scalars/BigIntScalar';
-import { HexScalar } from '@graphql/internal/scalars/HexScalar';
+import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
+import HexScalar from '@graphql/internal/scalars/HexScalar';
 import { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 
 @ObjectType()
@@ -42,7 +42,7 @@ export class Provider {
   @Field(() => ProviderPrices)
   providerPrices!: ProviderPrices;
 
-  @Field(() => ProviderStatus)
+  @Field(() => Int)
   status!: ProviderStatus;
 
   @Field(() => BigIntScalar)

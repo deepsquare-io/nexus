@@ -7,17 +7,17 @@ config:
   scalars:
     BigNumber: string
     DateTime: string
-    bigint: bigint
+    bigint: string
     Time: string
   skipTypename: true
-  enumValues: {
-    JobStatus: '@deepsquare/deepsquare-client#JobStatus',
-    ProviderStatus: '@deepsquare/deepsquare-client#ProviderStatus'
-  }
+  numericEnums: true
   useTypeImports: true
   # Apollo
   withRefetchFn: true
   pureMagicComment: true
+  namingConvention: {
+    enumValues: 'change-case-all#upperCase',
+  }
 generates:
   src/graphql/internal/client/generated/Types.ts:
     plugins:
