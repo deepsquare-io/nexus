@@ -13,7 +13,7 @@ export type ListJobQuery = {
     jobId: any;
     jobName: any;
     providerAddr: any;
-    status: Types.JobStatus;
+    status: number;
     valid: boolean;
     cost: { delegateSpendingAuthority: boolean; finalCost: string; maxCost: string; pendingTopUp: string };
     definition: {
@@ -29,7 +29,7 @@ export type ListJobQuery = {
       addr: any;
       jobCount: string;
       linkListed: boolean;
-      status: Types.ProviderStatus;
+      status: number;
       valid: boolean;
       providerHardware: { cpus: string; gpus: string; mem: string; nodes: string };
       providerPrices: { cpuPricePerMin: string; gpuPricePerMin: string; memPricePerMin: string };

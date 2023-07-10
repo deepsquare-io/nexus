@@ -92,46 +92,48 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
   if (isDisconnected(authMethod)) return [];
 
   if (isWeb2(authMethod) && data)
-    return data.listJobs.map((job) => {
-      return {
-        ...job,
-        definition: {
-          ...job.definition,
-          ntasks: BigInt(job.definition.ntasks),
-          gpuPerTask: BigInt(job.definition.gpuPerTask),
-          cpuPerTask: BigInt(job.definition.cpuPerTask),
-          memPerCpu: BigInt(job.definition.memPerCpu),
-        },
-        time: {
-          ...job.time,
-          start: BigInt(job.time.start),
-          end: BigInt(job.time.end),
-          cancelRequestTimestamp: BigInt(job.time.cancelRequestTimestamp),
-          blockNumberStateChange: BigInt(job.time.blockNumberStateChange),
-        },
-        cost: {
-          ...job.cost,
-          maxCost: BigInt(job.cost.maxCost),
-          finalCost: BigInt(job.cost.finalCost),
-          pendingTopUp: BigInt(job.cost.pendingTopUp),
-        },
-        provider: {
-          ...job.provider,
-          jobCount: BigInt(job.provider.jobCount),
-          providerHardware: {
-            nodes: BigInt(job.provider.providerHardware.nodes),
-            gpus: BigInt(job.provider.providerHardware.gpus),
-            cpus: BigInt(job.provider.providerHardware.cpus),
-            mem: BigInt(job.provider.providerHardware.mem),
+    return data.listJobs
+      .map((job) => {
+        return {
+          ...job,
+          definition: {
+            ...job.definition,
+            ntasks: BigInt(job.definition.ntasks),
+            gpuPerTask: BigInt(job.definition.gpuPerTask),
+            cpuPerTask: BigInt(job.definition.cpuPerTask),
+            memPerCpu: BigInt(job.definition.memPerCpu),
           },
-          providerPrices: {
-            gpuPricePerMin: BigInt(job.provider.providerPrices.gpuPricePerMin),
-            cpuPricePerMin: BigInt(job.provider.providerPrices.cpuPricePerMin),
-            memPricePerMin: BigInt(job.provider.providerPrices.memPricePerMin),
+          time: {
+            ...job.time,
+            start: BigInt(job.time.start),
+            end: BigInt(job.time.end),
+            cancelRequestTimestamp: BigInt(job.time.cancelRequestTimestamp),
+            blockNumberStateChange: BigInt(job.time.blockNumberStateChange),
           },
-        },
-      };
-    });
+          cost: {
+            ...job.cost,
+            maxCost: BigInt(job.cost.maxCost),
+            finalCost: BigInt(job.cost.finalCost),
+            pendingTopUp: BigInt(job.cost.pendingTopUp),
+          },
+          provider: {
+            ...job.provider,
+            jobCount: BigInt(job.provider.jobCount),
+            providerHardware: {
+              nodes: BigInt(job.provider.providerHardware.nodes),
+              gpus: BigInt(job.provider.providerHardware.gpus),
+              cpus: BigInt(job.provider.providerHardware.cpus),
+              mem: BigInt(job.provider.providerHardware.mem),
+            },
+            providerPrices: {
+              gpuPricePerMin: BigInt(job.provider.providerPrices.gpuPricePerMin),
+              cpuPricePerMin: BigInt(job.provider.providerPrices.cpuPricePerMin),
+              memPricePerMin: BigInt(job.provider.providerPrices.memPricePerMin),
+            },
+          },
+        };
+      })
+      .sort((a, b) => (a.jobId > b.jobId ? -1 : 1));
 
   return jobList
     ? jobList

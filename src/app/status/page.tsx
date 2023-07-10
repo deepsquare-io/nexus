@@ -4,9 +4,7 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import type { Address } from 'wagmi';
-import { usePublicClient } from 'wagmi';
 import type { MouseEvent } from 'react';
 import { useContext, useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
@@ -51,8 +49,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
   const [topUpJobId, setTopUpJobId] = useState<string | undefined>(undefined);
 
   const { cancel } = useCancelJob();
-
-  const publicClient = usePublicClient();
 
   const [loading] = useState(false);
 
@@ -141,13 +137,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   size="small"
                   onClick={async () => {
                     if (isJobTerminated(params.row.status) || !cancel) return;
-                    const cancelTransaction = await toast.promise(cancel(params.row.jobId), {
-                      error: 'Transaction rejected',
-                    });
-
-                    await toast.promise(publicClient.waitForTransactionReceipt({ hash: cancelTransaction.hash }), {
-                      success: 'Job successfully cancelled',
-                    });
+                    await cancel(params.row.jobId);
                   }}
                 >
                   <CancelSharp />
@@ -323,13 +313,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                       aria-label="cancel"
                       onClick={async () => {
                         if (isJobTerminated(params.row.status) || !cancel) return;
-                        const cancelTransaction = await toast.promise(cancel(params.row.jobId), {
-                          error: 'Transaction rejected',
-                        });
-
-                        await toast.promise(publicClient.waitForTransactionReceipt({ hash: cancelTransaction.hash }), {
-                          success: 'Job successfully cancelled',
-                        });
+                        await cancel(params.row.jobId);
                       }}
                     >
                       <CancelOutlinedIcon />

@@ -51,7 +51,7 @@ export type FullJobSummary = {
   jobName: Scalars['Hex'];
   provider: Provider;
   providerAddr: Scalars['Hex'];
-  status: JobStatus;
+  status: Scalars['Int'];
   time: JobTime;
   valid: Scalars['Boolean'];
 };
@@ -101,17 +101,6 @@ export type JobResourcesInput = {
   tasks: Scalars['Int'];
 };
 
-export enum JobStatus {
-  CANCELLED = 0,
-  FAILED = 1,
-  FINISHED = 2,
-  META_SCHEDULED = 3,
-  OUT_OF_CREDITS = 4,
-  PENDING = 5,
-  RUNNING = 6,
-  SCHEDULED = 7,
-}
-
 export type JobTime = {
   blockNumberStateChange: Scalars['bigint'];
   cancelRequestTimestamp: Scalars['bigint'];
@@ -131,7 +120,12 @@ export type MountInput = {
 };
 
 export type Mutation = {
+  cancelJob: Scalars['Boolean'];
   requestJob: Scalars['Boolean'];
+};
+
+export type MutationCancelJobArgs = {
+  jobId: Scalars['Hex'];
 };
 
 export type MutationRequestJobArgs = {
@@ -151,7 +145,7 @@ export type Provider = {
   linkListed: Scalars['Boolean'];
   providerHardware: ProviderHardware;
   providerPrices: ProviderPrices;
-  status: ProviderStatus;
+  status: Scalars['Int'];
   valid: Scalars['Boolean'];
 };
 
@@ -167,14 +161,6 @@ export type ProviderPrices = {
   gpuPricePerMin: Scalars['bigint'];
   memPricePerMin: Scalars['bigint'];
 };
-
-export enum ProviderStatus {
-  BANNED = 0,
-  JOINED = 1,
-  KICKED = 2,
-  UNKNOWN = 3,
-  WAITING_APPROVAL = 4,
-}
 
 export type Query = {
   getJobHash: GetJobHashOutput;

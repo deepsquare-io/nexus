@@ -299,11 +299,7 @@
             "name": "status",
             "description": null,
             "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "ENUM", "name": "JobStatus", "ofType": null }
-            },
+            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null } },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -720,25 +716,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "ENUM",
-        "name": "JobStatus",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          { "name": "CANCELLED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "FAILED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "FINISHED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "META_SCHEDULED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "OUT_OF_CREDITS", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "PENDING", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "RUNNING", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "SCHEDULED", "description": null, "isDeprecated": false, "deprecationReason": null }
-        ],
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "JobTime",
         "description": null,
@@ -884,6 +861,31 @@
         "name": "Mutation",
         "description": null,
         "fields": [
+          {
+            "name": "cancelJob",
+            "description": null,
+            "args": [
+              {
+                "name": "jobId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": { "kind": "SCALAR", "name": "Hex", "ofType": null }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": { "kind": "SCALAR", "name": "Boolean", "ofType": null }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "requestJob",
             "description": null,
@@ -1031,11 +1033,7 @@
             "name": "status",
             "description": null,
             "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "ENUM", "name": "ProviderStatus", "ofType": null }
-            },
+            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null } },
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1161,22 +1159,6 @@
         "inputFields": null,
         "interfaces": [],
         "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "ProviderStatus",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          { "name": "BANNED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "JOINED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "KICKED", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "UNKNOWN", "description": null, "isDeprecated": false, "deprecationReason": null },
-          { "name": "WAITING_APPROVAL", "description": null, "isDeprecated": false, "deprecationReason": null }
-        ],
         "possibleTypes": null
       },
       {

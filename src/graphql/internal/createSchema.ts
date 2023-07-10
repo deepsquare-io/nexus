@@ -1,5 +1,6 @@
 import { buildSchemaSync, registerEnumType } from 'type-graphql';
 import { JobStatus } from '@deepsquare/deepsquare-client';
+import CancelJobMutation from '@graphql/internal/mutations/CancelJobMutation';
 import RequestJobMutation from '@graphql/internal/mutations/RequestJobMutation';
 import GetJobHashQuery from '@graphql/internal/queries/GetJobHashQuery';
 import ListJobsQuery from '@graphql/internal/queries/ListJobsQuery';
@@ -31,6 +32,7 @@ export default function createSchema() {
       PingQuery,
 
       // Mutations
+      CancelJobMutation,
       RequestJobMutation,
     ],
     container: {

@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-import type * as Types from './Types';
 
 export type FullJobSummaryFragmentFragment = {
   customerAddr: any;
@@ -7,7 +6,7 @@ export type FullJobSummaryFragmentFragment = {
   jobId: any;
   jobName: any;
   providerAddr: any;
-  status: Types.JobStatus;
+  status: number;
   valid: boolean;
   cost: { delegateSpendingAuthority: boolean; finalCost: string; maxCost: string; pendingTopUp: string };
   definition: {
@@ -23,7 +22,7 @@ export type FullJobSummaryFragmentFragment = {
     addr: any;
     jobCount: string;
     linkListed: boolean;
-    status: Types.ProviderStatus;
+    status: number;
     valid: boolean;
     providerHardware: { cpus: string; gpus: string; mem: string; nodes: string };
     providerPrices: { cpuPricePerMin: string; gpuPricePerMin: string; memPricePerMin: string };
