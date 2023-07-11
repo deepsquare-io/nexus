@@ -53,6 +53,9 @@ const privateSchema = z.intersection(
     WEB3_PRIVATE_KEY: z.custom<Address>((val) => {
       return /^0x+[0-9a-fA-f]{64}$/.test(val as string);
     }),
+
+    // Third parties
+    MONGODB_URI: z.string().min(1),
   }),
 );
 

@@ -1,0 +1,3 @@
+mutation CreateUser($userId: String!) {
+    createUser(userId: $userId)
+}
