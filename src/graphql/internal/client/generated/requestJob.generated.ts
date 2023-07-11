@@ -7,13 +7,14 @@ export type RequestJobMutationVariables = Types.Exact<{
   job: Types.JobInput;
   jobName: Types.Scalars['String'];
   maxAmount: Types.Scalars['String'];
+  userId: Types.Scalars['String'];
 }>;
 
 export type RequestJobMutation = { requestJob: boolean };
 
 export const RequestJobDocument = /*#__PURE__*/ gql`
-  mutation RequestJob($job: JobInput!, $jobName: String!, $maxAmount: String!) {
-    requestJob(job: $job, jobName: $jobName, maxAmount: $maxAmount)
+  mutation RequestJob($job: JobInput!, $jobName: String!, $maxAmount: String!, $userId: String!) {
+    requestJob(job: $job, jobName: $jobName, maxAmount: $maxAmount, userId: $userId)
   }
 `;
 export type RequestJobMutationFn = Apollo.MutationFunction<RequestJobMutation, RequestJobMutationVariables>;
@@ -34,6 +35,7 @@ export type RequestJobMutationFn = Apollo.MutationFunction<RequestJobMutation, R
  *      job: // value for 'job'
  *      jobName: // value for 'jobName'
  *      maxAmount: // value for 'maxAmount'
+ *      userId: // value for 'userId'
  *   },
  * });
  */

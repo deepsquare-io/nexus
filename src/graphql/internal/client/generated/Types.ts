@@ -121,6 +121,7 @@ export type MountInput = {
 
 export type Mutation = {
   cancelJob: Scalars['Boolean'];
+  createUser: Scalars['Boolean'];
   requestJob: Scalars['Boolean'];
 };
 
@@ -128,10 +129,15 @@ export type MutationCancelJobArgs = {
   jobId: Scalars['Hex'];
 };
 
+export type MutationCreateUserArgs = {
+  userId: Scalars['String'];
+};
+
 export type MutationRequestJobArgs = {
   job: JobInput;
   jobName: Scalars['String'];
   maxAmount: Scalars['String'];
+  userId: Scalars['String'];
 };
 
 export type NetworkInterfaceInput = {
@@ -170,6 +176,10 @@ export type Query = {
 
 export type QueryGetJobHashArgs = {
   jobId: Scalars['Hex'];
+};
+
+export type QueryListJobsArgs = {
+  userId: Scalars['String'];
 };
 
 export type QueryPingArgs = {

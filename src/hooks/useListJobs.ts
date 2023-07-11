@@ -1,9 +1,9 @@
 import type { Address } from 'wagmi';
 import { useContractRead, useContractReads } from 'wagmi';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { MetaSchedulerAbi } from '@abi/MetaScheduler';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
-import { useListJobQuery } from '@graphql/internal/client/generated/listJobs.generated';
+import { useListJobLazyQuery } from '@graphql/internal/client/generated/listJobs.generated';
 import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import type { JobCost, JobDefinition, JobSummary, JobTime } from '@graphql/internal/types/JobSummary';
 import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/Provider';
@@ -87,7 +87,11 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     },
   });
 
-  const { data } = useListJobQuery();
+  const [listJobs, { data }] = useListJobLazyQuery();
+
+  useEffect(() => {
+    if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
+  }, [authMethod, listJobs]);
 
   if (isDisconnected(authMethod)) return [];
 

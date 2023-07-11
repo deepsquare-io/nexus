@@ -48,8 +48,8 @@ const Runtime: FC<RuntimeProps> = ({ children }) => {
         <StyledEngineProvider injectFirst>
           <WagmiConfig config={wagmiConfig}>
             <FirebaseProvider>
-              <AuthProvider>
-                <ApolloProvider client={client}>
+              <ApolloProvider client={client}>
+                <AuthProvider>
                   <LockProvider>
                     <DialogProvider>
                       <IconContext.Provider value={{ style: { display: 'inline', verticalAlign: 'middle' } }}>
@@ -59,8 +59,8 @@ const Runtime: FC<RuntimeProps> = ({ children }) => {
                       </IconContext.Provider>
                     </DialogProvider>
                   </LockProvider>
-                </ApolloProvider>
-              </AuthProvider>
+                </AuthProvider>
+              </ApolloProvider>
             </FirebaseProvider>
           </WagmiConfig>
         </StyledEngineProvider>

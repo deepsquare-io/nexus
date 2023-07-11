@@ -95,6 +95,7 @@ export default function useHandleJob(
                 job,
                 jobName: debouncedName,
                 maxAmount: debouncedAmount.toString(),
+                userId: authMethod.id,
               },
             }),
             {

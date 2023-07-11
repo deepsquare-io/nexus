@@ -1,3 +1,3 @@
-mutation RequestJob($job: JobInput!, $jobName: String!, $maxAmount: String!) {
-    requestJob(job: $job, jobName: $jobName, maxAmount: $maxAmount)
+mutation RequestJob($job: JobInput!, $jobName: String!, $maxAmount: String!, $userId: String!) {
+    requestJob(job: $job, jobName: $jobName, maxAmount: $maxAmount, userId: $userId)
 }
