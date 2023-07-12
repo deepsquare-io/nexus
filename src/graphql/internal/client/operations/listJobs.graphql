@@ -1,5 +1,5 @@
-query ListJob {
-    listJobs {
+query ListJob($userId: String!) {
+    listJobs(userId: $userId) {
         ...FullJobSummaryFragment
     }
 }

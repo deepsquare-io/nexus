@@ -1,10 +1,9 @@
 import { injectable } from 'tsyringe';
-import { Field, ObjectType, Query, Resolver } from 'type-graphql';
-import { privateKeyToAccount } from 'viem/accounts';
+import { Arg, Field, ObjectType, Query, Resolver } from 'type-graphql';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
 import { JobSummary } from '@graphql/internal/types/JobSummary';
 import { Provider } from '@graphql/internal/types/Provider';
-import env from '@lib/app/env';
+import UserModel from '../../../database/User/UserModel';
 
 @ObjectType()
 export class FullJobSummary extends JobSummary {
@@ -18,8 +17,11 @@ export default class ListJobsQuery {
   constructor(private readonly deepsquare: DeepSquareClient) {}
 
   @Query(() => [FullJobSummary])
-  async listJobs() {
-    const ids = await this.deepsquare.listJob(privateKeyToAccount(env.WEB3_PRIVATE_KEY).address);
-    return Promise.all(ids.map((id) => this.deepsquare.getJob(id)));
+  async listJobs(@Arg('userId', () => String) userId: string) {
+    const user = await UserModel.findById(userId);
+    if (!user) return [];
+    return (await Promise.all(user.jobs.map((id) => this.deepsquare.getJob(id)))).filter(
+      (job) => job.jobId !== '0x0000000000000000000000000000000000000000000000000000000000000000',
+    );
   }
 }

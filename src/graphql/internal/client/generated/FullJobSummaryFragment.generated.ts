@@ -1,4 +1,5 @@
 import { gql } from '@apollo/client';
+import type * as Types from './Types';
 
 export type FullJobSummaryFragmentFragment = {
   customerAddr: any;

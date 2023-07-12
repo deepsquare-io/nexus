@@ -20,6 +20,7 @@ let config = {
   },
   productionBrowserSourceMaps: true,
   outputFileTracing: false,
+  experimental: { serverComponentsExternalPackages: ['mongoose'] },
   webpack: (config, { buildId }) => {
     config.plugins.forEach((plugin) => {
       if (plugin.constructor.name === 'DefinePlugin') {
@@ -36,7 +37,7 @@ let config = {
     if (debug) {
       config.optimization.minimize = false;
     }
-
+    config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
 };
