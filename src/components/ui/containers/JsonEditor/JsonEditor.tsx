@@ -55,7 +55,8 @@ function JsonEditor(props: Record<string, any>) {
         editorRef.current = null;
       });
     };
-  }, [updateProps, containerRef, editorRef]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (editorRef.current?.updateProps) void updateProps(editorRef.current);
