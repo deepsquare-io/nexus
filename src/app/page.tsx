@@ -7,8 +7,8 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
 import { cloneElement } from 'react';
+import { communityApps, demoApps } from '@components/data/appData';
 import InfoCard from '@components/ui/containers/Card/InfoCard';
-import { communityApps, demoApps } from '@data/appData';
 import { Dashboard } from '@mui/icons-material';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import CodeIcon from '@mui/icons-material/Code';
