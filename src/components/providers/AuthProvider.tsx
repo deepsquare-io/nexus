@@ -34,7 +34,6 @@ const AuthProvider: FC<AuthContextProps> = ({ children }) => {
       void createUser({ variables: { userId: web2User.data.uid } });
     }
   }, [address, connector, createUser, setAuthMethod, web2User.data]);
-
   return (
     <authContext.Provider
       value={{
