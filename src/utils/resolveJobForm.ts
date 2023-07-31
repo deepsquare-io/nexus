@@ -571,15 +571,9 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
                       memPerCpu: 8000,
                       gpusPerTask: 1,
                     },
-                    env: [
-                      {
-                        key: 'HF_HOME',
-                        value: '/deepsquare/tmp',
-                      },
-                    ],
                     shell: '/bin/bash',
                     command: dedent(`set -e
-
+                        export HF_HOME="\${DEEPSQUARE_SHARED_TMP}"
                         mkdir -p "\${STORAGE_PATH}/batch-\${index}"
                         params=(
                           "--ckpt" "/models/$MODEL/model.ckpt"
