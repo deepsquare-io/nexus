@@ -1,6 +1,12 @@
 'use client';
 
+// Copyright 2023 Deepsquare Association
+// This file is part of Nexus.
+// Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+// Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import Image from 'next/image';
+import { useAuth } from 'reactfire';
 import { useDisconnect } from 'wagmi';
 import { useContext } from 'react';
 import ConnectButton from '@components/buttons/ConnectButton';
@@ -8,7 +14,7 @@ import CustomLink from '@components/routing/Link';
 import WalletBalances from '@components/web3/WalletBalances';
 import useDialog from '@hooks/useDialog';
 import { authContext } from '@lib/contexts/AuthContext';
-import { isDisconnected, isWeb3 } from '@lib/types/AuthMethod';
+import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import MuiAppBar from '@mui/material/AppBar';
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar/AppBar';
 import Button from '@mui/material/Button';
@@ -47,6 +53,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
   const { authMethod, setAuthMethod } = useContext(authContext);
   const { isOpen: isDrawerOpen, toggle: toggleDrawer } = useDialog('drawer');
   const { disconnectAsync } = useDisconnect();
+  const auth = useAuth();
 
   return (
     <AppBar position="fixed" open={isDrawerOpen} elevation={0} {...props}>
@@ -68,14 +75,15 @@ const Header = ({ className, ...props }: HeaderProps) => {
             <Button
               onClick={async () => {
                 if (isWeb3(authMethod)) {
-                  localStorage.setItem('reconnectWallet', 'false');
                   await disconnectAsync();
+                } else if (isWeb2(authMethod)) {
+                  await auth.signOut();
                 }
                 setUser(null);
                 setAuthMethod(undefined);
               }}
             >
-              Disconnect
+              Log out
             </Button>
           )}
           <CustomLink

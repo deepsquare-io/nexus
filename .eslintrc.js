@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  parser: '@typescript-eslint/parser',
   plugins: ['prettier', '@typescript-eslint'],
   extends: ['plugin:@typescript-eslint/recommended', 'prettier', 'plugin:prettier/recommended', 'next/core-web-vitals'],
   rules: {

@@ -1,0 +1,40 @@
+name: Nexus CI
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches: [main, dev, hotfix/*]
+    tags: ['**']
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches-ignore: [main]
+jobs:
+  scripts:
+    name: Quality assessment via scripts
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        script:
+          - pnpm depcheck
+          - pnpm unimported
+          - pnpm lint:ci
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup environment
+        uses: ./.github/actions/setup
+      - name: Run the script
+        run: ${{ matrix.script }}
+  test-build:
+    name: Test build
+    runs-on: self-hosted
+    if: ${{ github.ref != 'refs/heads/main' }}
+    needs: [scripts]
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup environment
+        uses: ./.github/actions/setup
+      - name: Build
+        run: pnpm run test:build

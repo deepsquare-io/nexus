@@ -1,4 +1,10 @@
+// Copyright 2023 Deepsquare Association
+// This file is part of Nexus.
+// Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+// Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import merge from 'lodash/merge';
+import type { Address } from 'wagmi';
 import type { ZodString } from 'zod';
 import { z } from 'zod';
 import ChainId from '@lib/web3/lib/ChainId';
@@ -45,6 +51,19 @@ const publicSchema = z.lazy(() => {
   );
 });
 
-const env = publicSchema.parse(raw);
+const privateSchema = z.intersection(
+  publicSchema,
+  z.object({
+    // ECDSA keypair for user authentication
+    WEB3_PRIVATE_KEY: z.custom<Address>((val) => {
+      return /^0x+[0-9a-fA-f]{64}$/.test(val as string);
+    }),
 
+    // Third parties
+    MONGODB_URI: z.string().min(1),
+  }),
+);
+
+const schema = isPlatformBrowser() ? publicSchema : privateSchema;
+const env = schema.parse(raw) as z.infer<typeof privateSchema>;
 export default env;

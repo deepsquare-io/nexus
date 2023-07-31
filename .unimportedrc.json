@@ -21,7 +21,7 @@
     "../../tailwind.config",
     "hardhat/config"
   ],
-  "ignoreUnused": ["next", "react", "react-dom", "@babel/preset-env", "@swc/core", "react-is"],
+  "ignoreUnused": ["next", "react", "react-dom", "@babel/preset-env", "@swc/core", "react-is", "encoding"],
   "ignoreUnimported": ["**/*.spec.*", "./abi/*", "src/components/forms/workloads/ContainerWorkloadSubform.tsx"],
   "aliases": {
     "@components/*": ["./src/components/*"],

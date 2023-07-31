@@ -1,22 +1,27 @@
 'use client';
 
+// Copyright 2023 Deepsquare Association
+// This file is part of Nexus.
+// Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+// Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import type { Address } from 'wagmi';
-import { usePublicClient } from 'wagmi';
 import type { MouseEvent } from 'react';
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
-import type { JobStruct, ProviderStruct } from '@lib/web3/types/DataStructs';
-import { JobStatus } from '@lib/web3/types/DataStructs';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb3 } from '@lib/types/AuthMethod';
+import { JobStatus } from '@lib/types/enums/JobStatus';
 import { CancelSharp, DownloadSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -29,10 +34,11 @@ import type { GridColumns } from '@mui/x-data-grid';
 import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
-import { formatEther } from '@utils/format/formatEther';
+import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
-import { isJobTerminated } from '@utils/isJobTerminated';
+import { computeCost } from '@utils/job/computeCost';
+import { isJobTerminated } from '@utils/job/isJobTerminated';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 dayjs.extend(duration);
@@ -42,32 +48,22 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   const { width } = useWindowSize();
 
+  const { authMethod } = useContext(authContext);
+
   const [openTopUpDialog, setOpenTopUpDialog] = useState<boolean>(false);
   const [topUpJobId, setTopUpJobId] = useState<string | undefined>(undefined);
 
   const { cancel } = useCancelJob();
 
-  const publicClient = usePublicClient();
-
   const [loading] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  const [value, setValue] = useState<(JobStruct & { provider: ProviderStruct | undefined }) | undefined>(undefined);
+  const [value, setValue] = useState<FullJobSummary | undefined>(undefined);
 
   const jobs = useListJobs();
 
   if (jobs.length === 0) return null;
-
-  const computeCost = (job: JobStruct & { provider: ProviderStruct | undefined }): bigint => {
-    if (!job.provider) return 0n;
-
-    const tasks = job.definition.ntasks;
-    const gpuCost = job.definition.gpuPerTask * job.provider.providerPrices.gpuPricePerMin;
-    const cpuCost = job.definition.cpuPerTask * job.provider.providerPrices.cpuPricePerMin;
-    const memCost = job.definition.memPerCpu * job.definition.cpuPerTask * job.provider.providerPrices.memPricePerMin;
-    return formatEther(tasks * (gpuCost + cpuCost + memCost));
-  };
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
     const field = event.currentTarget.dataset.field!;
@@ -146,13 +142,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   size="small"
                   onClick={async () => {
                     if (isJobTerminated(params.row.status) || !cancel) return;
-                    const cancelTransaction = await toast.promise(cancel(params.row.jobId as Address), {
-                      error: 'Transaction rejected',
-                    });
-
-                    await toast.promise(publicClient.waitForTransactionReceipt({ hash: cancelTransaction.hash }), {
-                      success: 'Job successfully cancelled',
-                    });
+                    await cancel(params.row.jobId);
                   }}
                 >
                   <CancelSharp />
@@ -160,7 +150,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<JobStruct & { provider: ProviderStruct | undefined }>)
+        ] as GridColumns<FullJobSummary>)
       : ([
           {
             field: 'jobId',
@@ -210,7 +200,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               )
                 return '-';
               const maxDuration = dayjs.duration(
-                Number((formatEther(params.row.cost.maxCost) * 60n * 1000n) / computeCost(params.row)),
+                formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
               );
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
@@ -246,7 +236,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) => (params.row.provider ? `${computeCost(params.row)} creds/min` : '-'),
+            valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
           },
           {
             field: 'cost',
@@ -260,10 +250,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               hasJobRun(params.row.status)
                 ? isJobTerminated(params.row.status)
                   ? formatEther(params.row.cost.finalCost)
-                  : `~${
+                  : `~${formatEther(
                       BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
-                      computeCost(params.row)
-                    }`
+                        computeCost(params.row),
+                    )}`
                 : '-',
           },
           {
@@ -303,20 +293,22 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                     <DescriptionOutlinedIcon />
                   </Button>
                 </Tooltip>
-                <Tooltip title="Top up">
-                  <Button
-                    className="rounded h-11"
-                    color="primary"
-                    disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
-                    aria-label="top up"
-                    onClick={() => {
-                      if (isJobTerminated(params.row.status) || !cancel) return;
-                      setOpenTopUpDialog(true);
-                    }}
-                  >
-                    <MoreTime />
-                  </Button>
-                </Tooltip>
+                {isWeb3(authMethod) && (
+                  <Tooltip title="Top up">
+                    <Button
+                      className="rounded h-11"
+                      color="primary"
+                      disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
+                      aria-label="top up"
+                      onClick={() => {
+                        if (isJobTerminated(params.row.status) || !cancel) return;
+                        setOpenTopUpDialog(true);
+                      }}
+                    >
+                      <MoreTime />
+                    </Button>
+                  </Tooltip>
+                )}
                 <Tooltip title="Cancel job">
                   <span>
                     <Button
@@ -326,13 +318,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                       aria-label="cancel"
                       onClick={async () => {
                         if (isJobTerminated(params.row.status) || !cancel) return;
-                        const cancelTransaction = await toast.promise(cancel(params.row.jobId as Address), {
-                          error: 'Transaction rejected',
-                        });
-
-                        await toast.promise(publicClient.waitForTransactionReceipt({ hash: cancelTransaction.hash }), {
-                          success: 'Job successfully cancelled',
-                        });
+                        await cancel(params.row.jobId);
                       }}
                     >
                       <CancelOutlinedIcon />
@@ -342,7 +328,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<JobStruct & { provider: ProviderStruct | undefined }>);
+        ] as GridColumns<FullJobSummary>);
 
   const columnBuffer = columns.map((col) => ({
     ...col,

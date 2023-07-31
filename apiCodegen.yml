@@ -1,0 +1,40 @@
+overwrite: true
+schema: [ 'http://localhost:3000/graphql' ]
+documents: [ 'src/graphql/internal/client/**/*.graphql' ]
+config:
+  strictScalars: false
+  declarationKind: type
+  scalars:
+    BigNumber: string
+    DateTime: string
+    bigint: string
+    Time: string
+  skipTypename: true
+  numericEnums: true
+  useTypeImports: true
+  # Apollo
+  withRefetchFn: true
+  pureMagicComment: true
+  namingConvention: {
+    enumValues: 'change-case-all#upperCase',
+  }
+generates:
+  src/graphql/internal/client/generated/Types.ts:
+    plugins:
+      - typescript
+  src/graphql/internal/client:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.ts
+      baseTypesPath: generated/Types.ts
+      folder: ../generated
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+  src/graphql/internal/client/generated/introspection.json:
+    plugins:
+      - introspection
+    config: { minify: true }
+hooks:
+  afterAllFileWrite:
+    - prettier --write

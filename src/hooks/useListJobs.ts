@@ -1,38 +1,34 @@
+// Copyright 2023 Deepsquare Association
+// This file is part of Nexus.
+// Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+// Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { Address } from 'wagmi';
 import { useContractRead, useContractReads } from 'wagmi';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { MetaSchedulerAbi } from '@abi/MetaScheduler';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
+import { useListJobLazyQuery } from '@graphql/internal/client/generated/listJobs.generated';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
+import type { JobCost, JobDefinition, JobSummary, JobTime } from '@graphql/internal/types/JobSummary';
+import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/Provider';
 import { authContext } from '@lib/contexts/AuthContext';
-import { isDisconnected, isWeb3 } from '@lib/types/AuthMethod';
+import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
+import type { JobStatus } from '@lib/types/enums/JobStatus';
+import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 import { ZERO_ADDRESS } from '@lib/web3/constants/address';
 import { addressMetaScheduler, addressProviderManager } from '@lib/web3/constants/contracts';
-import type {
-  JobCostStruct,
-  JobDefinitionStruct,
-  JobStatus,
-  JobStruct,
-  JobTimeStruct,
-  ProviderHardware,
-  ProviderPrices,
-  ProviderStatus,
-  ProviderStruct,
-} from '@lib/web3/types/DataStructs';
 
-export default function useListJobs(
-  start?: number,
-  stop?: number,
-): (JobStruct & { provider: ProviderStruct | undefined })[] {
+export default function useListJobs(start?: number, stop?: number): FullJobSummary[] {
   const { authMethod } = useContext(authContext);
 
-  //TODO: Replace '0x0' with public address of portal provider
   const { data: idList } = useContractRead({
     address: addressMetaScheduler,
     abi: MetaSchedulerAbi,
     functionName: 'getJobs',
     args: [isWeb3(authMethod) ? authMethod.address : '0x0'],
-    watch: !isDisconnected(authMethod),
-    enabled: !isDisconnected(authMethod),
+    watch: isWeb3(authMethod),
+    enabled: isWeb3(authMethod),
   });
 
   const jobListConfig = { address: addressMetaScheduler, abi: MetaSchedulerAbi, functionName: 'jobs' };
@@ -41,22 +37,12 @@ export default function useListJobs(
       return { ...jobListConfig, args: [id] };
     }),
     allowFailure: false,
-    watch: !isDisconnected(authMethod),
-    select: (data): JobStruct[] => {
+    enabled: isWeb3(authMethod),
+    watch: isWeb3(authMethod),
+    select: (data): JobSummary[] => {
       return (
-        data as [
-          string,
-          JobStatus,
-          Address,
-          Address,
-          JobDefinitionStruct,
-          boolean,
-          JobCostStruct,
-          JobTimeStruct,
-          string,
-          boolean,
-        ][]
-      ).map((job): JobStruct => {
+        data as [Address, JobStatus, Address, Address, JobDefinition, boolean, JobCost, JobTime, Address, boolean][]
+      ).map((job): JobSummary => {
         return {
           jobId: job[0],
           status: job[1],
@@ -74,7 +60,7 @@ export default function useListJobs(
   });
 
   const providerIds = new Set(
-    (jobList as JobStruct[])?.filter((job) => job.providerAddr).map((job) => job.providerAddr),
+    (jobList as JobSummary[])?.filter((job) => job.providerAddr).map((job) => job.providerAddr),
   );
 
   providerIds.delete(ZERO_ADDRESS);
@@ -87,8 +73,9 @@ export default function useListJobs(
       };
     }),
     allowFailure: false,
-    watch: !isDisconnected(authMethod),
-    select: (data): ProviderStruct[] => {
+    enabled: isWeb3(authMethod),
+    watch: isWeb3(authMethod),
+    select: (data): Provider[] => {
       return (data as [Address, ProviderHardware, ProviderPrices, ProviderStatus, bigint, boolean, boolean][]).map(
         (provider) => {
           return {
@@ -105,7 +92,57 @@ export default function useListJobs(
     },
   });
 
+  const [listJobs, { data }] = useListJobLazyQuery();
+
+  useEffect(() => {
+    if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
+  }, [authMethod, listJobs]);
+
   if (isDisconnected(authMethod)) return [];
+
+  if (isWeb2(authMethod) && data)
+    return data.listJobs
+      .map((job) => {
+        return {
+          ...job,
+          definition: {
+            ...job.definition,
+            ntasks: BigInt(job.definition.ntasks),
+            gpuPerTask: BigInt(job.definition.gpuPerTask),
+            cpuPerTask: BigInt(job.definition.cpuPerTask),
+            memPerCpu: BigInt(job.definition.memPerCpu),
+          },
+          time: {
+            ...job.time,
+            start: BigInt(job.time.start),
+            end: BigInt(job.time.end),
+            cancelRequestTimestamp: BigInt(job.time.cancelRequestTimestamp),
+            blockNumberStateChange: BigInt(job.time.blockNumberStateChange),
+          },
+          cost: {
+            ...job.cost,
+            maxCost: BigInt(job.cost.maxCost),
+            finalCost: BigInt(job.cost.finalCost),
+            pendingTopUp: BigInt(job.cost.pendingTopUp),
+          },
+          provider: {
+            ...job.provider,
+            jobCount: BigInt(job.provider.jobCount),
+            providerHardware: {
+              nodes: BigInt(job.provider.providerHardware.nodes),
+              gpus: BigInt(job.provider.providerHardware.gpus),
+              cpus: BigInt(job.provider.providerHardware.cpus),
+              mem: BigInt(job.provider.providerHardware.mem),
+            },
+            providerPrices: {
+              gpuPricePerMin: BigInt(job.provider.providerPrices.gpuPricePerMin),
+              cpuPricePerMin: BigInt(job.provider.providerPrices.cpuPricePerMin),
+              memPricePerMin: BigInt(job.provider.providerPrices.memPricePerMin),
+            },
+          },
+        };
+      })
+      .sort((a, b) => (a.jobId > b.jobId ? -1 : 1));
 
   return jobList
     ? jobList
