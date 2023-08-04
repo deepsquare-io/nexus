@@ -8,6 +8,7 @@ import type { ReactNode } from 'react';
 import Runtime from '@components/Runtime';
 import AnalyticsRuntime from '@components/runtimes/AnalyticsRuntime';
 import Main from '@components/structure/Main';
+import Maintenance from '@components/structure/Maintenance';
 import './globals.css';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -165,9 +166,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
 
       <body>
-        <Runtime>
-          <Main>{children}</Main>
-        </Runtime>
+        <Runtime>{process.env.NEXT_PUBLIC_MAINTENANCE === 'true' ? <Maintenance /> : <Main>{children}</Main>}</Runtime>
       </body>
     </html>
   );
