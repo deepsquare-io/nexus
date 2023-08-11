@@ -170,12 +170,17 @@ export type ProviderPrices = {
 
 export type Query = {
   getJobHash: GetJobHashOutput;
+  getWorkflow?: Maybe<Scalars['String']>;
   listJobs: Array<FullJobSummary>;
   ping: Scalars['String'];
 };
 
 export type QueryGetJobHashArgs = {
   jobId: Scalars['Hex'];
+};
+
+export type QueryGetWorkflowArgs = {
+  workflowId: Scalars['String'];
 };
 
 export type QueryListJobsArgs = {

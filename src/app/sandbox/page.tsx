@@ -7,6 +7,7 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import randomWords from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -20,6 +21,7 @@ import CreditSubform from '@components/forms/CreditSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
+import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
@@ -28,6 +30,7 @@ import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb2 } from '@lib/types/AuthMethod';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
+import LoadingButton from '@mui/lab/LoadingButton';
 import formatCredit from '@utils/format/formatCredit';
 import { formatWei } from '@utils/format/formatWei';
 
@@ -83,12 +86,20 @@ const SandboxPage: NextPage = () => {
   const { balance_wCredit } = useBalances();
   const { data: minAmount } = useGetMinimumAmount();
   const { authMethod } = useContext(authContext);
+  const searchParams = useSearchParams();
+  const workflowId = searchParams.get('workflowId');
+
+  const { data, loading } = useGetWorkflowQuery({
+    variables: { workflowId: workflowId! },
+    skip: !workflowId,
+  });
 
   const [content, setContent] = useState<Content>(() => {
     if (typeof window === 'undefined') return { text: JSON.stringify(defaultJob) };
-    const storedContent = localStorage.getItem('userContent');
+    const storedContent = localStorage.getItem(workflowId ? `sandbox-${workflowId}` : 'sandbox');
     return storedContent ? (JSON.parse(storedContent) as Content) : { text: JSON.stringify(defaultJob) };
   });
+
   let json: any;
 
   try {
@@ -100,8 +111,8 @@ const SandboxPage: NextPage = () => {
   const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
 
   useEffect(() => {
-    localStorage.setItem('userContent', JSON.stringify(content));
-  }, [content]);
+    localStorage.setItem(workflowId ? `sandbox-${workflowId}` : 'sandbox', JSON.stringify(content));
+  }, [content, workflowId]);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
@@ -159,10 +170,20 @@ const SandboxPage: NextPage = () => {
                   setContent(newContent);
                 }}
               />
+              <LoadingButton
+                className="mt-5"
+                loading={loading}
+                onClick={() => {
+                  setContent({ text: data?.getWorkflow ? data?.getWorkflow : JSON.stringify(defaultJob) });
+                }}
+              >
+                Reset
+              </LoadingButton>
             </div>
           </Card>
 
           <CreditSubform
+            defaultDuration={20}
             gpuQty={
               json?.resources?.tasks && json?.resources?.gpusPerTask
                 ? json.resources.tasks * json.resources.gpusPerTask
