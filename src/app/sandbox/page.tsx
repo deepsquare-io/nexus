@@ -60,6 +60,8 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
 
 type Content = { json: Job } | { text: string };
 
+type Store = { content: Content; initialized: boolean };
+
 function isJson(content: Content): content is { json: Job } {
   return (content as { json: Job }).json !== undefined;
 }
@@ -89,21 +91,38 @@ const SandboxPage: NextPage = () => {
   const searchParams = useSearchParams();
   const workflowId = searchParams.get('workflowId');
 
+  const [store, setStore] = useState<Store>(() => {
+    if (typeof window === 'undefined') return { content: { text: JSON.stringify(defaultJob) }, initialized: false };
+    const storedContent = localStorage.getItem(workflowId ? `sandbox-${workflowId}` : 'sandbox');
+    console.log(!workflowId);
+    return storedContent
+      ? (JSON.parse(storedContent) as Store)
+      : {
+          content: { text: JSON.stringify(defaultJob) },
+          initialized: workflowId === null,
+        };
+  });
+
   const { data, loading } = useGetWorkflowQuery({
     variables: { workflowId: workflowId! },
     skip: !workflowId,
-  });
-
-  const [content, setContent] = useState<Content>(() => {
-    if (typeof window === 'undefined') return { text: JSON.stringify(defaultJob) };
-    const storedContent = localStorage.getItem(workflowId ? `sandbox-${workflowId}` : 'sandbox');
-    return storedContent ? (JSON.parse(storedContent) as Content) : { text: JSON.stringify(defaultJob) };
+    onCompleted: (data) => {
+      if (data.getWorkflow != null) {
+        console.log(JSON.parse(data.getWorkflow));
+      }
+      if (data.getWorkflow && !store.initialized) {
+        setStore({
+          content: { json: JSON.parse(data.getWorkflow) },
+          initialized: true,
+        });
+      }
+    },
   });
 
   let json: any;
 
   try {
-    json = isJson(content) ? content.json : JSON.parse(content.text);
+    json = isJson(store.content) ? store.content.json : JSON.parse(store.content.text);
   } catch (e) {
     json = defaultJob;
   }
@@ -111,8 +130,9 @@ const SandboxPage: NextPage = () => {
   const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
 
   useEffect(() => {
-    localStorage.setItem(workflowId ? `sandbox-${workflowId}` : 'sandbox', JSON.stringify(content));
-  }, [content, workflowId]);
+    if (!store.initialized) return;
+    localStorage.setItem(workflowId ? `sandbox-${workflowId}` : 'sandbox', JSON.stringify(store));
+  }, [store, workflowId]);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
@@ -160,21 +180,26 @@ const SandboxPage: NextPage = () => {
           <Card className="flex flex-col grow p-8" title="Write your workflow file">
             <div className="pt-5">
               <MemoJsonEditor
-                content={content}
+                content={store.content}
                 onChange={(
                   newContent: Content,
                   previousContent: Content,
                   { contentErrors }: { contentErrors: ContentErrors },
                 ) => {
                   setJsonErrors(contentErrors);
-                  setContent(newContent);
+                  setStore((prev) => {
+                    return { content: newContent, initialized: prev.initialized };
+                  });
                 }}
               />
               <LoadingButton
                 className="mt-5"
                 loading={loading}
                 onClick={() => {
-                  setContent({ text: data?.getWorkflow ? data?.getWorkflow : JSON.stringify(defaultJob) });
+                  setStore({
+                    content: { text: data?.getWorkflow ? data?.getWorkflow : JSON.stringify(defaultJob) },
+                    initialized: true,
+                  });
                 }}
               >
                 Reset
