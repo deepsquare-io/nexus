@@ -94,7 +94,6 @@ const SandboxPage: NextPage = () => {
   const [store, setStore] = useState<Store>(() => {
     if (typeof window === 'undefined') return { content: { text: JSON.stringify(defaultJob) }, initialized: false };
     const storedContent = localStorage.getItem(workflowId ? `sandbox-${workflowId}` : 'sandbox');
-    console.log(!workflowId);
     return storedContent
       ? (JSON.parse(storedContent) as Store)
       : {
@@ -107,9 +106,6 @@ const SandboxPage: NextPage = () => {
     variables: { workflowId: workflowId! },
     skip: !workflowId,
     onCompleted: (data) => {
-      if (data.getWorkflow != null) {
-        console.log(JSON.parse(data.getWorkflow));
-      }
       if (data.getWorkflow && !store.initialized) {
         setStore({
           content: { json: JSON.parse(data.getWorkflow) },
