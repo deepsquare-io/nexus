@@ -57,7 +57,6 @@ function JsonEditor(props: Record<string, any>) {
     return () => {
       void jsonEditorPromise.then((editor) => {
         void editor.destroy();
-        editorRef.current = null;
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

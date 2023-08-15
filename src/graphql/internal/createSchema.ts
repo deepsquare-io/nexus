@@ -9,6 +9,7 @@ import CancelJobMutation from '@graphql/internal/mutations/CancelJobMutation';
 import CreateUserMutation from '@graphql/internal/mutations/CreateUserMutation';
 import RequestJobMutation from '@graphql/internal/mutations/RequestJobMutation';
 import GetJobHashQuery from '@graphql/internal/queries/GetJobHashQuery';
+import GetWorkflowQuery from '@graphql/internal/queries/GetWorkflowQuery';
 import ListJobsQuery from '@graphql/internal/queries/ListJobsQuery';
 import PingQuery from '@graphql/internal/queries/PingQuery';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
@@ -34,6 +35,7 @@ export default function createSchema() {
     resolvers: [
       // Queries
       GetJobHashQuery,
+      GetWorkflowQuery,
       ListJobsQuery,
       PingQuery,
 
