@@ -7,6 +7,7 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
+import { useSearchParams } from 'next/navigation';
 import randomWords from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -20,6 +21,7 @@ import CreditSubform from '@components/forms/CreditSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
+import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
@@ -28,6 +30,7 @@ import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb2 } from '@lib/types/AuthMethod';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
+import LoadingButton from '@mui/lab/LoadingButton';
 import formatCredit from '@utils/format/formatCredit';
 import { formatWei } from '@utils/format/formatWei';
 
@@ -57,6 +60,8 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
 
 type Content = { json: Job } | { text: string };
 
+type Store = { content: Content; initialized: boolean };
+
 function isJson(content: Content): content is { json: Job } {
   return (content as { json: Job }).json !== undefined;
 }
@@ -83,16 +88,37 @@ const SandboxPage: NextPage = () => {
   const { balance_wCredit } = useBalances();
   const { data: minAmount } = useGetMinimumAmount();
   const { authMethod } = useContext(authContext);
+  const searchParams = useSearchParams();
+  const workflowId = searchParams.get('workflowId');
 
-  const [content, setContent] = useState<Content>(() => {
-    if (typeof window === 'undefined') return { text: JSON.stringify(defaultJob) };
-    const storedContent = localStorage.getItem('userContent');
-    return storedContent ? (JSON.parse(storedContent) as Content) : { text: JSON.stringify(defaultJob) };
+  const [store, setStore] = useState<Store>(() => {
+    if (typeof window === 'undefined') return { content: { text: JSON.stringify(defaultJob) }, initialized: false };
+    const storedContent = localStorage.getItem(workflowId ? `sandbox-${workflowId}` : 'sandbox');
+    return storedContent
+      ? (JSON.parse(storedContent) as Store)
+      : {
+          content: { text: JSON.stringify(defaultJob) },
+          initialized: workflowId === null,
+        };
   });
+
+  const { data, loading } = useGetWorkflowQuery({
+    variables: { workflowId: workflowId! },
+    skip: !workflowId,
+    onCompleted: (data) => {
+      if (data.getWorkflow && !store.initialized) {
+        setStore({
+          content: { json: JSON.parse(data.getWorkflow) },
+          initialized: true,
+        });
+      }
+    },
+  });
+
   let json: any;
 
   try {
-    json = isJson(content) ? content.json : JSON.parse(content.text);
+    json = isJson(store.content) ? store.content.json : JSON.parse(store.content.text);
   } catch (e) {
     json = defaultJob;
   }
@@ -100,8 +126,9 @@ const SandboxPage: NextPage = () => {
   const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
 
   useEffect(() => {
-    localStorage.setItem('userContent', JSON.stringify(content));
-  }, [content]);
+    if (!store.initialized) return;
+    localStorage.setItem(workflowId ? `sandbox-${workflowId}` : 'sandbox', JSON.stringify(store));
+  }, [store, workflowId]);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
@@ -149,20 +176,35 @@ const SandboxPage: NextPage = () => {
           <Card className="flex flex-col grow p-8" title="Write your workflow file">
             <div className="pt-5">
               <MemoJsonEditor
-                content={content}
+                content={store.content}
                 onChange={(
                   newContent: Content,
                   previousContent: Content,
                   { contentErrors }: { contentErrors: ContentErrors },
                 ) => {
                   setJsonErrors(contentErrors);
-                  setContent(newContent);
+                  setStore((prev) => {
+                    return { content: newContent, initialized: prev.initialized };
+                  });
                 }}
               />
+              <LoadingButton
+                className="mt-5"
+                loading={loading}
+                onClick={() => {
+                  setStore({
+                    content: { text: data?.getWorkflow ? data?.getWorkflow : JSON.stringify(defaultJob) },
+                    initialized: true,
+                  });
+                }}
+              >
+                Reset
+              </LoadingButton>
             </div>
           </Card>
 
           <CreditSubform
+            defaultDuration={20}
             gpuQty={
               json?.resources?.tasks && json?.resources?.gpusPerTask
                 ? json.resources.tasks * json.resources.gpusPerTask
