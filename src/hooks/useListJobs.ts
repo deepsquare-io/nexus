@@ -31,14 +31,26 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     enabled: isWeb3(authMethod),
   });
 
+  const [listJobs, { data }] = useListJobLazyQuery();
+
+  useEffect(() => {
+    if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
+  }, [authMethod, listJobs]);
+
   const jobListConfig = { address: addressMetaScheduler, abi: MetaSchedulerAbi, functionName: 'jobs' };
   const { data: jobList } = useContractReads({
-    contracts: idList?.slice(start, stop).map((id) => {
-      return { ...jobListConfig, args: [id] };
-    }),
+    contracts: isWeb3(authMethod)
+      ? idList?.slice(start, stop).map((id) => {
+          return { ...jobListConfig, args: [id] };
+        })
+      : isWeb2(authMethod)
+      ? data?.listJobs?.slice(start, stop).map((id) => {
+          return { ...jobListConfig, args: [id] };
+        })
+      : [{ ...jobListConfig, args: [] }],
     allowFailure: false,
-    enabled: isWeb3(authMethod),
-    watch: isWeb3(authMethod),
+    enabled: !isDisconnected(authMethod),
+    watch: !isDisconnected(authMethod),
     select: (data): JobSummary[] => {
       return (
         data as [Address, JobStatus, Address, Address, JobDefinition, boolean, JobCost, JobTime, Address, boolean][]
@@ -92,57 +104,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     },
   });
 
-  const [listJobs, { data }] = useListJobLazyQuery();
-
-  useEffect(() => {
-    if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
-  }, [authMethod, listJobs]);
-
   if (isDisconnected(authMethod)) return [];
-
-  if (isWeb2(authMethod) && data)
-    return data.listJobs
-      .map((job) => {
-        return {
-          ...job,
-          definition: {
-            ...job.definition,
-            ntasks: BigInt(job.definition.ntasks),
-            gpuPerTask: BigInt(job.definition.gpuPerTask),
-            cpuPerTask: BigInt(job.definition.cpuPerTask),
-            memPerCpu: BigInt(job.definition.memPerCpu),
-          },
-          time: {
-            ...job.time,
-            start: BigInt(job.time.start),
-            end: BigInt(job.time.end),
-            cancelRequestTimestamp: BigInt(job.time.cancelRequestTimestamp),
-            blockNumberStateChange: BigInt(job.time.blockNumberStateChange),
-          },
-          cost: {
-            ...job.cost,
-            maxCost: BigInt(job.cost.maxCost),
-            finalCost: BigInt(job.cost.finalCost),
-            pendingTopUp: BigInt(job.cost.pendingTopUp),
-          },
-          provider: {
-            ...job.provider,
-            jobCount: BigInt(job.provider.jobCount),
-            providerHardware: {
-              nodes: BigInt(job.provider.providerHardware.nodes),
-              gpus: BigInt(job.provider.providerHardware.gpus),
-              cpus: BigInt(job.provider.providerHardware.cpus),
-              mem: BigInt(job.provider.providerHardware.mem),
-            },
-            providerPrices: {
-              gpuPricePerMin: BigInt(job.provider.providerPrices.gpuPricePerMin),
-              cpuPricePerMin: BigInt(job.provider.providerPrices.cpuPricePerMin),
-              memPricePerMin: BigInt(job.provider.providerPrices.memPricePerMin),
-            },
-          },
-        };
-      })
-      .sort((a, b) => (a.jobId > b.jobId ? -1 : 1));
 
   return jobList
     ? jobList
