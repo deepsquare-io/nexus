@@ -6,7 +6,7 @@
 import type { Address } from 'wagmi';
 import { useContractRead, useContractReads } from 'wagmi';
 import { useContext, useEffect } from 'react';
-import { MetaSchedulerAbi } from '@abi/MetaScheduler';
+import { JobRepositoryAbi } from '@abi/JobRepository';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
 import { useListJobLazyQuery } from '@graphql/internal/client/generated/listJobs.generated';
 import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
@@ -17,15 +17,15 @@ import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import type { JobStatus } from '@lib/types/enums/JobStatus';
 import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 import { ZERO_ADDRESS } from '@lib/web3/constants/address';
-import { addressMetaScheduler, addressProviderManager } from '@lib/web3/constants/contracts';
+import { addressJobRepository, addressProviderManager } from '@lib/web3/constants/contracts';
 
 export default function useListJobs(start?: number, stop?: number): FullJobSummary[] {
   const { authMethod } = useContext(authContext);
 
   const { data: idList } = useContractRead({
-    address: addressMetaScheduler,
-    abi: MetaSchedulerAbi,
-    functionName: 'getJobs',
+    address: addressJobRepository,
+    abi: JobRepositoryAbi,
+    functionName: 'getByCustomer',
     args: [isWeb3(authMethod) ? authMethod.address : '0x0'],
     watch: isWeb3(authMethod),
     enabled: isWeb3(authMethod),
@@ -37,7 +37,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
   }, [authMethod, listJobs]);
 
-  const jobListConfig = { address: addressMetaScheduler, abi: MetaSchedulerAbi, functionName: 'jobs' };
+  const jobListConfig = { address: addressJobRepository, abi: JobRepositoryAbi, functionName: 'get' };
   const { data: jobList } = useContractReads({
     contracts: isWeb3(authMethod)
       ? idList?.slice(start, stop).map((id) => {
@@ -76,7 +76,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
   );
 
   providerIds.delete(ZERO_ADDRESS);
-  const providerConfig = { address: addressProviderManager, abi: ProviderManagerAbi, functionName: 'providers' };
+  const providerConfig = { address: addressProviderManager, abi: ProviderManagerAbi, functionName: 'getProvider' };
   const { data: providerList } = useContractReads({
     contracts: [...providerIds].map((providerAddr) => {
       return {
