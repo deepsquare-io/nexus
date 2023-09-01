@@ -53,7 +53,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     watch: !isDisconnected(authMethod),
     select: (data): JobSummary[] => {
       return (
-        data as [Address, JobStatus, Address, Address, JobDefinition, boolean, JobCost, JobTime, Address, boolean][]
+        data as [Address, JobStatus, Address, Address, JobDefinition, JobCost, JobTime, Address, boolean, string][]
       ).map((job): JobSummary => {
         return {
           jobId: job[0],
@@ -61,11 +61,11 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
           customerAddr: job[2],
           providerAddr: job[3],
           definition: job[4],
-          valid: job[5],
-          cost: job[6],
-          time: job[7],
-          jobName: job[8],
-          hasCancelRequest: job[9],
+          cost: job[5],
+          time: job[6],
+          jobName: job[7],
+          hasCancelRequest: job[8],
+          lastError: job[9],
         };
       });
     },

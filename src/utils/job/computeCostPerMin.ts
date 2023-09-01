@@ -19,9 +19,9 @@ import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 export function computeCostPerMin(summary: FullJobSummary): bigint {
   if (!summary.provider) return 0n;
   const tasks = summary.definition.ntasks;
-  const gpuCost = summary.definition.gpuPerTask * summary.provider.providerPrices.gpuPricePerMin;
-  const cpuCost = summary.definition.cpuPerTask * summary.provider.providerPrices.cpuPricePerMin;
+  const gpuCost = summary.definition.gpusPerTask * summary.provider.providerPrices.gpuPricePerMin;
+  const cpuCost = summary.definition.cpusPerTask * summary.provider.providerPrices.cpuPricePerMin;
   const memCost =
-    summary.definition.memPerCpu * summary.definition.cpuPerTask * summary.provider.providerPrices.memPricePerMin;
+    summary.definition.memPerCpu * summary.definition.cpusPerTask * summary.provider.providerPrices.memPricePerMin;
   return (tasks * (gpuCost + cpuCost + memCost)) / 1000000n;
 }
