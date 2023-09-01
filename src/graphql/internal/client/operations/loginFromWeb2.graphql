@@ -1,0 +1,3 @@
+mutation LoginFromWeb2($firebaseToken: String!) {
+    loginFromWeb2(firebaseToken: $firebaseToken)
+}

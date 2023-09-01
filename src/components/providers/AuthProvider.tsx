@@ -8,11 +8,17 @@
 import { useUser } from 'reactfire';
 import { useAccount } from 'wagmi';
 import type { FC, ReactNode } from 'react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useCreateUserMutation } from '@graphql/internal/client/generated/createUser.generated';
+import { useLoginFromWeb2Mutation } from '@graphql/internal/client/generated/loginFromWeb2.generated';
+import { useLoginFromWeb3Mutation } from '@graphql/internal/client/generated/loginFromWeb3.generated';
+import verify from '@lib/auth/verify';
+import { JWT_STORAGE_KEY } from '@lib/constants';
 import { authContext } from '@lib/contexts/AuthContext';
 import type { AuthMethod } from '@lib/types/AuthMethod';
+import { isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import { setUser } from '@sentry/nextjs';
+import { signMessage } from '@wagmi/core';
 
 interface AuthContextProps {
   children?: ReactNode;
@@ -23,6 +29,8 @@ const AuthProvider: FC<AuthContextProps> = ({ children }) => {
   const { address, connector } = useAccount();
   const web2User = useUser();
   const [createUser] = useCreateUserMutation();
+  const [loginFromWeb2] = useLoginFromWeb2Mutation();
+  const [loginFromWeb3] = useLoginFromWeb3Mutation();
 
   useEffect(() => {
     if (address && connector) {
@@ -33,7 +41,44 @@ const AuthProvider: FC<AuthContextProps> = ({ children }) => {
       setUser({ id: web2User.data.uid });
       void createUser({ variables: { userId: web2User.data.uid } });
     }
-  }, [address, connector, createUser, setAuthMethod, web2User.data]);
+  }, [address, connector, createUser, web2User.data]);
+
+  const fetchToken = useCallback(async () => {
+    const verifyToken = async (tokenSetter: () => Promise<void>) => {
+      const currentToken = localStorage.getItem(JWT_STORAGE_KEY);
+      if (!currentToken) {
+        console.log('no token');
+        await tokenSetter();
+      } else {
+        try {
+          verify(currentToken);
+        } catch (e) {
+          console.error(e);
+          await tokenSetter();
+        }
+      }
+    };
+
+    console.log(authMethod);
+
+    if (isWeb3(authMethod)) {
+      await verifyToken(async () => {
+        const signature = await signMessage({ message: authMethod.address });
+        const tokenResponse = await loginFromWeb3({ variables: { address, signature } });
+        localStorage.setItem(JWT_STORAGE_KEY, tokenResponse.data!.loginFromWeb3);
+      });
+    } else if (isWeb2(authMethod)) {
+      await verifyToken(async () => {
+        const tokenResponse = await loginFromWeb2({ variables: { firebaseToken: await web2User.data!.getIdToken() } });
+        localStorage.setItem(JWT_STORAGE_KEY, tokenResponse.data!.loginFromWeb2);
+      });
+    }
+  }, [address, authMethod, loginFromWeb2, loginFromWeb3, web2User.data]);
+
+  useEffect(() => {
+    void fetchToken();
+  }, [fetchToken]);
+
   return (
     <authContext.Provider
       value={{

@@ -19,7 +19,7 @@ import google from '@public/icons/social/google.svg';
 
 const ConnectDialog = () => {
   const { isOpen, close } = useDialog('connect');
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const auth = useAuth();
   const { connectAsync, isLoading, connectors } = useConnect();
 
@@ -37,7 +37,9 @@ const ConnectDialog = () => {
           startIcon={<Image src={metamask} alt="Metamask logo" height={32} className="mr-2" />}
           variant="outlined"
           onClick={async () => {
-            if (!isConnected) await connectAsync({ connector: connectors[0], chainId: deepsquareChain.id });
+            if (!isConnected) {
+              await connectAsync({ connector: connectors[0], chainId: deepsquareChain.id });
+            }
             close();
           }}
           color="primary"

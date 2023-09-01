@@ -1,0 +1,3 @@
+mutation LoginFromWeb3($address: Hex!, $signature: Hex!) {
+    loginFromWeb3(address: $address, signature: $signature)
+}

@@ -7,6 +7,8 @@ import { buildSchemaSync, registerEnumType } from 'type-graphql';
 import { JobStatus } from '@deepsquare/deepsquare-client';
 import CancelJobMutation from '@graphql/internal/mutations/CancelJobMutation';
 import CreateUserMutation from '@graphql/internal/mutations/CreateUserMutation';
+import LoginFromWeb2Mutation from '@graphql/internal/mutations/LoginFromWeb2Mutation';
+import LoginFromWeb3Mutation from '@graphql/internal/mutations/LoginFromWeb3Mutation';
 import RequestJobMutation from '@graphql/internal/mutations/RequestJobMutation';
 import GetJobHashQuery from '@graphql/internal/queries/GetJobHashQuery';
 import GetWorkflowQuery from '@graphql/internal/queries/GetWorkflowQuery';
@@ -42,6 +44,8 @@ export default function createSchema() {
       // Mutations
       CancelJobMutation,
       CreateUserMutation,
+      LoginFromWeb2Mutation,
+      LoginFromWeb3Mutation,
       RequestJobMutation,
     ],
     container: {

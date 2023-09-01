@@ -78,6 +78,8 @@ export type MountInput = {
 export type Mutation = {
   cancelJob: Scalars['Boolean'];
   createUser: Scalars['Boolean'];
+  loginFromWeb2: Scalars['String'];
+  loginFromWeb3: Scalars['String'];
   requestJob: Scalars['Boolean'];
 };
 
@@ -87,6 +89,15 @@ export type MutationCancelJobArgs = {
 
 export type MutationCreateUserArgs = {
   userId: Scalars['String'];
+};
+
+export type MutationLoginFromWeb2Args = {
+  firebaseToken: Scalars['String'];
+};
+
+export type MutationLoginFromWeb3Args = {
+  address: Scalars['Hex'];
+  signature: Scalars['Hex'];
 };
 
 export type MutationRequestJobArgs = {

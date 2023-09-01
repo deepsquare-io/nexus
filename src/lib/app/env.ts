@@ -30,6 +30,8 @@ const raw = merge(isPlatformServer() ? process.env : {}, {
 
   // Web3
   NEXT_PUBLIC_WEB3_CHAIN: process.env.NEXT_PUBLIC_WEB3_CHAIN ?? ChainId.DEEPSQUARE_MAINNET,
+
+  NEXT_PUBLIC_JWT_PUBLIC_KEY: process.env.NEXT_PUBLIC_JWT_PUBLIC_KEY,
 });
 
 type PublicVariables = Extract<keyof typeof raw, `NEXT_PUBLIC_${string}`>;
@@ -55,11 +57,14 @@ const privateSchema = z.intersection(
   publicSchema,
   z.object({
     // ECDSA keypair for user authentication
+    JWT_PRIVATE_KEY: z.string().min(1),
+
     WEB3_PRIVATE_KEY: z.custom<Address>((val) => {
       return /^0x+[0-9a-fA-f]{64}$/.test(val as string);
     }),
 
     // Third parties
+    FIREBASE_CONFIG: z.string().min(1),
     MONGODB_URI: z.string().min(1),
   }),
 );
