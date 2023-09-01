@@ -6,7 +6,7 @@
 import { Field, Int, ObjectType } from 'type-graphql';
 import type { ReadContractReturnType } from 'viem';
 import { type Hex } from 'viem';
-import type { MetaSchedulerAbi } from '@abi/MetaScheduler';
+import type { IJobRepositoryAbi } from '@abi/IJobRepository';
 import { JobStatus } from '@deepsquare/deepsquare-client';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
 import HexScalar from '@graphql/internal/scalars/HexScalar';
@@ -21,15 +21,24 @@ export class Label {
 }
 
 @ObjectType()
+export class Affinity {
+  @Field(() => Label)
+  label!: Label;
+
+  @Field(() => HexScalar)
+  op!: Hex;
+}
+
+@ObjectType()
 export class JobDefinition {
   @Field(() => BigIntScalar)
-  gpuPerTask!: bigint;
+  gpusPerTask!: bigint;
 
   @Field(() => BigIntScalar)
   memPerCpu!: bigint;
 
   @Field(() => BigIntScalar)
-  cpuPerTask!: bigint;
+  cpusPerTask!: bigint;
 
   @Field(() => BigIntScalar)
   ntasks!: bigint;
@@ -42,6 +51,9 @@ export class JobDefinition {
 
   @Field(() => [Label])
   uses!: readonly Label[];
+
+  @Field(() => [Affinity])
+  affinity!: Affinity[];
 }
 
 @ObjectType()
@@ -57,6 +69,9 @@ export class JobTime {
 
   @Field(() => BigIntScalar)
   blockNumberStateChange!: bigint;
+
+  @Field(() => BigIntScalar)
+  panicTimestamp!: bigint;
 }
 
 @ObjectType()
@@ -75,7 +90,7 @@ export class JobCost {
 }
 
 @ObjectType()
-export class JobSummary implements ReadContractReturnType<typeof MetaSchedulerAbi, 'getJob'> {
+export class JobSummary implements ReadContractReturnType<typeof IJobRepositoryAbi, 'get'> {
   @Field(() => HexScalar)
   jobId!: Hex;
 
@@ -91,9 +106,6 @@ export class JobSummary implements ReadContractReturnType<typeof MetaSchedulerAb
   @Field()
   definition!: JobDefinition;
 
-  @Field(() => Boolean)
-  valid!: boolean;
-
   @Field()
   cost!: JobCost;
 
@@ -105,4 +117,7 @@ export class JobSummary implements ReadContractReturnType<typeof MetaSchedulerAb
 
   @Field(() => Boolean)
   hasCancelRequest!: boolean;
+
+  @Field(() => String)
+  lastError!: string;
 }

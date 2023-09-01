@@ -4,8 +4,8 @@ export const FaucetCreditAbi =
     "inputs":
     [
       {
-        "internalType": "address",
-        "name": "_creditAddr",
+        "internalType": "contract IERC20",
+        "name": "_credit",
         "type": "address"
       }
     ],
@@ -87,7 +87,7 @@ export const FaucetCreditAbi =
     "outputs":
     [
       {
-        "internalType": "contract Credit",
+        "internalType": "contract IERC20",
         "name": "",
         "type": "address"
       }

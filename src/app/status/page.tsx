@@ -399,15 +399,15 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                 min × {value.definition.ntasks.toString()} tasks ×
               </div>
               <div>
-                &#40; {value.definition.gpuPerTask.toString()} GPU/task ×{' '}
+                &#40; {value.definition.gpusPerTask.toString()} GPU/task ×{' '}
                 {formatCredit(value.provider.providerPrices.gpuPricePerMin)} credits/(GPU.min)
               </div>
               <div>
-                + {value.definition.cpuPerTask.toString()} CPU/task ×{' '}
+                + {value.definition.cpusPerTask.toString()} CPU/task ×{' '}
                 {formatCredit(value.provider.providerPrices.cpuPricePerMin)} credits/(CPU.min)
               </div>
               <div>
-                + {((value.definition.cpuPerTask * value.definition.memPerCpu) / 1000n).toString()} GB/task ×{' '}
+                + {((value.definition.cpusPerTask * value.definition.memPerCpu) / 1000n).toString()} GB/task ×{' '}
                 {formatBigNumber(value.provider.providerPrices.memPricePerMin, {
                   divide: 15,
                   precision: 7,
