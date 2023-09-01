@@ -1,28 +1,20 @@
 export const ToolsAbi = 
 [
   {
-    "inputs": [],
-    "name": "DivisionByZeroError",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTransitionFromMetascheduled",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTransitionFromPending",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTransitionFromRunning",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "InvalidTransitionFromScheduled",
+    "inputs":
+    [
+      {
+        "internalType": "enum JobStatus",
+        "name": "from",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum JobStatus",
+        "name": "to",
+        "type": "uint8"
+      }
+    ],
+    "name": "InvalidTransition",
     "type": "error"
   },
   {
@@ -111,7 +103,7 @@ export const ToolsAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpuPerTask",
+            "name": "gpusPerTask",
             "type": "uint64"
           },
           {
@@ -121,7 +113,7 @@ export const ToolsAbi =
           },
           {
             "internalType": "uint64",
-            "name": "cpuPerTask",
+            "name": "cpusPerTask",
             "type": "uint64"
           },
           {
@@ -156,16 +148,42 @@ export const ToolsAbi =
             "internalType": "struct Label[]",
             "name": "uses",
             "type": "tuple[]"
+          },
+          {
+            "components":
+            [
+              {
+                "components":
+                [
+                  {
+                    "internalType": "string",
+                    "name": "key",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "value",
+                    "type": "string"
+                  }
+                ],
+                "internalType": "struct Label",
+                "name": "label",
+                "type": "tuple"
+              },
+              {
+                "internalType": "bytes2",
+                "name": "op",
+                "type": "bytes2"
+              }
+            ],
+            "internalType": "struct Affinity[]",
+            "name": "affinity",
+            "type": "tuple[]"
           }
         ],
         "internalType": "struct JobDefinition",
         "name": "jobDefinition",
         "type": "tuple"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amountLocked",
-        "type": "uint256"
       },
       {
         "components":
@@ -189,6 +207,11 @@ export const ToolsAbi =
         "internalType": "struct ProviderPrices",
         "name": "providerPrices",
         "type": "tuple"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountLocked",
+        "type": "uint256"
       }
     ],
     "name": "convertCreditToDuration",
@@ -211,7 +234,7 @@ export const ToolsAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpuPerTask",
+            "name": "gpusPerTask",
             "type": "uint64"
           },
           {
@@ -221,7 +244,7 @@ export const ToolsAbi =
           },
           {
             "internalType": "uint64",
-            "name": "cpuPerTask",
+            "name": "cpusPerTask",
             "type": "uint64"
           },
           {
@@ -255,6 +278,37 @@ export const ToolsAbi =
             ],
             "internalType": "struct Label[]",
             "name": "uses",
+            "type": "tuple[]"
+          },
+          {
+            "components":
+            [
+              {
+                "components":
+                [
+                  {
+                    "internalType": "string",
+                    "name": "key",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "value",
+                    "type": "string"
+                  }
+                ],
+                "internalType": "struct Label",
+                "name": "label",
+                "type": "tuple"
+              },
+              {
+                "internalType": "bytes2",
+                "name": "op",
+                "type": "bytes2"
+              }
+            ],
+            "internalType": "struct Affinity[]",
+            "name": "affinity",
             "type": "tuple[]"
           }
         ],
@@ -334,7 +388,7 @@ export const ToolsAbi =
             [
               {
                 "internalType": "uint64",
-                "name": "gpuPerTask",
+                "name": "gpusPerTask",
                 "type": "uint64"
               },
               {
@@ -344,7 +398,7 @@ export const ToolsAbi =
               },
               {
                 "internalType": "uint64",
-                "name": "cpuPerTask",
+                "name": "cpusPerTask",
                 "type": "uint64"
               },
               {
@@ -379,16 +433,42 @@ export const ToolsAbi =
                 "internalType": "struct Label[]",
                 "name": "uses",
                 "type": "tuple[]"
+              },
+              {
+                "components":
+                [
+                  {
+                    "components":
+                    [
+                      {
+                        "internalType": "string",
+                        "name": "key",
+                        "type": "string"
+                      },
+                      {
+                        "internalType": "string",
+                        "name": "value",
+                        "type": "string"
+                      }
+                    ],
+                    "internalType": "struct Label",
+                    "name": "label",
+                    "type": "tuple"
+                  },
+                  {
+                    "internalType": "bytes2",
+                    "name": "op",
+                    "type": "bytes2"
+                  }
+                ],
+                "internalType": "struct Affinity[]",
+                "name": "affinity",
+                "type": "tuple[]"
               }
             ],
             "internalType": "struct JobDefinition",
             "name": "definition",
             "type": "tuple"
-          },
-          {
-            "internalType": "bool",
-            "name": "valid",
-            "type": "bool"
           },
           {
             "components":
@@ -440,6 +520,11 @@ export const ToolsAbi =
                 "internalType": "uint256",
                 "name": "blockNumberStateChange",
                 "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "panicTimestamp",
+                "type": "uint256"
               }
             ],
             "internalType": "struct JobTime",
@@ -455,6 +540,11 @@ export const ToolsAbi =
             "internalType": "bool",
             "name": "hasCancelRequest",
             "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "lastError",
+            "type": "string"
           }
         ],
         "internalType": "struct Job",
@@ -547,7 +637,7 @@ export const ToolsAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpuPerTask",
+            "name": "gpusPerTask",
             "type": "uint64"
           },
           {
@@ -557,7 +647,7 @@ export const ToolsAbi =
           },
           {
             "internalType": "uint64",
-            "name": "cpuPerTask",
+            "name": "cpusPerTask",
             "type": "uint64"
           },
           {
@@ -591,6 +681,37 @@ export const ToolsAbi =
             ],
             "internalType": "struct Label[]",
             "name": "uses",
+            "type": "tuple[]"
+          },
+          {
+            "components":
+            [
+              {
+                "components":
+                [
+                  {
+                    "internalType": "string",
+                    "name": "key",
+                    "type": "string"
+                  },
+                  {
+                    "internalType": "string",
+                    "name": "value",
+                    "type": "string"
+                  }
+                ],
+                "internalType": "struct Label",
+                "name": "label",
+                "type": "tuple"
+              },
+              {
+                "internalType": "bytes2",
+                "name": "op",
+                "type": "bytes2"
+              }
+            ],
+            "internalType": "struct Affinity[]",
+            "name": "affinity",
             "type": "tuple[]"
           }
         ],
@@ -630,32 +751,6 @@ export const ToolsAbi =
       }
     ],
     "stateMutability": "pure",
-    "type": "function"
-  },
-  {
-    "inputs":
-    [
-      {
-        "internalType": "uint256",
-        "name": "_blockNumberStateChange",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint64",
-        "name": "_timeoutBlockNumbers",
-        "type": "uint64"
-      }
-    ],
-    "name": "isJobTimeout",
-    "outputs":
-    [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   }
 ] as const;
