@@ -8,13 +8,13 @@ import ChainId from '@lib/web3/lib/ChainId';
 
 const mainnet: { [contractName: string]: Address } = {
   Credit: '0x43f185708de9e18D514F317Ca5587F96847A3dbe',
-  FaucetCredit: '0xc35af2Ef0892a5eaFe66622B43984fE1f706818D',
-  FaucetNative: '0xD7A048d0004db0A4603B2e4a19D977b6d8f6a5d5',
-  MetaScheduler: '0x3707aB457CF457275b7ec32e203c54df80C299d5',
-  ProviderManager: '0x335aC45a7D3A1b705F431e809230A58c795fc86D',
-  Tools: '0x147770d430eB795efC40848e03d4d09c9FeBCcdF',
-  Constants: '0x67d5AF411a8eB3745784c5161b6969b28D8a813d',
-  ProviderJobQueues: '0x1F9D645E67ad92CCE89320c719513CD6E70Ba7aA',
+  FaucetCredit: '0xc4d780b7b335565D6f245B2a7a202FDdf8D53C7E',
+  FaucetNative: '0x5b6AaAeeff5CC2EDf02936369dE62a80f48ba952',
+  MetaScheduler: '0xeD6Deb4c6E7e5D35c0d0FE3802663142e3E266da',
+  ProviderManager: '0x4d2e48b66dbBbD8381a0C7117a9d968E7c2a7Ae9',
+  Tools: '0x6Db50eC804f3D7a1E3dE8A7Cc72BA0F0Dc84e5f0',
+  Constants: '0x982b6457f4261BA330358CFf4e51C1Bc27137082',
+  ProviderJobQueues: '0xe2Cb34139cA4d42708e98E68722558b0e9F4C1E3',
   JobRepository: '0xeDa851d8A2a2aac992f053F76667E8745f446141',
 };
 
