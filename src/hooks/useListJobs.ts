@@ -10,11 +10,10 @@ import { JobRepositoryAbi } from '@abi/JobRepository';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
 import { useListJobLazyQuery } from '@graphql/internal/client/generated/listJobs.generated';
 import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
-import type { JobCost, JobDefinition, JobSummary, JobTime } from '@graphql/internal/types/JobSummary';
+import type { JobSummary } from '@graphql/internal/types/JobSummary';
 import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/Provider';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
-import type { JobStatus } from '@lib/types/enums/JobStatus';
 import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 import { ZERO_ADDRESS } from '@lib/web3/constants/address';
 import { addressJobRepository, addressProviderManager } from '@lib/web3/constants/contracts';
@@ -52,22 +51,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     enabled: !isDisconnected(authMethod),
     watch: !isDisconnected(authMethod),
     select: (data): JobSummary[] => {
-      return (
-        data as [Address, JobStatus, Address, Address, JobDefinition, JobCost, JobTime, Address, boolean, string][]
-      ).map((job): JobSummary => {
-        return {
-          jobId: job[0],
-          status: job[1],
-          customerAddr: job[2],
-          providerAddr: job[3],
-          definition: job[4],
-          cost: job[5],
-          time: job[6],
-          jobName: job[7],
-          hasCancelRequest: job[8],
-          lastError: job[9],
-        };
-      });
+      return data as JobSummary[];
     },
   });
 
