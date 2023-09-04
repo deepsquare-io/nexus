@@ -41,6 +41,7 @@ const Icon: FC<Props> = ({ status }) => {
     case 'FAILED':
       return <ErrorOutlineIcon />;
     case 'OUT_OF_CREDITS':
+    case 'PANICKED':
       return <AccountBalanceWalletIcon />;
     default:
       return null;
