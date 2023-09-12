@@ -127,10 +127,6 @@ export type QueryGetWorkflowArgs = {
   workflowId: Scalars['String'];
 };
 
-export type QueryListJobsArgs = {
-  userId: Scalars['String'];
-};
-
 export type QueryPingArgs = {
   pong?: InputMaybe<Scalars['String']>;
 };

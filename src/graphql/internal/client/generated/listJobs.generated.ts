@@ -3,15 +3,13 @@ import * as Apollo from '@apollo/client';
 import type * as Types from './Types';
 
 const defaultOptions = {} as const;
-export type ListJobQueryVariables = Types.Exact<{
-  userId: Types.Scalars['String'];
-}>;
+export type ListJobQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type ListJobQuery = { listJobs: Array<any> };
 
 export const ListJobDocument = /*#__PURE__*/ gql`
-  query ListJob($userId: String!) {
-    listJobs(userId: $userId)
+  query ListJob {
+    listJobs
   }
 `;
 
@@ -27,11 +25,10 @@ export const ListJobDocument = /*#__PURE__*/ gql`
  * @example
  * const { data, loading, error } = useListJobQuery({
  *   variables: {
- *      userId: // value for 'userId'
  *   },
  * });
  */
-export function useListJobQuery(baseOptions: Apollo.QueryHookOptions<ListJobQuery, ListJobQueryVariables>) {
+export function useListJobQuery(baseOptions?: Apollo.QueryHookOptions<ListJobQuery, ListJobQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<ListJobQuery, ListJobQueryVariables>(ListJobDocument, options);
 }
@@ -42,6 +39,6 @@ export function useListJobLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Li
 export type ListJobQueryHookResult = ReturnType<typeof useListJobQuery>;
 export type ListJobLazyQueryHookResult = ReturnType<typeof useListJobLazyQuery>;
 export type ListJobQueryResult = Apollo.QueryResult<ListJobQuery, ListJobQueryVariables>;
-export function refetchListJobQuery(variables: ListJobQueryVariables) {
+export function refetchListJobQuery(variables?: ListJobQueryVariables) {
   return { query: ListJobDocument, variables: variables };
 }

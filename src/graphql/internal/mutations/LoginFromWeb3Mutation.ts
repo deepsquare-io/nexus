@@ -35,6 +35,6 @@ export default class LoginFromWeb3Mutation {
       }))
     )
       throw new AuthenticationError('Invalid web3 signature');
-    return sign({}, { expiresIn: '1 week', subject: address });
+    return sign({ type: 'web3', sub: address });
   }
 }

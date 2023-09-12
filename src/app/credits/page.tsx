@@ -7,7 +7,7 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
 import { toast } from 'react-toastify';
-import { useContractRead, useContractWrite, usePrepareContractWrite, usePublicClient } from 'wagmi';
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, usePublicClient } from 'wagmi';
 import { useContext, useEffect, useState } from 'react';
 import { FaucetCreditAbi } from '@abi/FaucetCredit';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
@@ -20,15 +20,15 @@ import formatCredit from '@utils/format/formatCredit';
 
 const CreditsPage: NextPage = withConnectionRequired(() => {
   const { authMethod } = useContext(authContext);
+  const { connector } = useAccount();
   const [formCreated, setFormCreated] = useState<boolean>(false);
-
   const [userCredits, setUserCredits] = useState<bigint>(0n);
 
   useContractRead({
     address: addressFaucetCredit,
     abi: FaucetCreditAbi,
     functionName: 'addressToUserCredit',
-    args: [isWeb3(authMethod) ? authMethod.address : '0x0'],
+    args: [isWeb3(authMethod) ? authMethod.sub : '0x0'],
     enabled: isWeb3(authMethod),
     onSuccess: (data) => setUserCredits(data),
   });
@@ -57,7 +57,7 @@ const CreditsPage: NextPage = withConnectionRequired(() => {
     }
   }, [setFormCreated]);
 
-  if (!isWeb3(authMethod)) return null;
+  if (!connector) return null;
 
   return (
     <div>
@@ -81,7 +81,7 @@ const CreditsPage: NextPage = withConnectionRequired(() => {
       <div className="pt-8">
         <Button
           onClick={async () => {
-            await authMethod.connector.watchAsset?.(Credit);
+            await connector.watchAsset?.(Credit);
           }}
         >
           Add credits to wallet

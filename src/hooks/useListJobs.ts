@@ -25,7 +25,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     address: addressJobRepository,
     abi: JobRepositoryAbi,
     functionName: 'getByCustomer',
-    args: [isWeb3(authMethod) ? authMethod.address : '0x0'],
+    args: [isWeb3(authMethod) ? authMethod.sub : '0x0'],
     watch: isWeb3(authMethod),
     enabled: isWeb3(authMethod),
   });
@@ -33,7 +33,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
   const [listJobs, { data }] = useListJobLazyQuery();
 
   useEffect(() => {
-    if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
+    if (isWeb2(authMethod)) void listJobs();
   }, [authMethod, listJobs]);
 
   const jobListConfig = { address: addressJobRepository, abi: JobRepositoryAbi, functionName: 'get' };

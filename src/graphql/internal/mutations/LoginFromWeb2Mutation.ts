@@ -22,12 +22,9 @@ export default class LoginFromWeb2Mutation {
 
   @Mutation(() => String)
   async loginFromWeb2(@Args() { firebaseToken }: LoginFromWeb2Args) {
-    return sign(
-      {},
-      {
-        expiresIn: '1 week',
-        subject: (await this.firebase.auth().verifyIdToken(firebaseToken, true)).uid,
-      },
-    );
+    return sign({
+      type: 'web2',
+      sub: (await this.firebase.auth().verifyIdToken(firebaseToken, true)).uid,
+    });
   }
 }

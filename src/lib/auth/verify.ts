@@ -1,15 +1,15 @@
-import type { VerifyOptions } from 'jsonwebtoken';
-import { verify as verifyJWT } from 'jsonwebtoken';
+import type { JWTPayload } from 'jose';
+import { importSPKI, jwtVerify } from 'jose';
 import { z } from 'zod';
 import env from '@lib/app/env';
 import { JWT_ALG } from '@lib/auth/constants';
 
-export default function verify(jwt: string, options?: Omit<VerifyOptions, 'algorithms' | 'issuer'>) {
+export default async function verify<
+  T extends JWTPayload = JWTPayload & {
+    type: 'web2' | 'web3';
+  },
+>(jwt: string): Promise<T> {
   const publicKeyBase64 = z.string().parse(env.NEXT_PUBLIC_JWT_PUBLIC_KEY);
   const publicKey = Buffer.from(publicKeyBase64, 'base64').toString('utf-8');
-  console.log('test');
-  return verifyJWT(jwt, publicKey, {
-    algorithms: [JWT_ALG],
-    ...options,
-  });
+  return (await jwtVerify(jwt, await importSPKI(publicKey, JWT_ALG))).payload as T;
 }

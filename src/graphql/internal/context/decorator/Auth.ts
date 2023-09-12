@@ -5,7 +5,7 @@ import type Context from '../Context';
 
 const Auth = createParamDecorator<Context>(async ({ context }) => {
   if (!context.jwt) {
-    throw new AuthenticationError('Authentication required.');
+    throw new AuthenticationError(JSON.stringify(context));
   }
 
   await withUser(context);

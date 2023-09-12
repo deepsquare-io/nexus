@@ -1,13 +1,9 @@
-import type { JwtPayload } from 'jsonwebtoken';
-import type { NextApiRequest, NextApiResponse } from 'next';
-import type User from '../../../database/User/User';
+import type { NextRequest } from 'next/server';
+import type { AuthMethod } from '@lib/types/AuthMethod';
+import type { User } from '../../../database/User/User';
 
-/**
- * @see https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
- */
-export default interface Context<T = any> {
-  req: NextApiRequest;
-  res: NextApiResponse<T>;
-  jwt: JwtPayload | null;
+export default interface Context {
+  req: NextRequest;
+  jwt: AuthMethod;
   user: User | null;
 }

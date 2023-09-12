@@ -24,10 +24,11 @@ const authApiLink = setContext(<T>(_: GraphQLRequest, context: T) => {
     const raw = localStorage.getItem(JWT_STORAGE_KEY);
 
     if (raw) {
-      headers.authorization = JSON.parse(raw);
+      headers.authorization = raw;
     }
   } catch (e) {
     // JWT is malformed
+    console.error('client', e);
     localStorage.removeItem(JWT_STORAGE_KEY);
   }
 
@@ -49,7 +50,7 @@ const errorLink = onError(({ graphQLErrors }) => {
 
       switch (error.extensions.code) {
         case 'UNAUTHENTICATED':
-          localStorage.removeItem(JWT_STORAGE_KEY);
+          // localStorage.removeItem(JWT_STORAGE_KEY);
           break;
       }
     }
@@ -59,14 +60,13 @@ const errorLink = onError(({ graphQLErrors }) => {
 const client = new ApolloClient({
   ssrMode: isPlatformServer(),
   link: from([
-    errorLink,
     split(
       (operation) => operation.getContext().clientName === 'stats',
       statsLink,
       split(
         (operation) => operation.getContext().clientName === 'sbatch',
         sbatchServiceLink,
-        from([authApiLink, apiLink]),
+        from([authApiLink, errorLink, apiLink]),
       ),
     ),
   ]),

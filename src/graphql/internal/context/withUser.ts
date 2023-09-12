@@ -1,4 +1,4 @@
-import type User from 'src/database/User/User';
+import type { User } from 'src/database/User/User';
 import type Context from '@graphql/internal/context/Context';
 import { AuthenticationError } from '@graphql/internal/errors/AuthenticationError';
 import UserModel from '../../../database/User/UserModel';
@@ -21,7 +21,7 @@ export default async function withUser(context: Context): Promise<ContextWithUse
   context.user = await UserModel.findById(context.jwt.sub).lean().exec();
 
   if (!hasUser(context)) {
-    throw new AuthenticationError('Authentication required.');
+    throw new AuthenticationError('Authentication failed.');
   }
 
   return context;

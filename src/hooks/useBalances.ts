@@ -20,11 +20,11 @@ export default function useBalances(): UseBalancesOutput {
 
   const { authMethod } = useContext(authContext);
   const { data: squareBalance } = useBalance({
-    address: isWeb3(authMethod) ? authMethod.address : '0x0',
+    address: isWeb3(authMethod) ? authMethod.sub : '0x0',
     enabled: isWeb3(authMethod),
   });
   const { data: creditBalance } = useBalance({
-    address: isWeb3(authMethod) ? authMethod.address : '0x0',
+    address: isWeb3(authMethod) ? authMethod.sub : '0x0',
     token: addressCredit,
     enabled: isWeb3(authMethod),
   });

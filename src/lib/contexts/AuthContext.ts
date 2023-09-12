@@ -7,7 +7,7 @@ import { createContext } from 'react';
 import type { AuthMethod } from '@lib/types/AuthMethod';
 
 export interface AuthContextType {
-  authMethod: AuthMethod;
+  authMethod?: AuthMethod;
   setAuthMethod: (authMethod: AuthMethod) => void;
 }
 

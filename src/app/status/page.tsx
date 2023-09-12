@@ -63,8 +63,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   const jobs = useListJobs();
 
-  if (jobs.length === 0) return null;
-
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
     const field = event.currentTarget.dataset.field!;
     if (field !== 'cost') return;
