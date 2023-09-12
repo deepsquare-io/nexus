@@ -10,6 +10,7 @@ import type Workflow from './Workflow';
 
 export const WorkflowSchema = new Schema<Workflow>({
   _id: { type: String, default: v4 },
+  userId: { type: String, required: true },
   content: { type: String, required: true },
 });
 

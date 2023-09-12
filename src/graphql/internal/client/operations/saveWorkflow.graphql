@@ -1,0 +1,3 @@
+mutation SaveWorkflow($content: String!, $workflowId: String) {
+    saveWorkflow(content: $content, workflowId: $workflowId)
+}

@@ -7,11 +7,15 @@ export type GetWorkflowQueryVariables = Types.Exact<{
   workflowId: Types.Scalars['String'];
 }>;
 
-export type GetWorkflowQuery = { getWorkflow?: string | null };
+export type GetWorkflowQuery = { getWorkflow?: { _id: string; userId: string; content: string } | null };
 
 export const GetWorkflowDocument = /*#__PURE__*/ gql`
   query GetWorkflow($workflowId: String!) {
-    getWorkflow(workflowId: $workflowId)
+    getWorkflow(workflowId: $workflowId) {
+      _id
+      userId
+      content
+    }
   }
 `;
 

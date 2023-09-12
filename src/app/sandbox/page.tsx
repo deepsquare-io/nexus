@@ -22,12 +22,13 @@ import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
+import { useSaveWorkflowMutation } from '@graphql/internal/client/generated/saveWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
 import useHandleJob from '@hooks/useHandleJob';
 import { authContext } from '@lib/contexts/AuthContext';
-import { isWeb2 } from '@lib/types/AuthMethod';
+import { isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -108,12 +109,14 @@ const SandboxPage: NextPage = () => {
     onCompleted: (data) => {
       if (data.getWorkflow && !store.initialized) {
         setStore({
-          content: { json: JSON.parse(data.getWorkflow) },
+          content: { json: JSON.parse(data.getWorkflow.content) },
           initialized: true,
         });
       }
     },
   });
+
+  const [save, { loading: saveLoading }] = useSaveWorkflowMutation();
 
   let json: any;
 
@@ -193,7 +196,9 @@ const SandboxPage: NextPage = () => {
                 loading={loading}
                 onClick={() => {
                   setStore({
-                    content: { text: data?.getWorkflow ? data?.getWorkflow : JSON.stringify(defaultJob) },
+                    content: {
+                      text: data?.getWorkflow?.content ? data.getWorkflow.content : JSON.stringify(defaultJob),
+                    },
                     initialized: true,
                   });
                 }}
@@ -222,6 +227,23 @@ const SandboxPage: NextPage = () => {
             }
           />
           <SendButton>Submit</SendButton>
+          {(!data ||
+            (isWeb2(authMethod) && data?.getWorkflow?.userId === authMethod.sub) ||
+            (isWeb3(authMethod) && data?.getWorkflow?.userId === authMethod.sub)) && (
+            <LoadingButton
+              loading={loading && saveLoading}
+              onClick={async () => {
+                await save({
+                  variables: {
+                    content: isJson(store.content) ? JSON.stringify(store.content.json) : store.content.text,
+                    workflowId,
+                  },
+                });
+              }}
+            >
+              Save
+            </LoadingButton>
+          )}
         </div>
       </form>
     </FormProvider>

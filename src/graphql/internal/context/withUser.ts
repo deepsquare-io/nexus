@@ -18,7 +18,13 @@ export default async function withUser(context: Context): Promise<ContextWithUse
     return context;
   }
 
-  context.user = await UserModel.findById(context.jwt.sub).lean().exec();
+  if (!context.jwt.sub) throw new AuthenticationError('Authentication required.');
+
+  if (context.jwt.sub.startsWith('0x')) {
+    context.user = { _id: context.jwt.sub, jobs: [] };
+  } else {
+    context.user = await UserModel.findById(context.jwt.sub).lean().exec();
+  }
 
   if (!hasUser(context)) {
     throw new AuthenticationError('Authentication failed.');

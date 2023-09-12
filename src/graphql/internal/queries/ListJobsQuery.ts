@@ -8,8 +8,8 @@ import { Field, ObjectType, Query, Resolver } from 'type-graphql';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
 import Auth from '@graphql/internal/context/decorator/Auth';
 import HexScalar from '@graphql/internal/scalars/HexScalar';
-import { JobSummary } from '@graphql/internal/types/JobSummary';
-import { Provider } from '@graphql/internal/types/Provider';
+import { JobSummary } from '@graphql/internal/types/objects/JobSummary';
+import { Provider } from '@graphql/internal/types/objects/Provider';
 import { type User } from '../../../database/User/User';
 
 @ObjectType()

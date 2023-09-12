@@ -4,15 +4,17 @@
 // Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import { injectable } from 'tsyringe';
-import { Arg, Query, Resolver } from 'type-graphql';
+import { Query, Resolver } from 'type-graphql';
+import Auth from '@graphql/internal/context/decorator/Auth';
 import { WorkflowNode } from '@graphql/internal/types/nodes/WorkflowNode';
+import { type User } from '../../../database/User/User';
 import WorkflowModel from '../../../database/Workflow/WorkflowModel';
 
 @injectable()
 @Resolver()
-export default class GetWorkflowQuery {
-  @Query(() => WorkflowNode, { nullable: true })
-  async getWorkflow(@Arg('workflowId', () => String) workflowId: string) {
-    return WorkflowModel.findById(workflowId).lean().exec();
+export default class ListWorkflowsQuery {
+  @Query(() => [WorkflowNode])
+  async listWorkflows(@Auth user: User) {
+    return WorkflowModel.find({ userId: user._id }).lean().exec();
   }
 }
