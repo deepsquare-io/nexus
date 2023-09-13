@@ -83,6 +83,7 @@ export type Mutation = {
   loginFromWeb3: Scalars['String'];
   requestJob: Scalars['Boolean'];
   saveWorkflow: Scalars['Boolean'];
+  setWorkflowVisibility: Scalars['Boolean'];
 };
 
 export type MutationCancelJobArgs = {
@@ -116,6 +117,11 @@ export type MutationRequestJobArgs = {
 export type MutationSaveWorkflowArgs = {
   content: Scalars['String'];
   workflowId?: InputMaybe<Scalars['String']>;
+};
+
+export type MutationSetWorkflowVisibilityArgs = {
+  isPublic: Scalars['Boolean'];
+  workflowId: Scalars['String'];
 };
 
 export type NetworkInterfaceInput = {
@@ -229,5 +235,6 @@ export type WireguardPeerInput = {
 export type Workflow = Node & {
   _id: Scalars['ID'];
   content: Scalars['String'];
+  public: Scalars['Boolean'];
   userId: Scalars['String'];
 };

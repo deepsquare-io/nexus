@@ -12,6 +12,7 @@ export const WorkflowSchema = new Schema<Workflow>({
   _id: { type: String, default: v4 },
   userId: { type: String, required: true },
   content: { type: String, required: true },
+  public: { type: Boolean, default: false },
 });
 
 const WorkflowModel: Model<Workflow> = models.Workflow ?? model('Workflow', WorkflowSchema, 'workflows');

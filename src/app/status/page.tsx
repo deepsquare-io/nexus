@@ -359,6 +359,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
           }}
           columns={columnBuffer}
           autoHeight
+          isRowSelectable={() => false}
           rowHeight={55}
           rows={jobs.map((job, index) => {
             return {

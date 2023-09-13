@@ -95,6 +95,10 @@ const Sidebar: FC<Omit<DrawerProps, 'open'>> = (props) => {
         text: 'Dev',
         icon: <DataObjectIcon height={22} width={22} />,
       },
+      '/workflows': {
+        text: 'Workflows',
+        icon: <DataObjectIcon height={22} width={22} />,
+      },
     },
     home: {
       '/stats': { icon: <QueryStatsIcon height={22} width={22} />, text: 'Stats' },

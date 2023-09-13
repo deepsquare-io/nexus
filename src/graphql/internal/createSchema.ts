@@ -12,6 +12,7 @@ import LoginFromWeb2Mutation from '@graphql/internal/mutations/LoginFromWeb2Muta
 import LoginFromWeb3Mutation from '@graphql/internal/mutations/LoginFromWeb3Mutation';
 import RequestJobMutation from '@graphql/internal/mutations/RequestJobMutation';
 import SaveWorkflowMutation from '@graphql/internal/mutations/SaveWorkflowMutation';
+import SetWorkflowVisibilityMutation from '@graphql/internal/mutations/SetWorkflowVisibilityMutation';
 import GetJobHashQuery from '@graphql/internal/queries/GetJobHashQuery';
 import GetWorkflowQuery from '@graphql/internal/queries/GetWorkflowQuery';
 import ListJobsQuery from '@graphql/internal/queries/ListJobsQuery';
@@ -53,6 +54,7 @@ export default function createSchema() {
       LoginFromWeb3Mutation,
       RequestJobMutation,
       SaveWorkflowMutation,
+      SetWorkflowVisibilityMutation,
     ],
     container: {
       get(someClass: any): any {

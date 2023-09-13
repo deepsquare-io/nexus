@@ -13,4 +13,7 @@ export class WorkflowNode extends Node {
 
   @Field()
   content!: string;
+
+  @Field(() => Boolean)
+  public!: boolean;
 }

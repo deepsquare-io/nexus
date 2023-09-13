@@ -116,7 +116,11 @@ const SandboxPage: NextPage = () => {
     },
   });
 
-  const [save, { loading: saveLoading }] = useSaveWorkflowMutation();
+  const [save, { loading: saveLoading }] = useSaveWorkflowMutation({
+    onCompleted: () => {
+      toast.success('Workflow successfully saved');
+    },
+  });
 
   let json: any;
 

@@ -5,6 +5,7 @@
 // Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
+import copy from 'copy-to-clipboard';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
@@ -12,7 +13,9 @@ import { useRouter } from 'next/navigation';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
 import { useDeleteWorkflowMutation } from '@graphql/internal/client/generated/deleteWorkflow.generated';
 import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
-import { DeleteSharp, EditSharp } from '@mui/icons-material';
+import { useSetWorkflowVisibilityMutation } from '@graphql/internal/client/generated/setWorkflowVisibility.generated';
+import { ContentCopySharp, DeleteSharp, EditSharp } from '@mui/icons-material';
+import Checkbox from '@mui/material/Checkbox';
 import Fab from '@mui/material/Fab';
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -21,9 +24,10 @@ dayjs.extend(duration);
 const WorkflowsPage: NextPage = withConnectionRequired(() => {
   const router = useRouter();
 
-  const { data, loading } = useListWorkflowsQuery();
+  const { data, loading, refetch } = useListWorkflowsQuery();
 
   const [remove] = useDeleteWorkflowMutation();
+  const [setVisibility] = useSetWorkflowVisibilityMutation();
 
   return (
     <>
@@ -38,21 +42,48 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
           columns={[
             {
               field: '_id',
-              flex: 0.04,
+              flex: 0.7,
               headerName: 'Workflow ID',
               type: 'string',
               sortable: false,
               filterable: false,
-              align: 'right',
+              // align: 'right',
+            },
+            {
+              field: 'public',
+              flex: 0.1,
+              headerName: 'Public',
+              type: 'boolean',
+              sortable: false,
+              filterable: false,
+              align: 'center',
+              renderCell: (params) => (
+                <Checkbox
+                  checked={params.row.public}
+                  onChange={async (_, checked) => {
+                    await setVisibility({ variables: { workflowId: params.row._id, isPublic: checked } });
+                    await refetch();
+                  }}
+                />
+              ),
             },
             {
               field: 'actions',
               headerName: 'Actions',
-              flex: 0.3,
-              minWidth: 120,
-              maxWidth: 120,
+              flex: 0.2,
               renderCell: (params) => (
                 <div className="flex justify-center content-center">
+                  <Fab
+                    color="primary"
+                    className="m-1"
+                    aria-label="copy"
+                    size="small"
+                    onClick={() => {
+                      copy(`${process.env.NEXT_PUBLIC_APP_URL}/sandbox?workflowId=${params.row._id}`);
+                    }}
+                  >
+                    <ContentCopySharp />
+                  </Fab>
                   <Fab
                     color="primary"
                     className="m-1"
@@ -71,6 +102,7 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
                     size="small"
                     onClick={async () => {
                       await remove({ variables: { workflowId: params.row._id } });
+                      await refetch();
                     }}
                   >
                     <DeleteSharp />
@@ -82,8 +114,10 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
           autoHeight
           rowHeight={55}
           rows={data?.listWorkflows ?? []}
+          getRowId={(row) => row._id}
           pageSize={15}
           className="shadow-lg bg-white"
+          isRowSelectable={() => false}
         ></DataGrid>
       </div>
     </>

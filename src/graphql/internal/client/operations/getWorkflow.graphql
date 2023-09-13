@@ -8,5 +8,6 @@ query GetWorkflow($workflowId: String!) {
         _id
         userId
         content
+        public
     }
 }

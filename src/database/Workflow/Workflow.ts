@@ -8,4 +8,5 @@ export default interface Workflow {
   _id: string;
   userId: string;
   content: string;
+  public: boolean;
 }
