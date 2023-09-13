@@ -30,7 +30,7 @@ import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import Popover from '@mui/material/Popover';
 import Tooltip from '@mui/material/Tooltip';
-import type { GridColumns } from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
 import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
@@ -148,7 +148,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<FullJobSummary>)
+        ] as GridColDef<FullJobSummary>[])
       : ([
           {
             field: 'jobId',
@@ -326,7 +326,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               </div>
             ),
           },
-        ] as GridColumns<FullJobSummary>);
+        ] as GridColDef<FullJobSummary>[]);
 
   const columnBuffer = columns.map((col) => ({
     ...col,
@@ -344,9 +344,14 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                 cost: true,
               },
             },
+            pagination: {
+              paginationModel: {
+                pageSize: 15,
+              },
+            },
           }}
           loading={loading}
-          componentsProps={{
+          slotProps={{
             cell: {
               onMouseEnter: handlePopoverOpen,
               onMouseLeave: handlePopoverClose,
@@ -367,7 +372,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               ...job,
             };
           })}
-          pageSize={15}
           className="shadow-lg bg-white"
         ></DataGrid>
         {!!value && !!value.provider && (

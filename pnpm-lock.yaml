@@ -244,9 +244,6 @@ devDependencies:
   '@types/dedent':
     specifier: ^0.7.0
     version: 0.7.0
-  '@types/jsonwebtoken':
-    specifier: ^9.0.2
-    version: 9.0.2
   '@types/lodash':
     specifier: ^4.14.191
     version: 4.14.191
@@ -6051,6 +6048,7 @@ packages:
     resolution: {integrity: sha512-drE6uz7QBKq1fYqqoFKTDRdFCPHd5TCub75BM+D+cMx7NU9hUz7SESLfC2fSCXVFMO5Yj8sOWHuGqPgjc+fz0Q==}
     dependencies:
       '@types/node': 20.3.3
+    dev: false
 
   /@types/linkify-it@3.0.2:
     resolution: {integrity: sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==}
