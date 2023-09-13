@@ -1,6 +1,6 @@
-import type { User } from 'src/database/User/User';
 import type Context from '@graphql/internal/context/Context';
 import { AuthenticationError } from '@graphql/internal/errors/AuthenticationError';
+import type { User } from '../../../database/User/User';
 import UserModel from '../../../database/User/UserModel';
 
 type ContextWithUser = Omit<Context, 'user'> & { user: User };
