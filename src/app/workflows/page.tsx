@@ -111,11 +111,17 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
               ),
             },
           ]}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 15,
+              },
+            },
+          }}
           autoHeight
           rowHeight={55}
           rows={data?.listWorkflows ?? []}
           getRowId={(row) => row._id}
-          pageSize={15}
           className="shadow-lg bg-white"
           isRowSelectable={() => false}
         ></DataGrid>
