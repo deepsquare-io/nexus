@@ -38,7 +38,7 @@
     "gen:grpc": "cd ../protos/loggerapis && buf generate"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.9",
+    "@apollo/client": "^3.8.3",
     "@apollo/server": "^4.7.4",
     "@as-integrations/next": "^2.0.0",
     "@deepsquare/deepsquare-client": "^0.12.1",

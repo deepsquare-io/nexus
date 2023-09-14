@@ -22,6 +22,7 @@ import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
+import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
 import { useSaveWorkflowMutation } from '@graphql/internal/client/generated/saveWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
@@ -116,9 +117,12 @@ const SandboxPage: NextPage = () => {
     },
   });
 
+  const { refetch } = useListWorkflowsQuery();
+
   const [save, { loading: saveLoading }] = useSaveWorkflowMutation({
-    onCompleted: () => {
+    onCompleted: async () => {
       toast.success('Workflow successfully saved');
+      await refetch();
     },
   });
 
