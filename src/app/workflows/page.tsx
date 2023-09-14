@@ -14,7 +14,7 @@ import withConnectionRequired from '@components/hoc/withConnectionRequired';
 import { useDeleteWorkflowMutation } from '@graphql/internal/client/generated/deleteWorkflow.generated';
 import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
 import { useSetWorkflowVisibilityMutation } from '@graphql/internal/client/generated/setWorkflowVisibility.generated';
-import { ContentCopySharp, DeleteSharp, EditSharp } from '@mui/icons-material';
+import { DeleteSharp, EditSharp, LinkSharp } from '@mui/icons-material';
 import Checkbox from '@mui/material/Checkbox';
 import Fab from '@mui/material/Fab';
 import { DataGrid } from '@mui/x-data-grid';
@@ -82,7 +82,7 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
                       copy(`${process.env.NEXT_PUBLIC_APP_URL}/sandbox?workflowId=${params.row._id}`);
                     }}
                   >
-                    <ContentCopySharp />
+                    <LinkSharp />
                   </Fab>
                   <Fab
                     color="primary"
