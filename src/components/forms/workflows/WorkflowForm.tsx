@@ -5,15 +5,16 @@
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import * as y from 'yup';
 import type { FC } from 'react';
-import SendButton from '@components/buttons/SendButton';
 import TextField from '@components/forms/fields/TextField';
 import WorkflowEditor from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
 import { useSaveWorkflowMutation } from '@graphql/internal/client/generated/saveWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { defaultJob } from '@lib/constants';
 import { isText } from '@lib/types/Content';
+import Button from '@mui/material/Button';
 
 const schema = () => {
   return y.object().shape({
@@ -27,6 +28,7 @@ export interface WorkflowFormProps {
   name: string;
   content?: string;
   workflowId?: string;
+  onSubmit?: () => void;
 }
 
 export interface WorkflowFormData {
@@ -39,6 +41,7 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
   workflowId,
   name: defaultName,
   content: defaultContent = JSON.stringify(defaultJob),
+  onSubmit,
 }) => {
   const [save] = useSaveWorkflowMutation();
 
@@ -51,13 +54,21 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
     resolver: yupResolver(schema()),
   });
 
-  const onSubmit: SubmitHandler<WorkflowFormData> = async ({ workflowId, name, content }) => {
-    await save({ variables: { workflowId, name, content } });
+  const submit: SubmitHandler<WorkflowFormData> = async ({ workflowId, name, content }) => {
+    await save({
+      variables: { workflowId, name, content },
+      onCompleted: () => {
+        toast.success('Workflow successfully saved !');
+      },
+    });
+    if (onSubmit) {
+      onSubmit();
+    }
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(onSubmit)}>
+      <form onSubmit={methods.handleSubmit(submit, console.error)}>
         <TextField name="name" control={methods.control} />
 
         <WorkflowEditor
@@ -65,12 +76,19 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
           defaultContent={defaultContent}
           onContentChange={(newContent, contentErrors) => {
             methods.setValue('content', isText(newContent) ? newContent.text : JSON.stringify(newContent.json));
-            if ('validationErrors' in contentErrors && contentErrors.validationErrors.length > 0)
+            if (
+              contentErrors !== null &&
+              'validationErrors' in contentErrors &&
+              contentErrors.validationErrors.length > 0
+            ) {
               methods.setError('content', { message: 'Invalid workflow' });
+            } else {
+              methods.clearErrors('content');
+            }
           }}
         />
+        <Button type="submit">Save</Button>
       </form>
-      <SendButton>Save</SendButton>
     </FormProvider>
   );
 };

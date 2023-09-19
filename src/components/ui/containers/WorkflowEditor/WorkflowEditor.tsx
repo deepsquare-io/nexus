@@ -20,7 +20,7 @@ type Store = { content: Content; initialized: boolean };
 export interface WorkflowEditorProps {
   cacheKey: string;
   defaultContent: string;
-  onContentChange: (newContent: Content, contentErrors: ContentErrors) => void;
+  onContentChange: (newContent: Content, contentErrors: ContentErrors | null) => void;
 }
 
 const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onContentChange }) => {
@@ -48,7 +48,7 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
           onChange={(
             newContent: Content,
             previousContent: Content,
-            { contentErrors }: { contentErrors: ContentErrors },
+            { contentErrors }: { contentErrors: ContentErrors | null },
           ) => {
             onContentChange(newContent, contentErrors);
             setStore((prev) => {
