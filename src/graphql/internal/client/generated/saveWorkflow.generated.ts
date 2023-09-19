@@ -4,6 +4,7 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type SaveWorkflowMutationVariables = Types.Exact<{
+  name: Types.Scalars['String'];
   content: Types.Scalars['String'];
   workflowId?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
@@ -11,8 +12,8 @@ export type SaveWorkflowMutationVariables = Types.Exact<{
 export type SaveWorkflowMutation = { saveWorkflow: boolean };
 
 export const SaveWorkflowDocument = /*#__PURE__*/ gql`
-  mutation SaveWorkflow($content: String!, $workflowId: String) {
-    saveWorkflow(content: $content, workflowId: $workflowId)
+  mutation SaveWorkflow($name: String!, $content: String!, $workflowId: String) {
+    saveWorkflow(name: $name, content: $content, workflowId: $workflowId)
   }
 `;
 export type SaveWorkflowMutationFn = Apollo.MutationFunction<SaveWorkflowMutation, SaveWorkflowMutationVariables>;
@@ -30,6 +31,7 @@ export type SaveWorkflowMutationFn = Apollo.MutationFunction<SaveWorkflowMutatio
  * @example
  * const [saveWorkflowMutation, { data, loading, error }] = useSaveWorkflowMutation({
  *   variables: {
+ *      name: // value for 'name'
  *      content: // value for 'content'
  *      workflowId: // value for 'workflowId'
  *   },

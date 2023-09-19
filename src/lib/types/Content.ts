@@ -5,22 +5,8 @@
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 
-export const JWT_STORAGE_KEY = 'nexus-jwt';
+export type Content = { json: Job } | { text: string };
 
-export const defaultJob: Job = {
-  resources: {
-    tasks: 1,
-    gpusPerTask: 0,
-    cpusPerTask: 1,
-    memPerCpu: 1024,
-  },
-  enableLogging: true,
-  steps: [
-    {
-      name: 'hello world',
-      run: {
-        command: `echo \"Hello World\"`,
-      },
-    },
-  ],
-};
+export function isText(content: Content): content is { text: string } {
+  return (content as { text: string }).text !== undefined;
+}

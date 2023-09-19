@@ -12,6 +12,9 @@ import WorkflowModel from '../../../database/Workflow/WorkflowModel';
 @ArgsType()
 class SaveWorkflowArgs {
   @Field()
+  name!: string;
+
+  @Field()
   content!: string;
 
   @Field({ nullable: true })
@@ -22,13 +25,14 @@ class SaveWorkflowArgs {
 @Resolver()
 export default class SaveWorkflowMutation {
   @Mutation(() => Boolean)
-  async saveWorkflow(@Auth user: User, @Args() { content, workflowId }: SaveWorkflowArgs) {
+  async saveWorkflow(@Auth user: User, @Args() { name, content, workflowId }: SaveWorkflowArgs) {
     const existing = await WorkflowModel.findById(workflowId);
     if (!existing) {
-      await WorkflowModel.create({ content, userId: user._id });
+      await WorkflowModel.create({ name, content, userId: user._id });
     } else {
       if (existing.userId !== user._id) throw new Error('Workflow does not belong to logged user');
       existing.content = content;
+      existing.name = name;
       await existing.save();
     }
     return true;

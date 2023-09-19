@@ -8,13 +8,14 @@ export type GetWorkflowQueryVariables = Types.Exact<{
 }>;
 
 export type GetWorkflowQuery = {
-  getWorkflow?: { _id: string; userId: string; content: string; public: boolean } | null;
+  getWorkflow?: { _id: string; name: string; userId: string; content: string; public: boolean } | null;
 };
 
 export const GetWorkflowDocument = /*#__PURE__*/ gql`
   query GetWorkflow($workflowId: String!) {
     getWorkflow(workflowId: $workflowId) {
       _id
+      name
       userId
       content
       public

@@ -116,6 +116,7 @@ export type MutationRequestJobArgs = {
 
 export type MutationSaveWorkflowArgs = {
   content: Scalars['String'];
+  name: Scalars['String'];
   workflowId?: InputMaybe<Scalars['String']>;
 };
 
@@ -235,6 +236,7 @@ export type WireguardPeerInput = {
 export type Workflow = Node & {
   _id: Scalars['ID'];
   content: Scalars['String'];
+  name: Scalars['String'];
   public: Scalars['Boolean'];
   userId: Scalars['String'];
 };

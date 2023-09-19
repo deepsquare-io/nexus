@@ -9,6 +9,9 @@ import Node from '@graphql/internal/types/interfaces/Node';
 @ObjectType('Workflow', { implements: [Node] })
 export class WorkflowNode extends Node {
   @Field()
+  name!: string;
+
+  @Field()
   userId!: string;
 
   @Field()

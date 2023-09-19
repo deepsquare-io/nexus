@@ -5,12 +5,15 @@ import type * as Types from './Types';
 const defaultOptions = {} as const;
 export type ListWorkflowsQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type ListWorkflowsQuery = { listWorkflows: Array<{ _id: string; content: string; public: boolean }> };
+export type ListWorkflowsQuery = {
+  listWorkflows: Array<{ _id: string; name: string; content: string; public: boolean }>;
+};
 
 export const ListWorkflowsDocument = /*#__PURE__*/ gql`
   query ListWorkflows {
     listWorkflows {
       _id
+      name
       content
       public
     }

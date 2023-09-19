@@ -6,7 +6,6 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
-import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import randomWords from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
@@ -14,31 +13,27 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import type { ContentErrors } from 'vanilla-jsoneditor';
 import * as y from 'yup';
-import { memo, useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
 import type { CreditSubformData } from '@components/forms/CreditSubform';
 import CreditSubform from '@components/forms/CreditSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
+import type { Content } from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
+import WorkflowEditor from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
-import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
-import { useSaveWorkflowMutation } from '@graphql/internal/client/generated/saveWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
 import useHandleJob from '@hooks/useHandleJob';
+import { defaultJob } from '@lib/constants';
 import { authContext } from '@lib/contexts/AuthContext';
-import { isWeb2, isWeb3 } from '@lib/types/AuthMethod';
+import { isWeb2 } from '@lib/types/AuthMethod';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
-import LoadingButton from '@mui/lab/LoadingButton';
 import formatCredit from '@utils/format/formatCredit';
 import { formatWei } from '@utils/format/formatWei';
-
-const JsonEditor = dynamic(() => import('@components/ui/containers/JsonEditor/JsonEditor'), { ssr: false });
-
-const MemoJsonEditor = memo(JsonEditor, (prev, next) => JSON.stringify(prev) == JSON.stringify(next));
 
 const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) => {
   return y.object().shape({
@@ -60,86 +55,29 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
   });
 };
 
-type Content = { json: Job } | { text: string };
-
-type Store = { content: Content; initialized: boolean };
-
 function isJson(content: Content): content is { json: Job } {
   return (content as { json: Job }).json !== undefined;
 }
 
 const SandboxPage: NextPage = () => {
-  const defaultJob: Job = {
-    resources: {
-      tasks: 1,
-      gpusPerTask: 0,
-      cpusPerTask: 1,
-      memPerCpu: 1024,
-    },
-    enableLogging: true,
-    steps: [
-      {
-        name: 'hello world',
-        run: {
-          command: `echo \"Hello World\"`,
-        },
-      },
-    ],
-  };
-
   const { balance_wCredit } = useBalances();
   const { data: minAmount } = useGetMinimumAmount();
   const { authMethod } = useContext(authContext);
   const searchParams = useSearchParams();
   const workflowId = searchParams.get('workflowId');
+  const [content, setContent] = useState<Content>({ text: '' });
 
-  const [store, setStore] = useState<Store>(() => {
-    if (typeof window === 'undefined') return { content: { text: JSON.stringify(defaultJob) }, initialized: false };
-    const storedContent = localStorage.getItem(workflowId ? `sandbox-${workflowId}` : 'sandbox');
-    return storedContent
-      ? (JSON.parse(storedContent) as Store)
-      : {
-          content: { text: JSON.stringify(defaultJob) },
-          initialized: workflowId === null,
-        };
-  });
-
-  const { data, loading } = useGetWorkflowQuery({
-    variables: { workflowId: workflowId! },
-    skip: !workflowId,
-    onCompleted: (data) => {
-      if (data.getWorkflow && !store.initialized) {
-        setStore({
-          content: { json: JSON.parse(data.getWorkflow.content) },
-          initialized: true,
-        });
-      }
-    },
-  });
-
-  const { refetch } = useListWorkflowsQuery();
-
-  const [save, { loading: saveLoading }] = useSaveWorkflowMutation({
-    onCompleted: async () => {
-      toast.success('Workflow successfully saved');
-      await refetch();
-    },
-  });
+  const { data } = useGetWorkflowQuery({ variables: { workflowId: workflowId! }, skip: !workflowId });
 
   let json: any;
 
   try {
-    json = isJson(store.content) ? store.content.json : JSON.parse(store.content.text);
+    json = isJson(content) ? content.json : JSON.parse(content.text);
   } catch (e) {
     json = defaultJob;
   }
 
   const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
-
-  useEffect(() => {
-    if (!store.initialized) return;
-    localStorage.setItem(workflowId ? `sandbox-${workflowId}` : 'sandbox', JSON.stringify(store));
-  }, [store, workflowId]);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
@@ -163,6 +101,8 @@ const SandboxPage: NextPage = () => {
     await handleJob(json);
   };
 
+  //TODO: add loading state awaiting for get workflow query if necessary
+
   return (
     <FormProvider {...methods}>
       <form className="flew grow" onSubmit={handleSubmit(onSubmit)}>
@@ -184,37 +124,14 @@ const SandboxPage: NextPage = () => {
               </p>
             </div>
           </Card>
-          <Card className="flex flex-col grow p-8" title="Write your workflow file">
-            <div className="pt-5">
-              <MemoJsonEditor
-                content={store.content}
-                onChange={(
-                  newContent: Content,
-                  previousContent: Content,
-                  { contentErrors }: { contentErrors: ContentErrors },
-                ) => {
-                  setJsonErrors(contentErrors);
-                  setStore((prev) => {
-                    return { content: newContent, initialized: prev.initialized };
-                  });
-                }}
-              />
-              <LoadingButton
-                className="mt-5"
-                loading={loading}
-                onClick={() => {
-                  setStore({
-                    content: {
-                      text: data?.getWorkflow?.content ? data.getWorkflow.content : JSON.stringify(defaultJob),
-                    },
-                    initialized: true,
-                  });
-                }}
-              >
-                Reset
-              </LoadingButton>
-            </div>
-          </Card>
+          <WorkflowEditor
+            cacheKey={workflowId ? `sandbox-${workflowId}` : 'sandbox'}
+            defaultContent={data?.getWorkflow ? data.getWorkflow.content : JSON.stringify(defaultJob)}
+            onContentChange={(newContent, contentErrors) => {
+              setContent(newContent);
+              setJsonErrors(contentErrors);
+            }}
+          />
 
           <CreditSubform
             defaultDuration={20}
@@ -235,23 +152,23 @@ const SandboxPage: NextPage = () => {
             }
           />
           <SendButton>Submit</SendButton>
-          {(!data ||
-            (isWeb2(authMethod) && data?.getWorkflow?.userId === authMethod.sub) ||
-            (isWeb3(authMethod) && data?.getWorkflow?.userId === authMethod.sub)) && (
-            <LoadingButton
-              loading={loading && saveLoading}
-              onClick={async () => {
-                await save({
-                  variables: {
-                    content: isJson(store.content) ? JSON.stringify(store.content.json) : store.content.text,
-                    workflowId,
-                  },
-                });
-              }}
-            >
-              Save
-            </LoadingButton>
-          )}
+          {/*{(!data ||*/}
+          {/*  (isWeb2(authMethod) && data?.getWorkflow?.userId === authMethod.sub) ||*/}
+          {/*  (isWeb3(authMethod) && data?.getWorkflow?.userId === authMethod.sub)) && (*/}
+          {/*  <LoadingButton*/}
+          {/*    loading={loading && saveLoading}*/}
+          {/*    onClick={async () => {*/}
+          {/*      await save({*/}
+          {/*        variables: {*/}
+          {/*          content: isJson(store.content) ? JSON.stringify(store.content.json) : store.content.text,*/}
+          {/*          workflowId,*/}
+          {/*        },*/}
+          {/*      });*/}
+          {/*    }}*/}
+          {/*  >*/}
+          {/*    Save*/}
+          {/*  </LoadingButton>*/}
+          {/*)}*/}
         </div>
       </form>
     </FormProvider>

@@ -10,14 +10,12 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
 import { useDeleteWorkflowMutation } from '@graphql/internal/client/generated/deleteWorkflow.generated';
 import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
 import { useSetWorkflowVisibilityMutation } from '@graphql/internal/client/generated/setWorkflowVisibility.generated';
-import { authContext } from '@lib/contexts/AuthContext';
-import { isDisconnected } from '@lib/types/AuthMethod';
 import { DeleteSharp, EditSharp, LinkSharp } from '@mui/icons-material';
+import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Fab from '@mui/material/Fab';
 import { DataGrid } from '@mui/x-data-grid';
@@ -26,15 +24,20 @@ dayjs.extend(duration);
 
 const WorkflowsPage: NextPage = withConnectionRequired(() => {
   const router = useRouter();
-  const { authMethod } = useContext(authContext);
-
-  const { data, loading, refetch } = useListWorkflowsQuery({ skip: isDisconnected(authMethod) });
 
   const [remove] = useDeleteWorkflowMutation();
   const [setVisibility] = useSetWorkflowVisibilityMutation();
+  const { data, loading, refetch } = useListWorkflowsQuery();
 
   return (
     <>
+      <Button
+        onClick={() => {
+          router.push('/workflows/new');
+        }}
+      >
+        New workflow
+      </Button>
       <div className="h-[56rem]">
         <DataGrid
           loading={loading}
@@ -45,13 +48,12 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
           }}
           columns={[
             {
-              field: '_id',
+              field: 'name',
               flex: 0.7,
-              headerName: 'Workflow ID',
+              headerName: 'Name',
               type: 'string',
               sortable: false,
               filterable: false,
-              // align: 'right',
             },
             {
               field: 'public',
@@ -94,7 +96,7 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
                     aria-label="edit"
                     size="small"
                     onClick={() => {
-                      router.push(`/sandbox?workflowId=${params.row._id}`);
+                      router.push(`/workflows/edit/${params.row._id}`);
                     }}
                   >
                     <EditSharp />
