@@ -69,25 +69,29 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
   return (
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(submit, console.error)}>
-        <TextField name="name" control={methods.control} />
+        <div className="flex flex-col grow space-y-4">
+          <TextField name="name" control={methods.control} className="bg-white" />
 
-        <WorkflowEditor
-          cacheKey={workflowId ? `edit-workflow-${workflowId}` : 'new-workflow'}
-          defaultContent={defaultContent}
-          onContentChange={(newContent, contentErrors) => {
-            methods.setValue('content', isText(newContent) ? newContent.text : JSON.stringify(newContent.json));
-            if (
-              contentErrors !== null &&
-              'validationErrors' in contentErrors &&
-              contentErrors.validationErrors.length > 0
-            ) {
-              methods.setError('content', { message: 'Invalid workflow' });
-            } else {
-              methods.clearErrors('content');
-            }
-          }}
-        />
-        <Button type="submit">Save</Button>
+          <WorkflowEditor
+            cacheKey={workflowId ? `edit-workflow-${workflowId}` : 'new-workflow'}
+            defaultContent={defaultContent}
+            onContentChange={(newContent, contentErrors) => {
+              methods.setValue('content', isText(newContent) ? newContent.text : JSON.stringify(newContent.json));
+              if (
+                contentErrors !== null &&
+                'validationErrors' in contentErrors &&
+                contentErrors.validationErrors.length > 0
+              ) {
+                methods.setError('content', { message: 'Invalid workflow' });
+              } else {
+                methods.clearErrors('content');
+              }
+            }}
+          />
+        </div>
+        <Button type="submit" className="mt-4">
+          Save
+        </Button>
       </form>
     </FormProvider>
   );

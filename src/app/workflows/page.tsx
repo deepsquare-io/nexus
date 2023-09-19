@@ -32,6 +32,7 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
   return (
     <>
       <Button
+        className="mb-4"
         onClick={() => {
           router.push('/workflows/new');
         }}
