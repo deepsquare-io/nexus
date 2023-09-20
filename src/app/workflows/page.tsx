@@ -10,7 +10,8 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import ConfirmDialog from '@components/dialogs/ConfirmDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
 import { useDeleteWorkflowMutation } from '@graphql/internal/client/generated/deleteWorkflow.generated';
 import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
@@ -29,9 +30,10 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
   const router = useRouter();
   const { authMethod } = useContext(authContext);
 
-  const [remove] = useDeleteWorkflowMutation();
+  const [remove, { loading: removeLoading }] = useDeleteWorkflowMutation();
   const [setVisibility] = useSetWorkflowVisibilityMutation();
   const { data, loading, refetch } = useListWorkflowsQuery({ skip: isDisconnected(authMethod) });
+  const [openDeletionDialog, setOpenDeletionDialog] = useState<boolean>(false);
 
   return (
     <>
@@ -122,13 +124,28 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
                     className="m-1"
                     aria-label="cancel"
                     size="small"
-                    onClick={async () => {
-                      await remove({ variables: { workflowId: params.row._id } });
-                      await refetch();
+                    onClick={() => {
+                      setOpenDeletionDialog(true);
                     }}
                   >
                     <DeleteSharp />
                   </Fab>
+                  <ConfirmDialog
+                    title="Confirm workflow deletion"
+                    show={openDeletionDialog}
+                    loading={removeLoading}
+                    onConfirmation={async () => {
+                      await remove({ variables: { workflowId: params.row._id } });
+                      await refetch();
+                      setOpenDeletionDialog(false);
+                    }}
+                    onClose={() => {
+                      setOpenDeletionDialog(false);
+                    }}
+                  >
+                    Deleting this workflow will permanently remove it and all associated data. This action cannot be
+                    undone.
+                  </ConfirmDialog>
                 </div>
               ),
             },
