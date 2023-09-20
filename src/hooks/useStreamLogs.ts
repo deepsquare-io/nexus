@@ -65,10 +65,10 @@ export default function useStreamLogs(
       if (isWeb3(authMethod)) {
         const timestamp = Date.now();
         const signedHash = await sign({
-          message: `read:${authMethod.address.toLowerCase()}/${jobId}/${timestamp}`,
+          message: `read:${authMethod.sub.toLowerCase()}/${jobId}/${timestamp}`,
         });
         params = {
-          address: authMethod.address,
+          address: authMethod.sub,
           hash: signedHash,
           timestamp,
         };

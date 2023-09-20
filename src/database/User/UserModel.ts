@@ -1,6 +1,6 @@
 import type { Document, Model } from 'mongoose';
 import { model, models, Schema } from 'mongoose';
-import type User from './User';
+import type { User } from './User';
 
 export type UserDocument = User & Document<string>;
 
@@ -9,6 +9,6 @@ export const UserSchema = new Schema<UserDocument>({
   jobs: { type: [String] },
 });
 
-const UserModel = models.User ?? model<UserDocument>('User', UserSchema, 'users');
+const UserModel: Model<User> = models.User ?? model<UserDocument>('User', UserSchema, 'users');
 
-export default UserModel as Model<UserDocument>;
+export default UserModel;

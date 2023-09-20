@@ -1,0 +1,8 @@
+query ListWorkflows {
+    listWorkflows {
+        _id
+        name
+        content
+        public
+    }
+}

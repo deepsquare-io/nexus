@@ -24,7 +24,7 @@ export default function useCreditAllowance(spender: Address): UseCreditAllowance
     address: addressCredit,
     abi: CreditAbi,
     functionName: 'allowance',
-    args: [isWeb3(authMethod) ? authMethod.address : '0x0', spender],
+    args: [isWeb3(authMethod) ? authMethod.sub : '0x0', spender],
     enabled: isWeb3(authMethod),
   });
 

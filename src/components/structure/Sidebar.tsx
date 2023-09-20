@@ -12,7 +12,7 @@ import type { FC, JSX, ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 import CustomLink from '@components/routing/Link';
 import useDialog from '@hooks/useDialog';
-import { AspectRatio } from '@mui/icons-material';
+import { AspectRatio, LibraryBooks } from '@mui/icons-material';
 import AppsIcon from '@mui/icons-material/Apps';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -94,6 +94,10 @@ const Sidebar: FC<Omit<DrawerProps, 'open'>> = (props) => {
       '/sandbox': {
         text: 'Dev',
         icon: <DataObjectIcon height={22} width={22} />,
+      },
+      '/workflows': {
+        text: 'Workflows',
+        icon: <LibraryBooks height={22} width={22} />,
       },
     },
     home: {

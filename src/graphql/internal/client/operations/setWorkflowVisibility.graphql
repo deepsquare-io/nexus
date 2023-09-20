@@ -1,0 +1,3 @@
+mutation SetWorkflowVisibility($workflowId: String!, $isPublic: Boolean!) {
+    setWorkflowVisibility (workflowId: $workflowId, isPublic: $isPublic)
+}

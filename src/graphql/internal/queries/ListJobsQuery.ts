@@ -4,11 +4,13 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { injectable } from 'tsyringe';
-import { Arg, Field, ObjectType, Query, Resolver } from 'type-graphql';
+import { Field, ObjectType, Query, Resolver } from 'type-graphql';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
-import { JobSummary } from '@graphql/internal/types/JobSummary';
-import { Provider } from '@graphql/internal/types/Provider';
-import UserModel from '../../../database/User/UserModel';
+import Auth from '@graphql/internal/context/decorator/Auth';
+import HexScalar from '@graphql/internal/scalars/HexScalar';
+import { JobSummary } from '@graphql/internal/types/objects/JobSummary';
+import { Provider } from '@graphql/internal/types/objects/Provider';
+import { type User } from '../../../database/User/User';
 
 @ObjectType()
 export class FullJobSummary extends JobSummary {
@@ -21,12 +23,8 @@ export class FullJobSummary extends JobSummary {
 export default class ListJobsQuery {
   constructor(private readonly deepsquare: DeepSquareClient) {}
 
-  @Query(() => [FullJobSummary])
-  async listJobs(@Arg('userId', () => String) userId: string) {
-    const user = await UserModel.findById(userId);
-    if (!user) return [];
-    return (await Promise.all(user.jobs.map((id) => this.deepsquare.getJob(id)))).filter(
-      (job) => job.jobId !== '0x0000000000000000000000000000000000000000000000000000000000000000',
-    );
+  @Query(() => [HexScalar])
+  listJobs(@Auth user: User) {
+    return user.jobs;
   }
 }

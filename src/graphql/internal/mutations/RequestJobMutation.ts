@@ -6,7 +6,7 @@
 import { injectable } from 'tsyringe';
 import { Args, ArgsType, Field, Mutation, Resolver } from 'type-graphql';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
-import Job from '@graphql/internal/types/Job';
+import Job from '@graphql/internal/types/objects/Job';
 import UserModel from '../../../database/User/UserModel';
 
 @ArgsType()

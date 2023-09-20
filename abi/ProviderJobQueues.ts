@@ -1,7 +1,14 @@
 export const ProviderJobQueuesAbi = 
 [
   {
-    "inputs": [],
+    "inputs":
+    [
+      {
+        "internalType": "contract IJobRepository",
+        "name": "_jobs",
+        "type": "address"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -18,11 +25,6 @@ export const ProviderJobQueuesAbi =
   {
     "inputs": [],
     "name": "OutOfBounds",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Uninitialized",
     "type": "error"
   },
   {
@@ -76,27 +78,6 @@ export const ProviderJobQueuesAbi =
       }
     ],
     "name": "getClaimableJobQueueSize",
-    "outputs":
-    [
-      {
-        "internalType": "uint256",
-        "name": "length",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs":
-    [
-      {
-        "internalType": "address",
-        "name": "_providerAddr",
-        "type": "address"
-      }
-    ],
-    "name": "getTimeoutQueueSize",
     "outputs":
     [
       {
@@ -180,7 +161,7 @@ export const ProviderJobQueuesAbi =
         "type": "address"
       }
     ],
-    "name": "hasTimeoutJob",
+    "name": "hasTopUpJob",
     "outputs":
     [
       {
@@ -193,21 +174,14 @@ export const ProviderJobQueuesAbi =
     "type": "function"
   },
   {
-    "inputs":
-    [
-      {
-        "internalType": "address",
-        "name": "_providerAddr",
-        "type": "address"
-      }
-    ],
-    "name": "hasTopUpJob",
+    "inputs": [],
+    "name": "jobs",
     "outputs":
     [
       {
-        "internalType": "bool",
+        "internalType": "contract IJobRepository",
         "name": "",
-        "type": "bool"
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -278,27 +252,6 @@ export const ProviderJobQueuesAbi =
         "type": "address"
       }
     ],
-    "name": "popNextTimeoutJob",
-    "outputs":
-    [
-      {
-        "internalType": "bytes32",
-        "name": "jobId",
-        "type": "bytes32"
-      }
-    ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs":
-    [
-      {
-        "internalType": "address",
-        "name": "_providerAddr",
-        "type": "address"
-      }
-    ],
     "name": "popNextTopUpJob",
     "outputs":
     [
@@ -347,32 +300,6 @@ export const ProviderJobQueuesAbi =
       }
     ],
     "name": "providerClaimableJobsQueues",
-    "outputs":
-    [
-      {
-        "internalType": "int128",
-        "name": "_begin",
-        "type": "int128"
-      },
-      {
-        "internalType": "int128",
-        "name": "_end",
-        "type": "int128"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs":
-    [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "providerTimeoutJobsQueues",
     "outputs":
     [
       {
@@ -467,25 +394,6 @@ export const ProviderJobQueuesAbi =
         "type": "bytes32"
       }
     ],
-    "name": "pushTimeoutJob",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs":
-    [
-      {
-        "internalType": "address",
-        "name": "_providerAddr",
-        "type": "address"
-      },
-      {
-        "internalType": "bytes32",
-        "name": "_jobId",
-        "type": "bytes32"
-      }
-    ],
     "name": "pushTopUpJob",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -494,20 +402,6 @@ export const ProviderJobQueuesAbi =
   {
     "inputs": [],
     "name": "renounceOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs":
-    [
-      {
-        "internalType": "contract IMetaScheduler",
-        "name": "_metaschedulerAddr",
-        "type": "address"
-      }
-    ],
-    "name": "setMetascheduler",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

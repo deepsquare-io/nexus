@@ -69,13 +69,14 @@ export default function useHandleJob(
                 requestNewJob({
                   args: [
                     {
-                      gpuPerTask: BigInt(job.resources.gpusPerTask),
-                      cpuPerTask: BigInt(job.resources.cpusPerTask),
+                      gpusPerTask: BigInt(job.resources.gpusPerTask),
+                      cpusPerTask: BigInt(job.resources.cpusPerTask),
                       ntasks: BigInt(job.resources.tasks),
                       memPerCpu: BigInt(job.resources.memPerCpu),
                       storageType: resolveStorageType(job),
                       batchLocationHash,
                       uses: [],
+                      affinity: [],
                     },
                     debouncedAmount,
                     formatBytes32String(debouncedName),
@@ -100,7 +101,7 @@ export default function useHandleJob(
                 job,
                 jobName: debouncedName,
                 maxAmount: debouncedAmount.toString(),
-                userId: authMethod.id,
+                userId: authMethod.sub,
               },
             }),
             {

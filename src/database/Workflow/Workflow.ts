@@ -6,5 +6,8 @@
 
 export default interface Workflow {
   _id: string;
+  name: string;
+  userId: string;
   content: string;
+  public: boolean;
 }

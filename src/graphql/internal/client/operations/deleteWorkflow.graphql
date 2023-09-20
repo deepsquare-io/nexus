@@ -1,0 +1,3 @@
+mutation DeleteWorkflow($workflowId: String!) {
+    deleteWorkflow(workflowId: $workflowId)
+}
