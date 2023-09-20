@@ -10,10 +10,13 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
+import { useContext } from 'react';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
 import { useDeleteWorkflowMutation } from '@graphql/internal/client/generated/deleteWorkflow.generated';
 import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
 import { useSetWorkflowVisibilityMutation } from '@graphql/internal/client/generated/setWorkflowVisibility.generated';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isDisconnected } from '@lib/types/AuthMethod';
 import { DeleteSharp, EditSharp, LinkSharp } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -24,10 +27,11 @@ dayjs.extend(duration);
 
 const WorkflowsPage: NextPage = withConnectionRequired(() => {
   const router = useRouter();
+  const { authMethod } = useContext(authContext);
 
   const [remove] = useDeleteWorkflowMutation();
   const [setVisibility] = useSetWorkflowVisibilityMutation();
-  const { data, loading, refetch } = useListWorkflowsQuery();
+  const { data, loading, refetch } = useListWorkflowsQuery({ skip: isDisconnected(authMethod) });
 
   return (
     <>
