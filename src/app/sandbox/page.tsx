@@ -67,7 +67,11 @@ const SandboxPage: NextPage = () => {
   const workflowId = searchParams.get('workflowId');
   const [content, setContent] = useState<Content>({ text: '' });
 
-  const { data } = useGetWorkflowQuery({ variables: { workflowId: workflowId! }, skip: !workflowId });
+  const { data } = useGetWorkflowQuery({
+    variables: { workflowId: workflowId! },
+    skip: !workflowId,
+    fetchPolicy: 'cache-and-network',
+  });
 
   let json: any;
 
