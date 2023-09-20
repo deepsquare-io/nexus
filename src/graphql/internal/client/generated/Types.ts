@@ -78,7 +78,12 @@ export type MountInput = {
 export type Mutation = {
   cancelJob: Scalars['Boolean'];
   createUser: Scalars['Boolean'];
+  deleteWorkflow: Scalars['Boolean'];
+  loginFromWeb2: Scalars['String'];
+  loginFromWeb3: Scalars['String'];
   requestJob: Scalars['Boolean'];
+  saveWorkflow: Scalars['Boolean'];
+  setWorkflowVisibility: Scalars['Boolean'];
 };
 
 export type MutationCancelJobArgs = {
@@ -89,6 +94,19 @@ export type MutationCreateUserArgs = {
   userId: Scalars['String'];
 };
 
+export type MutationDeleteWorkflowArgs = {
+  workflowId: Scalars['String'];
+};
+
+export type MutationLoginFromWeb2Args = {
+  firebaseToken: Scalars['String'];
+};
+
+export type MutationLoginFromWeb3Args = {
+  address: Scalars['Hex'];
+  signature: Scalars['Hex'];
+};
+
 export type MutationRequestJobArgs = {
   job: JobInput;
   jobName: Scalars['String'];
@@ -96,15 +114,31 @@ export type MutationRequestJobArgs = {
   userId: Scalars['String'];
 };
 
+export type MutationSaveWorkflowArgs = {
+  content: Scalars['String'];
+  name: Scalars['String'];
+  workflowId?: InputMaybe<Scalars['String']>;
+};
+
+export type MutationSetWorkflowVisibilityArgs = {
+  isPublic: Scalars['Boolean'];
+  workflowId: Scalars['String'];
+};
+
 export type NetworkInterfaceInput = {
   bore?: InputMaybe<BoreInput>;
   wireguard?: InputMaybe<WireguardInput>;
 };
 
+export type Node = {
+  _id: Scalars['ID'];
+};
+
 export type Query = {
   getJobHash: GetJobHashOutput;
-  getWorkflow?: Maybe<Scalars['String']>;
+  getWorkflow?: Maybe<Workflow>;
   listJobs: Array<Scalars['Hex']>;
+  listWorkflows: Array<Workflow>;
   ping: Scalars['String'];
 };
 
@@ -114,10 +148,6 @@ export type QueryGetJobHashArgs = {
 
 export type QueryGetWorkflowArgs = {
   workflowId: Scalars['String'];
-};
-
-export type QueryListJobsArgs = {
-  userId: Scalars['String'];
 };
 
 export type QueryPingArgs = {
@@ -201,4 +231,12 @@ export type WireguardPeerInput = {
   persistentKeepalive?: InputMaybe<Scalars['Int']>;
   preSharedKey?: InputMaybe<Scalars['String']>;
   publicKey: Scalars['String'];
+};
+
+export type Workflow = Node & {
+  _id: Scalars['ID'];
+  content: Scalars['String'];
+  name: Scalars['String'];
+  public: Scalars['Boolean'];
+  userId: Scalars['String'];
 };

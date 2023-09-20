@@ -10,8 +10,8 @@ import { JobRepositoryAbi } from '@abi/JobRepository';
 import { ProviderManagerAbi } from '@abi/ProviderManager';
 import { useListJobLazyQuery } from '@graphql/internal/client/generated/listJobs.generated';
 import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
-import type { JobSummary } from '@graphql/internal/types/JobSummary';
-import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/Provider';
+import type { JobSummary } from '@graphql/internal/types/objects/JobSummary';
+import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/objects/Provider';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
@@ -25,7 +25,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     address: addressJobRepository,
     abi: JobRepositoryAbi,
     functionName: 'getByCustomer',
-    args: [isWeb3(authMethod) ? authMethod.address : '0x0'],
+    args: [isWeb3(authMethod) ? authMethod.sub : '0x0'],
     watch: isWeb3(authMethod),
     enabled: isWeb3(authMethod),
   });
@@ -33,7 +33,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
   const [listJobs, { data }] = useListJobLazyQuery();
 
   useEffect(() => {
-    if (isWeb2(authMethod)) void listJobs({ variables: { userId: authMethod.id } });
+    if (isWeb2(authMethod)) void listJobs();
   }, [authMethod, listJobs]);
 
   const jobListConfig = { address: addressJobRepository, abi: JobRepositoryAbi, functionName: 'get' };

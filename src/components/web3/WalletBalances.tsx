@@ -79,7 +79,7 @@ const WalletBalances = () => {
             <Image src={dps} alt="Square Logo" width={13} height={18} layout="fixed" />
             <div className="text-[#33313E]">Gas:</div>
             <BlockChainExplorer
-              address={authMethod.address}
+              address={authMethod.sub}
               token={Token.NATIVE}
               className="text-[#33313E] no-underline"
               data-test="Wallet--balance-native"
@@ -90,12 +90,8 @@ const WalletBalances = () => {
         </Tooltip>
         <Tooltip title="Your connected account" arrow>
           <div>
-            <BlockChainExplorer
-              address={authMethod.address}
-              token={Token.NATIVE}
-              className="text-[#33313E] no-underline"
-            >
-              {formatAccount(authMethod.address)}
+            <BlockChainExplorer address={authMethod.sub} token={Token.NATIVE} className="text-[#33313E] no-underline">
+              {formatAccount(authMethod.sub)}
             </BlockChainExplorer>
           </div>
         </Tooltip>

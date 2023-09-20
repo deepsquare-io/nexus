@@ -4,11 +4,12 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { ApolloServer } from '@apollo/server';
+import type Context from '@graphql/internal/context/Context';
 import createSchema from '@graphql/internal/createSchema';
 import env from '@lib/app/env';
 
 const createServer = () => {
-  return new ApolloServer({
+  return new ApolloServer<Context>({
     schema: createSchema(),
     introspection: env.NEXT_PUBLIC_APP_ENV !== 'production',
   });

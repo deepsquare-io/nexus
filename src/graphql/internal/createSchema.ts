@@ -7,10 +7,16 @@ import { buildSchemaSync, registerEnumType } from 'type-graphql';
 import { JobStatus } from '@deepsquare/deepsquare-client';
 import CancelJobMutation from '@graphql/internal/mutations/CancelJobMutation';
 import CreateUserMutation from '@graphql/internal/mutations/CreateUserMutation';
+import DeleteWorkflowMutation from '@graphql/internal/mutations/DeleteWorkflowMutation';
+import LoginFromWeb2Mutation from '@graphql/internal/mutations/LoginFromWeb2Mutation';
+import LoginFromWeb3Mutation from '@graphql/internal/mutations/LoginFromWeb3Mutation';
 import RequestJobMutation from '@graphql/internal/mutations/RequestJobMutation';
+import SaveWorkflowMutation from '@graphql/internal/mutations/SaveWorkflowMutation';
+import SetWorkflowVisibilityMutation from '@graphql/internal/mutations/SetWorkflowVisibilityMutation';
 import GetJobHashQuery from '@graphql/internal/queries/GetJobHashQuery';
 import GetWorkflowQuery from '@graphql/internal/queries/GetWorkflowQuery';
 import ListJobsQuery from '@graphql/internal/queries/ListJobsQuery';
+import ListWorkflowsQuery from '@graphql/internal/queries/ListWorkflowsQuery';
 import PingQuery from '@graphql/internal/queries/PingQuery';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
 import HexScalar from '@graphql/internal/scalars/HexScalar';
@@ -37,12 +43,18 @@ export default function createSchema() {
       GetJobHashQuery,
       GetWorkflowQuery,
       ListJobsQuery,
+      ListWorkflowsQuery,
       PingQuery,
 
       // Mutations
       CancelJobMutation,
       CreateUserMutation,
+      DeleteWorkflowMutation,
+      LoginFromWeb2Mutation,
+      LoginFromWeb3Mutation,
       RequestJobMutation,
+      SaveWorkflowMutation,
+      SetWorkflowVisibilityMutation,
     ],
     container: {
       get(someClass: any): any {

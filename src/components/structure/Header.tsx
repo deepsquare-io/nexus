@@ -81,6 +81,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
                 }
                 setUser(null);
                 setAuthMethod(undefined);
+                localStorage.clear();
               }}
             >
               Log out
