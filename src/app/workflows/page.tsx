@@ -17,7 +17,7 @@ import { useListWorkflowsQuery } from '@graphql/internal/client/generated/listWo
 import { useSetWorkflowVisibilityMutation } from '@graphql/internal/client/generated/setWorkflowVisibility.generated';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isDisconnected } from '@lib/types/AuthMethod';
-import { DeleteSharp, EditSharp, LinkSharp } from '@mui/icons-material';
+import { DeleteSharp, EditSharp, LinkSharp, PlayArrowSharp } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import Fab from '@mui/material/Fab';
@@ -84,6 +84,17 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
               flex: 0.2,
               renderCell: (params) => (
                 <div className="flex justify-center content-center">
+                  <Fab
+                    color="primary"
+                    className="m-1"
+                    aria-label="edit"
+                    size="small"
+                    onClick={() => {
+                      router.push(`/sandbox?workflowId=${params.row._id}`);
+                    }}
+                  >
+                    <PlayArrowSharp />
+                  </Fab>
                   <Fab
                     color="primary"
                     className="m-1"
