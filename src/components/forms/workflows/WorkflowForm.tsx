@@ -58,7 +58,7 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
     await save({
       variables: { workflowId, name, content },
       onCompleted: () => {
-        toast.success('Workflow successfully saved !');
+        toast.success('Workflow successfully saved!');
       },
     });
     if (onSubmit) {
@@ -70,7 +70,7 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
     <FormProvider {...methods}>
       <form onSubmit={methods.handleSubmit(submit, console.error)}>
         <div className="flex flex-col grow space-y-4">
-          <TextField name="name" control={methods.control} className="bg-white" />
+          <TextField name="name" control={methods.control} InputProps={{ sx: { bgcolor: 'white' } }} />
 
           <WorkflowEditor
             cacheKey={workflowId ? `edit-workflow-${workflowId}` : 'new-workflow'}
