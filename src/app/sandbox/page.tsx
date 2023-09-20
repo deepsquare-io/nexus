@@ -19,7 +19,6 @@ import type { CreditSubformData } from '@components/forms/CreditSubform';
 import CreditSubform from '@components/forms/CreditSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
-import type { Content } from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
 import WorkflowEditor from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
@@ -30,6 +29,7 @@ import useHandleJob from '@hooks/useHandleJob';
 import { defaultJob } from '@lib/constants';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb2 } from '@lib/types/AuthMethod';
+import type { Content } from '@lib/types/Content';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import formatCredit from '@utils/format/formatCredit';
@@ -129,7 +129,7 @@ const SandboxPage: NextPage = () => {
             defaultContent={data?.getWorkflow ? data.getWorkflow.content : JSON.stringify(defaultJob)}
             onContentChange={(newContent, contentErrors) => {
               setContent(newContent);
-              setJsonErrors(contentErrors);
+              if (contentErrors) setJsonErrors(contentErrors);
             }}
           />
 
