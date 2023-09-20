@@ -32,7 +32,10 @@ const WorkflowsPage: NextPage = withConnectionRequired(() => {
 
   const [remove, { loading: removeLoading }] = useDeleteWorkflowMutation();
   const [setVisibility] = useSetWorkflowVisibilityMutation();
-  const { data, loading, refetch } = useListWorkflowsQuery({ skip: isDisconnected(authMethod) });
+  const { data, loading, refetch } = useListWorkflowsQuery({
+    skip: isDisconnected(authMethod),
+    fetchPolicy: 'cache-and-network',
+  });
   const [openDeletionDialog, setOpenDeletionDialog] = useState<boolean>(false);
 
   return (

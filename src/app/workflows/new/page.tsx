@@ -7,15 +7,14 @@
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import { useRouter } from 'next/navigation';
 import WorkflowForm from '@components/forms/workflows/WorkflowForm';
-import { refetchListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
 
 const NewWorkflowPage = () => {
   const router = useRouter();
+
   return (
     <WorkflowForm
       name="New Workflow"
       onSubmit={() => {
-        refetchListWorkflowsQuery();
         router.push('/workflows');
       }}
     />

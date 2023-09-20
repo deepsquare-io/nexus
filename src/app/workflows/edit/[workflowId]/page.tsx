@@ -8,7 +8,6 @@
 import { useRouter } from 'next/navigation';
 import WorkflowForm from '@components/forms/workflows/WorkflowForm';
 import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
-import { refetchListWorkflowsQuery } from '@graphql/internal/client/generated/listWorkflows.generated';
 
 const EditWorkflowPage = ({ params }: { params: { workflowId: string } }) => {
   const router = useRouter();
@@ -21,7 +20,6 @@ const EditWorkflowPage = ({ params }: { params: { workflowId: string } }) => {
       name={data.getWorkflow.name}
       content={data.getWorkflow.content}
       onSubmit={() => {
-        refetchListWorkflowsQuery();
         router.push('/workflows');
       }}
     />
