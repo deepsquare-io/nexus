@@ -1,6 +1,6 @@
 {
   "name": "@deepsquare/app.deepsquare.io",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Full-stack application of the DeepSquare Investment project base on Next.js.",
   "keywords": [
     "deepsquare",
@@ -41,7 +41,7 @@
     "@apollo/client": "^3.8.3",
     "@apollo/server": "^4.7.4",
     "@as-integrations/next": "^2.0.0",
-    "@deepsquare/deepsquare-client": "^0.12.1",
+    "@deepsquare/deepsquare-client": "^0.13.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@ethersproject/bytes": "5.7.0",
