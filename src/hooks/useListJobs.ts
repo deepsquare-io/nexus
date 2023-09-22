@@ -47,11 +47,16 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
           return { ...jobListConfig, args: [id] };
         })
       : [{ ...jobListConfig, args: [] }],
-    allowFailure: false,
+    allowFailure: true,
     enabled: !isDisconnected(authMethod),
     watch: !isDisconnected(authMethod),
     select: (data): JobSummary[] => {
-      return data as JobSummary[];
+      return data.reduce<JobSummary[]>((jobList, job) => {
+        if (job.status === 'success') {
+          jobList.push(job.result as JobSummary);
+        }
+        return jobList;
+      }, []);
     },
   });
 
