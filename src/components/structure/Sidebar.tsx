@@ -9,9 +9,11 @@ import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import type { FC, JSX, ReactNode } from 'react';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import CustomLink from '@components/routing/Link';
 import useDialog from '@hooks/useDialog';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb3 } from '@lib/types/AuthMethod';
 import { AspectRatio, LibraryBooks } from '@mui/icons-material';
 import AppsIcon from '@mui/icons-material/Apps';
 import DataObjectIcon from '@mui/icons-material/DataObject';
@@ -70,6 +72,7 @@ const Sidebar: FC<Omit<DrawerProps, 'open'>> = (props) => {
   const { isOpen } = useDialog('drawer');
   const [appOpen, setAppOpen] = useState(false);
   const pathname = usePathname();
+  const { authMethod } = useContext(authContext);
 
   const routes = {
     apps: {
@@ -103,7 +106,7 @@ const Sidebar: FC<Omit<DrawerProps, 'open'>> = (props) => {
     home: {
       '/stats': { icon: <QueryStatsIcon height={22} width={22} />, text: 'Stats' },
       '/status': { icon: task, text: 'Job Status' },
-      '/credits': { icon: wallet, text: 'Credits' },
+      ...(isWeb3(authMethod) ? { '/credits': { icon: wallet, text: 'Credits' } } : {}),
     },
   };
   const isApps = useMemo(
