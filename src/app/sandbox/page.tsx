@@ -52,11 +52,25 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
         (value) => BigInt(value) > minAmount,
       ),
     type: y.mixed<WorkloadType>().oneOf(Object.values(WorkloadType)).required(),
+    labels: y.array().of(
+      y.object().shape({
+        key: y.string().required(),
+        value: y.string().required(),
+      }),
+    ),
   });
 };
 
-function isJson(content: Content): content is { json: Job } {
-  return (content as { json: Job }).json !== undefined;
+function isJson(content: Content): content is {
+  json: Job;
+} {
+  return (
+    (
+      content as {
+        json: Job;
+      }
+    ).json !== undefined
+  );
 }
 
 const SandboxPage: NextPage = () => {
@@ -87,6 +101,7 @@ const SandboxPage: NextPage = () => {
     defaultValues: {
       type: WorkloadType.SANDBOX,
       credit: formatWei(5000n).toString(),
+      labels: [],
       jobName: `${WorkloadType.SANDBOX} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
     resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n, isWeb2(authMethod))),
@@ -156,23 +171,6 @@ const SandboxPage: NextPage = () => {
             }
           />
           <SendButton>Submit</SendButton>
-          {/*{(!data ||*/}
-          {/*  (isWeb2(authMethod) && data?.getWorkflow?.userId === authMethod.sub) ||*/}
-          {/*  (isWeb3(authMethod) && data?.getWorkflow?.userId === authMethod.sub)) && (*/}
-          {/*  <LoadingButton*/}
-          {/*    loading={loading && saveLoading}*/}
-          {/*    onClick={async () => {*/}
-          {/*      await save({*/}
-          {/*        variables: {*/}
-          {/*          content: isJson(store.content) ? JSON.stringify(store.content.json) : store.content.text,*/}
-          {/*          workflowId,*/}
-          {/*        },*/}
-          {/*      });*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    Save*/}
-          {/*  </LoadingButton>*/}
-          {/*)}*/}
         </div>
       </form>
     </FormProvider>

@@ -69,6 +69,11 @@ export type JobResourcesInput = {
   tasks: Scalars['Int'];
 };
 
+export type LabelInput = {
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
+
 export type MountInput = {
   containerDir: Scalars['String'];
   hostDir: Scalars['String'];
@@ -110,6 +115,7 @@ export type MutationLoginFromWeb3Args = {
 export type MutationRequestJobArgs = {
   job: JobInput;
   jobName: Scalars['String'];
+  labels?: Array<LabelInput>;
   maxAmount: Scalars['String'];
   userId: Scalars['String'];
 };
