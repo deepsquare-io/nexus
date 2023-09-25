@@ -4,13 +4,16 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { toast } from 'react-toastify';
-import type { Address } from 'wagmi';
 import { useContractWrite, usePrepareContractWrite, usePublicClient } from 'wagmi';
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MetaSchedulerAbi } from '@abi/MetaScheduler';
+import { useTopUpMutation } from '@graphql/internal/client/generated/topUp.generated';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCreditAllowance from '@hooks/useCreditAllowance';
 import useCreditIncreaseAllowance from '@hooks/useCreditIncreaseAllowance';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb2, isWeb3 } from '@lib/types/AuthMethod';
 import { addressMetaScheduler } from '@lib/web3/constants/contracts';
 import Button from '@mui/material/Button';
 import type { DialogProps } from '@mui/material/Dialog';
@@ -19,14 +22,17 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import formatDuration from '@utils/format/formatTime';
+import { computeCostPerMin } from '@utils/job/computeCostPerMin';
 
 interface TopUpDialogProps extends DialogProps {
-  jobId: Address;
+  job: FullJobSummary;
 
   onClose: () => void;
 }
 
-const TopUpDialog: FC<TopUpDialogProps> = ({ jobId, onClose, ...props }) => {
+const TopUpDialog: FC<TopUpDialogProps> = ({ job, onClose, ...props }) => {
+  const { authMethod } = useContext(authContext);
   const [topUpAmount, setTopUpAmount] = useState<bigint>(0n);
 
   const { allowance_wCredit } = useCreditAllowance(addressMetaScheduler);
@@ -37,17 +43,19 @@ const TopUpDialog: FC<TopUpDialogProps> = ({ jobId, onClose, ...props }) => {
     address: addressMetaScheduler,
     abi: MetaSchedulerAbi,
     functionName: 'topUpJob',
-    args: [jobId, topUpAmount],
+    args: [job.jobId, topUpAmount],
   });
-  const { writeAsync: topUp } = useContractWrite(topUpConfig);
+  const { writeAsync: topUpWeb3 } = useContractWrite(topUpConfig);
 
   const publicClient = usePublicClient();
+
+  const [topUpWeb2] = useTopUpMutation();
 
   return (
     <Dialog onClose={onClose} {...props}>
       <DialogTitle>Top up job</DialogTitle>
 
-      {jobId && <DialogContent>{`Top up job ${jobId.toString()}`}</DialogContent>}
+      <DialogContent>{`Top up job ${job.jobId.toString()}`}</DialogContent>
 
       <TextField
         id="top-up-amount"
@@ -56,37 +64,43 @@ const TopUpDialog: FC<TopUpDialogProps> = ({ jobId, onClose, ...props }) => {
         onChange={(event) => setTopUpAmount(BigInt(event.target.value))}
       />
 
+      <div>Estimated time added : ${formatDuration(Number((topUpAmount * 60n) / computeCostPerMin(job)))}</div>
+
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
         <Button
           onClick={async () => {
-            try {
-              if (missingAllowance > 0 && increaseAllowance && !setAllowanceError) {
-                const increaseAllowanceTransaction = await toast.promise(increaseAllowance(missingAllowance), {
-                  error: 'Transaction rejected',
-                });
+            if (isWeb2(authMethod)) {
+              await topUpWeb2({ variables: { jobId: job.jobId, amount: topUpAmount.toString() } });
+            } else if (isWeb3(authMethod)) {
+              try {
+                if (missingAllowance > 0 && increaseAllowance && !setAllowanceError) {
+                  const increaseAllowanceTransaction = await toast.promise(increaseAllowance(missingAllowance), {
+                    error: 'Transaction rejected',
+                  });
 
-                await toast.promise(
-                  publicClient.waitForTransactionReceipt({ hash: increaseAllowanceTransaction.hash }),
-                  {
-                    pending: 'Waiting for authorization confirmation',
-                    success: 'Authorization confirmed',
-                  },
-                );
+                  await toast.promise(
+                    publicClient.waitForTransactionReceipt({ hash: increaseAllowanceTransaction.hash }),
+                    {
+                      pending: 'Waiting for authorization confirmation',
+                      success: 'Authorization confirmed',
+                    },
+                  );
+                }
+
+                if (topUpWeb3 && !topUpError) {
+                  const topUpTransaction = await toast.promise(topUpWeb3, {
+                    error: 'Transaction rejected',
+                  });
+
+                  await toast.promise(publicClient.waitForTransactionReceipt({ hash: topUpTransaction.hash }), {
+                    pending: 'Topping up new job...',
+                    success: 'Job has been topped up successfully!',
+                  });
+                }
+              } finally {
+                onClose();
               }
-
-              if (topUp && !topUpError) {
-                const topUpTransaction = await toast.promise(topUp, {
-                  error: 'Transaction rejected',
-                });
-
-                await toast.promise(publicClient.waitForTransactionReceipt({ hash: topUpTransaction.hash }), {
-                  pending: 'Topping up new job...',
-                  success: 'Job has been topped up successfully!',
-                });
-              }
-            } finally {
-              onClose();
             }
           }}
         >

@@ -3,10 +3,10 @@
 // Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
-import { useFormContext } from 'react-hook-form';
-import type { FC } from 'react';
-import { useEffect, useMemo, useState } from 'react';
-import type { CreditSubformData } from '@components/forms/CreditSubform';
+import {useFormContext} from 'react-hook-form';
+import type {FC} from 'react';
+import {useEffect, useMemo, useState} from 'react';
+import type {CreditSubformData} from '@components/forms/CreditSubform';
 import useGetProviderPrices from '@hooks/useGetProviderPrices';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -27,20 +27,20 @@ export interface HardwareRecapProps {
   memQty?: number;
 }
 
-const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cpuQty = 0, memQty = 0 }) => {
-  const [time, setTime] = useState({ hours: 0, minutes: defaultDuration });
+const HardwareRecap: FC<HardwareRecapProps> = ({defaultDuration, gpuQty = 0, cpuQty = 0, memQty = 0}) => {
+  const [time, setTime] = useState({hours: 0, minutes: defaultDuration});
   const [selectedTimeType, setSelectedTimeType] = useState<keyof typeof time>('minutes');
   const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setTime((prevState) => {
-      return { ...prevState, minutes: defaultDuration };
+      return {...prevState, minutes: defaultDuration};
     });
   }, [defaultDuration]);
 
-  const { data: provider } = useGetProviderPrices('0x75761b17c3088ce5cd8e02575c6daa438ffa6e12');
+  const {data: provider} = useGetProviderPrices('0x75761B17c3088ce5Cd8e02575c6DAa438FFA6e12');
 
-  const { setValue, formState } = useFormContext<CreditSubformData>();
+  const {setValue, formState} = useFormContext<CreditSubformData>();
 
   const credit = useMemo<bigint>(() => {
     if (!provider || !time[selectedTimeType]) return 0n;
@@ -65,54 +65,54 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
   const rows = [
     ...(gpuQty !== 0
       ? [
-          {
-            id: 'gpu',
-            productName: 'GPU',
-            qty: gpuQty,
-            price: time[selectedTimeType]
-              ? formatBigNumber(
-                  provider.gpuPricePerMin *
-                    BigInt(gpuQty) *
-                    BigInt(selectedTimeType === 'hours' ? time[selectedTimeType]! * 60 : time[selectedTimeType]!),
-                  { divide: 18, precision: 2 },
-                )
-              : '0',
-          },
-        ]
+        {
+          id: 'gpu',
+          productName: 'GPU',
+          qty: gpuQty,
+          price: time[selectedTimeType]
+            ? formatBigNumber(
+              provider.gpuPricePerMin *
+              BigInt(gpuQty) *
+              BigInt(selectedTimeType === 'hours' ? time[selectedTimeType]! * 60 : time[selectedTimeType]!),
+              {divide: 18, precision: 2},
+            )
+            : '0',
+        },
+      ]
       : []),
     ...(cpuQty !== 0
       ? [
-          {
-            id: 'cpu',
-            productName: 'CPU',
-            qty: cpuQty,
-            price: time[selectedTimeType]
-              ? formatBigNumber(
-                  provider.cpuPricePerMin *
-                    BigInt(cpuQty) *
-                    BigInt(selectedTimeType === 'hours' ? time[selectedTimeType]! * 60 : time[selectedTimeType]!),
-                  { divide: 18, precision: 2 },
-                )
-              : '0',
-          },
-        ]
+        {
+          id: 'cpu',
+          productName: 'CPU',
+          qty: cpuQty,
+          price: time[selectedTimeType]
+            ? formatBigNumber(
+              provider.cpuPricePerMin *
+              BigInt(cpuQty) *
+              BigInt(selectedTimeType === 'hours' ? time[selectedTimeType]! * 60 : time[selectedTimeType]!),
+              {divide: 18, precision: 2},
+            )
+            : '0',
+        },
+      ]
       : []),
     ...(memQty !== 0
       ? [
-          {
-            id: 'mem',
-            productName: 'Memory (MB)',
-            qty: memQty,
-            price: time[selectedTimeType]
-              ? formatBigNumber(
-                  provider.memPricePerMin *
-                    BigInt(memQty) *
-                    BigInt(selectedTimeType === 'hours' ? time[selectedTimeType]! * 60 : time[selectedTimeType]!),
-                  { divide: 18, precision: 2 },
-                )
-              : '0',
-          },
-        ]
+        {
+          id: 'mem',
+          productName: 'Memory (MB)',
+          qty: memQty,
+          price: time[selectedTimeType]
+            ? formatBigNumber(
+              provider.memPricePerMin *
+              BigInt(memQty) *
+              BigInt(selectedTimeType === 'hours' ? time[selectedTimeType]! * 60 : time[selectedTimeType]!),
+              {divide: 18, precision: 2},
+            )
+            : '0',
+        },
+      ]
       : []),
   ];
 
@@ -131,7 +131,7 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
                 value={time[selectedTimeType]}
                 onChange={(event) => {
                   if (!event.target.value) return;
-                  setTime({ ...time, [selectedTimeType]: event.target.value });
+                  setTime({...time, [selectedTimeType]: event.target.value});
                 }}
                 className="w-20 border-0 focus-visible:outline-0 appearance-none"
                 placeholder="duration"

@@ -84,6 +84,7 @@ export type Mutation = {
   requestJob: Scalars['Boolean'];
   saveWorkflow: Scalars['Boolean'];
   setWorkflowVisibility: Scalars['Boolean'];
+  topUp: Scalars['Boolean'];
 };
 
 export type MutationCancelJobArgs = {
@@ -123,6 +124,11 @@ export type MutationSaveWorkflowArgs = {
 export type MutationSetWorkflowVisibilityArgs = {
   isPublic: Scalars['Boolean'];
   workflowId: Scalars['String'];
+};
+
+export type MutationTopUpArgs = {
+  amount: Scalars['String'];
+  jobId: Scalars['Hex'];
 };
 
 export type NetworkInterfaceInput = {
