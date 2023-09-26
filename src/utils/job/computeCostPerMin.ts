@@ -23,5 +23,5 @@ export function computeCostPerMin(summary: FullJobSummary): bigint {
   const cpuCost = summary.definition.cpusPerTask * summary.provider.providerPrices.cpuPricePerMin;
   const memCost =
     summary.definition.memPerCpu * summary.definition.cpusPerTask * summary.provider.providerPrices.memPricePerMin;
-  return (tasks * (gpuCost + cpuCost + memCost)) / 1000000n;
+  return tasks * (gpuCost + cpuCost + memCost);
 }

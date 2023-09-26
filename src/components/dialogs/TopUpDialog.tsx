@@ -23,7 +23,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import formatDuration from '@utils/format/formatTime';
+import { formatWei } from '@utils/format/formatWei';
 import { computeCostPerMin } from '@utils/job/computeCostPerMin';
+import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 interface TopUpDialogProps extends DialogProps {
   job: FullJobSummary;
@@ -52,19 +54,23 @@ const TopUpDialog: FC<TopUpDialogProps> = ({ job, onClose, ...props }) => {
   const [topUpWeb2] = useTopUpMutation();
 
   return (
-    <Dialog onClose={onClose} {...props}>
+    <Dialog onClose={onClose} PaperProps={{ className: 'rounded-xl items-center' }} {...props}>
       <DialogTitle>Top up job</DialogTitle>
 
-      <DialogContent>{`Top up job ${job.jobId.toString()}`}</DialogContent>
+      <DialogContent>
+        {`Top up ${parseBytes32String(job.jobName)}`}
+        <TextField
+          id="top-up-amount"
+          className="mt-4"
+          label="Amount"
+          value={topUpAmount.toString()}
+          onChange={(event) => setTopUpAmount(BigInt(event.target.value))}
+        />
 
-      <TextField
-        id="top-up-amount"
-        label="Amount"
-        value={topUpAmount}
-        onChange={(event) => setTopUpAmount(BigInt(event.target.value))}
-      />
-
-      <div>Estimated time added : ${formatDuration(Number((topUpAmount * 60n) / computeCostPerMin(job)))}</div>
+        <div>
+          Estimated time added : {formatDuration(Number((formatWei(topUpAmount) * 60n) / computeCostPerMin(job)))}
+        </div>
+      </DialogContent>
 
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>

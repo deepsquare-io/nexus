@@ -32,9 +32,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
 import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
+import { formatWei } from '@utils/format/formatWei';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
 import { computeCost } from '@utils/job/computeCost';
+import { computeCostPerMin } from '@utils/job/computeCostPerMin';
 import { isJobTerminated } from '@utils/job/isJobTerminated';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
@@ -187,7 +189,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               )
                 return '-';
               const maxDuration = dayjs.duration(
-                formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
+                formatEtherLossy(formatWei(params.row.cost.maxCost) / computeCostPerMin(params.row)) * 60 * 1000,
               );
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
@@ -223,7 +225,8 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
+            valueGetter: (params) =>
+              params.row.provider ? `${formatEther(computeCostPerMin(params.row))} creds/min` : '-',
           },
           {
             field: 'cost',
@@ -233,15 +236,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) =>
-              hasJobRun(params.row.status)
-                ? isJobTerminated(params.row.status)
-                  ? formatEther(params.row.cost.finalCost)
-                  : `~${formatEther(
-                      BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
-                        computeCost(params.row),
-                    )}`
-                : '-',
+            valueGetter: (params) => (hasJobRun(params.row.status) ? formatEther(computeCost(params.row)) : '-'),
           },
           {
             field: 'actions',
