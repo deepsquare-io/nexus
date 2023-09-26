@@ -145,6 +145,17 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                 >
                   <CancelSharp />
                 </Fab>
+                <Fab
+                  color="primary"
+                  className="m-1"
+                  aria-label="get logs"
+                  size="small"
+                  onClick={() => {
+                    router.push(`/job/${params.row.jobId}`);
+                  }}
+                >
+                  <DescriptionOutlinedIcon />
+                </Fab>
               </div>
             ),
           },
