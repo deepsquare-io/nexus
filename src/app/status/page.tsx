@@ -7,52 +7,52 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-import type {NextPage} from 'next';
-import {useRouter} from 'next/navigation';
-import type {Address} from 'wagmi';
-import type {MouseEvent} from 'react';
-import {useContext, useState} from 'react';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/navigation';
+import type { Address } from 'wagmi';
+import type { MouseEvent } from 'react';
+import { useContext, useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
-import type {FullJobSummary} from '@graphql/internal/queries/ListJobsQuery';
+import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
-import {authContext} from '@lib/contexts/AuthContext';
-import {isWeb3} from '@lib/types/AuthMethod';
-import {JobStatus} from '@lib/types/enums/JobStatus';
-import {CancelSharp, MoreTime} from '@mui/icons-material';
+import { authContext } from '@lib/contexts/AuthContext';
+import { isWeb3 } from '@lib/types/AuthMethod';
+import { JobStatus } from '@lib/types/enums/JobStatus';
+import { CancelSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import Popover from '@mui/material/Popover';
 import Tooltip from '@mui/material/Tooltip';
-import type {GridColDef} from '@mui/x-data-grid';
-import {DataGrid} from '@mui/x-data-grid';
+import type { GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
-import {formatEther, formatEtherLossy} from '@utils/format/formatEther';
-import {hasJobRun} from '@utils/hasJobRun';
+import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
+import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
-import {computeCost} from '@utils/job/computeCost';
-import {isJobTerminated} from '@utils/job/isJobTerminated';
-import {parseBytes32String} from '@utils/parse/parseBytes32String';
+import { computeCost } from '@utils/job/computeCost';
+import { isJobTerminated } from '@utils/job/isJobTerminated';
+import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 dayjs.extend(duration);
 
 const StatusPage: NextPage = withConnectionRequired(() => {
   const router = useRouter();
 
-  const {width} = useWindowSize();
+  const { width } = useWindowSize();
 
-  const {authMethod} = useContext(authContext);
+  const { authMethod } = useContext(authContext);
 
   const [openTopUpDialog, setOpenTopUpDialog] = useState<boolean>(false);
   const [topUpJobId, setTopUpJobId] = useState<string | undefined>(undefined);
 
-  const {cancel} = useCancelJob();
+  const { cancel } = useCancelJob();
 
   const [loading] = useState(false);
 
@@ -82,213 +82,213 @@ const StatusPage: NextPage = withConnectionRequired(() => {
   const columns =
     width && width < 1440
       ? ([
-        {
-          field: 'jobId',
-          flex: 0.04,
-          headerName: 'Job Id',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          align: 'right',
-          valueFormatter: ({value}) => hex2dec(value),
-        },
-        {
-          field: 'jobName',
-          flex: 0.2,
-          headerName: 'Job name',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          valueFormatter: ({value}) => parseBytes32String(value),
-        },
-        {
-          field: 'status',
-          flex: 0.2,
-          headerName: 'Status',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          renderCell: (params) => <JobStatusChip status={params.row.status}/>,
-        },
-        {
-          field: 'actions',
-          headerName: 'Actions',
-          flex: 0.3,
-          minWidth: 120,
-          maxWidth: 120,
-          renderCell: (params) => (
-            <div className="flex justify-center content-center">
-              <Fab
-                disabled={isJobTerminated(params.row.status)}
-                color="primary"
-                className="m-1"
-                aria-label="cancel"
-                size="small"
-                onClick={async () => {
-                  if (isJobTerminated(params.row.status) || !cancel) return;
-                  await cancel(params.row.jobId);
-                }}
-              >
-                <CancelSharp/>
-              </Fab>
-              <Fab
-                color="primary"
-                className="m-1"
-                aria-label="get logs"
-                size="small"
-                onClick={() => {
-                  router.push(`/job/${params.row.jobId}`);
-                }}
-              >
-                <DescriptionOutlinedIcon/>
-              </Fab>
-            </div>
-          ),
-        },
-      ] as GridColDef<FullJobSummary>[])
-      : ([
-        {
-          field: 'jobId',
-          description: 'The global job id',
-          flex: 0.03,
-          headerName: 'Job Id',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          align: 'right',
-          headerAlign: 'right',
-          valueFormatter: ({value}) => hex2dec(value),
-        },
-        {
-          field: 'jobName',
-          description: 'Job name',
-          flex: 0.15,
-          headerName: 'Job name',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          valueFormatter: ({value}) => parseBytes32String(value),
-        },
-        {
-          field: 'status',
-          description:
-            'Job status starts as PENDING when submitted. Once a cluster is found by the meta-scheduler, it becomes META_SCHEDULED. After the cluster claims the job, it becomes SCHEDULED and waits in the queue for execution. Once started, the job status changes to RUNNING. Successful jobs are marked as FINISHED, while unsuccessful ones can either be FAILED or OUT_OF_CREDITS. The last status is CANCELLED, which is self-explanatory',
-          flex: 0.08,
-          headerName: 'Status',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          renderCell: (params) => <JobStatusChip status={params.row.status}/>,
-        },
-        {
-          field: 'timeLeft',
-          description: 'The authorized and prepaid time that a user can use a cloud computing resource for',
-          flex: 0.08,
-          headerName: 'Available Time Left',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          valueGetter: (params) => {
-            if (
-              (params.row.status !== JobStatus.SCHEDULED && params.row.status !== JobStatus.RUNNING) ||
-              !params.row.provider
-            )
-              return '-';
-            const maxDuration = dayjs.duration(
-              formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
-            );
-            if (params.row.status === JobStatus.SCHEDULED) {
-              return `${maxDuration.as('minutes').toFixed(0)} min`;
-            } else {
-              const remainingTime = maxDuration
-                .subtract(dayjs.duration(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)))))
-                .as('minutes')
-              return remainingTime >= 0 ? `${remainingTime.toFixed(0)} min` : "Stalled";
-            }
+          {
+            field: 'jobId',
+            flex: 0.04,
+            headerName: 'Job Id',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            align: 'right',
+            valueFormatter: ({ value }) => hex2dec(value),
           },
-        },
-        {
-          field: 'timestamp',
-          description: 'Amount of time that a job has been running since it started',
-          flex: 0.05,
-          headerName: 'Duration',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          valueGetter: (params) =>
-            hasJobRun(params.row.status)
-              ? `${(isJobTerminated(params.row.status) ? dayjs(Number(params.row.time.end * 1000n)) : dayjs()).diff(
-                dayjs(Number(params.row.time.start * 1000n)),
-                'minutes',
-              )} min`
-              : '-',
-        },
-        {
-          field: 'hourlyCost',
-          description: 'Amount of token credits charged per minute for the service',
-          flex: 0.1,
-          headerName: 'Cost/min',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
-        },
-        {
-          field: 'cost',
-          description: 'Amount of token credits charged for the service',
-          flex: 0.05,
-          headerName: 'Cost',
-          type: 'string',
-          sortable: false,
-          filterable: false,
-          valueGetter: (params) =>
-            hasJobRun(params.row.status)
-              ? isJobTerminated(params.row.status)
-                ? formatEther(params.row.cost.finalCost)
-                : `~${formatEther(
-                  BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
-                  computeCost(params.row),
-                )}`
-              : '-',
-        },
-        {
-          field: 'actions',
-          description:
-            'Refers to the various operations on a job or resource, such as cancelling, downloading, or topping up',
-          headerName: 'Actions',
-          flex: 0.22,
-          minWidth: 230,
-          renderCell: (params) => (
-            <div className="flex justify-center space-x-2">
-              <Tooltip title="Job logs">
-                <Button
-                  className="rounded h-11"
+          {
+            field: 'jobName',
+            flex: 0.2,
+            headerName: 'Job name',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            valueFormatter: ({ value }) => parseBytes32String(value),
+          },
+          {
+            field: 'status',
+            flex: 0.2,
+            headerName: 'Status',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            renderCell: (params) => <JobStatusChip status={params.row.status} />,
+          },
+          {
+            field: 'actions',
+            headerName: 'Actions',
+            flex: 0.3,
+            minWidth: 120,
+            maxWidth: 120,
+            renderCell: (params) => (
+              <div className="flex justify-center content-center">
+                <Fab
+                  disabled={isJobTerminated(params.row.status)}
                   color="primary"
+                  className="m-1"
+                  aria-label="cancel"
+                  size="small"
+                  onClick={async () => {
+                    if (isJobTerminated(params.row.status) || !cancel) return;
+                    await cancel(params.row.jobId);
+                  }}
+                >
+                  <CancelSharp />
+                </Fab>
+                <Fab
+                  color="primary"
+                  className="m-1"
                   aria-label="get logs"
+                  size="small"
                   onClick={() => {
                     router.push(`/job/${params.row.jobId}`);
                   }}
                 >
-                  <DescriptionOutlinedIcon/>
-                </Button>
-              </Tooltip>
-              {isWeb3(authMethod) && (
-                <Tooltip title="Top up">
+                  <DescriptionOutlinedIcon />
+                </Fab>
+              </div>
+            ),
+          },
+        ] as GridColDef<FullJobSummary>[])
+      : ([
+          {
+            field: 'jobId',
+            description: 'The global job id',
+            flex: 0.03,
+            headerName: 'Job Id',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            align: 'right',
+            headerAlign: 'right',
+            valueFormatter: ({ value }) => hex2dec(value),
+          },
+          {
+            field: 'jobName',
+            description: 'Job name',
+            flex: 0.15,
+            headerName: 'Job name',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            valueFormatter: ({ value }) => parseBytes32String(value),
+          },
+          {
+            field: 'status',
+            description:
+              'Job status starts as PENDING when submitted. Once a cluster is found by the meta-scheduler, it becomes META_SCHEDULED. After the cluster claims the job, it becomes SCHEDULED and waits in the queue for execution. Once started, the job status changes to RUNNING. Successful jobs are marked as FINISHED, while unsuccessful ones can either be FAILED or OUT_OF_CREDITS. The last status is CANCELLED, which is self-explanatory',
+            flex: 0.08,
+            headerName: 'Status',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            renderCell: (params) => <JobStatusChip status={params.row.status} />,
+          },
+          {
+            field: 'timeLeft',
+            description: 'The authorized and prepaid time that a user can use a cloud computing resource for',
+            flex: 0.08,
+            headerName: 'Available Time Left',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            valueGetter: (params) => {
+              if (
+                (params.row.status !== JobStatus.SCHEDULED && params.row.status !== JobStatus.RUNNING) ||
+                !params.row.provider
+              )
+                return '-';
+              const maxDuration = dayjs.duration(
+                formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
+              );
+              if (params.row.status === JobStatus.SCHEDULED) {
+                return `${maxDuration.as('minutes').toFixed(0)} min`;
+              } else {
+                const remainingTime = maxDuration
+                  .subtract(dayjs.duration(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)))))
+                  .as('minutes');
+                return remainingTime >= 0 ? `${remainingTime.toFixed(0)} min` : 'Stalled';
+              }
+            },
+          },
+          {
+            field: 'timestamp',
+            description: 'Amount of time that a job has been running since it started',
+            flex: 0.05,
+            headerName: 'Duration',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            valueGetter: (params) =>
+              hasJobRun(params.row.status)
+                ? `${(isJobTerminated(params.row.status) ? dayjs(Number(params.row.time.end * 1000n)) : dayjs()).diff(
+                    dayjs(Number(params.row.time.start * 1000n)),
+                    'minutes',
+                  )} min`
+                : '-',
+          },
+          {
+            field: 'hourlyCost',
+            description: 'Amount of token credits charged per minute for the service',
+            flex: 0.1,
+            headerName: 'Cost/min',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
+          },
+          {
+            field: 'cost',
+            description: 'Amount of token credits charged for the service',
+            flex: 0.05,
+            headerName: 'Cost',
+            type: 'string',
+            sortable: false,
+            filterable: false,
+            valueGetter: (params) =>
+              hasJobRun(params.row.status)
+                ? isJobTerminated(params.row.status)
+                  ? formatEther(params.row.cost.finalCost)
+                  : `~${formatEther(
+                      BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
+                        computeCost(params.row),
+                    )}`
+                : '-',
+          },
+          {
+            field: 'actions',
+            description:
+              'Refers to the various operations on a job or resource, such as cancelling, downloading, or topping up',
+            headerName: 'Actions',
+            flex: 0.22,
+            minWidth: 230,
+            renderCell: (params) => (
+              <div className="flex justify-center space-x-2">
+                <Tooltip title="Job logs">
                   <Button
                     className="rounded h-11"
                     color="primary"
-                    disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
-                    aria-label="top up"
+                    aria-label="get logs"
                     onClick={() => {
-                      if (isJobTerminated(params.row.status) || !cancel) return;
-                      setOpenTopUpDialog(true);
+                      router.push(`/job/${params.row.jobId}`);
                     }}
                   >
-                    <MoreTime/>
+                    <DescriptionOutlinedIcon />
                   </Button>
                 </Tooltip>
-              )}
-              <Tooltip title="Cancel job">
+                {isWeb3(authMethod) && (
+                  <Tooltip title="Top up">
+                    <Button
+                      className="rounded h-11"
+                      color="primary"
+                      disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
+                      aria-label="top up"
+                      onClick={() => {
+                        if (isJobTerminated(params.row.status) || !cancel) return;
+                        setOpenTopUpDialog(true);
+                      }}
+                    >
+                      <MoreTime />
+                    </Button>
+                  </Tooltip>
+                )}
+                <Tooltip title="Cancel job">
                   <span>
                     <Button
                       className="rounded h-11"
@@ -300,14 +300,14 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                         await cancel(params.row.jobId);
                       }}
                     >
-                      <CancelOutlinedIcon/>
+                      <CancelOutlinedIcon />
                     </Button>
                   </span>
-              </Tooltip>
-            </div>
-          ),
-        },
-      ] as GridColDef<FullJobSummary>[]);
+                </Tooltip>
+              </div>
+            ),
+          },
+        ] as GridColDef<FullJobSummary>[]);
 
   const columnBuffer = columns.map((col) => ({
     ...col,
@@ -402,7 +402,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
           </Popover>
         )}
       </div>
-      {topUpJobId && <TopUpDialog jobId={topUpJobId as Address} open={openTopUpDialog} onClose={onClose}/>}
+      {topUpJobId && <TopUpDialog jobId={topUpJobId as Address} open={openTopUpDialog} onClose={onClose} />}
     </>
   );
 });
