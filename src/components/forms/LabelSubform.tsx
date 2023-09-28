@@ -21,7 +21,7 @@ const LabelSubform = () => {
   return (
     <Grid item xs={2}>
       <div className="flex flex-col">
-        <h2 className="m-0 font-normal">Labels</h2>
+        <h2 className="m-0 font-medium">Labels</h2>
 
         <div className="flex flex-col">
           {fields.map((field, index) => {

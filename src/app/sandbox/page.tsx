@@ -17,6 +17,7 @@ import { useContext, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
 import type { CreditSubformData } from '@components/forms/CreditSubform';
 import CreditSubform from '@components/forms/CreditSubform';
+import LabelSubform from '@components/forms/LabelSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
 import WorkflowEditor from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
@@ -80,6 +81,7 @@ const SandboxPage: NextPage = () => {
   const searchParams = useSearchParams();
   const workflowId = searchParams.get('workflowId');
   const [content, setContent] = useState<Content>({ text: '' });
+  const [simpleMode, setSimpleMode] = useState<boolean>(true);
 
   const { data } = useGetWorkflowQuery({
     variables: { workflowId: workflowId! },
@@ -142,15 +144,31 @@ const SandboxPage: NextPage = () => {
                 .
               </p>
             </div>
+            <WorkflowEditor
+              cacheKey={workflowId ? `sandbox-${workflowId}` : 'sandbox'}
+              defaultContent={data?.getWorkflow ? data.getWorkflow.content : JSON.stringify(defaultJob)}
+              onContentChange={(newContent, contentErrors) => {
+                setContent(newContent);
+                if (contentErrors) setJsonErrors(contentErrors);
+              }}
+            />
+            {simpleMode && (
+              <div className="mt-4 text-primary font-bold hover:cursor-pointer" onClick={() => setSimpleMode(false)}>
+                Show Advanced Mode
+              </div>
+            )}
+            {!simpleMode && (
+              <div className="mt-4">
+                <LabelSubform />
+                <div
+                  className="mt-4 text-primary font-bold hover:cursor-pointer col-start-1"
+                  onClick={() => setSimpleMode(true)}
+                >
+                  Hide Advanced Mode
+                </div>
+              </div>
+            )}
           </Card>
-          <WorkflowEditor
-            cacheKey={workflowId ? `sandbox-${workflowId}` : 'sandbox'}
-            defaultContent={data?.getWorkflow ? data.getWorkflow.content : JSON.stringify(defaultJob)}
-            onContentChange={(newContent, contentErrors) => {
-              setContent(newContent);
-              if (contentErrors) setJsonErrors(contentErrors);
-            }}
-          />
 
           <CreditSubform
             defaultDuration={20}
