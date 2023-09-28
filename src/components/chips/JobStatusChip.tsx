@@ -70,6 +70,7 @@ const JobStatusChip: FC<JobStatusChipProps> = ({ status }) => {
       case JobStatus.FAILED:
       case JobStatus.CANCELLED:
       case JobStatus.OUT_OF_CREDITS:
+      case JobStatus.PANICKED:
         return (
           <Chip
             className="font-bold"

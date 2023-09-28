@@ -38,7 +38,7 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
     });
   }, [defaultDuration]);
 
-  const { data: provider } = useGetProviderPrices('0x75761b17c3088ce5cd8e02575c6daa438ffa6e12');
+  const { data: provider } = useGetProviderPrices('0x75761B17c3088ce5Cd8e02575c6DAa438FFA6e12');
 
   const { setValue, formState } = useFormContext<CreditSubformData>();
 

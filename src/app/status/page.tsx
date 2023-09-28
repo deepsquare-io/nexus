@@ -9,9 +9,8 @@ import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
-import type { Address } from 'wagmi';
 import type { MouseEvent } from 'react';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
@@ -19,8 +18,6 @@ import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
-import { authContext } from '@lib/contexts/AuthContext';
-import { isWeb3 } from '@lib/types/AuthMethod';
 import { JobStatus } from '@lib/types/enums/JobStatus';
 import { CancelSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -34,9 +31,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import formatBigNumber from '@utils/format/formatBigNumber';
 import formatCredit from '@utils/format/formatCredit';
 import { formatEther, formatEtherLossy } from '@utils/format/formatEther';
+import { formatWei } from '@utils/format/formatWei';
 import { hasJobRun } from '@utils/hasJobRun';
 import hex2dec from '@utils/hex2dec';
 import { computeCost } from '@utils/job/computeCost';
+import { computeCostPerMin } from '@utils/job/computeCostPerMin';
 import { isJobTerminated } from '@utils/job/isJobTerminated';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
@@ -47,10 +46,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   const { width } = useWindowSize();
 
-  const { authMethod } = useContext(authContext);
-
-  const [openTopUpDialog, setOpenTopUpDialog] = useState<boolean>(false);
-  const [topUpJobId, setTopUpJobId] = useState<string | undefined>(undefined);
+  const [topUpJob, setTopUpJob] = useState<FullJobSummary | undefined>(undefined);
 
   const { cancel } = useCancelJob();
 
@@ -72,11 +68,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
-  };
-
-  const onClose = () => {
-    setTopUpJobId(undefined);
-    setOpenTopUpDialog(false);
   };
 
   const columns =
@@ -195,7 +186,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               )
                 return '-';
               const maxDuration = dayjs.duration(
-                formatEtherLossy((params.row.cost.maxCost * 60n * 1000n) / computeCost(params.row)),
+                formatEtherLossy(formatWei(params.row.cost.maxCost) / computeCostPerMin(params.row)) * 60 * 1000,
               );
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
@@ -231,7 +222,8 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) => (params.row.provider ? `${formatEther(computeCost(params.row))} creds/min` : '-'),
+            valueGetter: (params) =>
+              params.row.provider ? `${formatEther(computeCostPerMin(params.row))} creds/min` : '-',
           },
           {
             field: 'cost',
@@ -241,15 +233,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             type: 'string',
             sortable: false,
             filterable: false,
-            valueGetter: (params) =>
-              hasJobRun(params.row.status)
-                ? isJobTerminated(params.row.status)
-                  ? formatEther(params.row.cost.finalCost)
-                  : `~${formatEther(
-                      BigInt(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)), 'minutes')) *
-                        computeCost(params.row),
-                    )}`
-                : '-',
+            valueGetter: (params) => (hasJobRun(params.row.status) ? formatEther(computeCost(params.row)) : '-'),
           },
           {
             field: 'actions',
@@ -272,22 +256,20 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                     <DescriptionOutlinedIcon />
                   </Button>
                 </Tooltip>
-                {isWeb3(authMethod) && (
-                  <Tooltip title="Top up">
-                    <Button
-                      className="rounded h-11"
-                      color="primary"
-                      disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
-                      aria-label="top up"
-                      onClick={() => {
-                        if (isJobTerminated(params.row.status) || !cancel) return;
-                        setOpenTopUpDialog(true);
-                      }}
-                    >
-                      <MoreTime />
-                    </Button>
-                  </Tooltip>
-                )}
+                <Tooltip title="Top up">
+                  <Button
+                    className="rounded h-11"
+                    color="primary"
+                    disabled={!(params.row.status === JobStatus.RUNNING || params.row.status === JobStatus.SCHEDULED)}
+                    aria-label="top up"
+                    onClick={() => {
+                      if (isJobTerminated(params.row.status) || !cancel) return;
+                      setTopUpJob(params.row);
+                    }}
+                  >
+                    <MoreTime />
+                  </Button>
+                </Tooltip>
                 <Tooltip title="Cancel job">
                   <span>
                     <Button
@@ -402,7 +384,15 @@ const StatusPage: NextPage = withConnectionRequired(() => {
           </Popover>
         )}
       </div>
-      {topUpJobId && <TopUpDialog jobId={topUpJobId as Address} open={openTopUpDialog} onClose={onClose} />}
+      {typeof topUpJob !== 'undefined' && (
+        <TopUpDialog
+          job={topUpJob}
+          open={typeof topUpJob !== 'undefined'}
+          onClose={() => {
+            setTopUpJob(undefined);
+          }}
+        />
+      )}
     </>
   );
 });

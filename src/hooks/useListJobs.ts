@@ -3,7 +3,6 @@
 // Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
-import type { Address } from 'wagmi';
 import { useContractRead, useContractReads } from 'wagmi';
 import { useContext, useEffect } from 'react';
 import { JobRepositoryAbi } from '@abi/JobRepository';
@@ -11,10 +10,9 @@ import { ProviderManagerAbi } from '@abi/ProviderManager';
 import { useListJobLazyQuery } from '@graphql/internal/client/generated/listJobs.generated';
 import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import type { JobSummary } from '@graphql/internal/types/objects/JobSummary';
-import type { Provider, ProviderHardware, ProviderPrices } from '@graphql/internal/types/objects/Provider';
+import type { Provider } from '@graphql/internal/types/objects/Provider';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isDisconnected, isWeb2, isWeb3 } from '@lib/types/AuthMethod';
-import type { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 import { ZERO_ADDRESS } from '@lib/web3/constants/address';
 import { addressJobRepository, addressProviderManager } from '@lib/web3/constants/contracts';
 
@@ -77,19 +75,7 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
     enabled: isWeb3(authMethod),
     watch: isWeb3(authMethod),
     select: (data): Provider[] => {
-      return (data as [Address, ProviderHardware, ProviderPrices, ProviderStatus, bigint, boolean, boolean][]).map(
-        (provider) => {
-          return {
-            addr: provider[0],
-            providerHardware: provider[1],
-            providerPrices: provider[2],
-            status: provider[3],
-            jobCount: provider[4],
-            valid: provider[5],
-            linkListed: provider[6],
-          };
-        },
-      );
+      return data as Provider[];
     },
   });
 
