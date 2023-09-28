@@ -13,6 +13,7 @@ import { useContext, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
 import type { CreditSubformData } from '@components/forms/CreditSubform';
 import CreditSubform from '@components/forms/CreditSubform';
+import LabelSubform from '@components/forms/LabelSubform';
 import NumberField from '@components/forms/fields/NumberField';
 import NumberSlider from '@components/forms/fields/SliderField';
 import BlenderForm from '@components/forms/workloads/BlenderForm';
@@ -51,6 +52,12 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
         (value) => BigInt(value) > minAmount,
       ),
     type: y.mixed<WorkloadType>().oneOf([WorkloadType.BLENDER]),
+    labels: y.array().of(
+      y.object().shape({
+        key: y.string().required(),
+        value: y.string().required(),
+      }),
+    ),
     details: y.object().shape({
       version: y.string().required(),
       outputFormat: y.mixed<BlenderOutputFormat>().oneOf(Object.values(BlenderOutputFormat)).required(),
@@ -72,6 +79,7 @@ export default function BlenderPage() {
     defaultValues: {
       type: WorkloadType.BLENDER,
       credit: formatWei(1200n).toString(),
+      labels: [],
       details: {
         version: BlenderVersion.v341,
         outputFormat: BlenderOutputFormat.PNG,
@@ -157,6 +165,7 @@ export default function BlenderPage() {
                       defaultValue={4096}
                     />
                   </Grid>
+                  <LabelSubform />
                 </>
               )}
             </Grid>

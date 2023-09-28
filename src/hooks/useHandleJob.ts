@@ -10,6 +10,7 @@ import { MetaSchedulerAbi } from '@abi/MetaScheduler';
 import type { Job } from '@graphql/external/sbatchServiceClient/generated/Types';
 import { useSubmitMutation } from '@graphql/external/sbatchServiceClient/generated/createJob.generated';
 import { useRequestJobMutation } from '@graphql/internal/client/generated/requestJob.generated';
+import type { Label } from '@graphql/internal/types/objects/JobSummary';
 import useCreditAllowance from '@hooks/useCreditAllowance';
 import useCreditIncreaseAllowance from '@hooks/useCreditIncreaseAllowance';
 import useDebounce from '@hooks/useDebounce';
@@ -22,7 +23,11 @@ import { resolveStorageType } from '@utils/resolveStorageType';
 export default function useHandleJob(
   amount: string,
   jobName: string,
-): { handleJob: (job: Job) => Promise<void>; loading: boolean } {
+  labels: Label[] = [],
+): {
+  handleJob: (job: Job) => Promise<void>;
+  loading: boolean;
+} {
   const debouncedAmount = useDebounce(BigInt(amount), 500);
   const debouncedName = useDebounce(jobName, 500);
   const { allowance_wCredit } = useCreditAllowance(addressMetaScheduler);
@@ -75,7 +80,7 @@ export default function useHandleJob(
                       memPerCpu: BigInt(job.resources.memPerCpu),
                       storageType: resolveStorageType(job),
                       batchLocationHash,
-                      uses: [],
+                      uses: labels,
                       affinity: [],
                     },
                     debouncedAmount,
@@ -102,6 +107,7 @@ export default function useHandleJob(
                 jobName: debouncedName,
                 maxAmount: debouncedAmount.toString(),
                 userId: authMethod.sub,
+                labels,
               },
             }),
             {

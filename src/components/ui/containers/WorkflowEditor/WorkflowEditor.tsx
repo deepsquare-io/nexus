@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic';
 import type { ContentErrors } from 'vanilla-jsoneditor';
 import type { FC } from 'react';
 import { memo, useEffect, useState } from 'react';
-import Card from '@components/ui/containers/Card/Card';
 import type { Content } from '@lib/types/Content';
 import Button from '@mui/material/Button';
 
@@ -41,8 +40,9 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
   }, [cacheKey, store]);
 
   return (
-    <Card className="flex flex-col grow p-8" title="Write your workflow file">
-      <div className="pt-5">
+    <div className="flex flex-col grow">
+      <h2 className="font-medium">Write your workflow file</h2>
+      <div>
         <MemoJsonEditor
           content={store.content}
           onChange={(
@@ -68,7 +68,7 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
           Reset
         </Button>
       </div>
-    </Card>
+    </div>
   );
 };
 

@@ -48,6 +48,12 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
         (value) => BigInt(value) > minAmount,
       ),
     type: y.mixed<WorkloadType>().oneOf([WorkloadType.URS]),
+    labels: y.array().of(
+      y.object().shape({
+        key: y.string().required(),
+        value: y.string().required(),
+      }),
+    ),
     details: y.object().shape({
       archiveLink: y.string().required(),
       binaryPath: y.string().required(),
@@ -72,6 +78,7 @@ const UnityPage: NextPage = () => {
     defaultValues: {
       type: WorkloadType.URS,
       credit: formatWei(275n).toString(),
+      labels: [],
       jobName: `${WorkloadType.URS} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 1,

@@ -47,6 +47,12 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
         (value) => BigInt(value) > minAmount,
       ),
     type: y.mixed<WorkloadType>().oneOf([WorkloadType.UPSCALING]),
+    labels: y.array().of(
+      y.object().shape({
+        key: y.string().required(),
+        value: y.string().required(),
+      }),
+    ),
     details: y.object().shape({
       isAnime: y.boolean().required(),
       isVideo: y.boolean().required(),
@@ -66,6 +72,7 @@ const NewPage: NextPage = () => {
       type: WorkloadType.UPSCALING,
       jobName: `${WorkloadType.UPSCALING} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       credit: formatWei(4000n).toString(),
+      labels: [],
       details: {
         nTasks: 1,
         gpuPerTask: 1,
