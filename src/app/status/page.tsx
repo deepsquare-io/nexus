@@ -22,10 +22,9 @@ import useWindowSize from '@hooks/useWindowSize';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb3 } from '@lib/types/AuthMethod';
 import { JobStatus } from '@lib/types/enums/JobStatus';
-import { CancelSharp, DownloadSharp, MoreTime } from '@mui/icons-material';
+import { CancelSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import DownloadIcon from '@mui/icons-material/Download';
 import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import Popover from '@mui/material/Popover';
@@ -120,19 +119,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             renderCell: (params) => (
               <div className="flex justify-center content-center">
                 <Fab
-                  disabled={!isJobTerminated(params.row.status)}
-                  color="primary"
-                  className="m-1"
-                  aria-label="download"
-                  size="small"
-                  onClick={() => {
-                    if (!isJobTerminated(params.row.status)) return;
-                    router.push(`/job/${params.row.jobId}`);
-                  }}
-                >
-                  <DownloadSharp />
-                </Fab>
-                <Fab
                   disabled={isJobTerminated(params.row.status)}
                   color="primary"
                   className="m-1"
@@ -144,6 +130,17 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   }}
                 >
                   <CancelSharp />
+                </Fab>
+                <Fab
+                  color="primary"
+                  className="m-1"
+                  aria-label="get logs"
+                  size="small"
+                  onClick={() => {
+                    router.push(`/job/${params.row.jobId}`);
+                  }}
+                >
+                  <DescriptionOutlinedIcon />
                 </Fab>
               </div>
             ),
@@ -263,22 +260,6 @@ const StatusPage: NextPage = withConnectionRequired(() => {
             minWidth: 230,
             renderCell: (params) => (
               <div className="flex justify-center space-x-2">
-                <Tooltip title="Download results">
-                  <span>
-                    <Button
-                      className="rounded h-11"
-                      color="primary"
-                      aria-label="download"
-                      disabled={!isJobTerminated(params.row.status)}
-                      onClick={() => {
-                        if (!isJobTerminated(params.row.status)) return;
-                        router.push(`/job/${params.row.jobId}?download=1`);
-                      }}
-                    >
-                      <DownloadIcon />
-                    </Button>
-                  </span>
-                </Tooltip>
                 <Tooltip title="Job logs">
                   <Button
                     className="rounded h-11"
