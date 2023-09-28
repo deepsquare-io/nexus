@@ -191,10 +191,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
               if (params.row.status === JobStatus.SCHEDULED) {
                 return `${maxDuration.as('minutes').toFixed(0)} min`;
               } else {
-                return `${maxDuration
+                const remainingTime = maxDuration
                   .subtract(dayjs.duration(dayjs().diff(dayjs(Number(params.row.time.start * 1000n)))))
-                  .as('minutes')
-                  .toFixed(0)} min`;
+                  .as('minutes');
+                return remainingTime >= 0 ? `${remainingTime.toFixed(0)} min` : 'Stalled';
               }
             },
           },
