@@ -45,7 +45,7 @@ const TopUpDialog: FC<TopUpDialogProps> = ({ job, onClose, ...props }) => {
     address: addressMetaScheduler,
     abi: MetaSchedulerAbi,
     functionName: 'topUpJob',
-    args: [job.jobId, topUpAmount],
+    args: [job.jobId, formatWei(topUpAmount)],
   });
   const { writeAsync: topUpWeb3 } = useContractWrite(topUpConfig);
 
@@ -77,7 +77,7 @@ const TopUpDialog: FC<TopUpDialogProps> = ({ job, onClose, ...props }) => {
         <Button
           onClick={async () => {
             if (isWeb2(authMethod)) {
-              await topUpWeb2({ variables: { jobId: job.jobId, amount: topUpAmount.toString() } });
+              await topUpWeb2({ variables: { jobId: job.jobId, amount: formatWei(topUpAmount).toString() } });
             } else if (isWeb3(authMethod)) {
               try {
                 if (missingAllowance > 0 && increaseAllowance && !setAllowanceError) {

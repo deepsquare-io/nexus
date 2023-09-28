@@ -10,7 +10,7 @@ import duration from 'dayjs/plugin/duration';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/navigation';
 import type { MouseEvent } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
@@ -58,6 +58,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
   const [value, setValue] = useState<FullJobSummary | undefined>(undefined);
 
   const jobs = useListJobs();
+
+  useEffect(() => {
+    console.log(jobs);
+  }, [jobs]);
 
   const handlePopoverOpen = (event: MouseEvent<HTMLElement>) => {
     const field = event.currentTarget.dataset.field!;
