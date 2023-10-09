@@ -4,32 +4,31 @@
 // Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import dynamic from 'next/dynamic';
-import type { ContentErrors } from 'vanilla-jsoneditor';
 import type { FC } from 'react';
 import { memo, useEffect, useState } from 'react';
-import type { Content } from '@lib/types/Content';
+import type Job from '@graphql/internal/types/objects/Job';
 import Button from '@mui/material/Button';
 
 const JsonEditor = dynamic(() => import('@components/ui/containers/JsonEditor/JsonEditor'), { ssr: false });
 
 const MemoJsonEditor = memo(JsonEditor, (prev, next) => JSON.stringify(prev) == JSON.stringify(next));
 
-type Store = { content: Content; initialized: boolean };
+type Store = { content: string; initialized: boolean };
 
 export interface WorkflowEditorProps {
   cacheKey: string;
   defaultContent: string;
-  onContentChange: (newContent: Content, contentErrors: ContentErrors | null) => void;
+  onContentChange: (value: string, parsedValue?: Job, contentErrors?: any[]) => void;
 }
 
 const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onContentChange }) => {
   const [store, setStore] = useState<Store>(() => {
-    if (typeof window === 'undefined') return { content: { text: '' }, initialized: false };
+    if (typeof window === 'undefined') return { content: '', initialized: false };
     const storedContent = localStorage.getItem(cacheKey);
     return storedContent
       ? (JSON.parse(storedContent) as Store)
       : {
-          content: { text: defaultContent },
+          content: defaultContent,
           initialized: false,
         };
   });
@@ -44,15 +43,11 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
       <h2 className="font-medium">Write your workflow file</h2>
       <div>
         <MemoJsonEditor
-          content={store.content}
-          onChange={(
-            newContent: Content,
-            previousContent: Content,
-            { contentErrors }: { contentErrors: ContentErrors | null },
-          ) => {
-            onContentChange(newContent, contentErrors);
+          value={store.content}
+          onChange={(value: string, parsedValue?: Job, errors?: any[]) => {
+            onContentChange(value, parsedValue, errors);
             setStore((prev) => {
-              return { content: newContent, initialized: prev.initialized };
+              return { content: value, initialized: prev.initialized };
             });
           }}
         />
@@ -60,7 +55,7 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
           className="mt-5"
           onClick={() => {
             setStore({
-              content: { text: defaultContent },
+              content: defaultContent,
               initialized: true,
             });
           }}
