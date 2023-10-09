@@ -11,7 +11,7 @@ import randomWords from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { stringify } from 'yaml';
+import { parse, stringify } from 'yaml';
 import * as y from 'yup';
 import { useContext, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
@@ -78,7 +78,7 @@ const SandboxPage: NextPage = () => {
 
   const [jsonErrors, setJsonErrors] = useState<any[]>([]);
 
-  const json = content.parsedValue;
+  const json = content.parsedValue ? content.parsedValue : parse(defaultJobContent);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
