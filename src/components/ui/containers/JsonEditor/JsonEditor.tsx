@@ -58,7 +58,7 @@ function JsonEditor(props: JsonEditorProps) {
           job = parse(value) as Job;
           validateJob(job);
           if (validateJob.errors) {
-            errors.push(validateJob.errors);
+            errors.push(...validateJob.errors);
           }
         } catch (e) {
           errors.push(e);
