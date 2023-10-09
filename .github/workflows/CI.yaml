@@ -37,4 +37,4 @@ jobs:
       - name: Setup environment
         uses: ./.github/actions/setup
       - name: Build
-        run: pnpm run test:build
+        run: NODE_OPTIONS=--max-old-space-size=1536 pnpm run test:build
