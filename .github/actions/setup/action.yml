@@ -17,6 +17,7 @@ runs:
       uses: pnpm/action-setup@v2
       with:
         version: ${{ steps.pnpm.outputs.latest-version }}
+        cache: 'pnpm'
 
     - name: Setup Node.js
       uses: actions/setup-node@v3
