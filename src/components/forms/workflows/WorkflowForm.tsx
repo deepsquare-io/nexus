@@ -74,8 +74,8 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
           <WorkflowEditor
             cacheKey={workflowId ? `edit-workflow-${workflowId}` : 'new-workflow'}
             defaultContent={defaultContent}
-            onContentChange={(value, parsedValue, contentErrors) => {
-              methods.setValue('content', parsedValue ? JSON.stringify(parsedValue) : value);
+            onContentChange={(value, _, contentErrors) => {
+              methods.setValue('content', value);
               if (contentErrors && contentErrors.length > 0) {
                 methods.setError('content', { message: 'Invalid workflow' });
               } else {

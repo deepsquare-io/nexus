@@ -47,6 +47,21 @@ function JsonEditor(props: JsonEditorProps) {
       language="yaml"
       options={{
         automaticLayout: true,
+        suggest: {
+          selectionMode: 'always',
+          // Disable words suggestions.
+          showWords: false,
+        },
+        scrollBeyondLastLine: false,
+        trimAutoWhitespace: true,
+        wordWrap: 'on',
+        wrappingStrategy: 'advanced',
+        renderWhitespace: 'trailing',
+        quickSuggestions: {
+          comments: 'off',
+          other: 'inline',
+          strings: 'inline',
+        },
       }}
       value={props.value}
       onChange={(value) => {

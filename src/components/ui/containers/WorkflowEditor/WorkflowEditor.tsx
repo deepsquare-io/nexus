@@ -8,6 +8,7 @@ import type { FC } from 'react';
 import { memo, useEffect, useState } from 'react';
 import type Job from '@graphql/internal/types/objects/Job';
 import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
 
 const JsonEditor = dynamic(() => import('@components/ui/containers/JsonEditor/JsonEditor'), { ssr: false });
 
@@ -42,15 +43,22 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
     <div className="flex flex-col grow">
       <h2 className="font-medium">Write your workflow file</h2>
       <div>
-        <MemoJsonEditor
-          value={store.content}
-          onChange={(value: string, parsedValue?: Job, errors?: any[]) => {
-            onContentChange(value, parsedValue, errors);
-            setStore((prev) => {
-              return { content: value, initialized: prev.initialized };
-            });
-          }}
-        />
+        <p>
+          <i>
+            Use <kbd>ctrl</kbd> + <kbd>space</kbd> to open suggestions.
+          </i>
+        </p>
+        <Card className="mt-5" variant="outlined">
+          <MemoJsonEditor
+            value={store.content}
+            onChange={(value: string, parsedValue?: Job, errors?: any[]) => {
+              onContentChange(value, parsedValue, errors);
+              setStore((prev) => {
+                return { content: value, initialized: prev.initialized };
+              });
+            }}
+          />
+        </Card>
         <Button
           className="mt-5"
           onClick={() => {
