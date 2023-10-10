@@ -8,10 +8,12 @@ import * as draft6MetaSchema from 'ajv/dist/refs/json-schema-draft-06.json';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import type { IntrospectionQuery } from 'graphql/index';
 import { configureMonacoYaml } from 'monaco-yaml';
-import MonacoEditor from 'react-monaco-editor';
+import dynamic from 'next/dynamic';
 import { parse } from 'yaml';
 import introspection from '@graphql/external/sbatchServiceClient/generated/introspection.json';
 import type Job from '@graphql/internal/types/objects/Job';
+
+const MonacoEditor = dynamic(() => import('react-monaco-editor'), { ssr: false });
 
 const schema = fromIntrospectionQuery(introspection as unknown as IntrospectionQuery);
 schema.properties = (schema.definitions!.Job as any).properties; // Switch graphql properties with job properties
@@ -36,7 +38,7 @@ type JsonEditorProps = {
 
 function JsonEditor(props: JsonEditorProps) {
   // Validator engine
-  const ajv = new Ajv();
+  const ajv = new Ajv({ strict: false });
   ajv.addMetaSchema(draft6MetaSchema);
   const validateJob = ajv.compile(schema);
 
@@ -88,11 +90,6 @@ function JsonEditor(props: JsonEditorProps) {
         return monaco.Uri.parse('job.yaml');
       }}
       editorWillMount={(monaco) => {
-        // Need to load workers. Webpack is used to copy the worker.js files.
-        window.MonacoEnvironment!.getWorkerUrl = (moduleId, label) => {
-          if (label === 'yaml') return '_next/static/yaml.worker.js';
-          return '_next/static/editor.worker.js';
-        };
         configureMonacoYaml(monaco, {
           enableSchemaRequest: false,
           validate: true,

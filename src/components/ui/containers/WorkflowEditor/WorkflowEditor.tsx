@@ -3,14 +3,12 @@
 // Foobar is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 // Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
-import dynamic from 'next/dynamic';
 import type { FC } from 'react';
 import { memo, useEffect, useState } from 'react';
+import JsonEditor from '@components/ui/containers/JsonEditor/JsonEditor';
 import type Job from '@graphql/internal/types/objects/Job';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-
-const JsonEditor = dynamic(() => import('@components/ui/containers/JsonEditor/JsonEditor'), { ssr: false });
 
 const MemoJsonEditor = memo(JsonEditor, (prev, next) => JSON.stringify(prev) == JSON.stringify(next));
 
