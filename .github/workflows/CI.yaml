@@ -12,7 +12,7 @@ on:
 jobs:
   scripts:
     name: Quality assessment via scripts
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         script:
@@ -28,7 +28,7 @@ jobs:
         run: ${{ matrix.script }}
   test-build:
     name: Test build
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: ${{ github.ref != 'refs/heads/main' }}
     needs: [scripts]
     timeout-minutes: 60
