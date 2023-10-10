@@ -7,6 +7,7 @@ import Ajv from 'ajv';
 import * as draft6MetaSchema from 'ajv/dist/refs/json-schema-draft-06.json';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import type { IntrospectionQuery } from 'graphql/index';
+import type { MonacoYaml } from 'monaco-yaml';
 import { configureMonacoYaml } from 'monaco-yaml';
 import dynamic from 'next/dynamic';
 import { parse } from 'yaml';
@@ -41,6 +42,8 @@ function JsonEditor(props: JsonEditorProps) {
   const ajv = new Ajv({ strict: false });
   ajv.addMetaSchema(draft6MetaSchema);
   const validateJob = ajv.compile(schema);
+
+  let yamlWorker: MonacoYaml | undefined;
 
   return (
     <MonacoEditor
@@ -90,7 +93,7 @@ function JsonEditor(props: JsonEditorProps) {
         return monaco.Uri.parse('job.yaml');
       }}
       editorWillMount={(monaco) => {
-        configureMonacoYaml(monaco, {
+        yamlWorker = configureMonacoYaml(monaco, {
           enableSchemaRequest: false,
           validate: true,
           hover: true,
@@ -107,6 +110,9 @@ function JsonEditor(props: JsonEditorProps) {
             },
           ],
         });
+      }}
+      editorWillUnmount={() => {
+        yamlWorker?.dispose();
       }}
     />
   );
