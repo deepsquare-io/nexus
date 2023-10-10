@@ -4,13 +4,11 @@
 // Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import type { FC } from 'react';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import JsonEditor from '@components/ui/containers/JsonEditor/JsonEditor';
 import type Job from '@graphql/internal/types/objects/Job';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-
-const MemoJsonEditor = memo(JsonEditor, (prev, next) => JSON.stringify(prev) == JSON.stringify(next));
 
 type Store = { content: string; initialized: boolean };
 
@@ -47,7 +45,7 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
           </i>
         </p>
         <Card className="mt-5" variant="outlined">
-          <MemoJsonEditor
+          <JsonEditor
             value={store.content}
             onChange={(value: string, parsedValue?: Job, errors?: any[]) => {
               onContentChange(value, parsedValue, errors);
