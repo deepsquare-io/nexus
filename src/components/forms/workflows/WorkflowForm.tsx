@@ -12,8 +12,7 @@ import TextField from '@components/forms/fields/TextField';
 import WorkflowEditor from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
 import { useSaveWorkflowMutation } from '@graphql/internal/client/generated/saveWorkflow.generated';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { defaultJob } from '@lib/constants';
-import { isText } from '@lib/types/Content';
+import { defaultJobContent } from '@lib/constants';
 import Button from '@mui/material/Button';
 
 const schema = () => {
@@ -40,7 +39,7 @@ export interface WorkflowFormData {
 const WorkflowForm: FC<WorkflowFormProps> = ({
   workflowId,
   name: defaultName,
-  content: defaultContent = JSON.stringify(defaultJob),
+  content: defaultContent = defaultJobContent,
   onSubmit,
 }) => {
   const [save] = useSaveWorkflowMutation();
@@ -75,13 +74,9 @@ const WorkflowForm: FC<WorkflowFormProps> = ({
           <WorkflowEditor
             cacheKey={workflowId ? `edit-workflow-${workflowId}` : 'new-workflow'}
             defaultContent={defaultContent}
-            onContentChange={(newContent, contentErrors) => {
-              methods.setValue('content', isText(newContent) ? newContent.text : JSON.stringify(newContent.json));
-              if (
-                contentErrors !== null &&
-                'validationErrors' in contentErrors &&
-                contentErrors.validationErrors.length > 0
-              ) {
+            onContentChange={(value, _, contentErrors) => {
+              methods.setValue('content', value);
+              if (contentErrors && contentErrors.length > 0) {
                 methods.setError('content', { message: 'Invalid workflow' });
               } else {
                 methods.clearErrors('content');
