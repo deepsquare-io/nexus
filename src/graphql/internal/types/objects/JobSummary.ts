@@ -60,6 +60,9 @@ export class JobDefinition {
 @ObjectType()
 export class JobTime {
   @Field(() => BigIntScalar)
+  submit!: bigint;
+
+  @Field(() => BigIntScalar)
   start!: bigint;
 
   @Field(() => BigIntScalar)
@@ -121,4 +124,7 @@ export class JobSummary implements ReadContractReturnType<typeof IJobRepositoryA
 
   @Field(() => String)
   lastError!: string;
+
+  @Field(() => BigIntScalar)
+  exitCode!: bigint;
 }

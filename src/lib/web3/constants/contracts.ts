@@ -8,14 +8,14 @@ import ChainId from '@lib/web3/lib/ChainId';
 
 const mainnet: { [contractName: string]: Address } = {
   Credit: '0x43f185708de9e18D514F317Ca5587F96847A3dbe',
-  FaucetCredit: '0x9d5686FcA91Dd2bc0C4efc40209A0d8c6Db4FE70',
-  FaucetNative: '0xb5ca6E9aA460714Ad7c4D734849bA016c07c43A8',
-  MetaScheduler: '0x48af46ee836514551886bbC3b5920Eba81126F62',
-  ProviderManager: '0x6203C63c987F2247F4694cE3Dc21F2393c2af84e',
-  Tools: '0xe5609294736a6340853b096F0d449E7B8C8765bD',
-  Constants: '0xc54620e9852C26d1f60495223345Bd624153b5D8',
-  ProviderJobQueues: '0x4e851439132e7a5306FDcf384B8b70CDa58FC1de',
-  JobRepository: '0xeDa851d8A2a2aac992f053F76667E8745f446141',
+  FaucetCredit: '0xE80D1B228BBc15489255fCe75243CD48913d4dfc',
+  FaucetNative: '0x9f2862718e0aD6715850938702deeF204C863300',
+  MetaScheduler: '0x945Cb74ba64714f977c4abbE8a416F7E0Cf5180B',
+  ProviderManager: '0x609b8204E4830b24fA09B09983Fe631d1D1bd897',
+  Tools: '0xE1F0AbA8476c5C725B1E897fb172f4432ae2525E',
+  Constants: '0x14d7cA72e3a8D2081E2cE1B4e16f4BBB1Ef95Ff4',
+  ProviderJobQueues: '0xB0a97543BdF19B070fDa596f103b2A9CE4E3B62E',
+  JobRepository: '0x94E361F62CB4BEb6d43e181A8570f83f2c809245',
 };
 
 type addressBook = typeof mainnet;
