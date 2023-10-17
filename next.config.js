@@ -1,4 +1,5 @@
 const { withSentryConfig } = require('@sentry/nextjs');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const test = process.env.NEXT_PUBLIC_APP_ENV === 'test';
 const analyse = process.env.NEXT_BUILD_ANALYZE === 'true';
@@ -38,6 +39,22 @@ let config = {
       config.optimization.minimize = false;
     }
     config.experiments = { ...config.experiments, topLevelAwait: true };
+    config.plugins.push(
+      new MonacoWebpackPlugin({
+        languages: ['yaml'],
+        filename: 'static/[name].worker.js',
+        customLanguages: [
+          {
+            label: 'yaml',
+            entry: 'monaco-yaml',
+            worker: {
+              id: 'monaco-yaml/yamlWorker',
+              entry: 'monaco-yaml/yaml.worker',
+            },
+          },
+        ],
+      }),
+    );
     return config;
   },
 };

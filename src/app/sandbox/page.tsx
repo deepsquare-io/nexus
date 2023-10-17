@@ -11,7 +11,7 @@ import randomWords from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import type { ContentErrors } from 'vanilla-jsoneditor';
+import { parse, stringify } from 'yaml';
 import * as y from 'yup';
 import { useContext, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
@@ -27,10 +27,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
 import useHandleJob from '@hooks/useHandleJob';
-import { defaultJob } from '@lib/constants';
+import { defaultJobContent } from '@lib/constants';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb2 } from '@lib/types/AuthMethod';
-import type { Content } from '@lib/types/Content';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import formatCredit from '@utils/format/formatCredit';
@@ -62,25 +61,13 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
   });
 };
 
-function isJson(content: Content): content is {
-  json: Job;
-} {
-  return (
-    (
-      content as {
-        json: Job;
-      }
-    ).json !== undefined
-  );
-}
-
 const SandboxPage: NextPage = () => {
   const { balance_wCredit } = useBalances();
   const { data: minAmount } = useGetMinimumAmount();
   const { authMethod } = useContext(authContext);
   const searchParams = useSearchParams();
   const workflowId = searchParams.get('workflowId');
-  const [content, setContent] = useState<Content>({ text: '' });
+  const [content, setContent] = useState<{ value: string; parsedValue?: Job }>({ value: '' });
   const [simpleMode, setSimpleMode] = useState<boolean>(true);
 
   const { data } = useGetWorkflowQuery({
@@ -89,15 +76,9 @@ const SandboxPage: NextPage = () => {
     fetchPolicy: 'cache-and-network',
   });
 
-  let json: any;
+  const [jsonErrors, setJsonErrors] = useState<any[]>([]);
 
-  try {
-    json = isJson(content) ? content.json : JSON.parse(content.text);
-  } catch (e) {
-    json = defaultJob;
-  }
-
-  const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
+  const json = content.parsedValue ? content.parsedValue : parse(defaultJobContent);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
@@ -114,12 +95,20 @@ const SandboxPage: NextPage = () => {
   const { handleJob } = useHandleJob(watch('credit').toString(), watch('jobName'));
 
   const onSubmit: SubmitHandler<CreditSubformData & WorkloadFormData> = async () => {
-    if (jsonErrors && 'validationErrors' in jsonErrors && jsonErrors.validationErrors.length > 0) {
-      toast.error('Invalid JSON');
+    if (jsonErrors && jsonErrors.length > 0) {
+      toast.error(`YAML has validation errors:\n${stringify(jsonErrors)}`);
       return;
     }
 
-    await handleJob(json);
+    if (!json) {
+      toast.error("YAML couldn't be parsed");
+      return;
+    }
+    try {
+      await handleJob(json);
+    } catch (e) {
+      toast.error(`Server refused the job: ${stringify(e)}`);
+    }
   };
 
   //TODO: add loading state awaiting for get workflow query if necessary
@@ -146,10 +135,10 @@ const SandboxPage: NextPage = () => {
             </div>
             <WorkflowEditor
               cacheKey={workflowId ? `sandbox-${workflowId}` : 'sandbox'}
-              defaultContent={data?.getWorkflow ? data.getWorkflow.content : JSON.stringify(defaultJob)}
-              onContentChange={(newContent, contentErrors) => {
-                setContent(newContent);
-                if (contentErrors) setJsonErrors(contentErrors);
+              defaultContent={data?.getWorkflow ? data.getWorkflow.content : defaultJobContent}
+              onContentChange={(value, parsedValue, errors) => {
+                setContent({ value, parsedValue });
+                if (errors) setJsonErrors(errors);
               }}
             />
             {simpleMode && (

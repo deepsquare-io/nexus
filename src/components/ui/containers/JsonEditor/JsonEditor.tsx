@@ -3,70 +3,119 @@
 // Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
+import Ajv from 'ajv';
 import * as draft6MetaSchema from 'ajv/dist/refs/json-schema-draft-06.json';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import type { IntrospectionQuery } from 'graphql/index';
-import type { JSONEditor, JSONSchema, JSONSchemaDefinitions } from 'vanilla-jsoneditor';
-import { useCallback, useEffect, useRef } from 'react';
+import type { MonacoYaml } from 'monaco-yaml';
+import { configureMonacoYaml } from 'monaco-yaml';
+import dynamic from 'next/dynamic';
+import { parse } from 'yaml';
 import introspection from '@graphql/external/sbatchServiceClient/generated/introspection.json';
+import type Job from '@graphql/internal/types/objects/Job';
 
-function JsonEditor(props: Record<string, any>) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const editorRef = useRef<JSONEditor | null>(null);
+const MonacoEditor = dynamic(() => import('react-monaco-editor'), { ssr: false });
 
-  const updateProps = useCallback(
-    async (editor: JSONEditor) => {
-      const schema = fromIntrospectionQuery(introspection as unknown as IntrospectionQuery);
-      const definitions: JSONSchemaDefinitions = {};
+const schema = fromIntrospectionQuery(introspection as unknown as IntrospectionQuery);
+schema.properties = (schema.definitions!.Job as any).properties; // Switch graphql properties with job properties
 
-      if (schema.definitions) {
-        Object.keys(schema.definitions).forEach((key) => {
-          if (!schema.definitions) return;
-          definitions[`#/definitions/${key}`] = schema.definitions[key] as JSONSchema;
-        });
-      }
+type JsonEditorProps = {
+  /**
+   * Value is the pre-loaded value of the editor.
+   */
+  value?: string | null;
+  /**
+   * onChange returns the raw value in the value variable.
+   *
+   * The json schema is hardcoded in the editor.
+   *
+   * If the value is parsable by the YAML engine, it will returns a parsedValue
+   * even if it is not passing validation.
+   *
+   * Errors is filled based on the schema validation. See the ajv engine.
+   */
+  onChange?: (value: string, parsedValue?: Job, errors?: any[]) => void;
+};
 
-      const createValidator = await import('vanilla-jsoneditor').then((module) => module.createAjvValidator);
+function JsonEditor(props: JsonEditorProps) {
+  // Validator engine
+  const ajv = new Ajv({ strict: false });
+  ajv.addMetaSchema(draft6MetaSchema);
+  const validateJob = ajv.compile(schema);
 
-      const validator = createValidator({
-        schema: schema.definitions?.Job as JSONSchema,
-        schemaDefinitions: definitions,
-        onCreateAjv: (ajv) => {
-          ajv.addMetaSchema(draft6MetaSchema);
+  let yamlWorker: MonacoYaml | undefined;
+
+  return (
+    <MonacoEditor
+      height="50vh"
+      width="auto"
+      language="yaml"
+      options={{
+        automaticLayout: true,
+        suggest: {
+          selectionMode: 'always',
+          // Disable words suggestions.
+          showWords: false,
         },
-      });
-      if (editor.updateProps) await editor.updateProps({ ...props, validator });
-      return editor;
-    },
-    [props],
+        scrollBeyondLastLine: false,
+        trimAutoWhitespace: true,
+        wordWrap: 'on',
+        wrappingStrategy: 'advanced',
+        renderWhitespace: 'trailing',
+        quickSuggestions: {
+          comments: 'off',
+          other: 'inline',
+          strings: 'inline',
+        },
+      }}
+      value={props.value}
+      onChange={(value) => {
+        const errors: any[] = [];
+
+        // Data parsing and validation.
+        let job: Job | undefined;
+        try {
+          job = parse(value) as Job;
+          validateJob(job);
+          if (validateJob.errors) {
+            errors.push(...validateJob.errors);
+          }
+        } catch (e) {
+          errors.push(e);
+        }
+
+        if (props?.onChange) {
+          props?.onChange(value, job, errors);
+        }
+      }}
+      uri={(monaco) => {
+        // Should match "fileMatch" below. This is the name of the file.
+        return monaco.Uri.parse('job.yaml');
+      }}
+      editorWillMount={(monaco) => {
+        yamlWorker = configureMonacoYaml(monaco, {
+          enableSchemaRequest: false,
+          validate: true,
+          hover: true,
+          completion: true,
+          format: true,
+          schemas: [
+            {
+              // If YAML file is opened matching this glob
+              fileMatch: ['job.yaml'],
+              // The following schema will be applied
+              schema: schema,
+              // And the URI will be linked to as the source.
+              uri: 'file:///schema.yaml',
+            },
+          ],
+        });
+      }}
+      editorWillUnmount={() => {
+        yamlWorker?.dispose();
+      }}
+    />
   );
-
-  // Initial JSON editor instanciation and attach
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const jsonEditorPromise = import('vanilla-jsoneditor').then((module) => {
-      const editor = new module.JSONEditor({
-        target: containerRef.current as Element,
-        props: {},
-      });
-      editorRef.current = editor;
-      return updateProps(editor);
-    });
-
-    return () => {
-      void jsonEditorPromise.then((editor) => {
-        void editor.destroy();
-      });
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (editorRef.current?.updateProps) void updateProps(editorRef.current);
-  }, [updateProps]);
-
-  return <div ref={containerRef} className="my-json-editor"></div>;
 }
 
 export default JsonEditor;
