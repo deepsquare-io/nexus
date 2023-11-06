@@ -7,7 +7,6 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { useSearchParams } from 'next/navigation';
 import type { Terminal } from 'xterm';
-import type { MouseEvent } from 'react';
 import { memo, useCallback, useState } from 'react';
 import XTerm from '@components/ui/XTerm/XTerm';
 import useStreamLogs from '@hooks/useStreamLogs';
@@ -19,36 +18,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
 import Zoom from '@mui/material/Zoom';
-
-type DownloadFABProps = {
-  download: boolean;
-  dlLink: string | undefined;
-  onClick: (event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>, url: string) => void | undefined;
-};
-
-const DownloadFAB = ({ download, onClick, dlLink }: DownloadFABProps) => {
-  if (download || !dlLink) return null;
-
-  return (
-    <div className="md:relative">
-      <div className="fixed bottom-5 right-5 md:bottom-10 md:right-10">
-        <div className="flex justify-end mx-4 md:justify-center">
-          <Fab
-            variant="extended"
-            color="primary"
-            onClick={(e) => {
-              onClick && onClick(e, dlLink);
-            }}
-            aria-label="download"
-          >
-            <FileDownload />
-            Download results
-          </Fab>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const JobConsolePage = ({ params }: { params: { jobId: string } }) => {
   const [showTimestamp, setShowTimestamp] = useState<boolean>(false);
@@ -98,17 +67,32 @@ const JobConsolePage = ({ params }: { params: { jobId: string } }) => {
           />
         </Card>
       </div>
-      <Zoom
-        in={dlLink !== undefined}
-        style={{
-          transitionDelay: `50ms`,
-        }}
-        unmountOnExit
-      >
-        <div>
-          <DownloadFAB onClick={(e, url) => handleDownload(url)} download={!!download} dlLink={dlLink} />
-        </div>
-      </Zoom>
+      {dlLink && (
+        <Zoom
+          style={{
+            transitionDelay: `50ms`,
+          }}
+          unmountOnExit
+        >
+          <div className="md:relative">
+            <div className="fixed bottom-5 right-5 md:bottom-10 md:right-10">
+              <div className="flex justify-end mx-4 md:justify-center">
+                <Fab
+                  variant="extended"
+                  color="primary"
+                  onClick={() => {
+                    handleDownload(dlLink);
+                  }}
+                  aria-label="download"
+                >
+                  <FileDownload />
+                  Download results
+                </Fab>
+              </div>
+            </div>
+          </div>
+        </Zoom>
+      )}
     </div>
   );
 };

@@ -4,12 +4,15 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { useFormContext } from 'react-hook-form';
+import { useState } from 'react';
+import LabelSubform from '@components/forms/LabelSubform';
 import TextField from '@components/forms/fields/TextField';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import Grid from '@mui/material/Grid';
 
 function URSForm() {
   const { control } = useFormContext<WorkloadFormData>();
+  const [simpleMode, setSimpleMode] = useState<boolean>(true);
 
   return (
     <>
@@ -27,6 +30,26 @@ function URSForm() {
           <TextField name="details.additionalArgs" multiline minRows={3} control={control} />
         </Grid>
       </Grid>
+      {simpleMode && (
+        <Grid className="pt-4" item xs={2}>
+          <div className="mt-4 text-primary font-bold hover:cursor-pointer" onClick={() => setSimpleMode(false)}>
+            Show Advanced Mode
+          </div>
+        </Grid>
+      )}
+      {!simpleMode && (
+        <>
+          <LabelSubform />
+          <Grid className="pt-4" item xs={2}>
+            <div
+              className="mt-4 text-primary font-bold hover:cursor-pointer col-start-1"
+              onClick={() => setSimpleMode(true)}
+            >
+              Hide Advanced Mode
+            </div>
+          </Grid>
+        </>
+      )}
     </>
   );
 }

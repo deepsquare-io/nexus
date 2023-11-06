@@ -69,6 +69,11 @@ export type JobResourcesInput = {
   tasks: Scalars['Int'];
 };
 
+export type LabelInput = {
+  key: Scalars['String'];
+  value: Scalars['String'];
+};
+
 export type MountInput = {
   containerDir: Scalars['String'];
   hostDir: Scalars['String'];
@@ -84,6 +89,7 @@ export type Mutation = {
   requestJob: Scalars['Boolean'];
   saveWorkflow: Scalars['Boolean'];
   setWorkflowVisibility: Scalars['Boolean'];
+  topUp: Scalars['Boolean'];
 };
 
 export type MutationCancelJobArgs = {
@@ -110,6 +116,7 @@ export type MutationLoginFromWeb3Args = {
 export type MutationRequestJobArgs = {
   job: JobInput;
   jobName: Scalars['String'];
+  labels?: Array<LabelInput>;
   maxAmount: Scalars['String'];
   userId: Scalars['String'];
 };
@@ -123,6 +130,11 @@ export type MutationSaveWorkflowArgs = {
 export type MutationSetWorkflowVisibilityArgs = {
   isPublic: Scalars['Boolean'];
   workflowId: Scalars['String'];
+};
+
+export type MutationTopUpArgs = {
+  amount: Scalars['String'];
+  jobId: Scalars['Hex'];
 };
 
 export type NetworkInterfaceInput = {

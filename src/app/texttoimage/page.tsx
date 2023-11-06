@@ -47,6 +47,12 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
         (value) => BigInt(value) > minAmount,
       ),
     type: y.mixed<WorkloadType>().oneOf([WorkloadType.TEXTTOIMAGE]),
+    labels: y.array().of(
+      y.object().shape({
+        key: y.string().required(),
+        value: y.string().required(),
+      }),
+    ),
     details: y.object().shape({
       tti: y.string().required('Oops! Looks like you forgot to write a prompt before submitting your request.'),
     }),
@@ -62,6 +68,7 @@ const TextToImagePage: NextPage = () => {
     defaultValues: {
       type: WorkloadType.TEXTTOIMAGE,
       credit: formatWei(1000n).toString(),
+      labels: [],
       jobName: `${WorkloadType.TEXTTOIMAGE} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 4,

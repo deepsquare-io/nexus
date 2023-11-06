@@ -11,12 +11,13 @@ import randomWords from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import type { ContentErrors } from 'vanilla-jsoneditor';
+import { parse, stringify } from 'yaml';
 import * as y from 'yup';
 import { useContext, useState } from 'react';
 import SendButton from '@components/buttons/SendButton';
 import type { CreditSubformData } from '@components/forms/CreditSubform';
 import CreditSubform from '@components/forms/CreditSubform';
+import LabelSubform from '@components/forms/LabelSubform';
 import CustomLink from '@components/routing/Link';
 import Card from '@components/ui/containers/Card/Card';
 import WorkflowEditor from '@components/ui/containers/WorkflowEditor/WorkflowEditor';
@@ -26,10 +27,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import useBalances from '@hooks/useBalances';
 import useGetMinimumAmount from '@hooks/useGetMinimumAmount';
 import useHandleJob from '@hooks/useHandleJob';
-import { defaultJob } from '@lib/constants';
+import { defaultJobContent } from '@lib/constants';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb2 } from '@lib/types/AuthMethod';
-import type { Content } from '@lib/types/Content';
 import type { WorkloadFormData } from '@lib/types/WorkloadFormData';
 import WorkloadType from '@lib/types/enums/WorkloadType';
 import formatCredit from '@utils/format/formatCredit';
@@ -52,12 +52,14 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
         (value) => BigInt(value) > minAmount,
       ),
     type: y.mixed<WorkloadType>().oneOf(Object.values(WorkloadType)).required(),
+    labels: y.array().of(
+      y.object().shape({
+        key: y.string().required(),
+        value: y.string().required(),
+      }),
+    ),
   });
 };
-
-function isJson(content: Content): content is { json: Job } {
-  return (content as { json: Job }).json !== undefined;
-}
 
 const SandboxPage: NextPage = () => {
   const { balance_wCredit } = useBalances();
@@ -65,7 +67,8 @@ const SandboxPage: NextPage = () => {
   const { authMethod } = useContext(authContext);
   const searchParams = useSearchParams();
   const workflowId = searchParams.get('workflowId');
-  const [content, setContent] = useState<Content>({ text: '' });
+  const [content, setContent] = useState<{ value: string; parsedValue?: Job }>({ value: '' });
+  const [simpleMode, setSimpleMode] = useState<boolean>(true);
 
   const { data } = useGetWorkflowQuery({
     variables: { workflowId: workflowId! },
@@ -73,20 +76,15 @@ const SandboxPage: NextPage = () => {
     fetchPolicy: 'cache-and-network',
   });
 
-  let json: any;
+  const [jsonErrors, setJsonErrors] = useState<any[]>([]);
 
-  try {
-    json = isJson(content) ? content.json : JSON.parse(content.text);
-  } catch (e) {
-    json = defaultJob;
-  }
-
-  const [jsonErrors, setJsonErrors] = useState<ContentErrors>({ validationErrors: [] });
+  const json = content.parsedValue ? content.parsedValue : parse(defaultJobContent);
 
   const methods = useForm<CreditSubformData & WorkloadFormData>({
     defaultValues: {
       type: WorkloadType.SANDBOX,
       credit: formatWei(5000n).toString(),
+      labels: [],
       jobName: `${WorkloadType.SANDBOX} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
     resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n, isWeb2(authMethod))),
@@ -97,12 +95,20 @@ const SandboxPage: NextPage = () => {
   const { handleJob } = useHandleJob(watch('credit').toString(), watch('jobName'));
 
   const onSubmit: SubmitHandler<CreditSubformData & WorkloadFormData> = async () => {
-    if (jsonErrors && 'validationErrors' in jsonErrors && jsonErrors.validationErrors.length > 0) {
-      toast.error('Invalid JSON');
+    if (jsonErrors && jsonErrors.length > 0) {
+      toast.error(`YAML has validation errors:\n${stringify(jsonErrors)}`);
       return;
     }
 
-    await handleJob(json);
+    if (!json) {
+      toast.error("YAML couldn't be parsed");
+      return;
+    }
+    try {
+      await handleJob(json);
+    } catch (e) {
+      toast.error(`Server refused the job: ${stringify(e)}`);
+    }
   };
 
   //TODO: add loading state awaiting for get workflow query if necessary
@@ -127,15 +133,31 @@ const SandboxPage: NextPage = () => {
                 .
               </p>
             </div>
+            <WorkflowEditor
+              cacheKey={workflowId ? `sandbox-${workflowId}` : 'sandbox'}
+              defaultContent={data?.getWorkflow ? data.getWorkflow.content : defaultJobContent}
+              onContentChange={(value, parsedValue, errors) => {
+                setContent({ value, parsedValue });
+                if (errors) setJsonErrors(errors);
+              }}
+            />
+            {simpleMode && (
+              <div className="mt-4 text-primary font-bold hover:cursor-pointer" onClick={() => setSimpleMode(false)}>
+                Show Advanced Mode
+              </div>
+            )}
+            {!simpleMode && (
+              <div className="mt-4">
+                <LabelSubform />
+                <div
+                  className="mt-4 text-primary font-bold hover:cursor-pointer col-start-1"
+                  onClick={() => setSimpleMode(true)}
+                >
+                  Hide Advanced Mode
+                </div>
+              </div>
+            )}
           </Card>
-          <WorkflowEditor
-            cacheKey={workflowId ? `sandbox-${workflowId}` : 'sandbox'}
-            defaultContent={data?.getWorkflow ? data.getWorkflow.content : JSON.stringify(defaultJob)}
-            onContentChange={(newContent, contentErrors) => {
-              setContent(newContent);
-              if (contentErrors) setJsonErrors(contentErrors);
-            }}
-          />
 
           <CreditSubform
             defaultDuration={20}
@@ -156,23 +178,6 @@ const SandboxPage: NextPage = () => {
             }
           />
           <SendButton>Submit</SendButton>
-          {/*{(!data ||*/}
-          {/*  (isWeb2(authMethod) && data?.getWorkflow?.userId === authMethod.sub) ||*/}
-          {/*  (isWeb3(authMethod) && data?.getWorkflow?.userId === authMethod.sub)) && (*/}
-          {/*  <LoadingButton*/}
-          {/*    loading={loading && saveLoading}*/}
-          {/*    onClick={async () => {*/}
-          {/*      await save({*/}
-          {/*        variables: {*/}
-          {/*          content: isJson(store.content) ? JSON.stringify(store.content.json) : store.content.text,*/}
-          {/*          workflowId,*/}
-          {/*        },*/}
-          {/*      });*/}
-          {/*    }}*/}
-          {/*  >*/}
-          {/*    Save*/}
-          {/*  </LoadingButton>*/}
-          {/*)}*/}
         </div>
       </form>
     </FormProvider>

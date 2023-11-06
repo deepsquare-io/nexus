@@ -15,6 +15,46 @@ export const JobRepositoryAbi =
     "inputs":
     [
       {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "_jobId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "JobCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs":
+    [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "_jobId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JobStatus",
+        "name": "_from",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum JobStatus",
+        "name": "_to",
+        "type": "uint8"
+      }
+    ],
+    "name": "JobTransitionEvent",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs":
+    [
+      {
         "indexed": true,
         "internalType": "bytes32",
         "name": "role",
@@ -262,6 +302,11 @@ export const JobRepositoryAbi =
             [
               {
                 "internalType": "uint256",
+                "name": "submit",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
                 "name": "start",
                 "type": "uint256"
               },
@@ -304,6 +349,11 @@ export const JobRepositoryAbi =
             "internalType": "string",
             "name": "lastError",
             "type": "string"
+          },
+          {
+            "internalType": "int64",
+            "name": "exitCode",
+            "type": "int64"
           }
         ],
         "internalType": "struct Job",
@@ -478,6 +528,11 @@ export const JobRepositoryAbi =
             [
               {
                 "internalType": "uint256",
+                "name": "submit",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
                 "name": "start",
                 "type": "uint256"
               },
@@ -520,6 +575,11 @@ export const JobRepositoryAbi =
             "internalType": "string",
             "name": "lastError",
             "type": "string"
+          },
+          {
+            "internalType": "int64",
+            "name": "exitCode",
+            "type": "int64"
           }
         ],
         "internalType": "struct Job",
@@ -809,6 +869,11 @@ export const JobRepositoryAbi =
         [
           {
             "internalType": "uint256",
+            "name": "submit",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "start",
             "type": "uint256"
           },
@@ -851,6 +916,11 @@ export const JobRepositoryAbi =
         "internalType": "string",
         "name": "lastError",
         "type": "string"
+      },
+      {
+        "internalType": "int64",
+        "name": "exitCode",
+        "type": "int64"
       }
     ],
     "stateMutability": "view",
@@ -1065,6 +1135,25 @@ export const JobRepositoryAbi =
         "type": "bytes32"
       },
       {
+        "internalType": "int64",
+        "name": "_exitCode",
+        "type": "int64"
+      }
+    ],
+    "name": "setExitCode",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs":
+    [
+      {
+        "internalType": "bytes32",
+        "name": "_jobId",
+        "type": "bytes32"
+      },
+      {
         "internalType": "bool",
         "name": "_hasCancelRequest",
         "type": "bool"
@@ -1162,6 +1251,11 @@ export const JobRepositoryAbi =
       {
         "components":
         [
+          {
+            "internalType": "uint256",
+            "name": "submit",
+            "type": "uint256"
+          },
           {
             "internalType": "uint256",
             "name": "start",
@@ -1365,6 +1459,11 @@ export const JobRepositoryAbi =
             [
               {
                 "internalType": "uint256",
+                "name": "submit",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
                 "name": "start",
                 "type": "uint256"
               },
@@ -1407,6 +1506,11 @@ export const JobRepositoryAbi =
             "internalType": "string",
             "name": "lastError",
             "type": "string"
+          },
+          {
+            "internalType": "int64",
+            "name": "exitCode",
+            "type": "int64"
           }
         ],
         "internalType": "struct Job",

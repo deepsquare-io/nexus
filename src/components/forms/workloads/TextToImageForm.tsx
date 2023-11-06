@@ -5,6 +5,7 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { Controller, useFormContext } from 'react-hook-form';
 import { useState } from 'react';
+import LabelSubform from '@components/forms/LabelSubform';
 import StorageSubform from '@components/forms/StorageSubform';
 import SelectorField from '@components/forms/fields/SelectorField';
 import TextField from '@components/forms/fields/TextField';
@@ -90,6 +91,7 @@ function TextToImageForm() {
                 />
               </div>
             </Grid>
+            <LabelSubform />
             <Grid className="pt-4" item xs={2}>
               <div
                 className="mt-4 text-primary font-bold hover:cursor-pointer col-start-1"

@@ -409,32 +409,6 @@ export const MetaSchedulerAbi =
       },
       {
         "indexed": false,
-        "internalType": "enum JobStatus",
-        "name": "_from",
-        "type": "uint8"
-      },
-      {
-        "indexed": false,
-        "internalType": "enum JobStatus",
-        "name": "_to",
-        "type": "uint8"
-      }
-    ],
-    "name": "JobTransitionEvent",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs":
-    [
-      {
-        "indexed": false,
-        "internalType": "bytes32",
-        "name": "_jobId",
-        "type": "bytes32"
-      },
-      {
-        "indexed": false,
         "internalType": "address",
         "name": "_customerAddr",
         "type": "address"
@@ -794,6 +768,11 @@ export const MetaSchedulerAbi =
         "internalType": "string",
         "name": "_lastError",
         "type": "string"
+      },
+      {
+        "internalType": "int64",
+        "name": "_exitCode",
+        "type": "int64"
       }
     ],
     "name": "providerSetJobStatus",

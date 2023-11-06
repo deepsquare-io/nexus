@@ -8,7 +8,7 @@ import { computeCostPerMin } from './computeCostPerMin';
 import { isJobTerminated } from './isJobTerminated';
 
 export function jobDurationInMinutes(job: FullJobSummary): bigint {
-  return BigInt(Math.floor(Date.now() / 1000)) - job.time.start / 60n;
+  return (BigInt(Math.floor(Date.now() / 1000)) - job.time.start) / 60n;
 }
 
 /**
