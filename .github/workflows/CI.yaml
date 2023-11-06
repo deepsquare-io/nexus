@@ -8,7 +8,6 @@ on:
     tags: ['**']
   pull_request:
     types: [opened, reopened, synchronize]
-    branches-ignore: [main]
 jobs:
   scripts:
     name: Quality assessment via scripts
