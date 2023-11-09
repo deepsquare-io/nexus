@@ -88,6 +88,14 @@
             "deprecationReason": null
           },
           {
+            "name": "mountHome",
+            "description": "Mount the home directories.\n\nGo name: \"MountHome\".",
+            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "mounts",
             "description": "[DEPRECATED] Mounts decribes a Bind Mount.\n\nPlease use predefined mounts like $STORAGE_PATH, $DEEPSQUARE_TMP, ...\n\nGo name: \"Mounts\".",
             "type": {
@@ -107,6 +115,14 @@
             "name": "password",
             "description": "Password of a basic authentication.\n\nGo name: \"Password\".",
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "readOnlyRootFS",
+            "description": "Disable write permissions on the container root file system. Does not applies to mounts.\n\nGo name: \"ReadOnlyRootFS\"",
+            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
