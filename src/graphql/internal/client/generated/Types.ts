@@ -23,8 +23,10 @@ export type ContainerRunInput = {
   apptainer?: InputMaybe<Scalars['Boolean']>;
   deepsquareHosted?: InputMaybe<Scalars['Boolean']>;
   image: Scalars['String'];
+  mountHome?: InputMaybe<Scalars['Boolean']>;
   mounts?: InputMaybe<Array<MountInput>>;
   password?: InputMaybe<Scalars['String']>;
+  readOnlyRootFS?: InputMaybe<Scalars['Boolean']>;
   registry?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['String']>;
   x11?: InputMaybe<Scalars['Boolean']>;
@@ -190,11 +192,15 @@ export type StepForInput = {
 };
 
 export type StepInput = {
+  catch?: InputMaybe<Array<StepInput>>;
   dependsOn?: InputMaybe<Array<Scalars['String']>>;
+  finally?: InputMaybe<Array<StepInput>>;
   for?: InputMaybe<StepForInput>;
+  if?: InputMaybe<Scalars['String']>;
   launch?: InputMaybe<StepAsyncLaunchInput>;
   name?: InputMaybe<Scalars['String']>;
   run?: InputMaybe<StepRunInput>;
+  steps?: InputMaybe<Array<StepInput>>;
   use?: InputMaybe<StepUseInput>;
 };
 
@@ -205,7 +211,8 @@ export type StepRunInput = {
   disableCpuBinding?: InputMaybe<Scalars['Boolean']>;
   dns?: InputMaybe<Array<Scalars['String']>>;
   env?: InputMaybe<Array<EnvVarInput>>;
-  mapRoot?: InputMaybe<Scalars['Boolean']>;
+  mapGid?: InputMaybe<Scalars['Int']>;
+  mapUid?: InputMaybe<Scalars['Int']>;
   mpi?: InputMaybe<Scalars['String']>;
   network?: InputMaybe<Scalars['String']>;
   resources?: InputMaybe<StepRunResourcesInput>;
@@ -224,6 +231,7 @@ export type StepUseInput = {
   args?: InputMaybe<Array<EnvVarInput>>;
   exportEnvAs?: InputMaybe<Scalars['String']>;
   source: Scalars['String'];
+  steps?: InputMaybe<Array<StepInput>>;
 };
 
 export type TransportDataInput = {

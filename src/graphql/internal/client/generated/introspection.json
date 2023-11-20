@@ -88,6 +88,14 @@
             "deprecationReason": null
           },
           {
+            "name": "mountHome",
+            "description": null,
+            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "mounts",
             "description": null,
             "type": {
@@ -107,6 +115,14 @@
             "name": "password",
             "description": null,
             "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "readOnlyRootFS",
+            "description": null,
+            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -1250,6 +1266,22 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "catch",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": { "kind": "INPUT_OBJECT", "name": "StepInput", "ofType": null }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dependsOn",
             "description": null,
             "type": {
@@ -1266,9 +1298,33 @@
             "deprecationReason": null
           },
           {
+            "name": "finally",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": { "kind": "INPUT_OBJECT", "name": "StepInput", "ofType": null }
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "for",
             "description": null,
             "type": { "kind": "INPUT_OBJECT", "name": "StepForInput", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "if",
+            "description": null,
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -1293,6 +1349,22 @@
             "name": "run",
             "description": null,
             "type": { "kind": "INPUT_OBJECT", "name": "StepRunInput", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "steps",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": { "kind": "INPUT_OBJECT", "name": "StepInput", "ofType": null }
+              }
+            },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -1393,9 +1465,17 @@
             "deprecationReason": null
           },
           {
-            "name": "mapRoot",
+            "name": "mapGid",
             "description": null,
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
+            "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "mapUid",
+            "description": null,
+            "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -1525,6 +1605,22 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "steps",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": { "kind": "INPUT_OBJECT", "name": "StepInput", "ofType": null }
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
