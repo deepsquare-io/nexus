@@ -15,9 +15,9 @@ import type {
   Mount as MountGQL,
   NetworkInterface as NetworkInterfaceGQL,
   S3Data as S3DataGQL,
-  Step as StepGQL,
   StepAsyncLaunch as StepAsyncLaunchGQL,
   StepFor as StepForGQL,
+  Step as StepGQL,
   StepRun as StepRunGQL,
   StepRunResources as StepRunResourcesGQL,
   StepUse as StepUseGQL,
@@ -177,11 +177,17 @@ export class ContainerRun implements ContainerRunGQL {
   @Field(() => String)
   image!: string;
 
+  @Field(() => Boolean, { nullable: true })
+  mountHome!: boolean | null;
+
   @Field(() => [Mount], { nullable: true })
   mounts!: Mount[] | null;
 
   @Field(() => String, { nullable: true })
   password!: string | null;
+
+  @Field(() => Boolean, { nullable: true })
+  readOnlyRootFS!: boolean | null;
 
   @Field(() => String, { nullable: true })
   registry!: string | null;
@@ -269,8 +275,11 @@ export class StepRun implements StepRunGQL {
   @Field(() => [EnvVar], { nullable: true })
   env!: EnvVar[] | null;
 
-  @Field(() => Boolean, { nullable: true })
-  mapRoot!: boolean | null;
+  @Field(() => Int, { nullable: true })
+  mapGid!: number | null;
+
+  @Field(() => Int, { nullable: true })
+  mapUid!: number | null;
 
   @Field(() => String, { nullable: true })
   mpi!: string | null;
@@ -299,16 +308,28 @@ export class StepUse implements StepUseGQL {
 
   @Field(() => String)
   source!: string;
+
+  @Field(() => [Step], { nullable: true })
+  steps!: Step[] | null;
 }
 
 @InputType('StepInput')
 @ObjectType()
 export class Step implements StepGQL {
+  @Field(() => [Step], { nullable: true })
+  catch!: Step[] | null;
+
   @Field(() => [String], { nullable: true })
   dependsOn!: string[] | null;
 
+  @Field(() => [Step], { nullable: true })
+  finally!: Step[] | null;
+
   @Field(() => StepFor, { nullable: true })
   for!: StepFor | null;
+
+  @Field(() => String, { nullable: true })
+  if!: string | null;
 
   @Field(() => StepAsyncLaunch, { nullable: true })
   launch!: StepAsyncLaunch | null;
@@ -318,6 +339,9 @@ export class Step implements StepGQL {
 
   @Field(() => StepRun, { nullable: true })
   run!: StepRun | null;
+
+  @Field(() => [Step], { nullable: true })
+  steps!: Step[] | null;
 
   @Field(() => StepUse, { nullable: true })
   use!: StepUse | null;
