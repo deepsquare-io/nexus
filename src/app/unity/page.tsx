@@ -6,7 +6,7 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
-import randomWords from 'random-words';
+import { generate } from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as y from 'yup';
@@ -79,7 +79,7 @@ const UnityPage: NextPage = () => {
       type: WorkloadType.URS,
       credit: formatWei(275n).toString(),
       labels: [],
-      jobName: `${WorkloadType.URS} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
+      jobName: `${WorkloadType.URS} - ${generate({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 1,
         gpuPerTask: 1,

@@ -7,7 +7,7 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { NextPage } from 'next';
 import { useSearchParams } from 'next/navigation';
-import randomWords from 'random-words';
+import { generate } from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -85,7 +85,7 @@ const SandboxPage: NextPage = () => {
       type: WorkloadType.SANDBOX,
       credit: formatWei(5000n).toString(),
       labels: [],
-      jobName: `${WorkloadType.SANDBOX} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
+      jobName: `${WorkloadType.SANDBOX} - ${generate({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
     resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n, isWeb2(authMethod))),
   });
