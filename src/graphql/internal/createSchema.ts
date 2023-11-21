@@ -31,6 +31,7 @@ export default function createSchema() {
   return buildSchemaSync({
     scalarsMap: [
       {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         type: 'Hex' as any,
         scalar: HexScalar,
       },
@@ -59,6 +60,7 @@ export default function createSchema() {
       TopUpMutation,
     ],
     container: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       get(someClass: any): any {
         return container.resolve(someClass);
       },

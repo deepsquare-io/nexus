@@ -1,6 +1,6 @@
 overwrite: true
-schema: [ 'http://localhost:3000/graphql' ]
-documents: [ 'src/graphql/internal/client/**/*.graphql' ]
+schema: ['http://localhost:3000/graphql']
+documents: ['src/graphql/internal/client/**/*.graphql']
 config:
   strictScalars: false
   declarationKind: type
@@ -15,9 +15,7 @@ config:
   # Apollo
   withRefetchFn: true
   pureMagicComment: true
-  namingConvention: {
-    enumValues: 'change-case-all#upperCase',
-  }
+  namingConvention: { enumValues: 'change-case-all#upperCase' }
 generates:
   src/graphql/internal/client/generated/Types.ts:
     plugins:

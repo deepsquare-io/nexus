@@ -17,6 +17,7 @@ import type Job from '@graphql/internal/types/objects/Job';
 const MonacoEditor = dynamic(() => import('react-monaco-editor'), { ssr: false });
 
 const schema = fromIntrospectionQuery(introspection as unknown as IntrospectionQuery);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 schema.properties = (schema.definitions!.Job as any).properties; // Switch graphql properties with job properties
 
 type JsonEditorProps = {
@@ -34,7 +35,7 @@ type JsonEditorProps = {
    *
    * Errors is filled based on the schema validation. See the ajv engine.
    */
-  onChange?: (value: string, parsedValue?: Job, errors?: any[]) => void;
+  onChange?: (value: string, parsedValue?: Job, errors?: unknown[]) => void;
 };
 
 function JsonEditor(props: JsonEditorProps) {
@@ -70,7 +71,7 @@ function JsonEditor(props: JsonEditorProps) {
       }}
       value={props.value}
       onChange={(value) => {
-        const errors: any[] = [];
+        const errors: unknown[] = [];
 
         // Data parsing and validation.
         let job: Job | undefined;

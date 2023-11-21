@@ -42,6 +42,7 @@ interface SidebarLinkProps {
   text: ReactNode;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isStaticImageData(object: any): object is StaticImageData {
   return 'src' in object;
 }

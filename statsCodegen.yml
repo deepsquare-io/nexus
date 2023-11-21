@@ -1,6 +1,6 @@
 overwrite: true
-schema: [ 'https://metrics.beta.deepsquare.run/graphql' ]
-documents: [ 'src/graphql/external/statsClient/**/*.graphql' ]
+schema: ['https://metrics.beta.deepsquare.run/graphql']
+documents: ['src/graphql/external/statsClient/**/*.graphql']
 config:
   strictScalars: true
   declarationKind: type

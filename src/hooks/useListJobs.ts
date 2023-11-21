@@ -41,10 +41,10 @@ export default function useListJobs(start?: number, stop?: number): FullJobSumma
           return { ...jobListConfig, args: [id] };
         })
       : isWeb2(authMethod)
-      ? data?.listJobs?.slice(start, stop).map((id) => {
-          return { ...jobListConfig, args: [id] };
-        })
-      : [{ ...jobListConfig, args: [] }],
+        ? data?.listJobs?.slice(start, stop).map((id) => {
+            return { ...jobListConfig, args: [id] };
+          })
+        : [{ ...jobListConfig, args: [] }],
     allowFailure: true,
     enabled: !isDisconnected(authMethod),
     watch: !isDisconnected(authMethod),

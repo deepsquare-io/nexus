@@ -10,9 +10,9 @@ export function resolveStorageType(job: Job): number {
     ? job.output.s3
       ? 2
       : job.output.http
-      ? job.output.http.url === 'https://transfer.deepsquare.run/'
-        ? 0
-        : 1
-      : 4
+        ? job.output.http.url === 'https://transfer.deepsquare.run/'
+          ? 0
+          : 1
+        : 4
     : 4;
 }

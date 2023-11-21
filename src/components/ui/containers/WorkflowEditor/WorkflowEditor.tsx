@@ -15,7 +15,7 @@ type Store = { content: string; initialized: boolean };
 export interface WorkflowEditorProps {
   cacheKey: string;
   defaultContent: string;
-  onContentChange: (value: string, parsedValue?: Job, contentErrors?: any[]) => void;
+  onContentChange: (value: string, parsedValue?: Job, contentErrors?: unknown[]) => void;
 }
 
 const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onContentChange }) => {
@@ -47,7 +47,7 @@ const WorkflowEditor: FC<WorkflowEditorProps> = ({ cacheKey, defaultContent, onC
         <Card className="mt-5" variant="outlined">
           <JsonEditor
             value={store.content}
-            onChange={(value: string, parsedValue?: Job, errors?: any[]) => {
+            onChange={(value: string, parsedValue?: Job, errors?: unknown[]) => {
               onContentChange(value, parsedValue, errors);
               setStore((prev) => {
                 return { content: value, initialized: prev.initialized };

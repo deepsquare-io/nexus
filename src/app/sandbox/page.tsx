@@ -76,7 +76,7 @@ const SandboxPage: NextPage = () => {
     fetchPolicy: 'cache-and-network',
   });
 
-  const [jsonErrors, setJsonErrors] = useState<any[]>([]);
+  const [jsonErrors, setJsonErrors] = useState<unknown[]>([]);
 
   const json = content.parsedValue ? content.parsedValue : parse(defaultJobContent);
 
