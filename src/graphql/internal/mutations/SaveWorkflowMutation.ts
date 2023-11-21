@@ -17,7 +17,7 @@ class SaveWorkflowArgs {
   @Field()
   content!: string;
 
-  @Field({ nullable: true })
+  @Field(() => String, { nullable: true })
   workflowId?: string | null;
 }
 
