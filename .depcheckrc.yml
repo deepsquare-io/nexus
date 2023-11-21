@@ -27,6 +27,7 @@ ignores:
   - babel-loader
   - autoprefixer
   - depcheck
+  - postcss
   - esbuild
   - encoding
   - '@ethersproject/bytes'
