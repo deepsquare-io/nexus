@@ -45,7 +45,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@ethersproject/bytes": "5.7.0",
-    "@hookform/resolvers": "^3.3.2",
+    "@hookform/resolvers": "^2.9.11",
     "@mui/icons-material": "^5.14.18",
     "@mui/lab": "5.0.0-alpha.153",
     "@mui/material": "^5.14.18",
