@@ -27,5 +27,7 @@ runs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile # equivalent to npm ci
       shell: bash
-      env:
-        SENTRYCLI_SKIP_DOWNLOAD: '1'
+      # Don't skip download because Sentry sucks at code review.
+      # Skipping the download will crash.
+      #env:
+      #  SENTRYCLI_SKIP_DOWNLOAD: '1'
