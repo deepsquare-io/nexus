@@ -19,8 +19,6 @@ ignores:
   - apollo-server-types
   - graphql-tag
   - standard-commit
-  - tsconfig-paths
-  - wait-on
   # Build
   - '@babel/' # Babel plugins
   - '@babel/preset-env'
