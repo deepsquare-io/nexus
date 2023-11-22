@@ -32,5 +32,7 @@ ignores:
   - react-is
   - '@trivago/prettier-plugin-sort-imports'
   - '@vue/compiler-sfc'
+  # Image optimizer used at compile-time (also used on Vercel by default)
+  - sharp
   # CLI
   - rimraf
