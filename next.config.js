@@ -20,9 +20,8 @@ let config = {
     domains: ['transfer.deepsquare.run'],
   },
   productionBrowserSourceMaps: true,
-  outputFileTracing: false,
   experimental: { serverComponentsExternalPackages: ['mongoose'] },
-  webpack: (config, { buildId }) => {
+  webpack: (config, { buildId, isServer }) => {
     config.plugins.forEach((plugin) => {
       if (plugin.constructor.name === 'DefinePlugin') {
         plugin.definitions = {
@@ -39,22 +38,24 @@ let config = {
       config.optimization.minimize = false;
     }
     config.experiments = { ...config.experiments, topLevelAwait: true };
-    config.plugins.push(
-      new MonacoWebpackPlugin({
-        languages: ['yaml'],
-        filename: 'static/[name].worker.js',
-        customLanguages: [
-          {
-            label: 'yaml',
-            entry: 'monaco-yaml',
-            worker: {
-              id: 'monaco-yaml/yamlWorker',
-              entry: 'monaco-yaml/yaml.worker',
+    if (!isServer) {
+      config.plugins.push(
+        new MonacoWebpackPlugin({
+          languages: ['yaml'],
+          filename: 'static/[name].worker.js',
+          customLanguages: [
+            {
+              label: 'yaml',
+              entry: 'monaco-yaml',
+              worker: {
+                id: 'monaco-yaml/yamlWorker',
+                entry: 'monaco-yaml/yaml.worker',
+              },
             },
-          },
-        ],
-      }),
-    );
+          ],
+        }),
+      );
+    }
     return config;
   },
 };
