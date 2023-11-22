@@ -5,11 +5,9 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { Field, InputType, Int, ObjectType } from 'type-graphql';
 import type { ReadContractReturnType } from 'viem';
-import { type Hex } from 'viem';
 import type { IJobRepositoryAbi } from '@abi/IJobRepository';
 import { JobStatus } from '@deepsquare/deepsquare-client';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
-import HexScalar from '@graphql/internal/scalars/HexScalar';
 
 @InputType('LabelInput')
 @ObjectType()
@@ -26,8 +24,8 @@ export class Affinity {
   @Field(() => Label)
   label!: Label;
 
-  @Field(() => HexScalar)
-  op!: Hex;
+  @Field(() => String)
+  op!: string;
 }
 
 @ObjectType()
@@ -95,17 +93,17 @@ export class JobCost {
 
 @ObjectType()
 export class JobSummary implements ReadContractReturnType<typeof IJobRepositoryAbi, 'get'> {
-  @Field(() => HexScalar)
-  jobId!: Hex;
+  @Field(() => String)
+  jobId!: string;
 
   @Field(() => Int)
   status!: JobStatus;
 
-  @Field(() => HexScalar)
-  customerAddr!: Hex;
+  @Field(() => String)
+  customerAddr!: string;
 
-  @Field(() => HexScalar)
-  providerAddr!: Hex;
+  @Field(() => String)
+  providerAddr!: string;
 
   @Field()
   definition!: JobDefinition;
@@ -116,8 +114,8 @@ export class JobSummary implements ReadContractReturnType<typeof IJobRepositoryA
   @Field()
   time!: JobTime;
 
-  @Field(() => HexScalar)
-  jobName!: Hex;
+  @Field(() => String)
+  jobName!: string;
 
   @Field(() => Boolean)
   hasCancelRequest!: boolean;

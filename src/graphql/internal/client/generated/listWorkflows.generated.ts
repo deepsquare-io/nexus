@@ -47,8 +47,15 @@ export function useListWorkflowsLazyQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<ListWorkflowsQuery, ListWorkflowsQueryVariables>(ListWorkflowsDocument, options);
 }
+export function useListWorkflowsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<ListWorkflowsQuery, ListWorkflowsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<ListWorkflowsQuery, ListWorkflowsQueryVariables>(ListWorkflowsDocument, options);
+}
 export type ListWorkflowsQueryHookResult = ReturnType<typeof useListWorkflowsQuery>;
 export type ListWorkflowsLazyQueryHookResult = ReturnType<typeof useListWorkflowsLazyQuery>;
+export type ListWorkflowsSuspenseQueryHookResult = ReturnType<typeof useListWorkflowsSuspenseQuery>;
 export type ListWorkflowsQueryResult = Apollo.QueryResult<ListWorkflowsQuery, ListWorkflowsQueryVariables>;
 export function refetchListWorkflowsQuery(variables?: ListWorkflowsQueryVariables) {
   return { query: ListWorkflowsDocument, variables: variables };

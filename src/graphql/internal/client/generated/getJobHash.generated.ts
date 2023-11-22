@@ -4,13 +4,13 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type GetJobHashQueryVariables = Types.Exact<{
-  jobId: Types.Scalars['Hex'];
+  jobId: Types.Scalars['String']['input'];
 }>;
 
-export type GetJobHashQuery = { getJobHash: { hash: any; address: any; timestamp: string } };
+export type GetJobHashQuery = { getJobHash: { hash: string; address: string; timestamp: string } };
 
 export const GetJobHashDocument = /*#__PURE__*/ gql`
-  query GetJobHash($jobId: Hex!) {
+  query GetJobHash($jobId: String!) {
     getJobHash(jobId: $jobId) {
       hash
       address
@@ -45,8 +45,15 @@ export function useGetJobHashLazyQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetJobHashQuery, GetJobHashQueryVariables>(GetJobHashDocument, options);
 }
+export function useGetJobHashSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetJobHashQuery, GetJobHashQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetJobHashQuery, GetJobHashQueryVariables>(GetJobHashDocument, options);
+}
 export type GetJobHashQueryHookResult = ReturnType<typeof useGetJobHashQuery>;
 export type GetJobHashLazyQueryHookResult = ReturnType<typeof useGetJobHashLazyQuery>;
+export type GetJobHashSuspenseQueryHookResult = ReturnType<typeof useGetJobHashSuspenseQuery>;
 export type GetJobHashQueryResult = Apollo.QueryResult<GetJobHashQuery, GetJobHashQueryVariables>;
 export function refetchGetJobHashQuery(variables: GetJobHashQueryVariables) {
   return { query: GetJobHashDocument, variables: variables };

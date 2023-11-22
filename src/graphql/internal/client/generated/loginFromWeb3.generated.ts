@@ -4,14 +4,14 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type LoginFromWeb3MutationVariables = Types.Exact<{
-  address: Types.Scalars['Hex'];
-  signature: Types.Scalars['Hex'];
+  address: Types.Scalars['String']['input'];
+  signature: Types.Scalars['String']['input'];
 }>;
 
 export type LoginFromWeb3Mutation = { loginFromWeb3: string };
 
 export const LoginFromWeb3Document = /*#__PURE__*/ gql`
-  mutation LoginFromWeb3($address: Hex!, $signature: Hex!) {
+  mutation LoginFromWeb3($address: String!, $signature: String!) {
     loginFromWeb3(address: $address, signature: $signature)
   }
 `;

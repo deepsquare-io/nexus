@@ -3,140 +3,141 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  Hex: any;
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
 };
 
 export type BoreInput = {
-  address: Scalars['String'];
-  port: Scalars['Int'];
-  targetPort: Scalars['Int'];
+  address: Scalars['String']['input'];
+  port: Scalars['Int']['input'];
+  targetPort: Scalars['Int']['input'];
 };
 
 export type ContainerRunInput = {
-  apptainer?: InputMaybe<Scalars['Boolean']>;
-  deepsquareHosted?: InputMaybe<Scalars['Boolean']>;
-  image: Scalars['String'];
-  mountHome?: InputMaybe<Scalars['Boolean']>;
+  apptainer?: InputMaybe<Scalars['Boolean']['input']>;
+  deepsquareHosted?: InputMaybe<Scalars['Boolean']['input']>;
+  image: Scalars['String']['input'];
+  mountHome?: InputMaybe<Scalars['Boolean']['input']>;
   mounts?: InputMaybe<Array<MountInput>>;
-  password?: InputMaybe<Scalars['String']>;
-  readOnlyRootFS?: InputMaybe<Scalars['Boolean']>;
-  registry?: InputMaybe<Scalars['String']>;
-  username?: InputMaybe<Scalars['String']>;
-  x11?: InputMaybe<Scalars['Boolean']>;
+  password?: InputMaybe<Scalars['String']['input']>;
+  readOnlyRootFS?: InputMaybe<Scalars['Boolean']['input']>;
+  registry?: InputMaybe<Scalars['String']['input']>;
+  username?: InputMaybe<Scalars['String']['input']>;
+  x11?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type EnvVarInput = {
-  key: Scalars['String'];
-  value: Scalars['String'];
+  key: Scalars['String']['input'];
+  value: Scalars['String']['input'];
 };
 
 export type ForRangeInput = {
-  begin: Scalars['Int'];
-  end: Scalars['Int'];
-  increment?: InputMaybe<Scalars['Int']>;
+  begin: Scalars['Int']['input'];
+  end: Scalars['Int']['input'];
+  increment?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type GetJobHashOutput = {
-  address: Scalars['Hex'];
-  hash: Scalars['Hex'];
-  timestamp: Scalars['String'];
+  address: Scalars['String']['output'];
+  hash: Scalars['String']['output'];
+  timestamp: Scalars['String']['output'];
 };
 
 export type HttpDataInput = {
-  url: Scalars['String'];
+  url: Scalars['String']['input'];
 };
 
 export type JobInput = {
-  continuousOutputSync?: InputMaybe<Scalars['Boolean']>;
-  enableLogging?: InputMaybe<Scalars['Boolean']>;
+  continuousOutputSync?: InputMaybe<Scalars['Boolean']['input']>;
+  enableLogging?: InputMaybe<Scalars['Boolean']['input']>;
   env?: InputMaybe<Array<EnvVarInput>>;
   input?: InputMaybe<TransportDataInput>;
-  inputMode?: InputMaybe<Scalars['Int']>;
+  inputMode?: InputMaybe<Scalars['Int']['input']>;
   output?: InputMaybe<TransportDataInput>;
   resources: JobResourcesInput;
   steps: Array<StepInput>;
 };
 
 export type JobResourcesInput = {
-  cpusPerTask: Scalars['Int'];
-  gpusPerTask: Scalars['Int'];
-  memPerCpu: Scalars['Int'];
-  tasks: Scalars['Int'];
+  cpusPerTask: Scalars['Int']['input'];
+  gpusPerTask: Scalars['Int']['input'];
+  memPerCpu: Scalars['Int']['input'];
+  tasks: Scalars['Int']['input'];
 };
 
 export type LabelInput = {
-  key: Scalars['String'];
-  value: Scalars['String'];
+  key: Scalars['String']['input'];
+  value: Scalars['String']['input'];
 };
 
 export type MountInput = {
-  containerDir: Scalars['String'];
-  hostDir: Scalars['String'];
-  options: Scalars['String'];
+  containerDir: Scalars['String']['input'];
+  hostDir: Scalars['String']['input'];
+  options: Scalars['String']['input'];
 };
 
 export type Mutation = {
-  cancelJob: Scalars['Boolean'];
-  createUser: Scalars['Boolean'];
-  deleteWorkflow: Scalars['Boolean'];
-  loginFromWeb2: Scalars['String'];
-  loginFromWeb3: Scalars['String'];
-  requestJob: Scalars['Boolean'];
-  saveWorkflow: Scalars['Boolean'];
-  setWorkflowVisibility: Scalars['Boolean'];
-  topUp: Scalars['Boolean'];
+  cancelJob: Scalars['Boolean']['output'];
+  createUser: Scalars['Boolean']['output'];
+  deleteWorkflow: Scalars['Boolean']['output'];
+  loginFromWeb2: Scalars['String']['output'];
+  loginFromWeb3: Scalars['String']['output'];
+  requestJob: Scalars['Boolean']['output'];
+  saveWorkflow: Scalars['Boolean']['output'];
+  setWorkflowVisibility: Scalars['Boolean']['output'];
+  topUp: Scalars['Boolean']['output'];
 };
 
 export type MutationCancelJobArgs = {
-  jobId: Scalars['Hex'];
+  jobId: Scalars['String']['input'];
 };
 
 export type MutationCreateUserArgs = {
-  userId: Scalars['String'];
+  userId: Scalars['String']['input'];
 };
 
 export type MutationDeleteWorkflowArgs = {
-  workflowId: Scalars['String'];
+  workflowId: Scalars['String']['input'];
 };
 
 export type MutationLoginFromWeb2Args = {
-  firebaseToken: Scalars['String'];
+  firebaseToken: Scalars['String']['input'];
 };
 
 export type MutationLoginFromWeb3Args = {
-  address: Scalars['Hex'];
-  signature: Scalars['Hex'];
+  address: Scalars['String']['input'];
+  signature: Scalars['String']['input'];
 };
 
 export type MutationRequestJobArgs = {
   job: JobInput;
-  jobName: Scalars['String'];
+  jobName: Scalars['String']['input'];
   labels?: Array<LabelInput>;
-  maxAmount: Scalars['String'];
-  userId: Scalars['String'];
+  maxAmount: Scalars['String']['input'];
+  userId: Scalars['String']['input'];
 };
 
 export type MutationSaveWorkflowArgs = {
-  content: Scalars['String'];
-  name: Scalars['String'];
-  workflowId?: InputMaybe<Scalars['String']>;
+  content: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  workflowId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type MutationSetWorkflowVisibilityArgs = {
-  isPublic: Scalars['Boolean'];
-  workflowId: Scalars['String'];
+  isPublic: Scalars['Boolean']['input'];
+  workflowId: Scalars['String']['input'];
 };
 
 export type MutationTopUpArgs = {
-  amount: Scalars['String'];
-  jobId: Scalars['Hex'];
+  amount: Scalars['String']['input'];
+  jobId: Scalars['String']['input'];
 };
 
 export type NetworkInterfaceInput = {
@@ -145,92 +146,92 @@ export type NetworkInterfaceInput = {
 };
 
 export type Node = {
-  _id: Scalars['ID'];
+  _id: Scalars['ID']['output'];
 };
 
 export type Query = {
   getJobHash: GetJobHashOutput;
   getWorkflow?: Maybe<Workflow>;
-  listJobs: Array<Scalars['Hex']>;
+  listJobs: Array<Scalars['String']['output']>;
   listWorkflows: Array<Workflow>;
-  ping: Scalars['String'];
+  ping: Scalars['String']['output'];
 };
 
 export type QueryGetJobHashArgs = {
-  jobId: Scalars['Hex'];
+  jobId: Scalars['String']['input'];
 };
 
 export type QueryGetWorkflowArgs = {
-  workflowId: Scalars['String'];
+  workflowId: Scalars['String']['input'];
 };
 
 export type QueryPingArgs = {
-  pong?: InputMaybe<Scalars['String']>;
+  pong?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type S3DataInput = {
-  accessKeyId: Scalars['String'];
-  bucketUrl: Scalars['String'];
-  deleteSync?: InputMaybe<Scalars['Boolean']>;
-  endpointUrl: Scalars['String'];
-  path: Scalars['String'];
-  region: Scalars['String'];
-  secretAccessKey: Scalars['String'];
+  accessKeyId: Scalars['String']['input'];
+  bucketUrl: Scalars['String']['input'];
+  deleteSync?: InputMaybe<Scalars['Boolean']['input']>;
+  endpointUrl: Scalars['String']['input'];
+  path: Scalars['String']['input'];
+  region: Scalars['String']['input'];
+  secretAccessKey: Scalars['String']['input'];
 };
 
 export type StepAsyncLaunchInput = {
-  handleName?: InputMaybe<Scalars['String']>;
-  signalOnParentStepExit?: InputMaybe<Scalars['Int']>;
+  handleName?: InputMaybe<Scalars['String']['input']>;
+  signalOnParentStepExit?: InputMaybe<Scalars['Int']['input']>;
   steps: Array<StepInput>;
 };
 
 export type StepForInput = {
-  items?: InputMaybe<Array<Scalars['String']>>;
-  parallel: Scalars['Boolean'];
+  items?: InputMaybe<Array<Scalars['String']['input']>>;
+  parallel: Scalars['Boolean']['input'];
   range?: InputMaybe<ForRangeInput>;
   steps: Array<StepInput>;
 };
 
 export type StepInput = {
   catch?: InputMaybe<Array<StepInput>>;
-  dependsOn?: InputMaybe<Array<Scalars['String']>>;
+  dependsOn?: InputMaybe<Array<Scalars['String']['input']>>;
   finally?: InputMaybe<Array<StepInput>>;
   for?: InputMaybe<StepForInput>;
-  if?: InputMaybe<Scalars['String']>;
+  if?: InputMaybe<Scalars['String']['input']>;
   launch?: InputMaybe<StepAsyncLaunchInput>;
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   run?: InputMaybe<StepRunInput>;
   steps?: InputMaybe<Array<StepInput>>;
   use?: InputMaybe<StepUseInput>;
 };
 
 export type StepRunInput = {
-  command: Scalars['String'];
+  command: Scalars['String']['input'];
   container?: InputMaybe<ContainerRunInput>;
   customNetworkInterfaces?: InputMaybe<Array<NetworkInterfaceInput>>;
-  disableCpuBinding?: InputMaybe<Scalars['Boolean']>;
-  dns?: InputMaybe<Array<Scalars['String']>>;
+  disableCpuBinding?: InputMaybe<Scalars['Boolean']['input']>;
+  dns?: InputMaybe<Array<Scalars['String']['input']>>;
   env?: InputMaybe<Array<EnvVarInput>>;
-  mapGid?: InputMaybe<Scalars['Int']>;
-  mapUid?: InputMaybe<Scalars['Int']>;
-  mpi?: InputMaybe<Scalars['String']>;
-  network?: InputMaybe<Scalars['String']>;
+  mapGid?: InputMaybe<Scalars['Int']['input']>;
+  mapUid?: InputMaybe<Scalars['Int']['input']>;
+  mpi?: InputMaybe<Scalars['String']['input']>;
+  network?: InputMaybe<Scalars['String']['input']>;
   resources?: InputMaybe<StepRunResourcesInput>;
-  shell?: InputMaybe<Scalars['String']>;
-  workDir?: InputMaybe<Scalars['String']>;
+  shell?: InputMaybe<Scalars['String']['input']>;
+  workDir?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StepRunResourcesInput = {
-  cpusPerTask?: InputMaybe<Scalars['Int']>;
-  gpusPerTask?: InputMaybe<Scalars['Int']>;
-  memPerCpu?: InputMaybe<Scalars['Int']>;
-  tasks?: InputMaybe<Scalars['Int']>;
+  cpusPerTask?: InputMaybe<Scalars['Int']['input']>;
+  gpusPerTask?: InputMaybe<Scalars['Int']['input']>;
+  memPerCpu?: InputMaybe<Scalars['Int']['input']>;
+  tasks?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type StepUseInput = {
   args?: InputMaybe<Array<EnvVarInput>>;
-  exportEnvAs?: InputMaybe<Scalars['String']>;
-  source: Scalars['String'];
+  exportEnvAs?: InputMaybe<Scalars['String']['input']>;
+  source: Scalars['String']['input'];
   steps?: InputMaybe<Array<StepInput>>;
 };
 
@@ -240,23 +241,23 @@ export type TransportDataInput = {
 };
 
 export type WireguardInput = {
-  address?: InputMaybe<Array<Scalars['String']>>;
+  address?: InputMaybe<Array<Scalars['String']['input']>>;
   peers?: InputMaybe<Array<WireguardPeerInput>>;
-  privateKey: Scalars['String'];
+  privateKey: Scalars['String']['input'];
 };
 
 export type WireguardPeerInput = {
-  allowedIPs?: InputMaybe<Array<Scalars['String']>>;
-  endpoint?: InputMaybe<Scalars['String']>;
-  persistentKeepalive?: InputMaybe<Scalars['Int']>;
-  preSharedKey?: InputMaybe<Scalars['String']>;
-  publicKey: Scalars['String'];
+  allowedIPs?: InputMaybe<Array<Scalars['String']['input']>>;
+  endpoint?: InputMaybe<Scalars['String']['input']>;
+  persistentKeepalive?: InputMaybe<Scalars['Int']['input']>;
+  preSharedKey?: InputMaybe<Scalars['String']['input']>;
+  publicKey: Scalars['String']['input'];
 };
 
 export type Workflow = Node & {
-  _id: Scalars['ID'];
-  content: Scalars['String'];
-  name: Scalars['String'];
-  public: Scalars['Boolean'];
-  userId: Scalars['String'];
+  _id: Scalars['ID']['output'];
+  content: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  public: Scalars['Boolean']['output'];
+  userId: Scalars['String']['output'];
 };

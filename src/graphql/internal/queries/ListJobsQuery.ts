@@ -7,7 +7,6 @@ import { injectable } from 'tsyringe';
 import { Field, ObjectType, Query, Resolver } from 'type-graphql';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
 import Auth from '@graphql/internal/context/decorator/Auth';
-import HexScalar from '@graphql/internal/scalars/HexScalar';
 import { JobSummary } from '@graphql/internal/types/objects/JobSummary';
 import { Provider } from '@graphql/internal/types/objects/Provider';
 import { type User } from '../../../database/User/User';
@@ -23,7 +22,7 @@ export class FullJobSummary extends JobSummary {
 export default class ListJobsQuery {
   constructor(private readonly deepsquare: DeepSquareClient) {}
 
-  @Query(() => [HexScalar])
+  @Query(() => [String])
   listJobs(@Auth user: User) {
     return user.jobs;
   }

@@ -5,7 +5,7 @@ import type * as Types from './Types';
 const defaultOptions = {} as const;
 export type ListJobQueryVariables = Types.Exact<{ [key: string]: never }>;
 
-export type ListJobQuery = { listJobs: Array<any> };
+export type ListJobQuery = { listJobs: Array<string> };
 
 export const ListJobDocument = /*#__PURE__*/ gql`
   query ListJob {
@@ -36,8 +36,15 @@ export function useListJobLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Li
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<ListJobQuery, ListJobQueryVariables>(ListJobDocument, options);
 }
+export function useListJobSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<ListJobQuery, ListJobQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<ListJobQuery, ListJobQueryVariables>(ListJobDocument, options);
+}
 export type ListJobQueryHookResult = ReturnType<typeof useListJobQuery>;
 export type ListJobLazyQueryHookResult = ReturnType<typeof useListJobLazyQuery>;
+export type ListJobSuspenseQueryHookResult = ReturnType<typeof useListJobSuspenseQuery>;
 export type ListJobQueryResult = Apollo.QueryResult<ListJobQuery, ListJobQueryVariables>;
 export function refetchListJobQuery(variables?: ListJobQueryVariables) {
   return { query: ListJobDocument, variables: variables };

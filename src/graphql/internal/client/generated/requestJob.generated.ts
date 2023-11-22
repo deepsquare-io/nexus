@@ -5,9 +5,9 @@ import type * as Types from './Types';
 const defaultOptions = {} as const;
 export type RequestJobMutationVariables = Types.Exact<{
   job: Types.JobInput;
-  jobName: Types.Scalars['String'];
-  maxAmount: Types.Scalars['String'];
-  userId: Types.Scalars['String'];
+  jobName: Types.Scalars['String']['input'];
+  maxAmount: Types.Scalars['String']['input'];
+  userId: Types.Scalars['String']['input'];
   labels: Array<Types.LabelInput> | Types.LabelInput;
 }>;
 

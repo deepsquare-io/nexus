@@ -4,13 +4,13 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type CancelJobMutationVariables = Types.Exact<{
-  jobId: Types.Scalars['Hex'];
+  jobId: Types.Scalars['String']['input'];
 }>;
 
 export type CancelJobMutation = { cancelJob: boolean };
 
 export const CancelJobDocument = /*#__PURE__*/ gql`
-  mutation CancelJob($jobId: Hex!) {
+  mutation CancelJob($jobId: String!) {
     cancelJob(jobId: $jobId)
   }
 `;

@@ -4,14 +4,14 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type TopUpMutationVariables = Types.Exact<{
-  jobId: Types.Scalars['Hex'];
-  amount: Types.Scalars['String'];
+  jobId: Types.Scalars['String']['input'];
+  amount: Types.Scalars['String']['input'];
 }>;
 
 export type TopUpMutation = { topUp: boolean };
 
 export const TopUpDocument = /*#__PURE__*/ gql`
-  mutation TopUp($jobId: Hex!, $amount: String!) {
+  mutation TopUp($jobId: String!, $amount: String!) {
     topUp(jobId: $jobId, amount: $amount)
   }
 `;

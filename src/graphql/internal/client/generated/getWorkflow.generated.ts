@@ -4,7 +4,7 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type GetWorkflowQueryVariables = Types.Exact<{
-  workflowId: Types.Scalars['String'];
+  workflowId: Types.Scalars['String']['input'];
 }>;
 
 export type GetWorkflowQuery = {
@@ -49,8 +49,15 @@ export function useGetWorkflowLazyQuery(
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetWorkflowQuery, GetWorkflowQueryVariables>(GetWorkflowDocument, options);
 }
+export function useGetWorkflowSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetWorkflowQuery, GetWorkflowQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetWorkflowQuery, GetWorkflowQueryVariables>(GetWorkflowDocument, options);
+}
 export type GetWorkflowQueryHookResult = ReturnType<typeof useGetWorkflowQuery>;
 export type GetWorkflowLazyQueryHookResult = ReturnType<typeof useGetWorkflowLazyQuery>;
+export type GetWorkflowSuspenseQueryHookResult = ReturnType<typeof useGetWorkflowSuspenseQuery>;
 export type GetWorkflowQueryResult = Apollo.QueryResult<GetWorkflowQuery, GetWorkflowQueryVariables>;
 export function refetchGetWorkflowQuery(variables: GetWorkflowQueryVariables) {
   return { query: GetWorkflowDocument, variables: variables };
