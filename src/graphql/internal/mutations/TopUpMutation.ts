@@ -5,8 +5,8 @@
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import { injectable } from 'tsyringe';
 import { Args, ArgsType, Field, Mutation, Resolver } from 'type-graphql';
-import type { Hex } from 'viem';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
+import mustBeHex from '@utils/parse/mustBeHex';
 
 @ArgsType()
 class TopUpArgs {
@@ -24,7 +24,7 @@ export default class TopUpMutation {
 
   @Mutation(() => Boolean)
   async topUp(@Args() { jobId, amount }: TopUpArgs) {
-    await this.deepsquare.topUp(jobId as Hex, BigInt(amount));
+    await this.deepsquare.topUp(mustBeHex(jobId), BigInt(amount));
     return true;
   }
 }

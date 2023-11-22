@@ -9,10 +9,10 @@
 // Foobar is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Foobar. If not, see <https://www.gnu.org/licenses/>.
 import { Args, ArgsType, Field, Mutation, Resolver } from 'type-graphql';
-import type { Hex } from 'viem';
 import { verifyMessage } from 'viem';
 import { AuthenticationError } from '@graphql/internal/errors/AuthenticationError';
 import { sign } from '@lib/auth/sign';
+import mustBeHex from '@utils/parse/mustBeHex';
 
 @ArgsType()
 class LoginFromWeb3Args {
@@ -29,9 +29,9 @@ export default class LoginFromWeb3Mutation {
   async loginFromWeb3(@Args() { address, signature }: LoginFromWeb3Args) {
     if (
       !(await verifyMessage({
-        address: address as Hex,
+        address: mustBeHex(address),
         message: address,
-        signature: signature as Hex,
+        signature: mustBeHex(signature),
       }))
     )
       throw new AuthenticationError('Invalid web3 signature');

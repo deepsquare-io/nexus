@@ -4,6 +4,7 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { Field, Int, ObjectType } from 'type-graphql';
+import { type Hex } from 'viem';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
 import { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 
@@ -37,7 +38,7 @@ export class ProviderPrices {
 @ObjectType()
 export class Provider {
   @Field(() => String)
-  addr!: string;
+  addr!: Hex;
 
   @Field(() => ProviderHardware)
   providerHardware!: ProviderHardware;

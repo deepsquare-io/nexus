@@ -37,6 +37,7 @@ import hex2dec from '@utils/hex2dec';
 import { computeCost } from '@utils/job/computeCost';
 import { computeCostPerMin } from '@utils/job/computeCostPerMin';
 import { isJobTerminated } from '@utils/job/isJobTerminated';
+import mustBeHex from '@utils/parse/mustBeHex';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 dayjs.extend(duration);
@@ -117,7 +118,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   size="small"
                   onClick={async () => {
                     if (isJobTerminated(params.row.status) || !cancel) return;
-                    await cancel(params.row.jobId);
+                    await cancel(mustBeHex(params.row.jobId));
                   }}
                 >
                   <CancelSharp />

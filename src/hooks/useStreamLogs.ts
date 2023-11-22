@@ -13,6 +13,7 @@ import loggerClient from '@grpc/client';
 import { GRPCService } from '@grpc/service';
 import { authContext } from '@lib/contexts/AuthContext';
 import { isWeb2, isWeb3 } from '@lib/types/AuthMethod';
+import mustBeHex from '@utils/parse/mustBeHex';
 
 export default function useStreamLogs(
   terminal: Terminal | null,
@@ -75,8 +76,8 @@ export default function useStreamLogs(
       } else {
         if (!jobHash) return;
         params = {
-          hash: jobHash.getJobHash.hash,
-          address: jobHash.getJobHash.address,
+          hash: mustBeHex(jobHash.getJobHash.hash),
+          address: mustBeHex(jobHash.getJobHash.address),
           timestamp: parseInt(jobHash.getJobHash.timestamp),
         };
       }
