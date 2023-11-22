@@ -4,7 +4,7 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import resolveConfig from 'tailwindcss/resolveConfig';
-import rawTailwindConfig from '../../tailwind.config';
+import rawTailwindConfig from '../../tailwind.config.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const tailwind = resolveConfig(rawTailwindConfig);

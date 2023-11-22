@@ -4,12 +4,10 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { Field, InputType, Int, ObjectType } from 'type-graphql';
-import type { ReadContractReturnType } from 'viem';
-import { type Hex } from 'viem';
+import { type Hex, type ReadContractReturnType } from 'viem';
 import type { IJobRepositoryAbi } from '@abi/IJobRepository';
 import { JobStatus } from '@deepsquare/deepsquare-client';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
-import HexScalar from '@graphql/internal/scalars/HexScalar';
 
 @InputType('LabelInput')
 @ObjectType()
@@ -26,7 +24,7 @@ export class Affinity {
   @Field(() => Label)
   label!: Label;
 
-  @Field(() => HexScalar)
+  @Field(() => String)
   op!: Hex;
 }
 
@@ -95,16 +93,16 @@ export class JobCost {
 
 @ObjectType()
 export class JobSummary implements ReadContractReturnType<typeof IJobRepositoryAbi, 'get'> {
-  @Field(() => HexScalar)
+  @Field(() => String)
   jobId!: Hex;
 
   @Field(() => Int)
   status!: JobStatus;
 
-  @Field(() => HexScalar)
+  @Field(() => String)
   customerAddr!: Hex;
 
-  @Field(() => HexScalar)
+  @Field(() => String)
   providerAddr!: Hex;
 
   @Field()
@@ -116,7 +114,7 @@ export class JobSummary implements ReadContractReturnType<typeof IJobRepositoryA
   @Field()
   time!: JobTime;
 
-  @Field(() => HexScalar)
+  @Field(() => String)
   jobName!: Hex;
 
   @Field(() => Boolean)

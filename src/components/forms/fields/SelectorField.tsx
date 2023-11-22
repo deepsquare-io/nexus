@@ -11,6 +11,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import MuiTextField from '@mui/material/TextField';
 
 type SelectorFieldProps<V extends FieldValues, N extends FieldPath<V>> = Omit<TextFieldProps<V, N>, 'rules'> & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   options: any[];
   AutocompleteProps?: Omit<
     AutocompleteProps<V, undefined, boolean, undefined>,

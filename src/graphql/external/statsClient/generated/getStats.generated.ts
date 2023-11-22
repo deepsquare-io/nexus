@@ -4,9 +4,9 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type GetStatsQueryVariables = Types.Exact<{
-  days: Types.Scalars['Int'];
-  startTime: Types.Scalars['Time'];
-  endTime: Types.Scalars['Time'];
+  days: Types.Scalars['Int']['input'];
+  startTime: Types.Scalars['Time']['input'];
+  endTime: Types.Scalars['Time']['input'];
   orderBy: Types.WalletOrderBy;
 }>;
 
@@ -81,8 +81,15 @@ export function useGetStatsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<G
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetStatsQuery, GetStatsQueryVariables>(GetStatsDocument, options);
 }
+export function useGetStatsSuspenseQuery(
+  baseOptions?: Apollo.SuspenseQueryHookOptions<GetStatsQuery, GetStatsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<GetStatsQuery, GetStatsQueryVariables>(GetStatsDocument, options);
+}
 export type GetStatsQueryHookResult = ReturnType<typeof useGetStatsQuery>;
 export type GetStatsLazyQueryHookResult = ReturnType<typeof useGetStatsLazyQuery>;
+export type GetStatsSuspenseQueryHookResult = ReturnType<typeof useGetStatsSuspenseQuery>;
 export type GetStatsQueryResult = Apollo.QueryResult<GetStatsQuery, GetStatsQueryVariables>;
 export function refetchGetStatsQuery(variables: GetStatsQueryVariables) {
   return { query: GetStatsDocument, variables: variables };

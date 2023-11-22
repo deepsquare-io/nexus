@@ -19,19 +19,20 @@ ignores:
   - apollo-server-types
   - graphql-tag
   - standard-commit
-  - tsconfig-paths
-  - wait-on
   # Build
   - '@babel/' # Babel plugins
   - '@babel/preset-env'
   - babel-loader
   - autoprefixer
   - depcheck
+  - postcss
   - esbuild
   - encoding
   - '@ethersproject/bytes'
   - react-is
   - '@trivago/prettier-plugin-sort-imports'
   - '@vue/compiler-sfc'
+  # Image optimizer used at compile-time (also used on Vercel by default)
+  - sharp
   # CLI
   - rimraf

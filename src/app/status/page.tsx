@@ -14,11 +14,11 @@ import { useState } from 'react';
 import JobStatusChip from '@components/chips/JobStatusChip';
 import TopUpDialog from '@components/dialogs/TopUpDialog';
 import withConnectionRequired from '@components/hoc/withConnectionRequired';
+import { JobStatus } from '@deepsquare/deepsquare-client';
 import type { FullJobSummary } from '@graphql/internal/queries/ListJobsQuery';
 import useCancelJob from '@hooks/useCancelJob';
 import useListJobs from '@hooks/useListJobs';
 import useWindowSize from '@hooks/useWindowSize';
-import { JobStatus } from '@lib/types/enums/JobStatus';
 import { CancelSharp, MoreTime } from '@mui/icons-material';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
@@ -37,6 +37,7 @@ import hex2dec from '@utils/hex2dec';
 import { computeCost } from '@utils/job/computeCost';
 import { computeCostPerMin } from '@utils/job/computeCostPerMin';
 import { isJobTerminated } from '@utils/job/isJobTerminated';
+import mustBeHex from '@utils/parse/mustBeHex';
 import { parseBytes32String } from '@utils/parse/parseBytes32String';
 
 dayjs.extend(duration);
@@ -117,7 +118,7 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   size="small"
                   onClick={async () => {
                     if (isJobTerminated(params.row.status) || !cancel) return;
-                    await cancel(params.row.jobId);
+                    await cancel(mustBeHex(params.row.jobId));
                   }}
                 >
                   <CancelSharp />

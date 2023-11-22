@@ -4,7 +4,7 @@ runs:
   using: composite
   steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
 
@@ -19,7 +19,7 @@ runs:
         version: ${{ steps.pnpm.outputs.latest-version }}
 
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 'lts/*'
         cache: pnpm
@@ -27,5 +27,7 @@ runs:
     - name: Install dependencies
       run: pnpm install --frozen-lockfile # equivalent to npm ci
       shell: bash
-      env:
-        SENTRYCLI_SKIP_DOWNLOAD: '1'
+      # Don't skip download because Sentry sucks at code review.
+      # Skipping the download will crash.
+      #env:
+      #  SENTRYCLI_SKIP_DOWNLOAD: '1'

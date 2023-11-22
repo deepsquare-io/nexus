@@ -5,7 +5,7 @@
 // Nexus is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
-import randomWords from 'random-words';
+import { generate } from 'random-words';
 import type { SubmitHandler } from 'react-hook-form';
 import { FormProvider, useForm } from 'react-hook-form';
 import * as y from 'yup';
@@ -89,7 +89,7 @@ export default function BlenderPage() {
         memPerCpu: 6000,
         gpuPerTask: 1,
       },
-      jobName: `${WorkloadType.BLENDER} - ${randomWords({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
+      jobName: `${WorkloadType.BLENDER} - ${generate({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
     resolver: yupResolver(schema(balance_wCredit, minAmount ?? 0n, isWeb2(authMethod))),
   });

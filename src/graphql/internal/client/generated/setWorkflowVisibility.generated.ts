@@ -4,8 +4,8 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type SetWorkflowVisibilityMutationVariables = Types.Exact<{
-  workflowId: Types.Scalars['String'];
-  isPublic: Types.Scalars['Boolean'];
+  workflowId: Types.Scalars['String']['input'];
+  isPublic: Types.Scalars['Boolean']['input'];
 }>;
 
 export type SetWorkflowVisibilityMutation = { setWorkflowVisibility: boolean };

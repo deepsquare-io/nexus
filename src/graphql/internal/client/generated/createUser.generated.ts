@@ -4,7 +4,7 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type CreateUserMutationVariables = Types.Exact<{
-  userId: Types.Scalars['String'];
+  userId: Types.Scalars['String']['input'];
 }>;
 
 export type CreateUserMutation = { createUser: boolean };

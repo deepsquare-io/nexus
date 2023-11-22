@@ -5,25 +5,23 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { injectable } from 'tsyringe';
 import { Args, ArgsType, Field, ObjectType, Query, Resolver } from 'type-graphql';
-import { type Hex } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
-import HexScalar from '@graphql/internal/scalars/HexScalar';
 import env from '@lib/app/env';
 
 @ArgsType()
 class GetJobHashArgs {
-  @Field(() => HexScalar)
-  jobId!: Hex;
+  @Field(() => String)
+  jobId!: string;
 }
 
 @ObjectType()
 class GetJobHashOutput {
-  @Field(() => HexScalar)
-  hash!: Hex;
+  @Field(() => String)
+  hash!: string;
 
-  @Field(() => HexScalar)
-  address!: Hex;
+  @Field(() => String)
+  address!: string;
 
   @Field(() => String)
   timestamp!: string;

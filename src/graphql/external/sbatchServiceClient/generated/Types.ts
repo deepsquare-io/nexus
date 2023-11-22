@@ -3,13 +3,15 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
 };
 
 /**
@@ -23,19 +25,19 @@ export type Bore = {
    *
    * Go name: "Address".
    */
-  address: Scalars['String'];
+  address: Scalars['String']['input'];
   /**
    * The bore server port.
    *
    * Go name: "Port".
    */
-  port: Scalars['Int'];
+  port: Scalars['Int']['input'];
   /**
    * Target port.
    *
    * Go name: "TargetPort".
    */
-  targetPort: Scalars['Int'];
+  targetPort: Scalars['Int']['input'];
 };
 
 export type ContainerRun = {
@@ -50,7 +52,7 @@ export type ContainerRun = {
    *
    * Go name: "Apptainer".
    */
-  apptainer?: InputMaybe<Scalars['Boolean']>;
+  apptainer?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Use DeepSquare-hosted images.
    *
@@ -58,7 +60,7 @@ export type ContainerRun = {
    *
    * Go name: "DeepsquareHosted".
    */
-  deepsquareHosted?: InputMaybe<Scalars['Boolean']>;
+  deepsquareHosted?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Run the command inside a container with Enroot.
    *
@@ -79,13 +81,13 @@ export type ContainerRun = {
    *
    * Go name: "Image".
    */
-  image: Scalars['String'];
+  image: Scalars['String']['input'];
   /**
    * Mount the home directories.
    *
    * Go name: "MountHome".
    */
-  mountHome?: InputMaybe<Scalars['Boolean']>;
+  mountHome?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * [DEPRECATED] Mounts decribes a Bind Mount.
    *
@@ -99,13 +101,13 @@ export type ContainerRun = {
    *
    * Go name: "Password".
    */
-  password?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']['input']>;
   /**
    * Disable write permissions on the container root file system. Does not applies to mounts.
    *
    * Go name: "ReadOnlyRootFS"
    */
-  readOnlyRootFS?: InputMaybe<Scalars['Boolean']>;
+  readOnlyRootFS?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Container registry host.
    *
@@ -113,19 +115,19 @@ export type ContainerRun = {
    *
    * Go name: "Registry".
    */
-  registry?: InputMaybe<Scalars['String']>;
+  registry?: InputMaybe<Scalars['String']['input']>;
   /**
    * Username of a basic authentication.
    *
    * Go name: "Username".
    */
-  username?: InputMaybe<Scalars['String']>;
+  username?: InputMaybe<Scalars['String']['input']>;
   /**
    * X11 mounts /tmp/.X11-unix in the container.
    *
    * Go name: "X11".
    */
-  x11?: InputMaybe<Scalars['Boolean']>;
+  x11?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /**
@@ -139,13 +141,13 @@ export type EnvVar = {
    *
    * Go name: "Key".
    */
-  key: Scalars['String'];
+  key: Scalars['String']['input'];
   /**
    * Value of the environment variable.
    *
    * Go name: "Value".
    */
-  value: Scalars['String'];
+  value: Scalars['String']['input'];
 };
 
 /** ForRange describes the parameter for a range loop. */
@@ -155,19 +157,19 @@ export type ForRange = {
    *
    * Go name: "Begin".
    */
-  begin: Scalars['Int'];
+  begin: Scalars['Int']['input'];
   /**
    * End is inclusive.
    *
    * Go name: "End".
    */
-  end: Scalars['Int'];
+  end: Scalars['Int']['input'];
   /**
    * Increment counter by x count. If null, defaults to 1.
    *
    * Go name: "Increment".
    */
-  increment?: InputMaybe<Scalars['Int']>;
+  increment?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** HTTPData describes the necessary variables to connect to a HTTP storage. */
@@ -177,7 +179,7 @@ export type HttpData = {
    *
    * Go name: "URL".
    */
-  url: Scalars['String'];
+  url: Scalars['String']['input'];
 };
 
 /** A Job is a finite sequence of instructions. */
@@ -191,13 +193,13 @@ export type Job = {
    *
    * Go name: "ContinuousOutputSync".
    */
-  continuousOutputSync?: InputMaybe<Scalars['Boolean']>;
+  continuousOutputSync?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * EnableLogging enables the DeepSquare Grid Logger.
    *
    * Go name: "EnableLogging".
    */
-  enableLogging?: InputMaybe<Scalars['Boolean']>;
+  enableLogging?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Environment variables accessible for the entire job.
    *
@@ -226,7 +228,7 @@ export type Job = {
    *
    * Go name: "InputMode".
    */
-  inputMode?: InputMaybe<Scalars['Int']>;
+  inputMode?: InputMaybe<Scalars['Int']['input']>;
   /**
    * Push data at the end of the job.
    *
@@ -267,7 +269,7 @@ export type JobResources = {
    *
    * Go name: "CpusPerTask".
    */
-  cpusPerTask: Scalars['Int'];
+  cpusPerTask: Scalars['Int']['input'];
   /**
    * Allocated GPUs per task.
    *
@@ -275,7 +277,7 @@ export type JobResources = {
    *
    * Go name: "GpusPerTask".
    */
-  gpusPerTask: Scalars['Int'];
+  gpusPerTask: Scalars['Int']['input'];
   /**
    * Allocated memory (MB) per task.
    *
@@ -283,7 +285,7 @@ export type JobResources = {
    *
    * Go name: "MemPerCPU".
    */
-  memPerCpu: Scalars['Int'];
+  memPerCpu: Scalars['Int']['input'];
   /**
    * Number of tasks which are run in parallel.
    *
@@ -291,7 +293,7 @@ export type JobResources = {
    *
    * Go name: "Tasks".
    */
-  tasks: Scalars['Int'];
+  tasks: Scalars['Int']['input'];
 };
 
 /**
@@ -350,7 +352,7 @@ export type Module = {
    *
    * Go name: "Description".
    */
-  description: Scalars['String'];
+  description: Scalars['String']['input'];
   /**
    * List of allowed arguments.
    *
@@ -368,7 +370,7 @@ export type Module = {
    *
    * Go name: "Name".
    */
-  name: Scalars['String'];
+  name: Scalars['String']['input'];
   /**
    * List of exported environment variables.
    *
@@ -391,19 +393,19 @@ export type ModuleInput = {
    *
    * Go name: "Default".
    */
-  default?: InputMaybe<Scalars['String']>;
+  default?: InputMaybe<Scalars['String']['input']>;
   /**
    * Description of the input.
    *
    * Go name: "Description".
    */
-  description: Scalars['String'];
+  description: Scalars['String']['input'];
   /**
    * Name of the input.
    *
    * Go name: "Key".
    */
-  key: Scalars['String'];
+  key: Scalars['String']['input'];
 };
 
 export type ModuleOutput = {
@@ -412,13 +414,13 @@ export type ModuleOutput = {
    *
    * Go name: "Description".
    */
-  description: Scalars['String'];
+  description: Scalars['String']['input'];
   /**
    * Name of the output.
    *
    * Go name: "Key".
    */
-  key: Scalars['String'];
+  key: Scalars['String']['input'];
 };
 
 /**
@@ -432,13 +434,13 @@ export type Mount = {
    *
    * Go name: "ContainerDir".
    */
-  containerDir: Scalars['String'];
+  containerDir: Scalars['String']['input'];
   /**
    * Directory on the host to be mounted inside the container.
    *
    * Go name: "HostDir".
    */
-  hostDir: Scalars['String'];
+  hostDir: Scalars['String']['input'];
   /**
    * Options modifies the mount options.
    *
@@ -446,14 +448,14 @@ export type Mount = {
    *
    * Go name: "Options".
    */
-  options: Scalars['String'];
+  options: Scalars['String']['input'];
 };
 
 export type Mutation = {
   /** Submit a Job and retrieve the batch location hash. */
-  submit: Scalars['String'];
+  submit: Scalars['String']['output'];
   /** Validate a module. */
-  validate: Scalars['String'];
+  validate: Scalars['String']['output'];
 };
 
 export type MutationSubmitArgs = {
@@ -488,11 +490,11 @@ export type NetworkInterface = {
 
 export type Query = {
   /** Retrieve a job batch script from the hash. */
-  job: Scalars['String'];
+  job: Scalars['String']['output'];
 };
 
 export type QueryJobArgs = {
-  batchLocationHash: Scalars['String'];
+  batchLocationHash: Scalars['String']['input'];
 };
 
 /** S3Data describes the necessary variables to connect to a S3 storage. */
@@ -502,7 +504,7 @@ export type S3Data = {
    *
    * Go name: "AccessKeyID".
    */
-  accessKeyId: Scalars['String'];
+  accessKeyId: Scalars['String']['input'];
   /**
    * The S3 Bucket URL. Must not end with "/".
    *
@@ -510,7 +512,7 @@ export type S3Data = {
    *
    * Go name: "BucketURL".
    */
-  bucketUrl: Scalars['String'];
+  bucketUrl: Scalars['String']['input'];
   /**
    * DeleteSync removes destination files that doesn't correspond to the source.
    *
@@ -522,31 +524,31 @@ export type S3Data = {
    *
    * Go name: "DeleteSync".
    */
-  deleteSync?: InputMaybe<Scalars['Boolean']>;
+  deleteSync?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * A S3 Endpoint URL used for authentication. Example: https://s3.us‑east‑2.amazonaws.com
    *
    * Go name: "EndpointURL".
    */
-  endpointUrl: Scalars['String'];
+  endpointUrl: Scalars['String']['input'];
   /**
    * The absolute path to a directory/file inside the bucket. Must start with "/".
    *
    * Go name: "Path".
    */
-  path: Scalars['String'];
+  path: Scalars['String']['input'];
   /**
    * S3 region. Example: "us‑east‑2".
    *
    * Go name: "Region".
    */
-  region: Scalars['String'];
+  region: Scalars['String']['input'];
   /**
    * A secret access key for the S3 endpoint.
    *
    * Go name: "SecretAccessKey".
    */
-  secretAccessKey: Scalars['String'];
+  secretAccessKey: Scalars['String']['input'];
 };
 
 /** Step is one instruction. */
@@ -568,7 +570,7 @@ export type Step = {
    *
    * Go name: "DependsOn".
    */
-  dependsOn?: InputMaybe<Array<Scalars['String']>>;
+  dependsOn?: InputMaybe<Array<Scalars['String']['input']>>;
   /**
    * Group of steps that will be run sequentially after the group of steps or command finishes.
    *
@@ -594,7 +596,7 @@ export type Step = {
    *
    * Go name: "If".
    */
-  if?: InputMaybe<Scalars['String']>;
+  if?: InputMaybe<Scalars['String']['input']>;
   /**
    * Launch a background process to run a group of commands if not null.
    *
@@ -610,7 +612,7 @@ export type Step = {
    *
    * Go name: "Name".
    */
-  name?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']['input']>;
   /**
    * Run a command if not null.
    *
@@ -650,7 +652,7 @@ export type StepAsyncLaunch = {
    *
    * Go name: "HandleName".
    */
-  handleName?: InputMaybe<Scalars['String']>;
+  handleName?: InputMaybe<Scalars['String']['input']>;
   /**
    * SignalOnParentStepExit sends a signal to the step and sub-steps when the parent step ends.
    *
@@ -676,7 +678,7 @@ export type StepAsyncLaunch = {
    *
    * Go name: "SignalOnParentStepExit".
    */
-  signalOnParentStepExit?: InputMaybe<Scalars['Int']>;
+  signalOnParentStepExit?: InputMaybe<Scalars['Int']['input']>;
   /**
    * Steps are run sequentially.
    *
@@ -694,13 +696,13 @@ export type StepFor = {
    *
    * Go name: "Items".
    */
-  items?: InputMaybe<Array<Scalars['String']>>;
+  items?: InputMaybe<Array<Scalars['String']['input']>>;
   /**
    * Do a parallel for loop. Each iteration is run in parallel.
    *
    * Go name: "Parallel".
    */
-  parallel: Scalars['Boolean'];
+  parallel: Scalars['Boolean']['input'];
   /**
    * Index accessible via the $index variable.
    *
@@ -750,7 +752,7 @@ export type StepRun = {
    *
    * Go name: "Command".
    */
-  command: Scalars['String'];
+  command: Scalars['String']['input'];
   /**
    * Container definition.
    *
@@ -782,7 +784,7 @@ export type StepRun = {
    *
    * Go name: "DisableCPUBinding".
    */
-  disableCpuBinding?: InputMaybe<Scalars['Boolean']>;
+  disableCpuBinding?: InputMaybe<Scalars['Boolean']['input']>;
   /**
    * Configuration for the DNS in "slirp4netns" mode.
    *
@@ -792,7 +794,7 @@ export type StepRun = {
    *
    * Go name: "DNS".
    */
-  dns?: InputMaybe<Array<Scalars['String']>>;
+  dns?: InputMaybe<Array<Scalars['String']['input']>>;
   /**
    * Environment variables accessible over the command.
    *
@@ -804,7 +806,7 @@ export type StepRun = {
    *
    * Go name: "MapGID".
    */
-  mapGid?: InputMaybe<Scalars['Int']>;
+  mapGid?: InputMaybe<Scalars['Int']['input']>;
   /**
    * Remap UID. Does not grant elevated system permissions, despite appearances.
    *
@@ -812,7 +814,7 @@ export type StepRun = {
    *
    * Go name: "MapUID".
    */
-  mapUid?: InputMaybe<Scalars['Int']>;
+  mapUid?: InputMaybe<Scalars['Int']['input']>;
   /**
    * MPI selection.
    *
@@ -822,7 +824,7 @@ export type StepRun = {
    *
    * Go name: "Mpi".
    */
-  mpi?: InputMaybe<Scalars['String']>;
+  mpi?: InputMaybe<Scalars['String']['input']>;
   /**
    * Type of core networking functionality.
    *
@@ -830,7 +832,7 @@ export type StepRun = {
    *
    * Go name: "Network".
    */
-  network?: InputMaybe<Scalars['String']>;
+  network?: InputMaybe<Scalars['String']['input']>;
   /**
    * Allocated resources for the command.
    *
@@ -845,7 +847,7 @@ export type StepRun = {
    *
    * Go name: "Shell".
    */
-  shell?: InputMaybe<Scalars['String']>;
+  shell?: InputMaybe<Scalars['String']['input']>;
   /**
    * Working directory.
    *
@@ -859,7 +861,7 @@ export type StepRun = {
    *
    * Go name: "WorkDir".
    */
-  workDir?: InputMaybe<Scalars['String']>;
+  workDir?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** StepRunResources are the allocated resources for a command in a job. */
@@ -873,7 +875,7 @@ export type StepRunResources = {
    *
    * Go name: "CpusPerTask".
    */
-  cpusPerTask?: InputMaybe<Scalars['Int']>;
+  cpusPerTask?: InputMaybe<Scalars['Int']['input']>;
   /**
    * Allocated GPUs per task.
    *
@@ -883,7 +885,7 @@ export type StepRunResources = {
    *
    * Go name: "GpusPerTask".
    */
-  gpusPerTask?: InputMaybe<Scalars['Int']>;
+  gpusPerTask?: InputMaybe<Scalars['Int']['input']>;
   /**
    * Allocated memory (MB) per task.
    *
@@ -893,7 +895,7 @@ export type StepRunResources = {
    *
    * Go name: "MemPerCPU".
    */
-  memPerCpu?: InputMaybe<Scalars['Int']>;
+  memPerCpu?: InputMaybe<Scalars['Int']['input']>;
   /**
    * Number of tasks which are run in parallel.
    *
@@ -903,7 +905,7 @@ export type StepRunResources = {
    *
    * Go name: "Tasks".
    */
-  tasks?: InputMaybe<Scalars['Int']>;
+  tasks?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type StepUse = {
@@ -920,7 +922,7 @@ export type StepUse = {
    *
    * Go name: "ExportEnvAs".
    */
-  exportEnvAs?: InputMaybe<Scalars['String']>;
+  exportEnvAs?: InputMaybe<Scalars['String']['input']>;
   /**
    * Source of the group of steps.
    *
@@ -935,7 +937,7 @@ export type StepUse = {
    *
    * Go name: "Source".
    */
-  source: Scalars['String'];
+  source: Scalars['String']['input'];
   /**
    * Additional children steps to the module.
    *
@@ -982,7 +984,7 @@ export type Wireguard = {
    *
    * Go name: "Address".
    */
-  address?: InputMaybe<Array<Scalars['String']>>;
+  address?: InputMaybe<Array<Scalars['String']['input']>>;
   /**
    * The peers connected to the wireguard interface.
    *
@@ -994,7 +996,7 @@ export type Wireguard = {
    *
    * Go name: "PrivateKey".
    */
-  privateKey: Scalars['String'];
+  privateKey: Scalars['String']['input'];
 };
 
 /** A Wireguard Peer. */
@@ -1012,7 +1014,7 @@ export type WireguardPeer = {
    *
    * Go name: "AllowedIPs".
    */
-  allowedIPs?: InputMaybe<Array<Scalars['String']>>;
+  allowedIPs?: InputMaybe<Array<Scalars['String']['input']>>;
   /**
    * The peer endpoint.
    *
@@ -1022,7 +1024,7 @@ export type WireguardPeer = {
    *
    * Go name: "Endpoint".
    */
-  endpoint?: InputMaybe<Scalars['String']>;
+  endpoint?: InputMaybe<Scalars['String']['input']>;
   /**
    * Initiate the handshake and re-initiate regularly.
    *
@@ -1032,17 +1034,17 @@ export type WireguardPeer = {
    *
    * Go name: "PersistentKeepalive".
    */
-  persistentKeepalive?: InputMaybe<Scalars['Int']>;
+  persistentKeepalive?: InputMaybe<Scalars['Int']['input']>;
   /**
    * The peer pre-shared key.
    *
    * Go name: "PreSharedKey".
    */
-  preSharedKey?: InputMaybe<Scalars['String']>;
+  preSharedKey?: InputMaybe<Scalars['String']['input']>;
   /**
    * The peer private key.
    *
    * Go name: "PublicKey".
    */
-  publicKey: Scalars['String'];
+  publicKey: Scalars['String']['input'];
 };

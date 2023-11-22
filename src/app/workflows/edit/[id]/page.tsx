@@ -9,14 +9,14 @@ import { useRouter } from 'next/navigation';
 import WorkflowForm from '@components/forms/workflows/WorkflowForm';
 import { useGetWorkflowQuery } from '@graphql/internal/client/generated/getWorkflow.generated';
 
-const EditWorkflowPage = ({ params }: { params: { workflowId: string } }) => {
+const EditWorkflowPage = ({ params }: { params: { id: string } }) => {
   const router = useRouter();
-  const { data } = useGetWorkflowQuery({ variables: { workflowId: params.workflowId } });
+  const { data } = useGetWorkflowQuery({ variables: { workflowId: params.id } });
 
   if (!data || !data.getWorkflow) return null;
   return (
     <WorkflowForm
-      workflowId={params.workflowId}
+      workflowId={params.id}
       name={data.getWorkflow.name}
       content={data.getWorkflow.content}
       onSubmit={() => {

@@ -180,10 +180,10 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
                           /usr/bin/blender --threads 0 --log-level 0 --enable-autoexec -E "${
                             details.renderEngine
                           }" -b "$STORAGE_PATH"/input/*.blend -F "${
-                      details.outputFormat
-                    }" -o "$DEEPSQUARE_OUTPUT/frame_#####" -s "$start_frame_i" -e "$end_frame_i" -a ${
-                      details.renderEngine === BlenderRenderEngine.CYCLES ? `-- --cycles-device OPTIX` : ''
-                    } | grep -A 2 'Saved:'`),
+                            details.outputFormat
+                          }" -o "$DEEPSQUARE_OUTPUT/frame_#####" -s "$start_frame_i" -e "$end_frame_i" -a ${
+                            details.renderEngine === BlenderRenderEngine.CYCLES ? `-- --cycles-device OPTIX` : ''
+                          } | grep -A 2 'Saved:'`),
                   },
                 },
               ],

@@ -18,10 +18,9 @@
     "tailwindcss/tailwind-config",
     "tailwindcss/colors",
     "yargs/helpers",
-    "../../tailwind.config",
-    "hardhat/config"
+    "../../tailwind.config"
   ],
-  "ignoreUnused": ["next", "react", "react-dom", "@babel/preset-env", "@swc/core", "react-is", "encoding"],
+  "ignoreUnused": ["next", "react", "react-dom", "@swc/core", "react-is", "encoding", "sharp"],
   "ignoreUnimported": ["**/*.spec.*", "./abi/*", "src/components/forms/workloads/ContainerWorkloadSubform.tsx"],
   "aliases": {
     "@components/*": ["./src/components/*"],

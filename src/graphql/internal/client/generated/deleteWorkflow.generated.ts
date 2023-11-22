@@ -4,7 +4,7 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type DeleteWorkflowMutationVariables = Types.Exact<{
-  workflowId: Types.Scalars['String'];
+  workflowId: Types.Scalars['String']['input'];
 }>;
 
 export type DeleteWorkflowMutation = { deleteWorkflow: boolean };

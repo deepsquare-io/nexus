@@ -4,20 +4,22 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import * as admin from 'firebase-admin';
+import { GraphQLClient } from 'graphql-request';
 import { Db, MongoClient } from 'mongodb';
 import { container, instanceCachingFactory } from 'tsyringe';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
+import { createLoggerClient } from '@deepsquare/deepsquare-client/grpc/browser';
 import env from '@lib/app/env';
 import { FirebaseAdmin } from '@lib/app/tokens';
 import { addressMetaScheduler } from '@lib/web3/constants/contracts';
 
 container.register(DeepSquareClient, {
   useFactory: instanceCachingFactory(() => {
-    return new DeepSquareClient(
+    return DeepSquareClient.withPrivateKey(
       env.WEB3_PRIVATE_KEY,
-      undefined,
+      createLoggerClient,
       addressMetaScheduler,
-      `${env.NEXT_PUBLIC_API_URL}/graphql`,
+      new GraphQLClient(`${env.NEXT_PUBLIC_API_URL}/graphql`),
     );
   }),
 });

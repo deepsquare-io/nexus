@@ -4,8 +4,8 @@
 // Nexus is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import type { FC } from 'react';
+import { JobStatus } from '@deepsquare/deepsquare-client';
 import useWindowSize from '@hooks/useWindowSize';
-import { JobStatus } from '@lib/types/enums/JobStatus';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';

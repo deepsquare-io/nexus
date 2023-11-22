@@ -4,9 +4,9 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type SaveWorkflowMutationVariables = Types.Exact<{
-  name: Types.Scalars['String'];
-  content: Types.Scalars['String'];
-  workflowId?: Types.InputMaybe<Types.Scalars['String']>;
+  name: Types.Scalars['String']['input'];
+  content: Types.Scalars['String']['input'];
+  workflowId?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 export type SaveWorkflowMutation = { saveWorkflow: boolean };

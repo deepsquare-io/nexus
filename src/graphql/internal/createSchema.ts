@@ -20,7 +20,6 @@ import ListJobsQuery from '@graphql/internal/queries/ListJobsQuery';
 import ListWorkflowsQuery from '@graphql/internal/queries/ListWorkflowsQuery';
 import PingQuery from '@graphql/internal/queries/PingQuery';
 import { BigIntScalar } from '@graphql/internal/scalars/BigIntScalar';
-import HexScalar from '@graphql/internal/scalars/HexScalar';
 import container from '@lib/app/container';
 import { ProviderStatus } from '@lib/types/enums/ProviderStatus';
 
@@ -30,10 +29,6 @@ registerEnumType(ProviderStatus, { name: 'ProviderStatus' });
 export default function createSchema() {
   return buildSchemaSync({
     scalarsMap: [
-      {
-        type: 'Hex' as any,
-        scalar: HexScalar,
-      },
       {
         type: BigInt,
         scalar: BigIntScalar,
@@ -59,6 +54,7 @@ export default function createSchema() {
       TopUpMutation,
     ],
     container: {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       get(someClass: any): any {
         return container.resolve(someClass);
       },

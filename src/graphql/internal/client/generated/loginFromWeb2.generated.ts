@@ -4,7 +4,7 @@ import type * as Types from './Types';
 
 const defaultOptions = {} as const;
 export type LoginFromWeb2MutationVariables = Types.Exact<{
-  firebaseToken: Types.Scalars['String'];
+  firebaseToken: Types.Scalars['String']['input'];
 }>;
 
 export type LoginFromWeb2Mutation = { loginFromWeb2: string };

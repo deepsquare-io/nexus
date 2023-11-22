@@ -19,7 +19,7 @@ import FormGroup from '@mui/material/FormGroup';
 import Switch from '@mui/material/Switch';
 import Zoom from '@mui/material/Zoom';
 
-const JobConsolePage = ({ params }: { params: { jobId: string } }) => {
+const JobConsolePage = ({ params }: { params: { id: string } }) => {
   const [showTimestamp, setShowTimestamp] = useState<boolean>(false);
   const [terminal, setTerminal] = useState<Terminal | null>(null);
   const searchParams = useSearchParams();
@@ -29,7 +29,7 @@ const JobConsolePage = ({ params }: { params: { jobId: string } }) => {
     window.location.href = url.replace(/(.*)transfer.deepsquare.run(.*)/, '$1transfer.deepsquare.run/get/$2');
   }, []);
 
-  const dlLink = useStreamLogs(terminal, params.jobId, showTimestamp, !!download, handleDownload);
+  const dlLink = useStreamLogs(terminal, params.id, showTimestamp, !!download, handleDownload);
 
   const onTerminal = useCallback(
     (terminal: Terminal) => {

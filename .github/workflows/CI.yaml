@@ -20,7 +20,7 @@ jobs:
           - pnpm lint:ci
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup environment
         uses: ./.github/actions/setup
       - name: Run the script
@@ -34,7 +34,7 @@ jobs:
   #   needs: [scripts]
   #   timeout-minutes: 60
   #   steps:
-  #     - uses: actions/checkout@v3
+  #     - uses: actions/checkout@v4
   #     - name: Setup environment
   #       uses: ./.github/actions/setup
   #     - uses: actions/cache@v3

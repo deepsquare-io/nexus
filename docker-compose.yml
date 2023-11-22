@@ -1,7 +1,7 @@
 services:
   mongodb:
     # See version at https://cloud.mongodb.com/v2/610d1cffadba9c7c5700263b#clusters
-    image: mongo:5.0.6
+    image: mongo:7
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: dSc7V5Yw5S48SAV6uecwUMtd4decL5sS

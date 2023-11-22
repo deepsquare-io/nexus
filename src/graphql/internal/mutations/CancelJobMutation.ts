@@ -5,14 +5,13 @@
 // You should have received a copy of the GNU General Public License along with Nexus. If not, see <https://www.gnu.org/licenses/>.
 import { injectable } from 'tsyringe';
 import { Args, ArgsType, Field, Mutation, Resolver } from 'type-graphql';
-import { type Hex } from 'viem';
 import DeepSquareClient from '@deepsquare/deepsquare-client';
-import HexScalar from '@graphql/internal/scalars/HexScalar';
+import mustBeHex from '@utils/parse/mustBeHex';
 
 @ArgsType()
 class CancelJobArgs {
-  @Field(() => HexScalar)
-  jobId!: Hex;
+  @Field(() => String)
+  jobId!: string;
 }
 
 @injectable()
@@ -22,7 +21,7 @@ export default class CancelJobMutation {
 
   @Mutation(() => Boolean)
   async cancelJob(@Args() { jobId }: CancelJobArgs) {
-    await this.deepsquare.cancel(jobId);
+    await this.deepsquare.cancel(mustBeHex(jobId));
     return true;
   }
 }
