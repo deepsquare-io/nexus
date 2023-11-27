@@ -85,7 +85,7 @@ export class JobResources implements JobResourcesGQL {
   cpusPerTask!: number;
 
   @Field(() => Int)
-  gpusPerTask!: number;
+  gpus!: number;
 
   @Field(() => Int)
   memPerCpu!: number;

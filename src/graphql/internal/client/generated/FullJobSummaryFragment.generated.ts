@@ -1,5 +1,4 @@
 import { gql } from '@apollo/client';
-import type * as Types from './Types';
 
 export type FullJobSummaryFragmentFragment = {
   customerAddr: any;
@@ -12,8 +11,8 @@ export type FullJobSummaryFragmentFragment = {
   cost: { delegateSpendingAuthority: boolean; finalCost: string; maxCost: string; pendingTopUp: string };
   definition: {
     batchLocationHash: string;
-    cpuPerTask: string;
-    gpuPerTask: string;
+    cpusPerTask: string;
+    gpusPerTask: string;
     memPerCpu: string;
     ntasks: string;
     storageType: number;
@@ -42,8 +41,8 @@ export const FullJobSummaryFragmentFragmentDoc = /*#__PURE__*/ gql`
     customerAddr
     definition {
       batchLocationHash
-      cpuPerTask
-      gpuPerTask
+      cpusPerTask
+      gpusPerTask
       memPerCpu
       ntasks
       storageType

@@ -161,11 +161,7 @@ const SandboxPage: NextPage = () => {
 
           <CreditSubform
             defaultDuration={20}
-            gpuQty={
-              json?.resources?.tasks && json?.resources?.gpusPerTask
-                ? json.resources.tasks * json.resources.gpusPerTask
-                : undefined
-            }
+            gpuQty={json?.resources?.gpus}
             cpuQty={
               json?.resources?.tasks && json?.resources?.cpusPerTask
                 ? json.resources.tasks * json.resources.cpusPerTask

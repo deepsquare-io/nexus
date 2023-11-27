@@ -75,8 +75,8 @@ const NewPage: NextPage = () => {
       labels: [],
       details: {
         nTasks: 1,
-        gpuPerTask: 1,
-        cpuPerTask: 8,
+        gpusPerTask: 1,
+        cpusPerTask: 8,
         memPerCpu: 8000,
         isVideo: false,
         isAnime: false,

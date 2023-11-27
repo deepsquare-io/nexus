@@ -74,7 +74,7 @@ export default function useHandleJob(
                 requestNewJob({
                   args: [
                     {
-                      gpusPerTask: BigInt(job.resources.gpusPerTask),
+                      gpus: BigInt(job.resources.gpus),
                       cpusPerTask: BigInt(job.resources.cpusPerTask),
                       ntasks: BigInt(job.resources.tasks),
                       memPerCpu: BigInt(job.resources.memPerCpu),
@@ -132,6 +132,7 @@ export default function useHandleJob(
       debouncedAmount,
       debouncedName,
       requestJob,
+      labels,
     ],
   );
   return {

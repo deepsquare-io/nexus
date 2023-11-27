@@ -363,14 +363,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   dayjs(Number(value.time.start * 1000n)),
                   'minutes',
                 )}{' '}
-                min × {value.definition.ntasks.toString()} tasks ×
+                min × &#91; {value.definition.ntasks.toString()} tasks ×
               </div>
               <div>
-                &#40; {value.definition.gpusPerTask.toString()} GPU/task ×{' '}
-                {formatCredit(value.provider.providerPrices.gpuPricePerMin)} credits/(GPU.min)
-              </div>
-              <div>
-                + {value.definition.cpusPerTask.toString()} CPU/task ×{' '}
+                &#40; {value.definition.cpusPerTask.toString()} CPU/task ×{' '}
                 {formatCredit(value.provider.providerPrices.cpuPricePerMin)} credits/(CPU.min)
               </div>
               <div>
@@ -380,6 +376,10 @@ const StatusPage: NextPage = withConnectionRequired(() => {
                   precision: 7,
                 })}{' '}
                 credits/(GB.min) &#41;
+              </div>
+              <div>
+                + {value.definition.gpus.toString()} GPU × {formatCredit(value.provider.providerPrices.gpuPricePerMin)}{' '}
+                credits/(GPU.min) &#93;
               </div>
             </div>
           </Popover>
