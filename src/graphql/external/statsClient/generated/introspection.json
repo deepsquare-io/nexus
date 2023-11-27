@@ -315,7 +315,7 @@
         "description": null,
         "fields": [
           {
-            "name": "cpuPerTask",
+            "name": "cpusPerTask",
             "description": null,
             "args": [],
             "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null } },
@@ -323,7 +323,7 @@
             "deprecationReason": null
           },
           {
-            "name": "gpuPerTask",
+            "name": "gpus",
             "description": null,
             "args": [],
             "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null } },

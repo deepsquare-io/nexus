@@ -47,9 +47,9 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
         // env: [{ key: 'DISPLAY', value: ':99' }],
         resources: {
           tasks: details.nTasks!,
-          cpusPerTask: details.cpuPerTask!,
+          cpusPerTask: details.cpusPerTask!,
           memPerCpu: details.memPerCpu!,
-          gpusPerTask: 1,
+          gpus: details.nTasks!, // 1 * ntasks
         },
         input: details.inputData
           ? {
@@ -91,7 +91,7 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
             run: {
               resources: {
                 tasks: 1,
-                cpusPerTask: details.cpuPerTask!,
+                cpusPerTask: details.cpusPerTask!,
                 memPerCpu: details.memPerCpu!,
                 gpusPerTask: 0,
               },
@@ -130,7 +130,7 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
             run: {
               resources: {
                 tasks: 1,
-                cpusPerTask: details.cpuPerTask!,
+                cpusPerTask: details.cpusPerTask!,
                 memPerCpu: details.memPerCpu!,
                 gpusPerTask: 0,
               },
@@ -158,7 +158,7 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
                   run: {
                     resources: {
                       tasks: 1,
-                      cpusPerTask: details.cpuPerTask!,
+                      cpusPerTask: details.cpusPerTask!,
                       memPerCpu: details.memPerCpu!,
                       gpusPerTask: 1,
                     },
@@ -201,9 +201,9 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
         ],
         resources: {
           tasks: 1,
-          cpusPerTask: details.cpuPerTask!,
-          memPerCpu: Math.round(details.memPerCpu! / details.cpuPerTask!),
-          gpusPerTask: details.gpuPerTask!,
+          cpusPerTask: details.cpusPerTask!,
+          memPerCpu: Math.round(details.memPerCpu! / details.cpusPerTask!),
+          gpus: details.gpusPerTask!,
         },
         input: {
           http: {
@@ -241,9 +241,9 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
         env: details.envVars,
         resources: {
           tasks: 1,
-          cpusPerTask: details.cpuPerTask!,
-          memPerCpu: Math.round(details.memPerCpu! / details.cpuPerTask!),
-          gpusPerTask: details.gpuPerTask!,
+          cpusPerTask: details.cpusPerTask!,
+          memPerCpu: Math.round(details.memPerCpu! / details.cpusPerTask!),
+          gpus: details.gpusPerTask!,
         },
         input: details.inputData
           ? {
@@ -294,9 +294,9 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
               disableCpuBinding: details.disableCpuBinding,
               resources: {
                 tasks: 1,
-                cpusPerTask: details.cpuPerTask!,
+                cpusPerTask: details.cpusPerTask!,
                 memPerCpu: details.memPerCpu!,
-                gpusPerTask: details.gpuPerTask!,
+                gpusPerTask: details.gpusPerTask!,
               },
               command: dedent(details.command!),
             },
@@ -311,7 +311,7 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
           tasks: details.isVideo ? 4 : 1,
           cpusPerTask: 8,
           memPerCpu: 8000,
-          gpusPerTask: 1,
+          gpus: details.isVideo ? 4 : 1,
         },
         env: [
           { key: 'IS_VIDEO', value: details.isVideo!.toString() },
@@ -489,7 +489,7 @@ export async function resolveJobForm(type: WorkloadType, details: DetailsData): 
           tasks: 4,
           cpusPerTask: 8,
           memPerCpu: 8000,
-          gpusPerTask: 1,
+          gpus: 4,
         },
         env: [
           {

@@ -38,9 +38,9 @@ export default class DetailsData {
 
   command?: string;
 
-  gpuPerTask?: number;
+  gpusPerTask?: number;
 
-  cpuPerTask?: number;
+  cpusPerTask?: number;
 
   memPerCpu?: number;
 

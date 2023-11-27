@@ -58,8 +58,8 @@ const schema = (maxAmount: bigint, minAmount: bigint, ignoreBalance: boolean) =>
       archiveLink: y.string().required(),
       binaryPath: y.string().required(),
       additionalArgs: y.string().notRequired(),
-      gpuPerTask: y.number().integer().min(0).max(2),
-      cpuPerTask: y.number().integer().min(0).max(16),
+      gpusPerTask: y.number().integer().min(0).max(2),
+      cpusPerTask: y.number().integer().min(0).max(16),
       memPerCpu: y
         .number()
         .integer()
@@ -82,8 +82,8 @@ const UnityPage: NextPage = () => {
       jobName: `${WorkloadType.URS} - ${generate({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 1,
-        gpuPerTask: 1,
-        cpuPerTask: 4,
+        gpusPerTask: 1,
+        cpusPerTask: 4,
         memPerCpu: 4096,
         binaryPath: '',
         archiveLink: '',
@@ -133,11 +133,11 @@ const UnityPage: NextPage = () => {
             <Grid className="pt-5" container spacing={2.5} columns={2}>
               <Grid item xs={1}>
                 <h4 className="m-0 font-normal">GPU(s)</h4>
-                <NumberField name="details.gpuPerTask" control={control} type="number" min={1} />
+                <NumberField name="details.gpusPerTask" control={control} type="number" min={1} />
               </Grid>
               <Grid item xs={1}>
                 <h4 className="m-0 font-normal">CPU(s)</h4>
-                <NumberField name="details.cpuPerTask" control={control} type="number" min={1} />
+                <NumberField name="details.cpusPerTask" control={control} type="number" min={1} />
               </Grid>
               <Grid item xs={1}>
                 <h4 className="m-0 font-normal">Memory (MB) per CPU</h4>
@@ -146,9 +146,9 @@ const UnityPage: NextPage = () => {
             </Grid>
           </Card>
           <CreditSubform
-            gpuQty={watch('details.gpuPerTask')}
-            cpuQty={watch('details.cpuPerTask')}
-            memQty={watch('details.cpuPerTask')! * watch('details.memPerCpu')!}
+            gpuQty={watch('details.gpusPerTask')}
+            cpuQty={watch('details.cpusPerTask')}
+            memQty={watch('details.cpusPerTask')! * watch('details.memPerCpu')!}
           />
           <SendButton>Render</SendButton>
         </div>

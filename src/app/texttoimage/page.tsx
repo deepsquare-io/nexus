@@ -72,8 +72,8 @@ const TextToImagePage: NextPage = () => {
       jobName: `${WorkloadType.TEXTTOIMAGE} - ${generate({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
       details: {
         nTasks: 4,
-        gpuPerTask: 1,
-        cpuPerTask: 8,
+        gpusPerTask: 1,
+        cpusPerTask: 8,
         memPerCpu: 8000,
         ttiModel: TextToImageModel['sd-2-1'],
         steps: '150',
@@ -119,8 +119,8 @@ const TextToImagePage: NextPage = () => {
           <CreditSubform
             defaultDuration={10}
             gpuQty={watch('details.nTasks')}
-            cpuQty={watch('details.nTasks')! * watch('details.cpuPerTask')!}
-            memQty={watch('details.nTasks')! * watch('details.cpuPerTask')! * watch('details.memPerCpu')!}
+            cpuQty={watch('details.nTasks')! * watch('details.cpusPerTask')!}
+            memQty={watch('details.nTasks')! * watch('details.cpusPerTask')! * watch('details.memPerCpu')!}
           />
           <SendButton>Generate</SendButton>
         </div>
