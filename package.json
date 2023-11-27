@@ -40,7 +40,7 @@
     "@apollo/client": "^3.8.7",
     "@apollo/server": "^4.9.5",
     "@as-integrations/next": "^3.0.0",
-    "@deepsquare/deepsquare-client": "^0.15.0",
+    "@deepsquare/deepsquare-client": "0.16.0-beta.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^2.9.11",
