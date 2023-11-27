@@ -232,7 +232,7 @@ export const MetaSchedulerAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpusPerTask",
+            "name": "gpus",
             "type": "uint64"
           },
           {
@@ -821,7 +821,7 @@ export const MetaSchedulerAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpusPerTask",
+            "name": "gpus",
             "type": "uint64"
           },
           {

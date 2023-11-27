@@ -61,7 +61,7 @@ export const ToolsAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpusPerTask",
+            "name": "gpus",
             "type": "uint64"
           },
           {
@@ -192,7 +192,7 @@ export const ToolsAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpusPerTask",
+            "name": "gpus",
             "type": "uint64"
           },
           {
@@ -346,7 +346,7 @@ export const ToolsAbi =
             [
               {
                 "internalType": "uint64",
-                "name": "gpusPerTask",
+                "name": "gpus",
                 "type": "uint64"
               },
               {
@@ -605,7 +605,7 @@ export const ToolsAbi =
         [
           {
             "internalType": "uint64",
-            "name": "gpusPerTask",
+            "name": "gpus",
             "type": "uint64"
           },
           {
