@@ -38,11 +38,10 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
     });
   }, [defaultDuration]);
 
-  const readProviderPrices = useGetProviderPrices('0x75761B17c3088ce5Cd8e02575c6DAa438FFA6e12');
+  const { data, error } = useGetProviderPrices('0x75761B17c3088ce5Cd8e02575c6DAa438FFA6e12');
 
   // TODO: HACK: Return fake data on error
   const provider = useMemo(() => {
-    const { data, error } = readProviderPrices;
     if (error || !data) {
       return {
         cpuPricePerMin: 950000000000000000n,
@@ -60,7 +59,7 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
       };
     }
     return data;
-  }, [readProviderPrices]);
+  }, [data, error]);
 
   const { setValue, formState } = useFormContext<CreditSubformData>();
 
