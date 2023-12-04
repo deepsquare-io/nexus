@@ -52,8 +52,8 @@ export type JobCost = {
 };
 
 export type JobDefinition = {
-  cpuPerTask: Scalars['Int']['output'];
-  gpuPerTask: Scalars['Int']['output'];
+  cpusPerTask: Scalars['Int']['output'];
+  gpus: Scalars['Int']['output'];
   memPerCpu: Scalars['Int']['output'];
   ntasks: Scalars['Int']['output'];
 };

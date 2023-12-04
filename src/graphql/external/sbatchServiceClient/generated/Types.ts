@@ -267,17 +267,19 @@ export type JobResources = {
    *
    * Can be greater or equal to 1.
    *
-   * Go name: "CpusPerTask".
+   * Go name: "CPUsPerTask".
    */
   cpusPerTask: Scalars['Int']['input'];
   /**
-   * Allocated GPUs per task.
+   * Allocated GPUs for the whole job.
+   *
+   * Tasks can consume the GPUs by setting `GPUsPerTask` at step level.
    *
    * Can be greater or equal to 0.
    *
-   * Go name: "GpusPerTask".
+   * Go name: "GPUs".
    */
-  gpusPerTask: Scalars['Int']['input'];
+  gpus: Scalars['Int']['input'];
   /**
    * Allocated memory (MB) per task.
    *
@@ -873,7 +875,7 @@ export type StepRunResources = {
    *
    * If null, defaults to the job resources.
    *
-   * Go name: "CpusPerTask".
+   * Go name: "CPUsPerTask".
    */
   cpusPerTask?: InputMaybe<Scalars['Int']['input']>;
   /**
@@ -881,9 +883,9 @@ export type StepRunResources = {
    *
    * Can be greater or equal to 0.
    *
-   * If null, defaults to the job resources.
+   * If null, defaults to 0.
    *
-   * Go name: "GpusPerTask".
+   * Go name: "GPUsPerTask".
    */
   gpusPerTask?: InputMaybe<Scalars['Int']['input']>;
   /**

@@ -85,9 +85,9 @@ export default function BlenderPage() {
         outputFormat: BlenderOutputFormat.PNG,
         renderEngine: BlenderRenderEngine.CYCLES,
         nTasks: 1,
-        cpuPerTask: 8,
+        cpusPerTask: 8,
         memPerCpu: 6000,
-        gpuPerTask: 1,
+        gpusPerTask: 1,
       },
       jobName: `${WorkloadType.BLENDER} - ${generate({ exactly: 3, maxLength: 4 })?.join(' ') ?? ''}`,
     },
@@ -153,7 +153,7 @@ export default function BlenderPage() {
                 <>
                   <Grid item xs={1}>
                     <h4 className="m-0 font-normal">CPU per task</h4>
-                    <NumberField name="details.cpuPerTask" control={control} type="number" defaultValue={4} />
+                    <NumberField name="details.cpusPerTask" control={control} type="number" defaultValue={4} />
                   </Grid>
                   <Grid item xs={1}>
                     <h4 className="m-0 font-normal">Memory per CPU (MB)</h4>
@@ -178,8 +178,8 @@ export default function BlenderPage() {
           </Card>
           <CreditSubform
             gpuQty={watch('details.nTasks')}
-            cpuQty={watch('details.nTasks')! * watch('details.cpuPerTask')!}
-            memQty={watch('details.nTasks')! * watch('details.cpuPerTask')! * watch('details.memPerCpu')!}
+            cpuQty={watch('details.nTasks')! * watch('details.cpusPerTask')!}
+            memQty={watch('details.nTasks')! * watch('details.cpusPerTask')! * watch('details.memPerCpu')!}
           />
           <SendButton>Render</SendButton>
         </div>

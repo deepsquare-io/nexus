@@ -67,7 +67,7 @@ export type JobInput = {
 
 export type JobResourcesInput = {
   cpusPerTask: Scalars['Int']['input'];
-  gpusPerTask: Scalars['Int']['input'];
+  gpus: Scalars['Int']['input'];
   memPerCpu: Scalars['Int']['input'];
   tasks: Scalars['Int']['input'];
 };

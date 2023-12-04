@@ -31,7 +31,7 @@ export class Affinity {
 @ObjectType()
 export class JobDefinition {
   @Field(() => BigIntScalar)
-  gpusPerTask!: bigint;
+  gpus!: bigint;
 
   @Field(() => BigIntScalar)
   memPerCpu!: bigint;

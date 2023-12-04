@@ -38,7 +38,28 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
     });
   }, [defaultDuration]);
 
-  const { data: provider } = useGetProviderPrices('0x75761B17c3088ce5Cd8e02575c6DAa438FFA6e12');
+  const { data, error } = useGetProviderPrices('0x75761B17c3088ce5Cd8e02575c6DAa438FFA6e12');
+
+  // TODO: HACK: Return fake data on error
+  const provider = useMemo(() => {
+    if (error || !data) {
+      return {
+        cpuPricePerMin: 950000000000000000n,
+        gpuPricePerMin: 8500000000000000000n,
+        memPricePerMin: 80000000000000n,
+      };
+    }
+
+    // Return fake also if everything is zero
+    if (!data.cpuPricePerMin && !data.gpuPricePerMin && !data.memPricePerMin) {
+      return {
+        cpuPricePerMin: 950000000000000000n,
+        gpuPricePerMin: 8500000000000000000n,
+        memPricePerMin: 80000000000000n,
+      };
+    }
+    return data;
+  }, [data, error]);
 
   const { setValue, formState } = useFormContext<CreditSubformData>();
 
@@ -59,8 +80,6 @@ const HardwareRecap: FC<HardwareRecapProps> = ({ defaultDuration, gpuQty = 0, cp
   useEffect(() => {
     setOpen(!!formState.errors.credit);
   }, [formState.errors]);
-
-  if (!provider) return null;
 
   const rows = [
     ...(gpuQty !== 0
