@@ -202,11 +202,14 @@ export class ContainerRun implements ContainerRunGQL {
 @InputType('BoreInput')
 @ObjectType()
 export class Bore implements BoreGQL {
-  @Field(() => String)
-  address!: string;
+  @Field(() => String, { nullable: true })
+  address!: string | null;
 
-  @Field(() => Int)
-  port!: number;
+  @Field(() => String, { nullable: true })
+  boreAddress!: string | null;
+
+  @Field(() => Int, { nullable: true })
+  port!: number | null;
 
   @Field(() => Int)
   targetPort!: number;
