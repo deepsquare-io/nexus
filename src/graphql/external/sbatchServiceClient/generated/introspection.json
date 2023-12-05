@@ -22,20 +22,32 @@
         "inputFields": [
           {
             "name": "address",
-            "description": "Bore server IP/Address.\n\nGo name: \"Address\".",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
-            },
+            "description": "Bore server IP/Address.\n\nDeprecated: Use boreAddress.\n\nGo name: \"Address\".",
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "boreAddress",
+            "description": "Bore server IP/Address:Port.\n\nGo name: \"BoreAddress\".",
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "port",
-            "description": "The bore server port.\n\nGo name: \"Port\".",
-            "type": { "kind": "NON_NULL", "name": null, "ofType": { "kind": "SCALAR", "name": "Int", "ofType": null } },
+            "description": "The bore server port.\n\nDeprecated: Use boreAddress.\n\nGo name: \"Port\".",
+            "type": { "kind": "SCALAR", "name": "Int", "ofType": null },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "secret",
+            "description": "Secret used to authenticate on a Bore server.\n\nThis secret is used to identify the client.\n\nGo name: \"Secret\".",
+            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
