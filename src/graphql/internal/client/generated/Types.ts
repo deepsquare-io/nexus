@@ -15,8 +15,9 @@ export type Scalars = {
 };
 
 export type BoreInput = {
-  address: Scalars['String']['input'];
-  port: Scalars['Int']['input'];
+  address?: InputMaybe<Scalars['String']['input']>;
+  boreAddress?: InputMaybe<Scalars['String']['input']>;
+  port?: InputMaybe<Scalars['Int']['input']>;
   targetPort: Scalars['Int']['input'];
 };
 
