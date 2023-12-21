@@ -22,6 +22,8 @@ import type {
   StepRunResources as StepRunResourcesGQL,
   StepUse as StepUseGQL,
   TransportData as TransportDataGQL,
+  VNet as VNetGQL,
+  VirtualNetwork as VirtualNetworkGQL,
   Wireguard as WireguardGQL,
   WireguardPeer as WireguardPeerGQL,
 } from '@graphql/external/sbatchServiceClient/generated/Types';
@@ -253,6 +255,9 @@ export class NetworkInterface implements NetworkInterfaceGQL {
   @Field(() => Bore, { nullable: true })
   bore!: Bore | null;
 
+  @Field(() => VNet, { nullable: true })
+  vnet!: VNet | null;
+
   @Field(() => Wireguard, { nullable: true })
   wireguard!: Wireguard | null;
 }
@@ -376,4 +381,27 @@ export default class Job implements JobGQL {
 
   @Field(() => [Step])
   steps!: Step[];
+
+  @Field(() => [VirtualNetwork], { nullable: true })
+  virtualNetworks!: VirtualNetwork[];
+}
+
+@InputType('VirtualNetworkInput')
+@ObjectType()
+export class VirtualNetwork implements VirtualNetworkGQL {
+  @Field(() => String)
+  gatewayAddress!: string;
+
+  @Field(() => String)
+  name!: string;
+}
+
+@InputType('VNetInput')
+@ObjectType()
+export class VNet implements VNetGQL {
+  @Field(() => String)
+  address!: string;
+
+  @Field(() => String)
+  name!: string;
 }
