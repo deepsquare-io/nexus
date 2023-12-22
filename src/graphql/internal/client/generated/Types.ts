@@ -64,6 +64,7 @@ export type JobInput = {
   output?: InputMaybe<TransportDataInput>;
   resources: JobResourcesInput;
   steps: Array<StepInput>;
+  virtualNetworks?: InputMaybe<Array<VirtualNetworkInput>>;
 };
 
 export type JobResourcesInput = {
@@ -143,6 +144,7 @@ export type MutationTopUpArgs = {
 
 export type NetworkInterfaceInput = {
   bore?: InputMaybe<BoreInput>;
+  vnet?: InputMaybe<VNetInput>;
   wireguard?: InputMaybe<WireguardInput>;
 };
 
@@ -239,6 +241,16 @@ export type StepUseInput = {
 export type TransportDataInput = {
   http?: InputMaybe<HttpDataInput>;
   s3?: InputMaybe<S3DataInput>;
+};
+
+export type VNetInput = {
+  address: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type VirtualNetworkInput = {
+  gatewayAddress: Scalars['String']['input'];
+  name: Scalars['String']['input'];
 };
 
 export type WireguardInput = {
