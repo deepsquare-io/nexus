@@ -97,7 +97,7 @@
     "tsyringe": "^4.8.0",
     "type-graphql": "2.0.0-beta.3",
     "uuid": "^9.0.1",
-    "viem": "^1.19.6",
+    "viem": "^2.0.0",
     "wagmi": "^1.4.7",
     "xterm": "5.3.0",
     "xterm-addon-fit": "^0.8.0",

@@ -61,10 +61,10 @@ dependencies:
     version: 1.3.99
   '@wagmi/connectors':
     specifier: ^3.1.5
-    version: 3.1.5(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4)
+    version: 3.1.5(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4)
   '@wagmi/core':
     specifier: ^1.4.7
-    version: 1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4)
+    version: 1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4)
   ajv:
     specifier: ^8.12.0
     version: 8.12.0
@@ -186,11 +186,11 @@ dependencies:
     specifier: ^9.0.1
     version: 9.0.1
   viem:
-    specifier: ^1.19.6
-    version: 1.19.6(typescript@5.3.2)(zod@3.22.4)
+    specifier: ^2.0.0
+    version: 2.0.0(typescript@5.3.2)(zod@3.22.4)
   wagmi:
     specifier: ^1.4.7
-    version: 1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4)
+    version: 1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4)
   xterm:
     specifier: 5.3.0
     version: 5.3.0
@@ -5482,7 +5482,7 @@ packages:
     resolution: {integrity: sha512-8PGwybFwM4x8pcfgqEQFy70NaQxASvOC5DJwLQfpArw1UDfUXrJkdxD3BhVTMS+0Lef/TU7YO0Jvr0jJY8T+mw==}
     dev: true
 
-  /@wagmi/connectors@3.1.5(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4):
+  /@wagmi/connectors@3.1.5(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4):
     resolution: {integrity: sha512-aE4rWZbivqWa9HqjiLDPtwROH2b1Az+lBVMeZ3o/aFxGNGNEkdrSAMOUG15/UFy3VnN6HqGOtTobOBZ10JhfNQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5502,7 +5502,7 @@ packages:
       abitype: 0.8.7(typescript@5.3.2)(zod@3.22.4)
       eventemitter3: 4.0.7
       typescript: 5.3.2
-      viem: 1.19.6(typescript@5.3.2)(zod@3.22.4)
+      viem: 2.0.0(typescript@5.3.2)(zod@3.22.4)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -5525,7 +5525,7 @@ packages:
       - zod
     dev: false
 
-  /@wagmi/core@1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4):
+  /@wagmi/core@1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4):
     resolution: {integrity: sha512-PiOIGni8ArQoPmuDylHX38zMt2nPnTYRIluIqiduKyGCM61X/tf10a0rafUMOOphDPudZu1TacNDhCSeoh/LEA==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -5534,11 +5534,11 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@wagmi/connectors': 3.1.5(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4)
+      '@wagmi/connectors': 3.1.5(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4)
       abitype: 0.8.7(typescript@5.3.2)(zod@3.22.4)
       eventemitter3: 4.0.7
       typescript: 5.3.2
-      viem: 1.19.6(typescript@5.3.2)(zod@3.22.4)
+      viem: 2.0.0(typescript@5.3.2)(zod@3.22.4)
       zustand: 4.4.6(@types/react@18.2.38)(react@18.2.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -6188,6 +6188,21 @@ packages:
     dependencies:
       jsonparse: 1.3.1
       through: 2.3.8
+
+  /abitype@0.10.0(typescript@5.3.2)(zod@3.22.4):
+    resolution: {integrity: sha512-QvMHEUzgI9nPj9TWtUGnS2scas80/qaL5PBxGdwWhhvzqXfOph+IEiiiWrzuisu3U3JgDQVruW9oLbJoQ3oZ3A==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+      zod: ^3 >=3.22.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      zod:
+        optional: true
+    dependencies:
+      typescript: 5.3.2
+      zod: 3.22.4
+    dev: false
 
   /abitype@0.10.2(typescript@5.3.2)(zod@3.22.4):
     resolution: {integrity: sha512-1XndI+RKFWK4+TXCNv1683MRyX5NGmlHXCvqzjOqhSS3PQrxT2QYRZq1bMPPRNjn89B3eVaM2w7y3jVj/OIUzA==}
@@ -10924,6 +10939,7 @@ packages:
   /minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
     engines: {node: '>=10'}
+    requiresBuild: true
     dependencies:
       brace-expansion: 2.0.1
     dev: false
@@ -14048,6 +14064,29 @@ packages:
       - zod
     dev: false
 
+  /viem@2.0.0(typescript@5.3.2)(zod@3.22.4):
+    resolution: {integrity: sha512-WYPwVAs/wrQE1Li9mgHMZaZTnRZuyPJMauIhnpZKeZgtx7f+bWU3uvVSR5kxTf1aBFdaTuRc/umzX2ucQUurnA==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@adraffy/ens-normalize': 1.10.0
+      '@noble/curves': 1.2.0
+      '@noble/hashes': 1.3.2
+      '@scure/bip32': 1.3.2
+      '@scure/bip39': 1.2.1
+      abitype: 0.10.0(typescript@5.3.2)(zod@3.22.4)
+      isows: 1.0.3(ws@8.13.0)
+      typescript: 5.3.2
+      ws: 8.13.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
   /vlq@0.2.3:
     resolution: {integrity: sha512-DRibZL6DsNhIgYQ+wNdWDL2SL3bKPlVrRiBqV5yuMm++op8W4kGFtaQfCs4KEJn0wBZcHVHJ3eoywX8983k1ow==}
     dev: true
@@ -14076,7 +14115,7 @@ packages:
     resolution: {integrity: sha512-AyFQ0EVmsOZOlAnxoFOGOq1SQDWAB7C6aqMGS23svWAllfOaxbuFvcT8D1i8z3Gyn8fraVeZNNmN6e9bxxXkKw==}
     dev: false
 
-  /wagmi@1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4):
+  /wagmi@1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4):
     resolution: {integrity: sha512-/k8gA9S6RnwU6Qroxs630jAFvRIx+DSKpCP1owgAEGWc7D2bAJHljwRSCRTGENz48HyJ4V3R7KYV1yImxPvM3A==}
     peerDependencies:
       react: '>=17.0.0'
@@ -14089,12 +14128,12 @@ packages:
       '@tanstack/query-sync-storage-persister': 4.36.1
       '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react@18.2.0)
       '@tanstack/react-query-persist-client': 4.36.1(@tanstack/react-query@4.36.1)
-      '@wagmi/core': 1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@1.19.6)(zod@3.22.4)
+      '@wagmi/core': 1.4.7(@types/react@18.2.38)(encoding@0.1.13)(react@18.2.0)(typescript@5.3.2)(viem@2.0.0)(zod@3.22.4)
       abitype: 0.8.7(typescript@5.3.2)(zod@3.22.4)
       react: 18.2.0
       typescript: 5.3.2
       use-sync-external-store: 1.2.0(react@18.2.0)
-      viem: 1.19.6(typescript@5.3.2)(zod@3.22.4)
+      viem: 2.0.0(typescript@5.3.2)(zod@3.22.4)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
