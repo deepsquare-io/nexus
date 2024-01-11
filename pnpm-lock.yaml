@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.0.0
     version: 3.0.0(@apollo/server@4.9.5)(next@14.0.3)
   '@deepsquare/deepsquare-client':
-    specifier: 0.18.0
-    version: 0.18.0(encoding@0.1.13)(typescript@5.3.2)(zod@3.22.4)
+    specifier: 0.18.1
+    version: 0.18.1(encoding@0.1.13)(typescript@5.3.2)(zod@3.22.4)
   '@emotion/react':
     specifier: 11.11.3
     version: 11.11.3(@types/react@18.2.38)(react@18.2.0)
@@ -1432,8 +1432,8 @@ packages:
       chalk: 4.1.2
     dev: true
 
-  /@deepsquare/deepsquare-client@0.18.0(encoding@0.1.13)(typescript@5.3.2)(zod@3.22.4):
-    resolution: {integrity: sha512-el5KoohfXfyHLlcjD70mIIRkhlpNr/lNa+LUQx6e+MaqjRH0K/KLopqjCswjyErK9mACD4/gigxiVd5dbgEWKA==}
+  /@deepsquare/deepsquare-client@0.18.1(encoding@0.1.13)(typescript@5.3.2)(zod@3.22.4):
+    resolution: {integrity: sha512-13+judcH3zTjnr11y+tMxggN2prefQ85PbIwqjTqV+nvRyMyn9GKTnAZeRlknSmephfwRYsj2MSizxSv7fCWdA==}
     dependencies:
       '@grpc/grpc-js': 1.9.11
       '@protobuf-ts/grpc-transport': 2.9.1(@grpc/grpc-js@1.9.11)
