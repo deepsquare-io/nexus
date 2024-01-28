@@ -128,7 +128,7 @@
     "autoprefixer": "^10.4.16",
     "depcheck": "^1.4.7",
     "env-cmd": "^10.1.0",
-    "esbuild": "^0.19.7",
+    "esbuild": "^0.20.0",
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.3",
     "eslint-config-prettier": "^9.0.0",
