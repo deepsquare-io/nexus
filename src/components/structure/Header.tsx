@@ -88,7 +88,7 @@ const Header = ({ className, ...props }: HeaderProps) => {
             </Button>
           )}
           <CustomLink
-            href="https://discord.gg/UwaHJcNvq9"
+            href="https://discord.gg/KYWh28BkUE"
             className="font-bold no-underline hover:underline"
             target="_blank"
           >

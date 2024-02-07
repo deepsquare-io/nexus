@@ -35,7 +35,7 @@ For production preview:
 
 ## Join the Community
 
-- [Community Discord](https://discord.gg/8XXDR4MAzy) - Request for support and help from the DeepSquare community.
+- [Community Discord](https://discord.gg/KYWh28BkUE) - Request for support and help from the DeepSquare community.
 - [GitHub Issues](https://github.com/deepsquare-io/nexus/issues) - Submit your issues and feature requests via GitHub.
 
 We welcome your help in building DeepSquare! If you are interested, we invite you to check
