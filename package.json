@@ -74,7 +74,7 @@
     "graphql-request": "^6.1.0",
     "jose": "^5.1.1",
     "lodash": "^4.17.21",
-    "monaco-editor": "^0.45.0",
+    "monaco-editor": "^0.46.0",
     "monaco-yaml": "^5.1.0",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.1",
