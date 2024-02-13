@@ -43,7 +43,7 @@ dependencies:
     version: 6.19.4(@mui/material@5.15.10)(@mui/system@5.15.9)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
   '@mui/x-date-pickers':
     specifier: 6.19.4
-    version: 6.19.4(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.10)(@mui/system@5.15.9)(@types/react@18.2.38)(date-fns@2.30.0)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
+    version: 6.19.4(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.10)(@mui/system@5.15.9)(@types/react@18.2.38)(date-fns@3.3.1)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
   '@protobuf-ts/grpcweb-transport':
     specifier: ^2.9.1
     version: 2.9.1
@@ -73,7 +73,7 @@ dependencies:
     version: 4.4.0
   chartjs-adapter-date-fns:
     specifier: ^3.0.0
-    version: 3.0.0(chart.js@4.4.0)(date-fns@2.30.0)
+    version: 3.0.0(chart.js@4.4.0)(date-fns@3.3.1)
   class-validator:
     specifier: ^0.14.0
     version: 0.14.0
@@ -84,8 +84,8 @@ dependencies:
     specifier: ^3.3.3
     version: 3.3.3
   date-fns:
-    specifier: ^2.30.0
-    version: 2.30.0
+    specifier: ^3.0.0
+    version: 3.3.1
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
@@ -1209,13 +1209,6 @@ packages:
       '@babel/core': 7.23.3
       '@babel/helper-plugin-utils': 7.22.5
     dev: true
-
-  /@babel/runtime@7.23.4:
-    resolution: {integrity: sha512-2Yv65nlWnWlSpe3fXEyX5i7fx5kIKo4Qbcj+hMO0odwaneFjfXw5fdum+4yL20O0QiaHpia0cYQ9xpNMqrBwHg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.14.0
-    dev: false
 
   /@babel/runtime@7.23.6:
     resolution: {integrity: sha512-zHd0eUrf5GZoOWVCXp6koAKQTfZV07eit6bGPmJgnZdnSAvvZee6zniW2XMF7Cmc4ISOOnPy3QaSiIJGJkVEDQ==}
@@ -3870,7 +3863,7 @@ packages:
       - '@types/react'
     dev: false
 
-  /@mui/x-date-pickers@6.19.4(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.10)(@mui/system@5.15.9)(@types/react@18.2.38)(date-fns@2.30.0)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0):
+  /@mui/x-date-pickers@6.19.4(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.10)(@mui/system@5.15.9)(@types/react@18.2.38)(date-fns@3.3.1)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-LekaacLGnoQNN5hD6iXeHFL4LbZPnr1BM57hnUKy5UgKDHqzHzZSdPGc2p7Ktv/Z2NDbpPaLEAgrLwISKIYcow==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -3916,7 +3909,7 @@ packages:
       '@mui/utils': 5.15.9(@types/react@18.2.38)(react@18.2.0)
       '@types/react-transition-group': 4.4.10
       clsx: 2.1.0
-      date-fns: 2.30.0
+      date-fns: 3.3.1
       dayjs: 1.11.10
       prop-types: 15.8.1
       react: 18.2.0
@@ -6988,14 +6981,14 @@ packages:
       '@kurkle/color': 0.3.2
     dev: false
 
-  /chartjs-adapter-date-fns@3.0.0(chart.js@4.4.0)(date-fns@2.30.0):
+  /chartjs-adapter-date-fns@3.0.0(chart.js@4.4.0)(date-fns@3.3.1):
     resolution: {integrity: sha512-Rs3iEB3Q5pJ973J93OBTpnP7qoGwvq3nUnoMdtxO+9aoJof7UFcRbWcIDteXuYd1fgAvct/32T9qaLyLuZVwCg==}
     peerDependencies:
       chart.js: '>=2.8.0'
       date-fns: '>=2.0.0'
     dependencies:
       chart.js: 4.4.0
-      date-fns: 2.30.0
+      date-fns: 3.3.1
     dev: false
 
   /chokidar@3.5.3:
@@ -7391,11 +7384,8 @@ packages:
     resolution: {integrity: sha512-8YnDaaf7N3k/q5HnTJVuzSyLETjoZjVmHc4AeKAzOvKHEFQKcn64OKBfzHYtE9zGjctNM7V9I0MfnUVLpi7M5g==}
     dev: true
 
-  /date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
-    dependencies:
-      '@babel/runtime': 7.23.4
+  /date-fns@3.3.1:
+    resolution: {integrity: sha512-y8e109LYGgoQDveiEBD3DYXKba1jWf5BA8YU1FL5Tvm0BTdEfy54WLCwnuYWZNnzzvALy/QQ4Hov+Q9RVRv+Zw==}
     dev: false
 
   /dayjs@1.11.10:
