@@ -52,7 +52,7 @@ dependencies:
     version: 2.9.4
   '@protobuf-ts/runtime-rpc':
     specifier: ^2.9.1
-    version: 2.9.1
+    version: 2.9.4
   '@sentry/nextjs':
     specifier: ^7.81.1
     version: 7.81.1(encoding@0.1.13)(next@14.0.3)(react@18.2.0)(webpack@5.89.0)
@@ -1639,7 +1639,7 @@ packages:
       '@protobuf-ts/grpc-transport': 2.9.1(@grpc/grpc-js@1.9.11)
       '@protobuf-ts/grpcweb-transport': 2.9.1
       '@protobuf-ts/runtime': 2.9.4
-      '@protobuf-ts/runtime-rpc': 2.9.1
+      '@protobuf-ts/runtime-rpc': 2.9.4
       abitype: 0.10.2(typescript@5.3.2)(zod@3.22.4)
       async-lock: 1.4.0
       graphql: 16.8.1
@@ -4532,18 +4532,18 @@ packages:
     dependencies:
       '@grpc/grpc-js': 1.9.11
       '@protobuf-ts/runtime': 2.9.4
-      '@protobuf-ts/runtime-rpc': 2.9.1
+      '@protobuf-ts/runtime-rpc': 2.9.4
     dev: false
 
   /@protobuf-ts/grpcweb-transport@2.9.1:
     resolution: {integrity: sha512-42bvBX312qhPlosMNTZE9XI+lt58ISM5vEJKv/wOx2Fu70J0TdlLa4Bjz8xcuRlv4Pq1CA+94DC1IgNxNRsQdg==}
     dependencies:
       '@protobuf-ts/runtime': 2.9.4
-      '@protobuf-ts/runtime-rpc': 2.9.1
+      '@protobuf-ts/runtime-rpc': 2.9.4
     dev: false
 
-  /@protobuf-ts/runtime-rpc@2.9.1:
-    resolution: {integrity: sha512-pzO20J6s07LTWcj8hKAXh/dAacU5HIVir6SANKXXH8G0pn0VIIB4FFECq5Hbv25/8PQoOGZ7iApq/DMHaSjGhg==}
+  /@protobuf-ts/runtime-rpc@2.9.4:
+    resolution: {integrity: sha512-y9L9JgnZxXFqH5vD4d7j9duWvIJ7AShyBRoNKJGhu9Q27qIbchfzli66H9RvrQNIFk5ER7z1Twe059WZGqERcA==}
     dependencies:
       '@protobuf-ts/runtime': 2.9.4
     dev: false
@@ -7056,7 +7056,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001655
-      electron-to-chromium: 1.5.13
+      electron-to-chromium: 1.5.14
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
     dev: false
@@ -8025,8 +8025,8 @@ packages:
   /electron-to-chromium@1.4.589:
     resolution: {integrity: sha512-zF6y5v/YfoFIgwf2dDfAqVlPPsyQeWNpEWXbAlDUS8Ax4Z2VoiiZpAPC0Jm9hXEkJm2vIZpwB6rc4KnLTQffbQ==}
 
-  /electron-to-chromium@1.5.13:
-    resolution: {integrity: sha512-lbBcvtIJ4J6sS4tb5TLp1b4LyfCdMkwStzXPyAgVgTRAsep4bvrAGaBOP7ZJtQMNJpSQ9SqG4brWOroNaQtm7Q==}
+  /electron-to-chromium@1.5.14:
+    resolution: {integrity: sha512-bEfPECb3fJ15eaDnu9LEJ2vPGD6W1vt7vZleSVyFhYuMIKm3vz/g9lt7IvEzgdwj58RjbPKUF2rXTCN/UW47tQ==}
     dev: false
 
   /emoji-regex@8.0.0:
