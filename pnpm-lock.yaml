@@ -43,7 +43,7 @@ dependencies:
     version: 6.19.11(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
   '@mui/x-date-pickers':
     specifier: 6.19.12
-    version: 6.19.12(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.38)(date-fns@2.30.0)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
+    version: 6.19.12(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.38)(date-fns@2.30.0)(dayjs@1.11.13)(react-dom@18.2.0)(react@18.2.0)
   '@protobuf-ts/grpcweb-transport':
     specifier: ^2.9.1
     version: 2.9.1
@@ -88,7 +88,7 @@ dependencies:
     version: 2.30.0
   dayjs:
     specifier: ^1.11.10
-    version: 1.11.10
+    version: 1.11.13
   dedent:
     specifier: ^1.5.1
     version: 1.5.1
@@ -4278,7 +4278,7 @@ packages:
       - '@types/react'
     dev: false
 
-  /@mui/x-date-pickers@6.19.12(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.38)(date-fns@2.30.0)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0):
+  /@mui/x-date-pickers@6.19.12(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@mui/material@5.15.18)(@mui/system@5.15.15)(@types/react@18.2.38)(date-fns@2.30.0)(dayjs@1.11.13)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-ohZWqb1SbO9ZbenO5SPxnHs0mi4iU6sREE3IBfTBSqVH02D68SBsWrEHOSFjuVIynao4RqeRITh4iA/anrTOsg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -4325,7 +4325,7 @@ packages:
       '@types/react-transition-group': 4.4.10
       clsx: 2.1.0
       date-fns: 2.30.0
-      dayjs: 1.11.10
+      dayjs: 1.11.13
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -8283,8 +8283,8 @@ packages:
       '@babel/runtime': 7.23.4
     dev: false
 
-  /dayjs@1.11.10:
-    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
+  /dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
     dev: false
 
   /debounce@1.2.1:
