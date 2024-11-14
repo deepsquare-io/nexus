@@ -169,7 +169,7 @@ dependencies:
     version: 4.2.3(firebase@9.23.0)(react@18.2.0)
   reflect-metadata:
     specifier: ^0.2.0
-    version: 0.2.1
+    version: 0.2.2
   sharp:
     specifier: ^0.33.0
     version: 0.33.0
@@ -13362,8 +13362,8 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /reflect-metadata@0.2.1:
-    resolution: {integrity: sha512-i5lLI6iw9AU3Uu4szRNPPEkomnkjRTaVt9hy/bn5g/oSzekBSMeLZblcjP74AW0vBabqERLLIrz+gR8QYR54Tw==}
+  /reflect-metadata@0.2.2:
+    resolution: {integrity: sha512-urBwgfrvVP/eAyXx4hluJivBKzuEbSQs9rKWCrCkbSxNv8mxPcUZKeuoF3Uy4mJl3Lwprp6yy5/39VWigZ4K6Q==}
     dev: false
 
   /reflect.getprototypeof@1.0.4:
