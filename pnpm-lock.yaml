@@ -13,7 +13,7 @@ dependencies:
     version: 4.9.5(encoding@0.1.13)(graphql@16.8.1)
   '@as-integrations/next':
     specifier: ^3.0.0
-    version: 3.0.0(@apollo/server@4.9.5)(next@14.0.3)
+    version: 3.2.0(@apollo/server@4.9.5)(next@14.0.3)
   '@deepsquare/deepsquare-client':
     specifier: 0.18.1
     version: 0.18.1(encoding@0.1.13)(typescript@5.3.2)(zod@3.22.4)
@@ -605,12 +605,12 @@ packages:
       - encoding
     dev: true
 
-  /@as-integrations/next@3.0.0(@apollo/server@4.9.5)(next@14.0.3):
-    resolution: {integrity: sha512-FmqJjoH5XamyBZQVTnnG9ssE3ywf/TPIanFGwYjp3YFsX92F1lY7FDcrQJa/gCJQnb8gSZAdqAIgrWo4K325sA==}
+  /@as-integrations/next@3.2.0(@apollo/server@4.9.5)(next@14.0.3):
+    resolution: {integrity: sha512-JTVtRwHdOQTixIacmvfdUukSqNytEHfgvg+K9P8cW7JeF4SCPXat+i9abSII3/cbR6/GQwFZ6gq+c4R0nmSzMg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@apollo/server': ^4.0.0
-      next: ^12.0.0 || ^13.0.0 || ^14.0.0
+      next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
     dependencies:
       '@apollo/server': 4.9.5(encoding@0.1.13)(graphql@16.8.1)
       next: 14.0.3(@babel/core@7.26.0)(react-dom@18.2.0)(react@18.2.0)
