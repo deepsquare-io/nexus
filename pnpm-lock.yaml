@@ -79,7 +79,7 @@ dependencies:
     version: 0.14.1
   classnames:
     specifier: ^2.3.2
-    version: 2.3.2
+    version: 2.5.1
   copy-to-clipboard:
     specifier: ^3.3.3
     version: 3.3.3
@@ -7959,8 +7959,8 @@ packages:
       validator: 13.12.0
     dev: false
 
-  /classnames@2.3.2:
-    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+  /classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
     dev: false
 
   /clean-stack@2.2.0:
