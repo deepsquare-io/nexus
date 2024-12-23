@@ -208,7 +208,7 @@ dependencies:
     version: 2.6.1
   yup:
     specifier: ^1.3.2
-    version: 1.3.2
+    version: 1.6.1
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -15582,8 +15582,8 @@ packages:
     engines: {node: '>=10'}
     requiresBuild: true
 
-  /yup@1.3.2:
-    resolution: {integrity: sha512-6KCM971iQtJ+/KUaHdrhVr2LDkfhBtFPRnsG1P8F4q3uUVQ2RfEM9xekpha9aA4GXWJevjM10eDcPQ1FfWlmaQ==}
+  /yup@1.6.1:
+    resolution: {integrity: sha512-JED8pB50qbA4FOkDol0bYF/p60qSEDQqBD0/qeIrUCG1KbPBIQ776fCUNb9ldbPcSTxA69g/47XTo4TqWiuXOA==}
     dependencies:
       property-expr: 2.0.6
       tiny-case: 1.0.3
