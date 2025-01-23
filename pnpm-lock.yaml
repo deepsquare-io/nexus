@@ -46,7 +46,7 @@ dependencies:
     version: 6.20.2(@emotion/react@11.14.0)(@emotion/styled@11.14.0)(@mui/material@5.16.13)(@mui/system@5.16.13)(@types/react@18.3.18)(date-fns@2.30.0)(dayjs@1.11.13)(react-dom@18.3.1)(react@18.3.1)
   '@protobuf-ts/grpcweb-transport':
     specifier: ^2.9.1
-    version: 2.9.1
+    version: 2.9.4
   '@protobuf-ts/runtime':
     specifier: ^2.9.1
     version: 2.9.4
@@ -1618,7 +1618,7 @@ packages:
     dependencies:
       '@grpc/grpc-js': 1.9.11
       '@protobuf-ts/grpc-transport': 2.9.1(@grpc/grpc-js@1.9.11)
-      '@protobuf-ts/grpcweb-transport': 2.9.1
+      '@protobuf-ts/grpcweb-transport': 2.9.4
       '@protobuf-ts/runtime': 2.9.4
       '@protobuf-ts/runtime-rpc': 2.9.4
       abitype: 0.10.2(typescript@5.7.2)(zod@3.24.1)
@@ -3027,7 +3027,7 @@ packages:
       graphql-ws: 5.16.0(graphql@16.10.0)
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.8.1
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3063,7 +3063,7 @@ packages:
       graphql: 16.10.0
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.8.1
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3333,7 +3333,7 @@ packages:
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.8.1
       value-or-promise: 1.0.12
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -4762,8 +4762,8 @@ packages:
       '@protobuf-ts/runtime-rpc': 2.9.4
     dev: false
 
-  /@protobuf-ts/grpcweb-transport@2.9.1:
-    resolution: {integrity: sha512-42bvBX312qhPlosMNTZE9XI+lt58ISM5vEJKv/wOx2Fu70J0TdlLa4Bjz8xcuRlv4Pq1CA+94DC1IgNxNRsQdg==}
+  /@protobuf-ts/grpcweb-transport@2.9.4:
+    resolution: {integrity: sha512-6aQgwPTgX6FkqWqmNts3uk8T/C5coJoH7U87zgaZY/Wo2EVa9SId5bXTM8uo4WR+CN8j9W4c9ij1yG13Hc3xUw==}
     dependencies:
       '@protobuf-ts/runtime': 2.9.4
       '@protobuf-ts/runtime-rpc': 2.9.4
@@ -7748,8 +7748,8 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /bufferutil@4.0.8:
-    resolution: {integrity: sha512-4T53u4PdgsXqKaIctwF8ifXlRTTmEPJ8iEPWFdGZvcf7sbwYo6FKFEX9eNNAnzFZ7EzJAQ3CJeOtCRA4rDp7Pw==}
+  /bufferutil@4.0.9:
+    resolution: {integrity: sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==}
     engines: {node: '>=6.14.2'}
     requiresBuild: true
     dependencies:
@@ -10854,7 +10854,7 @@ packages:
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     dev: true
 
   /isows@1.0.3(ws@8.13.0):
@@ -10870,7 +10870,7 @@ packages:
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     dev: false
 
   /istanbul-lib-coverage@3.2.2:
@@ -13540,9 +13540,9 @@ packages:
       '@babel/runtime': 7.23.9
       eventemitter3: 4.0.7
       uuid: 8.3.2
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     optionalDependencies:
-      bufferutil: 4.0.8
+      bufferutil: 4.0.9
       utf-8-validate: 5.0.10
     dev: false
 
@@ -15062,7 +15062,7 @@ packages:
       ox: 0.1.2(typescript@5.7.2)(zod@3.24.1)
       typescript: 5.7.2
       webauthn-p256: 0.0.10
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -15436,7 +15436,7 @@ packages:
         optional: true
     dev: false
 
-  /ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10):
+  /ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10):
     resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -15448,7 +15448,7 @@ packages:
       utf-8-validate:
         optional: true
     dependencies:
-      bufferutil: 4.0.8
+      bufferutil: 4.0.9
       utf-8-validate: 5.0.10
 
   /xmlcreate@2.0.4:
