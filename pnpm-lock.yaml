@@ -246,7 +246,7 @@ devDependencies:
     version: 0.7.2
   '@types/lodash':
     specifier: ^4.14.202
-    version: 4.17.13
+    version: 4.17.14
   '@types/prop-types':
     specifier: ^15.7.11
     version: 15.7.14
@@ -5654,8 +5654,8 @@ packages:
     dev: false
     optional: true
 
-  /@types/lodash@4.17.13:
-    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
+  /@types/lodash@4.17.14:
+    resolution: {integrity: sha512-jsxagdikDiDBeIRaPYtArcT8my4tN1og7MtMRquFT3XNA6axxyHDRUemqDz/taRDdOUn0GnGHRCuff4q48sW9A==}
     dev: true
 
   /@types/long@4.0.2:
