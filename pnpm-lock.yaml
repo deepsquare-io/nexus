@@ -136,7 +136,7 @@ dependencies:
     version: 15.8.1
   random-words:
     specifier: ^2.0.0
-    version: 2.0.0
+    version: 2.0.1
   react:
     specifier: ^18.2.0
     version: 18.3.1
@@ -181,7 +181,7 @@ dependencies:
     version: 4.8.0
   type-graphql:
     specifier: 2.0.0-beta.6
-    version: 2.0.0-beta.6(class-validator@0.14.1)(graphql-scalars@1.24.1)(graphql@16.10.0)
+    version: 2.0.0-beta.6(class-validator@0.14.1)(graphql-scalars@1.26.0)(graphql@16.10.0)
   uuid:
     specifier: ^9.0.1
     version: 9.0.1
@@ -1635,11 +1635,11 @@ packages:
       - zod
     dev: false
 
-  /@emnapi/runtime@1.3.1:
-    resolution: {integrity: sha512-kEBmG8KyqtxJZv+ygbEim+KCGtIq1fC22Ms3S4ziXmYKm8uyoLX0MHONVKwp+9opg390VaKRNt4a7A9NwmpNhw==}
+  /@emnapi/runtime@1.11.3:
+    resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
     requiresBuild: true
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
     optional: true
 
@@ -3027,7 +3027,7 @@ packages:
       graphql-ws: 5.16.0(graphql@16.10.0)
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.8.1
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3063,7 +3063,7 @@ packages:
       graphql: 16.10.0
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.8.1
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -3333,7 +3333,7 @@ packages:
       isomorphic-ws: 5.0.0(ws@8.18.0)
       tslib: 2.8.1
       value-or-promise: 1.0.12
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -3671,7 +3671,7 @@ packages:
     cpu: [wasm32]
     requiresBuild: true
     dependencies:
-      '@emnapi/runtime': 1.3.1
+      '@emnapi/runtime': 1.11.3
     dev: false
     optional: true
 
@@ -4008,7 +4008,7 @@ packages:
       '@motionone/easing': 10.16.3
       '@motionone/types': 10.16.3
       '@motionone/utils': 10.16.3
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@motionone/dom@10.16.4:
@@ -4019,14 +4019,14 @@ packages:
       '@motionone/types': 10.16.3
       '@motionone/utils': 10.16.3
       hey-listen: 1.0.8
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@motionone/easing@10.16.3:
     resolution: {integrity: sha512-HWTMZbTmZojzwEuKT/xCdvoMPXjYSyQvuVM6jmM0yoGU6BWzsmYMeB4bn38UFf618fJCNtP9XeC/zxtKWfbr0w==}
     dependencies:
       '@motionone/utils': 10.16.3
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@motionone/generators@10.16.4:
@@ -4034,14 +4034,14 @@ packages:
     dependencies:
       '@motionone/types': 10.16.3
       '@motionone/utils': 10.16.3
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@motionone/svelte@10.16.4:
     resolution: {integrity: sha512-zRVqk20lD1xqe+yEDZhMYgftsuHc25+9JSo+r0a0OWUJFocjSV9D/+UGhX4xgJsuwB9acPzXLr20w40VnY2PQA==}
     dependencies:
       '@motionone/dom': 10.16.4
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@motionone/types@10.16.3:
@@ -4053,14 +4053,14 @@ packages:
     dependencies:
       '@motionone/types': 10.16.3
       hey-listen: 1.0.8
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@motionone/vue@10.16.4:
     resolution: {integrity: sha512-z10PF9JV6SbjFq+/rYabM+8CVlMokgl8RFGvieSGNTmrkQanfHn+15XBrhG3BgUfvmTeSeyShfOHpG0i9zEdcg==}
     dependencies:
       '@motionone/dom': 10.16.4
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /@mui/base@5.0.0-beta.40(@types/react@18.3.18)(react-dom@18.3.1)(react@18.3.1):
@@ -7432,7 +7432,7 @@ packages:
   /async-mutex@0.2.6:
     resolution: {integrity: sha512-Hs4R+4SPgamu6rSGW8C7cV9gaWUKEHykfzCCvIRuaVv636Ju10ZdeUbvb4TBEW0INuq2DHZqXbK4Nd3yG4RaRw==}
     dependencies:
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /async-retry@1.3.3:
@@ -7773,8 +7773,8 @@ packages:
       ieee754: 1.2.1
     dev: false
 
-  /bufferutil@4.0.9:
-    resolution: {integrity: sha512-WDtdLmJvAuNNPzByAYpRo2rF1Mmradw6gvWsQKf63476DDXmomT9zUiGypLcG4ibIM67vhAj8jJRdbmEws2Aqw==}
+  /bufferutil@4.2.0:
+    resolution: {integrity: sha512-gyy58jET9kst2IGyBKb96a4Y2bPGTHXGyCd0/1eqIV3hr1Sz3VxtA8n7bXh8fLIuE2K6Z0Upax5a5Msx+HU1IQ==}
     engines: {node: '>=6.14.2'}
     requiresBuild: true
     dependencies:
@@ -10181,14 +10181,14 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /graphql-scalars@1.24.1(graphql@16.10.0):
-    resolution: {integrity: sha512-3L553TMPh3YpHQM4x9G4tXcyD+AX8QQOYA6tUn1nrNiWEXE0JfAnWdjoe3WGxRuGjnZrzvHDz62q8S+sSGXXwA==}
+  /graphql-scalars@1.26.0(graphql@16.10.0):
+    resolution: {integrity: sha512-o7BnU5yxAFUWTMKpC5yshB12DjzzoxLgEBO9OpOAcxodWrL3sPldD/fqVQoIfcqPH8OclyQilLtg3/7ZRqQUVQ==}
     engines: {node: '>=10'}
     peerDependencies:
-      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.10.0
-      tslib: 2.8.1
+      tslib: 2.9.1
     dev: false
 
   /graphql-tag@2.12.6(graphql@16.10.0):
@@ -10886,7 +10886,7 @@ packages:
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     dev: true
 
   /isows@1.0.3(ws@8.13.0):
@@ -10902,7 +10902,7 @@ packages:
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     dev: false
 
   /istanbul-lib-coverage@3.2.2:
@@ -13153,8 +13153,8 @@ packages:
     resolution: {integrity: sha512-b484I/7b8rDEdSDKckSSBA8knMpcdsXudlE/LNL639wFoHKwLbEkQFZHWEYwDC0wa0FKUcCY+GAF73Z7wxNVFA==}
     dev: false
 
-  /random-words@2.0.0:
-    resolution: {integrity: sha512-uqpnDqFnYrZajgmvgjmBrSZL2V1UA/9bNPGrilo12CmBeBszoff/avElutUlwWxG12gvmCk/8dUhvHefYxzYjw==}
+  /random-words@2.0.1:
+    resolution: {integrity: sha512-nZNJAmgcFmtJMTDDIUCm/iK4R6RydC6NvALvWhYItXQrgYGk1F7Gww416LpVROFQtfVd5TaLEf4WuSsko03N7w==}
     dependencies:
       seedrandom: 3.0.5
     dev: false
@@ -13563,9 +13563,9 @@ packages:
       '@babel/runtime': 7.23.9
       eventemitter3: 4.0.7
       uuid: 8.3.2
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     optionalDependencies:
-      bufferutil: 4.0.9
+      bufferutil: 4.2.0
       utf-8-validate: 5.0.10
     dev: false
 
@@ -14564,6 +14564,10 @@ packages:
   /tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
+  /tslib@2.9.1:
+    resolution: {integrity: sha512-a4Ux9VKuIMHsOS7ENbEq6hK2ZGYIT27Rtl0E4eD9KqwxhKiQeMZE/9xb3IdYwWaSOyIBQLExhQgXDTYoiCxnWA==}
+    dev: false
+
   /tsutils@3.21.0(typescript@5.7.2):
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
@@ -14642,7 +14646,7 @@ packages:
     engines: {node: '>=12.20'}
     dev: false
 
-  /type-graphql@2.0.0-beta.6(class-validator@0.14.1)(graphql-scalars@1.24.1)(graphql@16.10.0):
+  /type-graphql@2.0.0-beta.6(class-validator@0.14.1)(graphql-scalars@1.26.0)(graphql@16.10.0):
     resolution: {integrity: sha512-uSp42MLWzuR0+wiQmHUdsmenSEs8O+vC+dSa1ZlYPBo1oRe6+EVPYTwm2iCnSxN4nxt2v4Qpt0+mBqnE92sVRw==}
     engines: {node: '>= 16.16.0'}
     peerDependencies:
@@ -14659,7 +14663,7 @@ packages:
       class-validator: 0.14.1
       graphql: 16.10.0
       graphql-query-complexity: 0.12.0(graphql@16.10.0)
-      graphql-scalars: 1.24.1(graphql@16.10.0)
+      graphql-scalars: 1.26.0(graphql@16.10.0)
       semver: 7.5.4
       tslib: 2.6.2
     dev: false
@@ -15085,7 +15089,7 @@ packages:
       ox: 0.1.2(typescript@5.7.2)(zod@3.24.1)
       typescript: 5.7.2
       webauthn-p256: 0.0.10
-      ws: 8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
+      ws: 8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -15459,7 +15463,7 @@ packages:
         optional: true
     dev: false
 
-  /ws@8.18.0(bufferutil@4.0.9)(utf-8-validate@5.0.10):
+  /ws@8.18.0(bufferutil@4.2.0)(utf-8-validate@5.0.10):
     resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -15471,7 +15475,7 @@ packages:
       utf-8-validate:
         optional: true
     dependencies:
-      bufferutil: 4.0.9
+      bufferutil: 4.2.0
       utf-8-validate: 5.0.10
 
   /xmlcreate@2.0.4:
